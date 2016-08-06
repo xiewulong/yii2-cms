@@ -1,0 +1,24 @@
+{
+	"name": "xiewulong/yii2-cms",
+	"description": "yii2 cms module",
+	"keywords": ["yii2", "xiewulong", "cms"],
+	"type": "yii2-extension",
+	"license": "MIT",
+	"support": {
+		"issues": "https://github.com/xiewulong/yii2-cms/issues",
+		"wiki": "https://github.com/xiewulong/yii2-cms/wiki",
+		"source": "https://github.com/xiewulong/yii2-cms"
+	},
+	"authors": [
+		{
+			"name": "xiewulong",
+			"email": "xiewulong@vip.qq.com"
+		}
+    ],
+    "require": {
+        "yiisoft/yii2": ">=2.0.6"
+    },
+	"autoload": {
+		"psr-4": {"yii\\cms\\": ""}
+	}
+}
