@@ -1,26 +1,28 @@
 <?php
 /*!
- * yii2 extension - frontend - module
+ * yii2 - module - frontend
  * xiewulong <xiewulong@vip.qq.com>
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
  * update: 2016/8/7
- * version: 0.0.1
+ * since: 0.0.1
  */
 
 namespace yii\cms;
 
 use Yii;
 use yii\base\ErrorException;
-use yii\base\Module;
+use yii\components\Module;
 
 class FrontendModule extends Module {
 
-	public $layout = 'layouts/frontend';
+	public $controllerNamespace = 'yii\cms\controllers\frontend';
 
-	public function init() {
-		parent::init();
-	}
+	public $defaultRoute = 'home';
+
+	public $layout = 'frontend';
+
+	public $viewsPath = '@vendor/xiewulong/yii2-cms/views/frontend';
 
 }
