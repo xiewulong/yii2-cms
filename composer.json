@@ -16,7 +16,10 @@
 		}
     ],
     "require": {
-        "yiisoft/yii2": ">=2.0.6"
+        "yiisoft/yii2": ">=2.0.6",
+        "xiewulong/yii2-account": "*",
+        "xiewulong/yii2-components": "*",
+        "xiewulong/yii2-xui": "*"
     },
 	"autoload": {
 		"psr-4": {"yii\\cms\\": ""}
