@@ -6,7 +6,7 @@ use yii\xui\ModuleAsset;
 
 class BackendAsset extends ModuleAsset {
 
-	public $distPath = 'dist/backend';
+	public $namespace = 'backend';
 
 	public $depends = [
 		'yii\xui\BootstrapAsset',

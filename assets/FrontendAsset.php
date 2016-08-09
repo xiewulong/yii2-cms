@@ -6,7 +6,7 @@ use yii\xui\ModuleAsset;
 
 class FrontendAsset extends ModuleAsset {
 
-	public $distPath = 'dist/frontend';
+	public $namespace = 'frontend';
 
 	public $depends = [
 		'yii\xui\BootstrapAsset',

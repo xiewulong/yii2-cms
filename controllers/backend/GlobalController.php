@@ -11,7 +11,9 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 
-class DashboardController extends Controller {
+class GlobalController extends Controller {
+
+	public $defaultAction = 'edit';
 
 	public function behaviors() {
 		return [
@@ -19,11 +21,7 @@ class DashboardController extends Controller {
 				'class' => AccessControl::className(),
 				'rules' => [
 					[
-						'actions' => ['error'],
-						'allow' => true,
-					],
-					[
-						'actions' => ['index'],
+						'actions' => ['edit'],
 						'allow' => true,
 						'roles' => $this->module->permissions,
 					],
@@ -32,15 +30,7 @@ class DashboardController extends Controller {
 		];
 	}
 
-	public function actions() {
-		return [
-			'error' => [
-				'class' => 'yii\web\ErrorAction',
-			],
-		];
-	}
-
-	public function actionIndex() {
+	public function actionEdit() {
 		return $this->render($this->action->id);
 	}
 

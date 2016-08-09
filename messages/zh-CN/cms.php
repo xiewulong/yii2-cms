@@ -20,5 +20,8 @@ return [
 	'enter' => '输入',
 	'upload' => '上传',
 
+	'Reset password' => '修改密码',
 	'Logout' => '注销',
+	'Dashboard' => '概览',
+	'Global' => '全局设置',
 ];

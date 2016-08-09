@@ -48,12 +48,12 @@ BackendAsset::register($this);
 <?= Admin::widget([
 	'brand' => [
 		'logo' => $site['logo'],
-		'text' => \Yii::$app->name . Html::tag('span', $site['name']),
+		'text' => \Yii::$app->name . Html::tag('small', $site['name']),
 		'url' => ['/' . $module->id . '/dashboard/index'],
 	],
 	'menus' => [
 		[
-			'text' => \Yii::$app->user->identity->username . Html::tag('i', null, ['class' => 'glyphicon glyphicon-triangle-bottom']),
+			'text' => \Yii::$app->user->identity->username,
 			'options' => ['class' => 'pull-right border-none'],
 			'dropdown' => [
 				[
@@ -64,7 +64,7 @@ BackendAsset::register($this);
 				[
 					'text' => \Yii::t($module->messageCategory, 'Logout'),
 					'url' => ['/account/user/logout'],
-					'options' => ['data-method' => 'post'],
+					'options' => ['data-user' => 'logout'],
 				],
 			],
 		],
@@ -73,12 +73,14 @@ BackendAsset::register($this);
 			'options' => ['style' => 'display:none;'],
 			'sidebar' => [
 				[
-					'text' => Html::tag('em', Html::tag('i', null, ['class' => 'glyphicon glyphicon-cog'])) . 'Dashboard',
+					'text' => \Yii::t($module->messageCategory, 'Dashboard'),
+					'icon' => 'glyphicon glyphicon-dashboard',
 					'url' => ['/' . $module->id . '/dashboard/index'],
 				],
 				[
-					'text' => Html::tag('em', Html::tag('i', null, ['class' => 'glyphicon glyphicon-cog'])) . 'Global',
-					'url' => ['/' . $module->id . '/global/index'],
+					'text' => \Yii::t($module->messageCategory, 'Global'),
+					'icon' => 'glyphicon glyphicon-globe',
+					'url' => ['/' . $module->id . '/global/edit'],
 				],
 			],
 		],
