@@ -31,7 +31,14 @@ class GlobalController extends Controller {
 	}
 
 	public function actionEdit() {
-		return $this->render($this->action->id);
+		$this->module->site->scenario = 'edit';
+		if($this->module->site->load(\Yii::$app->request->post()) && $this->module->site->runCommon()) {
+			return $this->refresh();
+		}
+
+		return $this->render($this->action->id, [
+			'site' => $this->module->site,
+		]);
 	}
 
 }

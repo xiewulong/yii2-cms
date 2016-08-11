@@ -88,6 +88,10 @@ BackendAsset::register($this);
 	'content' => $content,
 ]) ?>
 
+<!-- begin admin-alerts -->
+<div class="admin-alerts J-admin-alerts"></div>
+<!-- end admin-alerts -->
+
 <?php $this->endBody(); ?>
 </body>
 <!-- end body -->

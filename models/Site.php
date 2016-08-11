@@ -21,9 +21,9 @@ use yii\components\ActiveRecord;
  */
 class Site extends ActiveRecord {
 
-	const STATUS_DELETED = 0;
+	const STATUS_DISABLED = 0;
 
-	const STATUS_ACTIVE = 10;
+	const STATUS_ENABLED = 10;
 
 	public $messageCategory = 'cms';
 
@@ -49,10 +49,16 @@ class Site extends ActiveRecord {
 	public function rules() {
 		return [
 			[['id', 'name', 'logo'], 'required'],
-			['id', 'unique'],
 
-			['status', 'default', 'value' => static::STATUS_ACTIVE],
-			['status', 'in', 'range' => [static::STATUS_DELETED, static::STATUS_ACTIVE]],
+			// ['logo', 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+
+			[['author', 'keywords', 'description'], 'safe'],
+
+			['status', 'default', 'value' => static::STATUS_ENABLED],
+			['status', 'in', 'range' => [static::STATUS_DISABLED, static::STATUS_ENABLED]],
+
+			// Query data needed
+			['id', 'unique'],
 		];
 	}
 
@@ -61,8 +67,8 @@ class Site extends ActiveRecord {
 	 */
 	public function scenarios() {
 		$scenarios = parent::scenarios();
-		$scenarios['autoCreate'] = ['id', 'name'];
-		$scenarios['global'] = ['name', 'logo', 'author', 'keywords', 'description', 'status'];
+		$scenarios['add'] = ['id', 'name'];
+		$scenarios['edit'] = ['name', 'logo', 'author', 'keywords', 'description', 'status'];
 
 		return $scenarios;
 	}
@@ -119,12 +125,13 @@ class Site extends ActiveRecord {
 	}
 
 	/**
-	 * Create a new site
+	 * Running a common handler
 	 *
 	 * @since 0.0.1
 	 * @return {boolean}
 	 */
-	public function autoCreate() {
+	public function runCommon() {
+		// return $this->validate() && $this->saveUploadedFiles() && $this->save();
 		return $this->validate() && $this->save();
 	}
 

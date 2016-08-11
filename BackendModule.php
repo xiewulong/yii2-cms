@@ -32,12 +32,19 @@ class BackendModule extends Module {
 
 	private $_site;
 
+	public function init() {
+		parent::init();
+
+		$this->getSite();
+	}
+
 	public function getSite() {
 		if(!$this->_site) {
 			$this->_site = Site::findOne($this->id);
 			if(!$this->_site) {
-				$this->_site = new Site(['scenario' => 'autoCreate']);
-				if(!$this->_site->load(['Site' => ['id' => $this->id, 'name' => $this->id]]) || !$this->_site->autoCreate()) {
+				$this->_site = new Site;
+				$this->_site->scenario = 'add';
+				if(!$this->_site->load([$this->_site->formName() => ['id' => $this->id, 'name' => $this->id]]) || !$this->_site->runCommon()) {
 					throw new ErrorException($this->_site->getFirstError('id'));
 				}
 			}

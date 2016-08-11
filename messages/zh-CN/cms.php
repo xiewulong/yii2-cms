@@ -2,7 +2,7 @@
 return [
 	'Site' => '网站',
 	'Site name' => '网站名称',
-	'Site logo' => '网站标志',
+	'Site logo' => '网站logo',
 	'Author' => '作者',
 	'Keywords' => '关键词',
 	'Description' => '描述',
@@ -18,10 +18,14 @@ return [
 	'choose' => '选择',
 	'confirm' => '确定',
 	'enter' => '输入',
+	'repeat' => '重复',
 	'upload' => '上传',
 
 	'Reset password' => '修改密码',
 	'Logout' => '注销',
 	'Dashboard' => '概览',
 	'Global' => '全局设置',
+	'Enabled' => '启用',
+	'Disabled' => '禁用',
+	'Submit' => '提交',
 ];

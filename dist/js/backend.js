@@ -48,10 +48,10 @@
 
 // user logout
 (function($, window, document, undefined) {
-	$(document).on('click', '.J-admin-header li[data-user=logout]', function() {
+	$(document).on('click', '[data-user=logout] a.text', function() {
 		var $this	= $(this).parents('.dropdown-open').removeClass('dropdown-open').end();
 		$.ajax({
-			url: $this.find('a.text').attr('href'),
+			url: $this.attr('href'),
 			data: $.csrf(),
 			method: 'post',
 			success: function(d) {
@@ -68,11 +68,11 @@
 
 // password reset
 (function($, window, document, undefined) {
-	$(document).on('click', '.J-admin-header li[data-password=reset]', function(e) {
+	$(document).on('click', '[data-password=reset] a.text', function(e) {
 		var $this	= $(this).parents('.dropdown-open').removeClass('dropdown-open').end(),
 			$modal	= $.modal(	'<div class="modal fade">' +
 									'<div class="modal-dialog">' +
-										'<form class="modal-content form-horizontal" action="' + $this.find('a.text').attr('href') + '" method="post">' +
+										'<form class="modal-content form-horizontal" action="' + $this.attr('href') + '" method="post">' +
 											'<fieldset>' +
 												'<div class="modal-header">' +
 													'<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +

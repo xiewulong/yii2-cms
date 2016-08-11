@@ -23,6 +23,11 @@ class DashboardController extends Controller {
 						'allow' => true,
 					],
 					[
+						'actions' => ['fileupload', 'ueditor', 'ui'],
+						'allow' => true,
+						'roles' => ['@'],
+					],
+					[
 						'actions' => ['index'],
 						'allow' => true,
 						'roles' => $this->module->permissions,
@@ -37,10 +42,23 @@ class DashboardController extends Controller {
 			'error' => [
 				'class' => 'yii\web\ErrorAction',
 			],
+			'fileupload' => [
+				'class' => 'yii\fileupload\FileuploadAction',
+			],
+			'ueditor' => [
+				'class' => 'yii\xui\UeditorAction',
+			],
 		];
 	}
 
 	public function actionIndex() {
+		return $this->render($this->action->id);
+	}
+
+	public function actionUi() {
+		if(YII_ENV == 'prod') {
+			throw new NotFoundHttpException('Page not found.');
+		}
 		return $this->render($this->action->id);
 	}
 
