@@ -74,7 +74,7 @@ $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 		<?php } else { ?>
 		<tfoot>
 			<tr>
-				<td colspan="4" class="text-center admin-table-empty">
+				<td colspan="4" class="text-center empty">
 					<?= Html::tag('i', null, ['class' => 'glyphicon glyphicon-info-sign text-success']) ?>
 					<?= Html::tag('span', \Yii::t($module->messageCategory, 'No matched data')) ?>
 				</td>
