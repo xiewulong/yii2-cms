@@ -10,16 +10,16 @@ use yii\components\ActiveRecord;
  * Site model
  *
  * @since 0.0.1
+ * @property {integer} $id
+ * @property {integer} $site_id
+ * @property {integer} $parent_id
  * @property {string} $name
- * @property {string} $logo
- * @property {string} $author
- * @property {string} $keywords
- * @property {string} $description
  * @property {integer} $status
+ * @property {integer} $list_order
  * @property {integer} $created_at
  * @property {integer} $updated_at
  */
-class Site extends ActiveRecord {
+class SiteCategory extends ActiveRecord {
 
 	const STATUS_DISABLED = 0;
 
@@ -36,7 +36,7 @@ class Site extends ActiveRecord {
 	 * @inheritdoc
 	 */
 	public static function tableName() {
-		return '{{%site}}';
+		return '{{%site_category}}';
 	}
 
 	/**
@@ -53,17 +53,17 @@ class Site extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['id', 'name', 'logo'], 'required'],
+			[['id', 'site_id', 'name'], 'required'],
+			[['parent_id', 'list_order'], 'default', 'value' => 0],
 
-			// ['logo', 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
-
-			[['author', 'keywords', 'description'], 'safe'],
+			['name', 'string', 'min' => 6, 'max' => 16],
 
 			['status', 'default', 'value' => self::STATUS_ENABLED],
 			['status', 'in', 'range' => [self::STATUS_DISABLED, self::STATUS_ENABLED]],
 
+			['list_order', 'number'],
+
 			// Query data needed
-			['id', 'unique'],
 		];
 	}
 
@@ -72,8 +72,8 @@ class Site extends ActiveRecord {
 	 */
 	public function scenarios() {
 		$scenarios = parent::scenarios();
-		$scenarios['add'] = ['id', 'name'];
-		$scenarios['edit'] = ['name', 'logo', 'author', 'keywords', 'description', 'status'];
+		$scenarios['add'] = ['site_id', 'parent_id', 'name', 'status'];
+		$scenarios['edit'] = ['id', 'site_id', 'parent_id', 'name', 'status'];
 
 		return $scenarios;
 	}
@@ -84,12 +84,11 @@ class Site extends ActiveRecord {
 	public function attributeLabels() {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Id'),
+			'site_id' => \Yii::t($this->messageCategory, 'Site id'),
+			'parent_id' => \Yii::t($this->messageCategory, 'Parent id'),
 			'name' => \Yii::t($this->messageCategory, 'Name'),
-			'logo' => \Yii::t($this->messageCategory, 'Logo'),
-			'author' => \Yii::t($this->messageCategory, 'Author'),
-			'keywords' => \Yii::t($this->messageCategory, 'Keywords'),
-			'description' => \Yii::t($this->messageCategory, 'Description'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
+			'list_order' => \Yii::t($this->messageCategory, 'List order'),
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
 			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
 		];
@@ -101,32 +100,28 @@ class Site extends ActiveRecord {
 	public function attributeHints() {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Id'),
+			]),
+			'site_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'Site id'),
+			]),
+			'parent_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'Parent id'),
 			]),
 			'name' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Name'),
 			]),
-			'logo' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'upload'),
-				'attribute' => \Yii::t($this->messageCategory, 'Logo'),
-			]),
-			'author' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Author'),
-			]),
-			'keywords' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Keywords'),
-			]),
-			'description' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Description'),
-			]),
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Status'),
+			]),
+			'list_order' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'List order'),
 			]),
 		];
 	}
@@ -138,7 +133,6 @@ class Site extends ActiveRecord {
 	 * @return {boolean}
 	 */
 	public function runCommon() {
-		// return $this->validate() && $this->saveUploadedFiles() && $this->save();
 		return $this->validate() && $this->save();
 	}
 

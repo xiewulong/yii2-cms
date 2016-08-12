@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\widgets\LinkPager;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, 'UI');
@@ -48,7 +49,7 @@ $this->params['parent'] = '/' . $module->id . '/dashboard/index';
 	<table class="table">
 		<thead>
 			<tr>
-				<th width="5%"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th>
+				<th width="5%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th>
 				<th width="8%"><?= Html::encode('Column_0') ?></th>
 				<th width="8%"><?= Html::encode('Column_1') ?></th>
 				<th width="8%"><?= Html::encode('Column_2') ?></th>
@@ -58,12 +59,12 @@ $this->params['parent'] = '/' . $module->id . '/dashboard/index';
 				<th width="8%"><?= Html::encode('Column_6') ?></th>
 				<th width="8%"><?= Html::encode('Column_7') ?></th>
 				<th width="8%"><?= Html::encode('Column_8') ?></th>
-				<th><?= Html::encode('Column_9') ?></th>
+				<th class="text-center"><?= \Yii::t($module->messageCategory, 'Operations') ?></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td><?= Html::checkbox('cb') ?></td>
+				<td class="text-center"><?= Html::checkbox('cb') ?></td>
 				<td><?= Html::encode('Value_0') ?></td>
 				<td><?= Html::encode('Value_1') ?></td>
 				<td><?= Html::encode('Value_2') ?></td>
@@ -73,14 +74,14 @@ $this->params['parent'] = '/' . $module->id . '/dashboard/index';
 				<td><?= Html::encode('Value_6') ?></td>
 				<td><?= Html::encode('Value_7') ?></td>
 				<td></td>
-				<td>
-					<?= Html::a('Edit', 'javascript:;') ?>
+				<td class="text-center">
+					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), 'javascript:;') ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a('Delete', 'javascript:;') ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), 'javascript:;') ?>
 				</td>
 			</tr>
 			<tr>
-				<td><?= Html::checkbox('cb') ?></td>
+				<td class="text-center"><?= Html::checkbox('cb') ?></td>
 				<td><?= Html::encode('Value_0') ?></td>
 				<td><?= Html::encode('Value_1') ?></td>
 				<td><?= Html::encode('Value_2') ?></td>
@@ -94,10 +95,10 @@ $this->params['parent'] = '/' . $module->id . '/dashboard/index';
 					<p><?= Html::encode('Value_7') ?></p>
 					<p><?= Html::encode('Value_7') ?></p>
 				</td>
-				<td>
-					<?= Html::a('Edit', 'javascript:;') ?>
+				<td class="text-center">
+					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), 'javascript:;') ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a('Delete', 'javascript:;') ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), 'javascript:;') ?>
 				</td>
 			</tr>
 		</tbody>
@@ -107,6 +108,7 @@ $this->params['parent'] = '/' . $module->id . '/dashboard/index';
 				<td colspan="10">
 					<?= Html::button('Batch', ['class' => 'btn btn-default']) ?>
 					<div class="pull-right admin-pagination">
+						<?= LinkPager::pagination() ?>
 						<div class="info">Total: 1, Per page: 30</div>
 						<ul class="pagination">
 							<li class="disabled"><?= Html::a(Html::tag('span', '&laquo;'), 'javascript:;') ?></li>
@@ -124,6 +126,10 @@ $this->params['parent'] = '/' . $module->id . '/dashboard/index';
 			</tr>
 		</tfoot>
 	</table>
+</div>
+<div class="admin-area text-center admin-table-empty">
+	<?= Html::tag('i', null, ['class' => 'glyphicon glyphicon-info-sign text-success']) ?>
+	<?= Html::tag('span', \Yii::t($module->messageCategory, 'No matched data')) ?>
 </div>
 <!-- end admin-table -->
 

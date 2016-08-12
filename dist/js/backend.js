@@ -2,49 +2,8 @@
  * backend
  * xiewulong <xiewulong@vip.qq.com>
  * create: 2016/8/8
- * version: 0.0.1
+ * since: 0.0.1
  */
-
-// csrf
-(function($, document, undefined) {
-	var param	= $('meta[name=csrf-param]').attr('content'),
-		token	= $('meta[name=csrf-token]').attr('content');
-	$.csrf = function(data) {
-		data = data || {};
-		data[param] = token;
-		return data;
-	};
-})(jQuery, document);
-
-// modal
-(function($, document, undefined) {
-	$.modal = function(html, options) {
-		// html sample
-		// '<div class="modal fade">' +
-		// 	'<div class="modal-dialog">' +
-		// 		'<div class="modal-content">' +
-		// 			'<div class="modal-header">' +
-		// 				'<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-		// 				'<h4 class="modal-title">Modal title</h4>' +
-		// 			'</div>' +
-		// 			'<div class="modal-body">' +
-		// 				'<p>One fine body&hellip;</p>' +
-		// 			'</div>' +
-		// 			'<div class="modal-footer">' +
-		// 				'<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
-		// 				'<button type="button" class="btn btn-primary">Save changes</button>' +
-		// 			'</div>' +
-		// 		'</div>' +
-		// 	'</div>' +
-		// '</div>';
-
-		return $(html).modal($.extend({backdrop: 'static'}, options)).on('shown.bs.modal', function() {
-			$(this).find('[autofocus=autofocus]').focus();
-		}).on('hidden.bs.modal', function() {
-			$(this).remove();
-		});
-	};
-})(jQuery, document);
 
 // user logout
 (function($, window, document, undefined) {
@@ -72,7 +31,7 @@
 		var $this	= $(this).parents('.dropdown-open').removeClass('dropdown-open').end(),
 			$modal	= $.modal(	'<div class="modal fade">' +
 									'<div class="modal-dialog">' +
-										'<form class="modal-content form-horizontal" action="' + $this.attr('href') + '" method="post">' +
+										'<form class="modal-content form-horizontal">' +
 											'<fieldset>' +
 												'<div class="modal-header">' +
 													'<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
@@ -93,8 +52,8 @@
 													'</div>' +
 												'</div>' +
 												'<div class="modal-footer">' +
-													'<button type="submit" class="btn btn-primary">确定</button>' +
 													'<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>' +
+													'<button type="submit" class="btn btn-primary">确定</button>' +
 												'</div>' +
 											'</fieldset>' +
 										'</form>' +
@@ -128,16 +87,13 @@
 				return false;
 			}
 			$.ajax({
-				url: this.action,
+				url: $this.attr('href'),
 				data: $.csrf({User: User}),
-				method: this.method,
+				method: 'post',
+				dataType: 'json',
 				success: function(d) {
-					if(d.error) {
-						console.error(d.message);
-						$fieldset.prop('disabled', false);
-						return false;
-					}
-					$modal.modal('hide');
+					d.error ? $fieldset.prop('disabled', false) : $modal.modal('hide');
+					$.alert(d.message, d.error);
 				}
 			});
 			return false;

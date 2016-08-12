@@ -82,6 +82,11 @@ BackendAsset::register($this);
 					'icon' => 'glyphicon glyphicon-globe',
 					'url' => ['/' . $module->id . '/global/edit'],
 				],
+				[
+					'text' => \Yii::t($module->messageCategory, 'Category'),
+					'icon' => 'glyphicon glyphicon glyphicon-th-list',
+					'url' => ['/' . $module->id . '/category/list'],
+				],
 			],
 		],
 	],

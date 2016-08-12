@@ -13,7 +13,7 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 <!-- end admin-title -->
 
 <!-- begin admin-form -->
-<?= Html::beginForm(null, null, ['class' => 'form-horizontal admin-area-sm admin-form']) ?>
+<?= Html::beginForm(null, null, ['class' => 'form-horizontal admin-area admin-form']) ?>
 	<div class="fieldset">
 		<div class="form-group">
 			<?= Html::activeLabel($site, 'name', ['class' => 'control-label col-sm-2']) ?>
@@ -28,7 +28,7 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 		<div class="form-group">
 			<?= Html::activeLabel($site, 'logo', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<div class="glyphicon glyphicon-upload admin-fileupload J-admin-fileupload" style="width:80px;height:80px;">
+				<div class="glyphicon glyphicon-picture admin-fileupload J-admin-fileupload" style="width:80px;height:80px;">
 					<?= Fileupload::widget([
 						'model' => $site,
 						'attribute' => 'logo',
