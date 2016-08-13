@@ -63,8 +63,13 @@ class CategoryController extends Controller {
 			$item->scenario = 'edit';
 		}
 
-		if($item->load(\Yii::$app->request->post()) && $item->runCommon()) {
-			return $this->redirect(['category/list']);
+		if($item->load(\Yii::$app->request->post())) {
+			if($item->save()) {
+				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
+
+				return $this->redirect(['category/list']);
+			}
+			\Yii::$app->session->setFlash('item', '1|' . $item->firstErrorInfirstErrors);
 		}
 
 		return $this->render($this->action->id, [
@@ -73,7 +78,7 @@ class CategoryController extends Controller {
 	}
 
 	public function actionList() {
-		$query = SiteCategory::find()->where(['site_id' => $this->module->id])->orderby('status desc, list_order desc');
+		$query = SiteCategory::find()->where(['site_id' => $this->module->id])->orderby('list_order desc, created_at');
 
 		$pagination = new Pagination([
 			'totalCount' => $query->count(),

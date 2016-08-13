@@ -21,16 +21,11 @@ use yii\components\ActiveRecord;
  */
 class SiteCategory extends ActiveRecord {
 
-	const STATUS_DISABLED = 0;
-
-	const STATUS_ENABLED = 10;
+	const STATUS_DELETED = 0;
+	const STATUS_ENABLED = 1;
+	const STATUS_DISABLED = 2;
 
 	public $messageCategory = 'cms';
-
-	protected $_statuses = [
-		self::STATUS_DISABLED => 'Disabled',
-		self::STATUS_ENABLED => 'Enabled',
-	];
 
 	/**
 	 * @inheritdoc
@@ -53,15 +48,16 @@ class SiteCategory extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['id', 'site_id', 'name'], 'required'],
+			[['site_id', 'name'], 'required'],
 			[['parent_id', 'list_order'], 'default', 'value' => 0],
 
 			['name', 'string', 'min' => 6, 'max' => 16],
 
 			['status', 'default', 'value' => self::STATUS_ENABLED],
-			['status', 'in', 'range' => [self::STATUS_DISABLED, self::STATUS_ENABLED]],
-
-			['list_order', 'number'],
+			['status', 'in', 'range' => [
+				self::STATUS_ENABLED,
+				self::STATUS_DISABLED,
+			]],
 
 			// Query data needed
 		];
@@ -72,8 +68,9 @@ class SiteCategory extends ActiveRecord {
 	 */
 	public function scenarios() {
 		$scenarios = parent::scenarios();
-		$scenarios['add'] = ['site_id', 'parent_id', 'name', 'status'];
-		$scenarios['edit'] = ['id', 'site_id', 'parent_id', 'name', 'status'];
+		$common = ['site_id', 'parent_id', 'name', 'status'];
+		$scenarios['add'] = $common;
+		$scenarios['edit'] = $common;
 
 		return $scenarios;
 	}
@@ -84,8 +81,8 @@ class SiteCategory extends ActiveRecord {
 	public function attributeLabels() {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Id'),
-			'site_id' => \Yii::t($this->messageCategory, 'Site id'),
-			'parent_id' => \Yii::t($this->messageCategory, 'Parent id'),
+			'site_id' => \Yii::t($this->messageCategory, 'Site'),
+			'parent_id' => \Yii::t($this->messageCategory, 'Parent'),
 			'name' => \Yii::t($this->messageCategory, 'Name'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'list_order' => \Yii::t($this->messageCategory, 'List order'),
@@ -127,13 +124,72 @@ class SiteCategory extends ActiveRecord {
 	}
 
 	/**
-	 * Running a common handler
+	 * Return status items in every scenario
 	 *
 	 * @since 0.0.1
-	 * @return {boolean}
+	 * @return {array}
 	 */
-	public function runCommon() {
-		return $this->validate() && $this->save();
+	public function statusItems() {
+		return [
+			self::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
+			self::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
+			self::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
+		];
+	}
+
+	/**
+	 * Get articles belongs it
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getArticles() {
+		return $this->hasMany(SiteArticle::classname(), ['category_id' => 'id']);
+	}
+
+	/**
+	 * Get it's articles quantity
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getArticleQuantity($status = null) {
+		$query = $this->getArticles();
+		if($status !== null) {
+			$query->where(['status' => $status]);
+		}
+
+		return $query->count();
+	}
+
+	/**
+	 * Get it's articles total page view
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getTotalPageView($status = null) {
+		$query = $this->getArticles();
+		if($status !== null) {
+			$query->where(['status' => $status]);
+		}
+
+		return $query->sum('pv') ? : 0;
+	}
+
+	/**
+	 * Get it's articles total unique visitor
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getTotalUniqueVisitor($status = null) {
+		$query = $this->getArticles();
+		if($status !== null) {
+			$query->where(['status' => $status]);
+		}
+
+		return $query->sum('uv') ? : 0;
 	}
 
 }

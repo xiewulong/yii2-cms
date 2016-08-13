@@ -10,27 +10,25 @@ use yii\components\ActiveRecord;
  * Site model
  *
  * @since 0.0.1
+ * @property {string} $site
  * @property {string} $name
  * @property {string} $logo
  * @property {string} $author
  * @property {string} $keywords
  * @property {string} $description
+ * @property {integer} $pv
+ * @property {integer} $uv
  * @property {integer} $status
  * @property {integer} $created_at
  * @property {integer} $updated_at
  */
 class Site extends ActiveRecord {
 
-	const STATUS_DISABLED = 0;
-
-	const STATUS_ENABLED = 10;
+	const STATUS_DELETED = 0;
+	const STATUS_ENABLED = 1;
+	const STATUS_DISABLED = 2;
 
 	public $messageCategory = 'cms';
-
-	protected $_statuses = [
-		self::STATUS_DISABLED => 'Disabled',
-		self::STATUS_ENABLED => 'Enabled',
-	];
 
 	/**
 	 * @inheritdoc
@@ -55,15 +53,15 @@ class Site extends ActiveRecord {
 		return [
 			[['id', 'name', 'logo'], 'required'],
 
-			// ['logo', 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
-
 			[['author', 'keywords', 'description'], 'safe'],
 
 			['status', 'default', 'value' => self::STATUS_ENABLED],
-			['status', 'in', 'range' => [self::STATUS_DISABLED, self::STATUS_ENABLED]],
+			['status', 'in', 'range' => [
+				self::STATUS_ENABLED,
+				self::STATUS_DISABLED,
+			]],
 
 			// Query data needed
-			['id', 'unique'],
 		];
 	}
 
@@ -72,7 +70,8 @@ class Site extends ActiveRecord {
 	 */
 	public function scenarios() {
 		$scenarios = parent::scenarios();
-		$scenarios['add'] = ['id', 'name'];
+
+		$scenarios['add'] = ['id'];
 		$scenarios['edit'] = ['name', 'logo', 'author', 'keywords', 'description', 'status'];
 
 		return $scenarios;
@@ -89,6 +88,8 @@ class Site extends ActiveRecord {
 			'author' => \Yii::t($this->messageCategory, 'Author'),
 			'keywords' => \Yii::t($this->messageCategory, 'Keywords'),
 			'description' => \Yii::t($this->messageCategory, 'Description'),
+			'pv' => \Yii::t($this->messageCategory, 'Page view'),
+			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
 			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
@@ -132,14 +133,17 @@ class Site extends ActiveRecord {
 	}
 
 	/**
-	 * Running a common handler
+	 * Return status items in every scenario
 	 *
 	 * @since 0.0.1
-	 * @return {boolean}
+	 * @return {array}
 	 */
-	public function runCommon() {
-		// return $this->validate() && $this->saveUploadedFiles() && $this->save();
-		return $this->validate() && $this->save();
+	public function statusItems() {
+		return [
+			self::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
+			self::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
+			self::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
+		];
 	}
 
 }

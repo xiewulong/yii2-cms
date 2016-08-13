@@ -32,12 +32,17 @@ class GlobalController extends Controller {
 
 	public function actionEdit() {
 		$this->module->site->scenario = 'edit';
-		if($this->module->site->load(\Yii::$app->request->post()) && $this->module->site->runCommon()) {
-			return $this->refresh();
+		if($this->module->site->load(\Yii::$app->request->post())) {
+			if($this->module->site->save()) {
+				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
+
+				return $this->refresh();
+			}
+			\Yii::$app->session->setFlash('item', '1|' . $this->module->site->firstErrorInfirstErrors);
 		}
 
 		return $this->render($this->action->id, [
-			'site' => $this->module->site,
+			'item' => $this->module->site,
 		]);
 	}
 

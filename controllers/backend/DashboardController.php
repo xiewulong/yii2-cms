@@ -2,7 +2,6 @@
 namespace yii\cms\controllers\backend;
 
 use Yii;
-use yii\base\ActionEvent;
 use yii\components\Controller;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -49,6 +48,10 @@ class DashboardController extends Controller {
 				'class' => 'yii\xui\UeditorAction',
 			],
 		];
+	}
+
+	public function beforeAction($action){
+		return $action->id == 'ueditor' || parent::beforeAction($action);
 	}
 
 	public function actionIndex() {

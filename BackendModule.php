@@ -5,7 +5,7 @@
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
- * update: 2016/8/8
+ * update: 2016/8/14
  * since: 0.0.1
  */
 
@@ -44,7 +44,7 @@ class BackendModule extends Module {
 			if(!$this->_site) {
 				$this->_site = new Site;
 				$this->_site->scenario = 'add';
-				if(!$this->_site->load([$this->_site->formName() => ['id' => $this->id, 'name' => $this->id]]) || !$this->_site->runCommon()) {
+				if(!$this->_site->load([$this->_site->formName() => ['id' => $this->id]]) || !$this->_site->save()) {
 					throw new ErrorException($this->_site->getFirstError('id'));
 				}
 			}

@@ -87,6 +87,11 @@ BackendAsset::register($this);
 					'icon' => 'glyphicon glyphicon glyphicon-th-list',
 					'url' => ['/' . $module->id . '/category/list'],
 				],
+				[
+					'text' => \Yii::t($module->messageCategory, 'Article'),
+					'icon' => 'glyphicon glyphicon glyphicon-pencil',
+					'url' => ['/' . $module->id . '/article/list'],
+				],
 			],
 		],
 	],
@@ -95,6 +100,12 @@ BackendAsset::register($this);
 
 <!-- begin admin-alerts -->
 <div class="admin-alerts J-admin-alerts"></div>
+<?php
+foreach(\Yii::$app->session->allFlashes as $flash) {
+	list($type, $message) = explode('|', $flash);
+	$this->registerJs('$.alert("' . $message . '", "' . $type . '");', 3);
+}
+?>
 <!-- end admin-alerts -->
 
 <?php $this->endBody(); ?>

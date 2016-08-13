@@ -4,7 +4,7 @@ use yii\helpers\Html;
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 	'attribute' => \Yii::t($module->messageCategory, 'Category'),
-	'action' => \Yii::t($module->messageCategory, 'edit'),
+	'action' => \Yii::t($module->messageCategory, $item['id'] ? 'Edit' : 'Add'),
 ]);
 
 // set parent menu
@@ -22,9 +22,8 @@ $this->params['parent'] = '/' . $module->id . '/category/list';
 <!-- end admin-title -->
 
 <!-- begin admin-form -->
-<?= Html::beginForm(null, null, ['class' => 'form-horizontal admin-area admin-form']) ?>
+<?= Html::beginForm(null, 'post', ['class' => 'form-horizontal admin-area admin-form']) ?>
 	<div class="fieldset">
-		<?= $item->firstErrorInFirstErrors ?>
 		<div class="form-group">
 			<?= Html::activeLabel($item, 'name', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
@@ -38,11 +37,8 @@ $this->params['parent'] = '/' . $module->id . '/category/list';
 		<div class="form-group">
 			<?= Html::activeLabel($item, 'status', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Html::activeRadioList($item, 'status', [
-					0 => \Yii::t($module->messageCategory, 'Disabled'),
-					10 => \Yii::t($module->messageCategory, 'Enabled'),
-				], [
-					'unselect' => 10,
+				<?= Html::activeRadioList($item, 'status', $item->getAttributeItems('status'), [
+					'unselect' => 1,
 					'itemOptions' => [
 						'labelOptions' => [
 							'class' => 'radio-inline',

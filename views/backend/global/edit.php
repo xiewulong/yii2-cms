@@ -16,75 +16,75 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 <?= Html::beginForm(null, null, ['class' => 'form-horizontal admin-area admin-form']) ?>
 	<div class="fieldset">
 		<div class="form-group">
-			<?= Html::activeLabel($site, 'name', ['class' => 'control-label col-sm-2']) ?>
+			<?= Html::activeLabel($item, 'name', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Html::activeTextInput($site, 'name', [
+				<?= Html::activeTextInput($item, 'name', [
 					'class' => 'form-control',
-					'placeholder' => $site->getAttributeHint('name'),
-					'autofocus' => $site->isFirstErrorAttribute('name') || !$site->hasErrors(),
+					'placeholder' => $item->getAttributeHint('name'),
+					'autofocus' => $item->isFirstErrorAttribute('name') || !$item->hasErrors(),
 				]) ?>
 			</div>
 		</div>
 		<div class="form-group">
-			<?= Html::activeLabel($site, 'logo', ['class' => 'control-label col-sm-2']) ?>
+			<?= Html::activeLabel($item, 'logo', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<div class="glyphicon glyphicon-picture admin-fileupload J-admin-fileupload" style="width:80px;height:80px;">
-					<?= Fileupload::widget([
-						'model' => $site,
-						'attribute' => 'logo',
-						'action' => '/' . $module->id . '/dashboard/fileupload',
-						'type' => 'image',
-						'max' => '2097152',
-						'sizes' => '80x80|150x150',
-						'options' => [
-							'data-show' => '80x80',
-						],
-						'hiddenOptions' => [
-							'data-thumb' => \Yii::$app->fileupload->addSuf($site->logo, [80, 80]),
-						],
-					]) ?>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<?= Html::activeLabel($site, 'author', ['class' => 'control-label col-sm-2']) ?>
-			<div class="col-sm-4">
-				<?= Html::activeTextInput($site, 'author', [
-					'class' => 'form-control',
-					'placeholder' => $site->getAttributeHint('author'),
-					'autofocus' => $site->isFirstErrorAttribute('author'),
+				<?= Fileupload::widget([
+					'model' => $item,
+					'attribute' => 'logo',
+					'action' => '/' . $module->id . '/dashboard/fileupload',
+					'type' => 'image',
+					'max' => '2097152',
+					'sizes' => '80x80|150x150',
+					'options' => [
+						'class' => 'glyphicon glyphicon-picture admin-fileupload J-admin-fileupload',
+						'style' => 'width:80px;height:80px;',
+					],
+					'fileOptions' => [
+						'data-show' => '80x80',
+					],
+					'hiddenOptions' => [
+						'data-thumb' => \Yii::$app->fileupload->addSuf($item['logo'], [80, 80]),
+					],
 				]) ?>
 			</div>
 		</div>
 		<div class="form-group">
-			<?= Html::activeLabel($site, 'keywords', ['class' => 'control-label col-sm-2']) ?>
+			<?= Html::activeLabel($item, 'author', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Html::activeTextarea($site, 'keywords', [
+				<?= Html::activeTextInput($item, 'author', [
+					'class' => 'form-control',
+					'placeholder' => $item->getAttributeHint('author'),
+					'autofocus' => $item->isFirstErrorAttribute('author'),
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group">
+			<?= Html::activeLabel($item, 'keywords', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Html::activeTextarea($item, 'keywords', [
 					'rows' => 6,
 					'class' => 'form-control',
-					'placeholder' => $site->getAttributeHint('keywords'),
-					'autofocus' => $site->isFirstErrorAttribute('keywords'),
+					'placeholder' => $item->getAttributeHint('keywords'),
+					'autofocus' => $item->isFirstErrorAttribute('keywords'),
 				]) ?>
 			</div>
 		</div>
 		<div class="form-group">
-			<?= Html::activeLabel($site, 'description', ['class' => 'control-label col-sm-2']) ?>
+			<?= Html::activeLabel($item, 'description', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Html::activeTextarea($site, 'description', [
+				<?= Html::activeTextarea($item, 'description', [
 					'rows' => 6,
 					'class' => 'form-control',
-					'placeholder' => $site->getAttributeHint('description'),
-					'autofocus' => $site->isFirstErrorAttribute('description'),
+					'placeholder' => $item->getAttributeHint('description'),
+					'autofocus' => $item->isFirstErrorAttribute('description'),
 				]) ?>
 			</div>
 		</div>
 		<div class="form-group">
-			<?= Html::activeLabel($site, 'status', ['class' => 'control-label col-sm-2']) ?>
+			<?= Html::activeLabel($item, 'status', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Html::activeRadioList($site, 'status', [
-					0 => \Yii::t($module->messageCategory, 'Disabled'),
-					10 => \Yii::t($module->messageCategory, 'Enabled'),
-				], [
+				<?= Html::activeRadioList($item, 'status', $item->getAttributeItems('status'), [
+					'unselect' => 2,
 					'itemOptions' => [
 						'labelOptions' => [
 							'class' => 'radio-inline',
