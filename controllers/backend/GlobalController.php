@@ -2,7 +2,6 @@
 namespace yii\cms\controllers\backend;
 
 use Yii;
-use yii\base\ActionEvent;
 use yii\components\Controller;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -10,6 +9,8 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
+
+use yii\cms\models\Site;
 
 class GlobalController extends Controller {
 
@@ -31,18 +32,19 @@ class GlobalController extends Controller {
 	}
 
 	public function actionEdit() {
-		$this->module->site->scenario = 'edit';
-		if($this->module->site->load(\Yii::$app->request->post())) {
-			if($this->module->site->save()) {
+		$site = Site::findOne($this->module->id);
+		$site->scenario = 'edit';
+		if($site->load(\Yii::$app->request->post())) {
+			if($site->commonHandler()) {
 				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
 
 				return $this->refresh();
 			}
-			\Yii::$app->session->setFlash('item', '1|' . $this->module->site->firstErrorInfirstErrors);
+			\Yii::$app->session->setFlash('item', '1|' . $site->firstErrorInfirstErrors);
 		}
 
 		return $this->render($this->action->id, [
-			'item' => $this->module->site,
+			'item' => $site,
 		]);
 	}
 

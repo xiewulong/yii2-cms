@@ -3,6 +3,9 @@ use yii\helpers\Html;
 use yii\cms\assets\FrontendAsset;
 use yii\xui\Statistics;
 
+$module = \Yii::$app->controller->module;
+$site = $module->site;
+
 FrontendAsset::register($this);
 ?>
 <?php $this->beginPage(); ?>
@@ -13,11 +16,11 @@ FrontendAsset::register($this);
 
 <!-- begin head -->
 <head>
-<title><?= Html::encode($this->title) ?> - <?= Html::encode(\Yii::$app->name) ?></title>
+<title><?= Html::encode($this->title) ?> - <?= Html::encode($site['name'] ? : \Yii::$app->name) ?></title>
 <meta charset="<?= \Yii::$app->charset ?>" />
-<meta name="author" content="" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<meta name="author" content="<?= $site['author'] ? : 'xiewulong<xiewulong@vip.qq.com>' ?>" />
+<meta name="keywords" content="<?= $site['keywords'] ?>" />
+<meta name="description" content="<?= $site['description'] ?>" />
 
 <!-- begin ie modes -->
 <meta http-equiv="x-ua-compatible" content="ie=edge" />

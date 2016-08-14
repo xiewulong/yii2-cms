@@ -44,7 +44,7 @@ class BackendModule extends Module {
 			if(!$this->_site) {
 				$this->_site = new Site;
 				$this->_site->scenario = 'add';
-				if(!$this->_site->load([$this->_site->formName() => ['id' => $this->id]]) || !$this->_site->save()) {
+				if(!$this->_site->load([$this->_site->formName() => ['id' => $this->id]]) || !$this->_site->commonHandler()) {
 					throw new ErrorException($this->_site->getFirstError('id'));
 				}
 			}

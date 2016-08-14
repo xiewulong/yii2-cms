@@ -2,15 +2,15 @@
 namespace yii\cms\controllers\backend;
 
 use Yii;
-use yii\base\ActionEvent;
 use yii\components\Controller;
-use yii\cms\models\SiteCategory;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
+
+use yii\cms\models\SiteCategory;
 
 class CategoryController extends Controller {
 
@@ -38,8 +38,11 @@ class CategoryController extends Controller {
 	}
 
 	public function actionDelete() {
-		$item = SiteCategory::findOne(\Yii::$app->request->post('id', 0));
-		$done = $item && $item->site_id == $this->module->id && $item->delete();
+		$item = SiteCategory::findOne([
+			'id' => \Yii::$app->request->post('id', 0),
+			'site_id' => $this->module->id,
+		]);
+		$done = $item && $item->delete();
 
 		return \Yii::$app->request->isAjax ? $this->respond([
 			'error' => !$done,
@@ -64,7 +67,7 @@ class CategoryController extends Controller {
 		}
 
 		if($item->load(\Yii::$app->request->post())) {
-			if($item->save()) {
+			if($item->commonHandler()) {
 				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
 
 				return $this->redirect(['category/list']);
@@ -77,8 +80,14 @@ class CategoryController extends Controller {
 		]);
 	}
 
-	public function actionList() {
-		$query = SiteCategory::find()->where(['site_id' => $this->module->id])->orderby('list_order desc, created_at');
+	public function actionList($stype = null, $sword = null) {
+		$query = SiteCategory::find()
+					->where(['site_id' => $this->module->id])
+					->orderby('list_order desc, created_at');
+
+		if($sword !== null) {
+			$query->andWhere("$stype like :sword", [':sword' => "%$sword%"]);
+		}
 
 		$pagination = new Pagination([
 			'totalCount' => $query->count(),
@@ -89,6 +98,8 @@ class CategoryController extends Controller {
 			->all();
 
 		return $this->render($this->action->id, [
+			'stype' => $stype,
+			'sword' => $sword,
 			'items' => $items,
 			'pagination' => $pagination,
 		]);

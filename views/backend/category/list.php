@@ -24,6 +24,29 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 
 <!-- begin admin-options -->
 <div class="clearfix admin-area-sm admin-options">
+	<?= Html::beginForm(null, 'get', ['class' => 'form-inline pull-left']) ?>
+		<div class="form-group">
+			<?= Html::listBox('stype', $stype, [
+				'name' => \Yii::t($module->messageCategory, 'Category') . \Yii::t($module->messageCategory, 'Name'),
+			], [
+				'class' => 'form-control',
+				'size' => 1,
+			]) ?>
+		</div>
+		<div class="form-group">
+			<?= Html::textInput('sword', $sword, [
+				'class' => 'form-control',
+				'placeholder' => \Yii::t($module->messageCategory, 'Please {action} {attribute}', [
+					'action' => \Yii::t($module->messageCategory, 'enter'),
+					'attribute' => \Yii::t($module->messageCategory, 'Search word'),
+				]),
+				'autofocus' => true,
+			]) ?>
+		</div>
+		<div class="form-group">
+			<?= Html::submitButton(\Yii::t($module->messageCategory, 'Search'), ['class' => 'btn btn-primary']) ?>
+		</div>
+	<?= Html::endForm() ?>
 	<div class="pull-right">
 		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['/' . $module->id . '/category/edit'], ['class' => 'btn btn-default pull-left']) ?>
 	</div>
@@ -49,10 +72,10 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<?php foreach($items as $item) { ?>
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
-				<td><?= $item['name'] ?></td>
+				<td><?= Html::encode($item['name']) ?></td>
 				<td class="text-center"><?= Html::a($item['articleQuantity'], ['/' . $module->id . '/article/list', 'cid' => $item['id']]) ?></td>
-				<td class="text-center"><?= $item['totalPageView'] ?></td>
-				<!-- <td class="text-center"><?= $item['totalUniqueVisitor'] ?></td> -->
+				<td class="text-center"><?= $item['articleTotalPageView'] ?></td>
+				<!-- <td class="text-center"><?= $item['articleTotalUniqueVisitor'] ?></td> -->
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
 				<td class="text-center">
 					<?= Html::a(\Yii::t($module->messageCategory, 'Add') . \Yii::t($module->messageCategory, 'Article'), ['/' . $module->id . '/article/edit', 'cid' => $item['id']]) ?>

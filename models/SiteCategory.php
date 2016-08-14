@@ -11,11 +11,13 @@ use yii\components\ActiveRecord;
  *
  * @since 0.0.1
  * @property {integer} $id
- * @property {integer} $site_id
+ * @property {string} $site_id
  * @property {integer} $parent_id
  * @property {string} $name
  * @property {integer} $status
  * @property {integer} $list_order
+ * @property {integer} $operator_id
+ * @property {integer} $creator_id
  * @property {integer} $created_at
  * @property {integer} $updated_at
  */
@@ -48,6 +50,7 @@ class SiteCategory extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
+			[['name'], 'trim'],
 			[['site_id', 'name'], 'required'],
 			[['parent_id', 'list_order'], 'default', 'value' => 0],
 
@@ -68,7 +71,16 @@ class SiteCategory extends ActiveRecord {
 	 */
 	public function scenarios() {
 		$scenarios = parent::scenarios();
-		$common = ['site_id', 'parent_id', 'name', 'status'];
+
+		$common = [
+			'site_id',
+			'parent_id',
+			'name',
+			'status',
+			'operator_id',
+			'creator_id',
+		];
+
 		$scenarios['add'] = $common;
 		$scenarios['edit'] = $common;
 
@@ -80,12 +92,14 @@ class SiteCategory extends ActiveRecord {
 	 */
 	public function attributeLabels() {
 		return [
-			'id' => \Yii::t($this->messageCategory, 'Id'),
+			'id' => \Yii::t($this->messageCategory, 'Category id'),
 			'site_id' => \Yii::t($this->messageCategory, 'Site'),
 			'parent_id' => \Yii::t($this->messageCategory, 'Parent'),
 			'name' => \Yii::t($this->messageCategory, 'Name'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'list_order' => \Yii::t($this->messageCategory, 'List order'),
+			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
+			'creator_id' => \Yii::t($this->messageCategory, 'Creator id'),
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
 			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
 		];
@@ -98,15 +112,15 @@ class SiteCategory extends ActiveRecord {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Id'),
+				'attribute' => \Yii::t($this->messageCategory, 'Category id'),
 			]),
 			'site_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Site id'),
+				'attribute' => \Yii::t($this->messageCategory, 'Site'),
 			]),
 			'parent_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Parent id'),
+				'attribute' => \Yii::t($this->messageCategory, 'Parent'),
 			]),
 			'name' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
@@ -138,6 +152,16 @@ class SiteCategory extends ActiveRecord {
 	}
 
 	/**
+	 * Running a common Handler
+	 *
+	 * @since 0.0.1
+	 * @return {boolean}
+	 */
+	public function commonHandler() {
+		return $this->save();
+	}
+
+	/**
 	 * Get articles belongs it
 	 *
 	 * @since 0.0.1
@@ -151,7 +175,7 @@ class SiteCategory extends ActiveRecord {
 	 * Get it's articles quantity
 	 *
 	 * @since 0.0.1
-	 * @return {object}
+	 * @return {integer}
 	 */
 	public function getArticleQuantity($status = null) {
 		$query = $this->getArticles();
@@ -166,9 +190,9 @@ class SiteCategory extends ActiveRecord {
 	 * Get it's articles total page view
 	 *
 	 * @since 0.0.1
-	 * @return {object}
+	 * @return {integer}
 	 */
-	public function getTotalPageView($status = null) {
+	public function getArticleTotalPageView($status = null) {
 		$query = $this->getArticles();
 		if($status !== null) {
 			$query->where(['status' => $status]);
@@ -181,9 +205,9 @@ class SiteCategory extends ActiveRecord {
 	 * Get it's articles total unique visitor
 	 *
 	 * @since 0.0.1
-	 * @return {object}
+	 * @return {integer}
 	 */
-	public function getTotalUniqueVisitor($status = null) {
+	public function getArticleTotalUniqueVisitor($status = null) {
 		$query = $this->getArticles();
 		if($status !== null) {
 			$query->where(['status' => $status]);

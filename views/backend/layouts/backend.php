@@ -5,6 +5,7 @@ use yii\xui\Admin;
 
 $module = \Yii::$app->controller->module;
 $site = $module->site;
+
 BackendAsset::register($this);
 ?>
 <?php $this->beginPage(); ?>
@@ -15,9 +16,9 @@ BackendAsset::register($this);
 
 <!-- begin head -->
 <head>
-<title><?= Html::encode($this->title) ?> - <?= Html::encode($site['name']) ?> - <?= Html::encode(\Yii::$app->name) ?></title>
+<title><?= Html::encode($this->title) ?> - <?= Html::encode(($site['name'] ? : null) . \Yii::$app->name) ?></title>
 <meta charset="<?= \Yii::$app->charset ?>" />
-<meta name="author" content="<?= $site['author'] ?>" />
+<meta name="author" content="<?= $site['author'] ? : 'xiewulong<xiewulong@vip.qq.com>' ?>" />
 <meta name="keywords" content="<?= $site['keywords'] ?>" />
 <meta name="description" content="<?= $site['description'] ?>" />
 
@@ -48,7 +49,7 @@ BackendAsset::register($this);
 <?= Admin::widget([
 	'brand' => [
 		'logo' => $site['logo'],
-		'text' => \Yii::$app->name . Html::tag('small', $site['name']),
+		'text' => ($site['name'] ? : null) . \Yii::$app->name,
 		'url' => ['/' . $module->id . '/dashboard/index'],
 	],
 	'menus' => [
@@ -81,6 +82,11 @@ BackendAsset::register($this);
 					'text' => \Yii::t($module->messageCategory, 'Global'),
 					'icon' => 'glyphicon glyphicon-globe',
 					'url' => ['/' . $module->id . '/global/edit'],
+				],
+				[
+					'text' => \Yii::t($module->messageCategory, 'Banner'),
+					'icon' => 'glyphicon glyphicon-flag',
+					'url' => ['/' . $module->id . '/banner/list'],
 				],
 				[
 					'text' => \Yii::t($module->messageCategory, 'Category'),

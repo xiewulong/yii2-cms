@@ -10,20 +10,16 @@ use yii\components\ActiveRecord;
  * Site model
  *
  * @since 0.0.1
- * @property {string} $site
+ * @property {string} $id
+ * @property {string} $site_id
  * @property {string} $name
- * @property {string} $logo
- * @property {string} $author
- * @property {string} $keywords
- * @property {string} $description
  * @property {integer} $status
- * @property {integer} $pv
- * @property {integer} $uv
  * @property {integer} $operator_id
+ * @property {integer} $creator_id
  * @property {integer} $created_at
  * @property {integer} $updated_at
  */
-class Site extends ActiveRecord {
+class SiteBanner extends ActiveRecord {
 
 	const STATUS_DELETED = 0;
 	const STATUS_ENABLED = 1;
@@ -35,7 +31,7 @@ class Site extends ActiveRecord {
 	 * @inheritdoc
 	 */
 	public static function tableName() {
-		return '{{%site}}';
+		return '{{%site_banner}}';
 	}
 
 	/**
@@ -52,8 +48,12 @@ class Site extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['id', 'name', 'logo', 'author', 'keywords', 'description'], 'trim'],
-			[['id', 'name', 'logo'], 'required'],
+			[['id', 'name'], 'trim'],
+			[['site_id', 'id', 'name'], 'required'],
+
+			['id', 'match', 'pattern' => '/^[a-z][a-z0-9_-]{0,15}$/i'],
+
+			['name', 'string', 'max' => 16],
 
 			['status', 'default', 'value' => self::STATUS_ENABLED],
 			['status', 'in', 'range' => [
@@ -72,19 +72,17 @@ class Site extends ActiveRecord {
 	public function scenarios() {
 		$scenarios = parent::scenarios();
 
-		$scenarios['add'] = [
+		$common = [
 			'id',
-		];
-
-		$scenarios['edit'] = [
+			'site_id',
 			'name',
-			'logo',
-			'author',
-			'keywords',
-			'description',
 			'status',
 			'operator_id',
+			'creator_id',
 		];
+
+		$scenarios['add'] = $common;
+		$scenarios['edit'] = $common;
 
 		return $scenarios;
 	}
@@ -94,16 +92,12 @@ class Site extends ActiveRecord {
 	 */
 	public function attributeLabels() {
 		return [
-			'id' => \Yii::t($this->messageCategory, 'Site id'),
+			'id' => \Yii::t($this->messageCategory, 'Banner id'),
+			'site_id' => \Yii::t($this->messageCategory, 'Site'),
 			'name' => \Yii::t($this->messageCategory, 'Name'),
-			'logo' => \Yii::t($this->messageCategory, 'Logo'),
-			'author' => \Yii::t($this->messageCategory, 'Author'),
-			'keywords' => \Yii::t($this->messageCategory, 'Keyword'),
-			'description' => \Yii::t($this->messageCategory, 'Description'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
-			'pv' => \Yii::t($this->messageCategory, 'Page view'),
-			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
 			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
+			'creator_id' => \Yii::t($this->messageCategory, 'Creator id'),
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
 			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
 		];
@@ -115,28 +109,16 @@ class Site extends ActiveRecord {
 	public function attributeHints() {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'Banner id'),
+			]),
+			'site_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Site id'),
+				'attribute' => \Yii::t($this->messageCategory, 'Site'),
 			]),
 			'name' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Name'),
-			]),
-			'logo' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'upload'),
-				'attribute' => \Yii::t($this->messageCategory, 'Logo'),
-			]),
-			'author' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Author'),
-			]),
-			'keywords' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Keyword'),
-			]),
-			'description' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Description'),
 			]),
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
@@ -146,7 +128,7 @@ class Site extends ActiveRecord {
 	}
 
 	/**
-	 * Return status items in every scenario
+	 * Return status items
 	 *
 	 * @since 0.0.1
 	 * @return {array}
@@ -167,6 +149,61 @@ class Site extends ActiveRecord {
 	 */
 	public function commonHandler() {
 		return $this->save();
+	}
+
+	/**
+	 * Get items belongs it
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getItems() {
+		return $this->hasMany(SiteBannerItem::classname(), ['banner_id' => 'id']);
+	}
+
+	/**
+	 * Get it's articles quantity
+	 *
+	 * @since 0.0.1
+	 * @return {integer}
+	 */
+	public function getItemQuantity($status = null) {
+		$query = $this->getItems();
+		if($status !== null) {
+			$query->where(['status' => $status]);
+		}
+
+		return $query->count();
+	}
+
+	/**
+	 * Get it's articles total page view
+	 *
+	 * @since 0.0.1
+	 * @return {integer}
+	 */
+	public function getItemTotalPageView($status = null) {
+		$query = $this->getItems();
+		if($status !== null) {
+			$query->where(['status' => $status]);
+		}
+
+		return $query->sum('pv') ? : 0;
+	}
+
+	/**
+	 * Get it's articles total unique visitor
+	 *
+	 * @since 0.0.1
+	 * @return {integer}
+	 */
+	public function getItemTotalUniqueVisitor($status = null) {
+		$query = $this->getItems();
+		if($status !== null) {
+			$query->where(['status' => $status]);
+		}
+
+		return $query->sum('uv') ? : 0;
 	}
 
 }

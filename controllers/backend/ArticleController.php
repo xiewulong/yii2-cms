@@ -2,16 +2,16 @@
 namespace yii\cms\controllers\backend;
 
 use Yii;
-use yii\base\ActionEvent;
 use yii\components\Controller;
-use yii\cms\models\SiteArticle;
-use yii\cms\models\SiteCategory;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
+
+use yii\cms\models\SiteArticle;
+use yii\cms\models\SiteCategory;
 
 class ArticleController extends Controller {
 
@@ -39,8 +39,11 @@ class ArticleController extends Controller {
 	}
 
 	public function actionDelete() {
-		$item = SiteArticle::findOne(\Yii::$app->request->post('id', 0));
-		$done = $item && $item->site_id == $this->module->id && $item->delete();
+		$item = SiteArticle::findOne([
+			'id' => \Yii::$app->request->post('id', 0),
+			'site_id' => $this->module->id,
+		]);
+		$done = $item && $item->delete();
 
 		return \Yii::$app->request->isAjax ? $this->respond([
 			'error' => !$done,
@@ -81,8 +84,8 @@ class ArticleController extends Controller {
 		}
 
 		if(\Yii::$app->request->isPost) {
-			$item->picture = [];
-			if($item->load(\Yii::$app->request->post()) && $item->save()) {
+			$item->pictures = [];
+			if($item->load(\Yii::$app->request->post()) && $item->commonHandler()) {
 				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
 
 				return $this->redirect(['article/list']);
@@ -96,8 +99,10 @@ class ArticleController extends Controller {
 		]);
 	}
 
-	public function actionList($cid = 0, $type = 0, $status = 'all', $keyword = null) {
-		$query = SiteArticle::find()->where(['site_id' => $this->module->id])->orderby('list_order desc, created_at desc');
+	public function actionList($cid = 0, $type = 0, $status = 'all', $stype = null, $sword = null) {
+		$query = SiteArticle::find()
+					->where(['site_id' => $this->module->id])
+					->orderby('list_order desc, created_at desc');
 
 		if($cid) {
 			$query->andWhere(['category_id' => $cid]);
@@ -106,10 +111,10 @@ class ArticleController extends Controller {
 			$query->andWhere(['type' => $type]);
 		}
 		if($status != 'all') {
-			$query->andWhere(['status' => $type]);
+			$query->andWhere(['status' => $status]);
 		}
-		if($keyword) {
-			$query->andWhere('name like "%:keyword%"', [':keyword' => $keyword]);
+		if($sword !== null) {
+			$query->andWhere("$stype like :sword", [':sword' => "%$sword%"]);
 		}
 
 		$pagination = new Pagination([
@@ -147,7 +152,8 @@ class ArticleController extends Controller {
 			'cid' => $cid,
 			'type' => $type,
 			'status' => $status,
-			'keyword' => $keyword,
+			'stype' => $stype,
+			'sword' => $sword,
 			'items' => $items,
 			'pagination' => $pagination,
 			'categoryItems' => $categoryItems,

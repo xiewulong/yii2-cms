@@ -58,13 +58,13 @@ $this->params['parent'] = '/' . $module->id . '/article/list';
 			</div>
 		</div>
 		<div class="form-group">
-			<?= Html::activeLabel($item, 'abstract', ['class' => 'control-label col-sm-2']) ?>
+			<?= Html::activeLabel($item, 'description', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Html::activeTextarea($item, 'abstract', [
+				<?= Html::activeTextarea($item, 'description', [
 					'rows' => 6,
 					'class' => 'form-control',
-					'placeholder' => $item->getAttributeHint('abstract'),
-					'autofocus' => $item->isFirstErrorAttribute('abstract'),
+					'placeholder' => $item->getAttributeHint('description'),
+					'autofocus' => $item->isFirstErrorAttribute('description'),
 				]) ?>
 			</div>
 		</div>
@@ -85,11 +85,11 @@ $this->params['parent'] = '/' . $module->id . '/article/list';
 			<?= Html::activeLabel($item, 'picture', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-8">
 				<?php
-				$pictures = is_array($item['picture']) ? $item['picture'] : $item['pictureList'];
+				$pictures = is_array($item['pictures']) ? $item['pictures'] : $item['pictureList'];
 				foreach($pictures as $picture) {
 				?>
 				<?= Fileupload::widget([
-					'attribute' => Html::getInputName($item, 'picture[]'),
+					'attribute' => Html::getInputName($item, 'pictures[]'),
 					'value' => $picture,
 					'action' => '/' . $module->id . '/dashboard/fileupload',
 					'type' => 'image',
@@ -108,7 +108,7 @@ $this->params['parent'] = '/' . $module->id . '/article/list';
 				]) ?>
 				<? } ?>
 				<?= Fileupload::widget([
-					'attribute' => Html::getInputName($item, 'picture[]'),
+					'attribute' => Html::getInputName($item, 'pictures[]'),
 					'action' => '/' . $module->id . '/dashboard/fileupload',
 					'type' => 'image',
 					'max' => '2097152',
