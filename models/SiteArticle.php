@@ -124,6 +124,14 @@ class SiteArticle extends ActiveRecord {
 		$scenarios['add'] = $common;
 		$scenarios['edit'] = $common;
 
+		$scenarios['visited'] = [
+			'id',
+			'site_id',
+			'category_id',
+			'pv',
+			'uv',
+		];
+
 		return $scenarios;
 	}
 

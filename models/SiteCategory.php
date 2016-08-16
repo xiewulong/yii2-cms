@@ -54,7 +54,7 @@ class SiteCategory extends ActiveRecord {
 			[['site_id', 'name'], 'required'],
 			[['parent_id', 'list_order'], 'default', 'value' => 0],
 
-			['name', 'string', 'min' => 6, 'max' => 16],
+			['name', 'string', 'max' => 16],
 
 			['status', 'default', 'value' => self::STATUS_ENABLED],
 			['status', 'in', 'range' => [

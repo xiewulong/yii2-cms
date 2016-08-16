@@ -9,7 +9,7 @@ $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 ]);
 
 // set parent menu
-$this->params['parent'] = '/' . $module->id . '/banner/list';
+$this->params['parent'] = $module->url('banner/list');
 ?>
 
 <!-- begin admin-title -->
@@ -18,7 +18,7 @@ $this->params['parent'] = '/' . $module->id . '/banner/list';
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
 		'action' => \Yii::t($module->messageCategory, 'Back to'),
 		'attribute' => \Yii::t($module->messageCategory, 'Banner item') . \Yii::t($module->messageCategory, 'list'),
-	]), ['/' . $module->id . '/banner/items', 'bid' => $banner['id']], ['class' => 'btn btn-link pull-left']) ?>
+	]), ['/banner/items', 'bid' => $banner['id']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
 <!-- end admin-title -->
 
@@ -52,7 +52,7 @@ $this->params['parent'] = '/' . $module->id . '/banner/list';
 				<?= Fileupload::widget([
 					'model' => $item,
 					'attribute' => 'picture',
-					'action' => '/' . $module->id . '/dashboard/fileupload',
+					'action' => $module->url('dashboard/fileupload'),
 					'type' => 'image',
 					'max' => '2097152',
 					'sizes' => '80x80|150x150',

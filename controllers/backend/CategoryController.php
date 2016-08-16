@@ -2,7 +2,7 @@
 namespace yii\cms\controllers\backend;
 
 use Yii;
-use yii\components\Controller;
+use yii\cms\components\Controller;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -40,7 +40,7 @@ class CategoryController extends Controller {
 	public function actionDelete() {
 		$item = SiteCategory::findOne([
 			'id' => \Yii::$app->request->post('id', 0),
-			'site_id' => $this->module->id,
+			'site_id' => $this->module->siteId,
 		]);
 		$done = $item && $item->delete();
 
@@ -54,11 +54,11 @@ class CategoryController extends Controller {
 		if(!$id) {
 			$item = new SiteCategory;
 			$item->scenario = 'add';
-			$item->site_id = $this->module->id;
+			$item->site_id = $this->module->siteId;
 		} else {
 			$item = SiteCategory::findOne([
 				'id' => $id,
-				'site_id' => $this->module->id,
+				'site_id' => $this->module->siteId,
 			]);
 			if(!$item) {
 				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
@@ -82,8 +82,8 @@ class CategoryController extends Controller {
 
 	public function actionList($stype = null, $sword = null) {
 		$query = SiteCategory::find()
-					->where(['site_id' => $this->module->id])
-					->orderby('list_order desc, created_at');
+			->where(['site_id' => $this->module->siteId])
+			->orderby('list_order desc, created_at');
 
 		if($sword !== null) {
 			$query->andWhere("$stype like :sword", [':sword' => "%$sword%"]);

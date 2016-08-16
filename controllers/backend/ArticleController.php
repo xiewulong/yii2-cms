@@ -2,7 +2,7 @@
 namespace yii\cms\controllers\backend;
 
 use Yii;
-use yii\components\Controller;
+use yii\cms\components\Controller;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -10,8 +10,8 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 
-use yii\cms\models\SiteArticle;
 use yii\cms\models\SiteCategory;
+use yii\cms\models\SiteArticle;
 
 class ArticleController extends Controller {
 
@@ -41,7 +41,7 @@ class ArticleController extends Controller {
 	public function actionDelete() {
 		$item = SiteArticle::findOne([
 			'id' => \Yii::$app->request->post('id', 0),
-			'site_id' => $this->module->id,
+			'site_id' => $this->module->siteId,
 		]);
 		$done = $item && $item->delete();
 
@@ -53,10 +53,10 @@ class ArticleController extends Controller {
 
 	public function actionEdit($id = 0, $cid = 0) {
 		$categoryItems = ArrayHelper::map(SiteCategory::find()
-							->select(['id', 'name'])
-							->where(['site_id' => $this->module->id])
-							->orderby('list_order desc, created_at desc')
-							->all(), 'id', 'name');
+			->select(['id', 'name'])
+			->where(['site_id' => $this->module->siteId])
+			->orderby('list_order desc, created_at desc')
+			->all(), 'id', 'name');
 		if(!$categoryItems) {
 			\Yii::$app->session->setFlash('error', '1|' . \Yii::t($this->module->messageCategory, 'Please {action} {attribute} first', [
 				'action' => \Yii::t($this->module->messageCategory, 'Add'),
@@ -68,14 +68,14 @@ class ArticleController extends Controller {
 		if(!$id) {
 			$item = new SiteArticle;
 			$item->scenario = 'add';
-			$item->site_id = $this->module->id;
+			$item->site_id = $this->module->siteId;
 			if($cid) {
 				$item->category_id = $cid;
 			}
 		} else {
 			$item = SiteArticle::findOne([
 				'id' => $id,
-				'site_id' => $this->module->id,
+				'site_id' => $this->module->siteId,
 			]);
 			if(!$item) {
 				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
@@ -101,8 +101,8 @@ class ArticleController extends Controller {
 
 	public function actionList($cid = 0, $type = 0, $status = 'all', $stype = null, $sword = null) {
 		$query = SiteArticle::find()
-					->where(['site_id' => $this->module->id])
-					->orderby('list_order desc, created_at desc');
+			->where(['site_id' => $this->module->siteId])
+			->orderby('list_order desc, created_at desc');
 
 		if($cid) {
 			$query->andWhere(['category_id' => $cid]);
@@ -132,7 +132,7 @@ class ArticleController extends Controller {
 			]),
 		], ArrayHelper::map(SiteCategory::find()
 			->select(['id', 'name'])
-			->where(['site_id' => $this->module->id])
+			->where(['site_id' => $this->module->siteId])
 			->orderby('list_order desc, created_at desc')
 			->all(), 'id', 'name'));
 		$typeItems = ArrayHelper::merge([

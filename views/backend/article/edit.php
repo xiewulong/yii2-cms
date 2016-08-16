@@ -10,7 +10,7 @@ $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 ]);
 
 // set parent menu
-$this->params['parent'] = '/' . $module->id . '/article/list';
+$this->params['parent'] = $module->url('article/list');
 ?>
 
 <!-- begin admin-title -->
@@ -91,7 +91,7 @@ $this->params['parent'] = '/' . $module->id . '/article/list';
 				<?= Fileupload::widget([
 					'attribute' => Html::getInputName($item, 'pictures[]'),
 					'value' => $picture,
-					'action' => '/' . $module->id . '/dashboard/fileupload',
+					'action' => $module->url('dashboard/fileupload'),
 					'type' => 'image',
 					'max' => '2097152',
 					'sizes' => '80x80|150x150',
@@ -109,7 +109,7 @@ $this->params['parent'] = '/' . $module->id . '/article/list';
 				<? } ?>
 				<?= Fileupload::widget([
 					'attribute' => Html::getInputName($item, 'pictures[]'),
-					'action' => '/' . $module->id . '/dashboard/fileupload',
+					'action' => $module->url('dashboard/fileupload'),
 					'type' => 'image',
 					'max' => '2097152',
 					'sizes' => '80x80|150x150',
@@ -131,7 +131,7 @@ $this->params['parent'] = '/' . $module->id . '/article/list';
 					'name' => Html::getInputName($item, 'content'),
 					'value' => Html::getAttributeValue($item, 'content'),
 					'id' => Html::getInputId($item, 'content'),
-					'action' => '/' . $module->id . '/dashboard/ueditor',
+					'action' => $module->url('dashboard/ueditor'),
 					'options' => [
 						'initialFrameHeight' => 600,
 					],

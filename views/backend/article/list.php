@@ -66,7 +66,7 @@ $statusClasses = ['text-muted', 'text-warning', 'text-success', 'text-primary'];
 		</div>
 	<?= Html::endForm() ?>
 	<div class="pull-right">
-		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['/' . $module->id . '/article/edit'], ['class' => 'btn btn-default pull-left']) ?>
+		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['article/edit'], ['class' => 'btn btn-default pull-left']) ?>
 	</div>
 </div>
 <!-- end admin-options -->
@@ -92,15 +92,15 @@ $statusClasses = ['text-muted', 'text-warning', 'text-success', 'text-primary'];
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
 				<td><?= Html::encode($item['title']) ?></td>
-				<td><?= Html::a($item['category']['name'], ['/' . $module->id . '/category/list', 'keyword' => $item['category']['name']]) ?></td>
+				<td><?= Html::a($item['category']['name'], ['category/list', 'keyword' => $item['category']['name']]) ?></td>
 				<td class="text-center <?= $typeClasses[$item['type']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('type')) ?></td>
 				<td class="text-center"><?= $item['pv'] ?></td>
 				<!-- <td class="text-center"><?= $item['uv'] ?></td> -->
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
 				<td class="text-center">
-					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['/' . $module->id . '/article/edit', 'id' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['article/edit', 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['/' . $module->id . '/article/delete'], ['data-delete' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['/article/delete'], ['data-delete' => $item['id']]) ?>
 				</td>
 			</tr>
 			<? } ?>

@@ -5,7 +5,6 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\components\ActiveRecord;
-use yii\web\Cookie;
 
 /**
  * Site model
@@ -69,14 +68,6 @@ class SiteBannerItem extends ActiveRecord {
 				self::STATUS_DISABLED,
 			]],
 
-			['pv', 'filter', 'filter' => function($value) {
-				if(!\Yii::$app->request->isPost && !\Yii::$app->request->isAjax) {
-					$value += 1;
-				}
-
-				return $value;
-			}],
-
 			// Query data needed
 		];
 	}
@@ -106,6 +97,8 @@ class SiteBannerItem extends ActiveRecord {
 
 		$scenarios['visited'] = [
 			'id',
+			'site_id',
+			'banner_id',
 			'pv',
 			'uv',
 		];
@@ -212,31 +205,6 @@ class SiteBannerItem extends ActiveRecord {
 	 */
 	public function commonHandler() {
 		return $this->save();
-	}
-
-	/**
-	 * Add pv and uv when visited
-	 *
-	 * @since 0.0.1
-	 * @return {boolean}
-	 */
-	public function visitedHandler() {
-		if(!$this->validate()) {
-			return false;
-		}
-
-		$uvCookieName = "site-$this->site_id-banner-$this->banner_id-item-$this->id";
-		if(!\Yii::$app->request->cookies->has($uvCookieName)) {
-			$cookie = new Cookie([
-				'name' => $uvCookieName,
-				'value' => true,
-				'expire' => strtotime(date('Y-m-d', time() + 60 * 60 * 24)),
-			]);
-			\Yii::$app->response->cookies->add($cookie);
-			$this->uv += 1;
-		}
-
-		return $this->save(false);
 	}
 
 	/**

@@ -48,7 +48,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		</div>
 	<?= Html::endForm() ?>
 	<div class="pull-right">
-		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['/' . $module->id . '/category/edit'], ['class' => 'btn btn-default pull-left']) ?>
+		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['category/edit'], ['class' => 'btn btn-default pull-left']) ?>
 	</div>
 </div>
 <!-- end admin-options -->
@@ -73,16 +73,16 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
 				<td><?= Html::encode($item['name']) ?></td>
-				<td class="text-center"><?= Html::a($item['articleQuantity'], ['/' . $module->id . '/article/list', 'cid' => $item['id']]) ?></td>
+				<td class="text-center"><?= Html::a($item['articleQuantity'], ['article/list', 'cid' => $item['id']]) ?></td>
 				<td class="text-center"><?= $item['articleTotalPageView'] ?></td>
 				<!-- <td class="text-center"><?= $item['articleTotalUniqueVisitor'] ?></td> -->
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
 				<td class="text-center">
-					<?= Html::a(\Yii::t($module->messageCategory, 'Add') . \Yii::t($module->messageCategory, 'Article'), ['/' . $module->id . '/article/edit', 'cid' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Add') . \Yii::t($module->messageCategory, 'Article'), ['article/edit', 'cid' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['/' . $module->id . '/category/edit', 'id' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['category/edit', 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['/' . $module->id . '/category/delete'], ['data-delete' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['category/delete'], ['data-delete' => $item['id']]) ?>
 				</td>
 			</tr>
 			<? } ?>

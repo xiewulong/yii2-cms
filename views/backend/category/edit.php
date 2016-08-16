@@ -8,7 +8,7 @@ $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 ]);
 
 // set parent menu
-$this->params['parent'] = '/' . $module->id . '/category/list';
+$this->params['parent'] = $module->url('category/list');
 ?>
 
 <!-- begin admin-title -->

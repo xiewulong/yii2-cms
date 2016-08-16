@@ -5,18 +5,27 @@
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
- * update: 2016/8/14
+ * update: 2016/8/16
  * since: 0.0.1
  */
 
 namespace yii\cms;
 
 use Yii;
-use yii\base\ErrorException;
 use yii\components\Module;
+use yii\helpers\Url;
+
 use yii\cms\models\Site;
 
 class BackendModule extends Module {
+
+	public $site;
+
+	public $siteId;
+
+	public $frontendHost;
+
+	public $frontendModuleId;
 
 	public $controllerNamespace = 'yii\cms\controllers\backend';
 
@@ -28,29 +37,41 @@ class BackendModule extends Module {
 
 	public $permissions = ['@'];
 
-	public $messageCategory = 'cms';
+	public $addSidebarItems = [];
 
-	private $_site;
+	public $addMenuItems = [];
+
+	public $messageCategory = 'cms';
 
 	public function init() {
 		parent::init();
 
-		$this->getSite();
+		$this->setSite();
 	}
 
-	public function getSite() {
-		if(!$this->_site) {
-			$this->_site = Site::findOne($this->id);
-			if(!$this->_site) {
-				$this->_site = new Site;
-				$this->_site->scenario = 'add';
-				if(!$this->_site->load([$this->_site->formName() => ['id' => $this->id]]) || !$this->_site->commonHandler()) {
-					throw new ErrorException($this->_site->getFirstError('id'));
-				}
-			}
+	public function getFrontendUrl() {
+		$frontendModuleId = $this->siteId ? : $this->id;
+
+		return ($this->frontendHost ? : null) . \Yii::$app->urlManager->createUrl([$this->frontendModuleId ? : $frontendModuleId]);
+	}
+
+	public function url($url) {
+		return '/' . $this->id . '/' . $url;
+	}
+
+	private function setSite() {
+		if(!$this->siteId) {
+			$this->siteId = $this->id;
 		}
 
-		return $this->_site;
+		$this->site = Site::findOne($this->siteId);
+		if(!$this->site) {
+			$this->site = new Site;
+			$this->site->scenario = 'add';
+			if(!$this->site->load([$this->site->formName() => ['id' => $this->siteId]]) || !$this->site->commonHandler()) {
+				\Yii::$app->end($this->site->getFirstError('id'));
+			}
+		}
 	}
 
 }

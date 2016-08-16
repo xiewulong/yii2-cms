@@ -14,14 +14,14 @@
 			"name": "xiewulong",
 			"email": "xiewulong@vip.qq.com"
 		}
-    ],
-    "require": {
-        "yiisoft/yii2": ">=2.0.6",
-        "xiewulong/yii2-account": "*",
-        "xiewulong/yii2-components": "*",
-        "xiewulong/yii2-fileupload": "*",
-        "xiewulong/yii2-xui": "*"
-    },
+	],
+	"require": {
+		"yiisoft/yii2": ">=2.0.6",
+		"xiewulong/yii2-account": "*",
+		"xiewulong/yii2-components": "*",
+		"xiewulong/yii2-fileupload": "*",
+		"xiewulong/yii2-xui": "*"
+	},
 	"autoload": {
 		"psr-4": {"yii\\cms\\": ""}
 	}

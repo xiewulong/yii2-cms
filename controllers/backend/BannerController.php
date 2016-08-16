@@ -2,7 +2,7 @@
 namespace yii\cms\controllers\backend;
 
 use Yii;
-use yii\components\Controller;
+use yii\cms\components\Controller;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -33,6 +33,7 @@ class BannerController extends Controller {
 				'class' => VerbFilter::className(),
 				'actions' => [
 					'delete' => ['post'],
+					'item-delete' => ['post'],
 				],
 			],
 		];
@@ -41,14 +42,11 @@ class BannerController extends Controller {
 	public function actionJump($id) {
 		$item = SiteBannerItem::findOne([
 			'id' => $id,
-			'site_id' => $this->module->id,
+			'site_id' => $this->module->siteId,
 		]);
 		if(!$item || !$item->url) {
 			return $this->goBack();
 		}
-
-		// $item->scenario = 'visited';
-		// $item->visitedHandler();
 
 		return $this->redirect($item->url);
 	}
@@ -56,7 +54,7 @@ class BannerController extends Controller {
 	public function actionItemDelete() {
 		$item = SiteBannerItem::findOne([
 			'id' => \Yii::$app->request->post('id', 0),
-			'site_id' => $this->module->id,
+			'site_id' => $this->module->siteId,
 		]);
 		$done = $item && $item->delete();
 
@@ -69,7 +67,7 @@ class BannerController extends Controller {
 	public function actionItemEdit($bid, $id = 0) {
 		$banner = SiteBanner::findOne([
 			'id' => $bid,
-			'site_id' => $this->module->id,
+			'site_id' => $this->module->siteId,
 		]);
 		if(!$banner) {
 			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
@@ -78,12 +76,12 @@ class BannerController extends Controller {
 		if(!$id) {
 			$item = new SiteBannerItem;
 			$item->scenario = 'add';
-			$item->site_id = $this->module->id;
+			$item->site_id = $this->module->siteId;
 			$item->banner_id = $bid;
 		} else {
 			$item = SiteBannerItem::findOne([
 				'id' => $id,
-				'site_id' => $this->module->id,
+				'site_id' => $this->module->siteId,
 				'banner_id' => $bid,
 			]);
 			if(!$item) {
@@ -110,15 +108,15 @@ class BannerController extends Controller {
 	public function actionItems($bid, $stype = null, $sword = null) {
 		$banner = SiteBanner::findOne([
 			'id' => $bid,
-			'site_id' => $this->module->id,
+			'site_id' => $this->module->siteId,
 		]);
 		if(!$banner) {
 			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
 		}
 
 		$query = SiteBannerItem::find()
-					->where(['site_id' => $this->module->id, 'banner_id' => $bid])
-					->orderby('list_order desc, created_at desc');
+			->where(['site_id' => $this->module->siteId, 'banner_id' => $bid])
+			->orderby('list_order desc, created_at desc');
 
 		if($sword !== null) {
 			$query->andWhere("$stype like :sword", [':sword' => "%$sword%"]);
@@ -144,7 +142,7 @@ class BannerController extends Controller {
 	public function actionDelete() {
 		$item = SiteBanner::findOne([
 			'id' => \Yii::$app->request->post('id', 0),
-			'site_id' => $this->module->id,
+			'site_id' => $this->module->siteId,
 		]);
 		$done = $item && $item->delete();
 
@@ -158,11 +156,11 @@ class BannerController extends Controller {
 		if(!$id) {
 			$item = new SiteBanner;
 			$item->scenario = 'add';
-			$item->site_id = $this->module->id;
+			$item->site_id = $this->module->siteId;
 		} else {
 			$item = SiteBanner::findOne([
 				'id' => $id,
-				'site_id' => $this->module->id,
+				'site_id' => $this->module->siteId,
 			]);
 			if(!$item) {
 				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
@@ -186,8 +184,8 @@ class BannerController extends Controller {
 
 	public function actionList($stype = null, $sword = null) {
 		$query = SiteBanner::find()
-					->where(['site_id' => $this->module->id])
-					->orderby('created_at desc');
+			->where(['site_id' => $this->module->siteId])
+			->orderby('created_at desc');
 
 		if($sword !== null) {
 			$query->andWhere("$stype like :sword", [':sword' => "%$sword%"]);

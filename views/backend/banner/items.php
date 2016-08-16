@@ -10,7 +10,7 @@ $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 ]);
 
 // set parent menu
-$this->params['parent'] = '/' . $module->id . '/banner/list';
+$this->params['parent'] = $module->url('banner/list');
 
 $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 ?>
@@ -55,7 +55,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		</div>
 	<?= Html::endForm() ?>
 	<div class="pull-right">
-		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['/' . $module->id . '/banner/item-edit', 'bid' => $banner['id']], ['class' => 'btn btn-default pull-left']) ?>
+		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['banner/item-edit', 'bid' => $banner['id']], ['class' => 'btn btn-default pull-left']) ?>
 	</div>
 </div>
 <!-- end admin-options -->
@@ -80,16 +80,16 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<?php foreach($items as $item) { ?>
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
-				<td><?= Html::a($item['title'], $item['url'] ? ['/' . $module->id . '/banner/jump', 'id' => $item['id']] : null, ['target' => '_blank']) ?></td>
-				<td><?= Html::a(Html::img($item['picture'], ['class' => 'admin-image-limit']), $item['url'] ? ['/' . $module->id . '/banner/jump', 'id' => $item['id']] : null, ['target' => '_blank']) ?></td>
+				<td><?= Html::a($item['title'], $item['url'] ? ['banner/jump', 'id' => $item['id']] : null, ['target' => '_blank']) ?></td>
+				<td><?= Html::a(Html::img($item['picture'], ['class' => 'admin-image-limit']), $item['url'] ? ['banner/jump', 'id' => $item['id']] : null, ['target' => '_blank']) ?></td>
 				<td><?= Html::encode($item['banner']['name']) ?></td>
 				<td class="text-center"><?= $item['pv'] ?></td>
 				<td class="text-center"><?= $item['uv'] ?></td>
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
 				<td class="text-center">
-					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['/' . $module->id . '/banner/item-edit', 'bid' => $banner['id'], 'id' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['banner/item-edit', 'bid' => $banner['id'], 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['/' . $module->id . '/banner/item-delete'], ['data-delete' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['/banner/item-delete'], ['data-delete' => $item['id']]) ?>
 				</td>
 			</tr>
 			<? } ?>
