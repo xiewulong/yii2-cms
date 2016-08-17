@@ -30,10 +30,6 @@ use yii\components\ActiveRecord;
  * @property {string} $record
  * @property {string} $license
  * @property {integer} $status
- * @property {string} $about
- * @property {integer} $about_status
- * @property {string} $contact
- * @property {integer} $contact_status
  * @property {integer} $pv
  * @property {integer} $uv
  * @property {integer} $operator_id
@@ -42,16 +38,11 @@ use yii\components\ActiveRecord;
  */
 class Site extends ActiveRecord {
 
-	const TYPE_ENTERPRISE = 1;
+	const TYPE_PERSONAL = 1;
+	const TYPE_ENTERPRISE = 2;
 
 	const STATUS_DISABLED = 0;
 	const STATUS_ENABLED = 1;
-
-	const ABOUT_STATUS_DISABLED = 0;
-	const ABOUT_STATUS_ENABLED = 1;
-
-	const CONTACT_STATUS_DISABLED = 0;
-	const CONTACT_STATUS_ENABLED = 1;
 
 	public $messageCategory = 'cms';
 
@@ -94,16 +85,12 @@ class Site extends ActiveRecord {
 				'powered_url',
 				'record',
 				'license',
-				'about',
-				'contact',
 			], 'trim'],
 
 			[[
 				'id',
 				'name',
 				'logo',
-				'about',
-				'contact',
 			], 'required'],
 
 			[[
@@ -112,29 +99,18 @@ class Site extends ActiveRecord {
 				'powered_url',
 			], 'url'],
 
+			['email', 'email'],
+
 			['type', 'default', 'value' => self::TYPE_ENTERPRISE],
 			['type', 'in', 'range' => [
+				self::TYPE_PERSONAL,
 				self::TYPE_ENTERPRISE,
 			]],
-
-			['email', 'email'],
 
 			['status', 'default', 'value' => self::STATUS_ENABLED],
 			['status', 'in', 'range' => [
 				self::STATUS_ENABLED,
 				self::STATUS_DISABLED,
-			]],
-
-			['about_status', 'default', 'value' => self::ABOUT_STATUS_ENABLED],
-			['about_status', 'in', 'range' => [
-				self::ABOUT_STATUS_ENABLED,
-				self::ABOUT_STATUS_DISABLED,
-			]],
-
-			['contact_status', 'default', 'value' => self::CONTACT_STATUS_ENABLED],
-			['contact_status', 'in', 'range' => [
-				self::CONTACT_STATUS_ENABLED,
-				self::CONTACT_STATUS_DISABLED,
 			]],
 
 			// Query data needed
@@ -152,7 +128,7 @@ class Site extends ActiveRecord {
 			'id',
 		];
 
-		$scenarios['basic'] = [
+		$scenarios['global'] = [
 			'type',
 			'name',
 			'logo',
@@ -172,18 +148,6 @@ class Site extends ActiveRecord {
 			'record',
 			'license',
 			'status',
-			'operator_id',
-		];
-
-		$scenarios['about'] = [
-			'about',
-			'about_status',
-			'operator_id',
-		];
-
-		$scenarios['contact'] = [
-			'contact',
-			'contact_status',
 			'operator_id',
 		];
 
@@ -221,10 +185,6 @@ class Site extends ActiveRecord {
 			'record' => \Yii::t($this->messageCategory, 'Record number'),
 			'license' => \Yii::t($this->messageCategory, 'License number'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
-			'about' => \Yii::t($this->messageCategory, 'About us'),
-			'about_status' => \Yii::t($this->messageCategory, 'About page Status'),
-			'contact' => \Yii::t($this->messageCategory, 'Contact us'),
-			'contact_status' => \Yii::t($this->messageCategory, 'Contact page Status'),
 			'pv' => \Yii::t($this->messageCategory, 'Page view'),
 			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
 			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
@@ -318,22 +278,6 @@ class Site extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Status'),
 			]),
-			'about' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'About'),
-			]),
-			'about_status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'About page Status'),
-			]),
-			'contact' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Contact'),
-			]),
-			'contact_status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Contact page Status'),
-			]),
 		];
 	}
 
@@ -345,7 +289,19 @@ class Site extends ActiveRecord {
 	 */
 	public function typeItems() {
 		return [
-			self::TYPE_ENTERPRISE => \Yii::t($this->messageCategory, 'Enterprise'),
+			[
+				self::TYPE_PERSONAL => \Yii::t($this->messageCategory, 'Personal'),
+				self::TYPE_ENTERPRISE => \Yii::t($this->messageCategory, 'Enterprise'),
+			],
+			[
+				self::TYPE_PERSONAL => [
+					'address',
+					'copyright',
+					'powered',
+					'powered_url',
+					'license',
+				],
+			],
 		];
 	}
 
@@ -357,34 +313,10 @@ class Site extends ActiveRecord {
 	 */
 	public function statusItems() {
 		return [
-			self::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
-			self::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
-		];
-	}
-
-	/**
-	 * Return about page status items in every scenario
-	 *
-	 * @since 0.0.1
-	 * @return {array}
-	 */
-	public function aboutStatusItems() {
-		return [
-			self::ABOUT_STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
-			self::ABOUT_STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
-		];
-	}
-
-	/**
-	 * Return contact page status items in every scenario
-	 *
-	 * @since 0.0.1
-	 * @return {array}
-	 */
-	public function contactStatusItems() {
-		return [
-			self::CONTACT_STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
-			self::CONTACT_STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
+			[
+				self::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
+				self::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
+			],
 		];
 	}
 
@@ -396,16 +328,6 @@ class Site extends ActiveRecord {
 	 */
 	public function commonHandler() {
 		return $this->save();
-	}
-
-	/**
-	 * Get site menus
-	 *
-	 * @since 0.0.1
-	 * @return {array}
-	 */
-	public function getMenus() {
-		return $this->hasMany(SiteCategory::classname(), ['site_id' => 'id']);
 	}
 
 }

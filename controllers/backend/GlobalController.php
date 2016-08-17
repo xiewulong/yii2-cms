@@ -14,7 +14,7 @@ use yii\cms\models\Site;
 
 class GlobalController extends Controller {
 
-	public $defaultAction = 'basic';
+	public $defaultAction = 'site';
 
 	public function behaviors() {
 		return [
@@ -22,7 +22,7 @@ class GlobalController extends Controller {
 				'class' => AccessControl::className(),
 				'rules' => [
 					[
-						'actions' => ['basic', 'about', 'contact'],
+						'actions' => ['site'],
 						'allow' => true,
 						'roles' => $this->module->permissions,
 					],
@@ -31,43 +31,9 @@ class GlobalController extends Controller {
 		];
 	}
 
-	public function actionContact() {
+	public function actionSite() {
 		$site = Site::findOne($this->module->siteId);
-		$site->scenario = 'contact';
-		if($site->load(\Yii::$app->request->post())) {
-			if($site->commonHandler()) {
-				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
-
-				return $this->refresh();
-			}
-			\Yii::$app->session->setFlash('item', '1|' . $site->firstErrorInfirstErrors);
-		}
-
-		return $this->render($this->action->id, [
-			'item' => $site,
-		]);
-	}
-
-	public function actionAbout() {
-		$site = Site::findOne($this->module->siteId);
-		$site->scenario = 'about';
-		if($site->load(\Yii::$app->request->post())) {
-			if($site->commonHandler()) {
-				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
-
-				return $this->refresh();
-			}
-			\Yii::$app->session->setFlash('item', '1|' . $site->firstErrorInfirstErrors);
-		}
-
-		return $this->render($this->action->id, [
-			'item' => $site,
-		]);
-	}
-
-	public function actionBasic() {
-		$site = Site::findOne($this->module->siteId);
-		$site->scenario = 'basic';
+		$site->scenario = 'global';
 		if($site->load(\Yii::$app->request->post())) {
 			if($site->commonHandler()) {
 				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));

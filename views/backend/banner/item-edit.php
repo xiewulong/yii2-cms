@@ -25,7 +25,7 @@ $this->params['parent'] = $module->url('banner/list');
 <!-- begin admin-form -->
 <?= Html::beginForm(null, null, ['class' => 'form-horizontal admin-area admin-form']) ?>
 	<div class="fieldset">
-		<div class="form-group">
+		<div class="form-group title">
 			<?= Html::activeLabel($item, 'title', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'title', [
@@ -35,7 +35,7 @@ $this->params['parent'] = $module->url('banner/list');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group description">
 			<?= Html::activeLabel($item, 'description', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextarea($item, 'description', [
@@ -46,7 +46,7 @@ $this->params['parent'] = $module->url('banner/list');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group picture">
 			<?= Html::activeLabel($item, 'picture', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Fileupload::widget([
@@ -69,7 +69,21 @@ $this->params['parent'] = $module->url('banner/list');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group type">
+			<?= Html::activeLabel($item, 'type', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Html::activeRadioList($item, 'type', $item->getAttributeItems('type'), [
+					'itemOptions' => [
+						'data-form-switch' => 'radio',
+						'labelOptions' => [
+							'class' => 'radio-inline',
+						],
+					],
+				]) ?>
+				<?php $this->registerJs('$("[data-form-switch=radio]").formSwitch(' . $item->getAttributeItems('type', 1, true) . ', "' . $item['type'] . '");', 3); ?>
+			</div>
+		</div>
+		<div class="form-group url">
 			<?= Html::activeLabel($item, 'url', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'url', [
@@ -79,7 +93,29 @@ $this->params['parent'] = $module->url('banner/list');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group category_id">
+			<?= Html::activeLabel($item, 'category_id', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-8">
+				<?= Html::activeHiddenInput($item, 'category_id') ?>
+				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
+					'class' => 'btn btn-default',
+					'data-form-selection' => $module->url('category/get'),
+				]) ?>
+				<?= Html::tag('span', $item['type'] == 3 ? $item['target']['name'] : null) ?>
+			</div>
+		</div>
+		<div class="form-group article_id">
+			<?= Html::activeLabel($item, 'article_id', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-8">
+				<?= Html::activeHiddenInput($item, 'article_id') ?>
+				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
+					'class' => 'btn btn-default',
+					'data-form-selection' => $module->url('article/get'),
+				]) ?>
+				<?= Html::tag('span', $item['type'] == 4 ? $item['target']['title'] : null) ?>
+			</div>
+		</div>
+		<div class="form-group status">
 			<?= Html::activeLabel($item, 'status', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeRadioList($item, 'status', $item->getAttributeItems('status'), [

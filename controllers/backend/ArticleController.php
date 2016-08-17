@@ -15,7 +15,7 @@ use yii\cms\models\SiteArticle;
 
 class ArticleController extends Controller {
 
-	public $defaultAction = 'List';
+	public $defaultAction = 'list';
 
 	public function behaviors() {
 		return [
@@ -23,7 +23,7 @@ class ArticleController extends Controller {
 				'class' => AccessControl::className(),
 				'rules' => [
 					[
-						'actions' => ['list', 'edit', 'delete'],
+						'actions' => ['list', 'edit', 'delete', 'get'],
 						'allow' => true,
 						'roles' => $this->module->permissions,
 					],
@@ -33,9 +33,44 @@ class ArticleController extends Controller {
 				'class' => VerbFilter::className(),
 				'actions' => [
 					'delete' => ['post'],
+					'get' => ['get'],
 				],
 			],
 		];
+	}
+
+	public function actionGet() {
+		$items = SiteCategory::find()
+			->alias('a')
+			->select(['a.id', 'a.name'])
+			->joinWith([
+				'items b' => function($query) {
+					return $query->select(['b.id', 'b.category_id', 'b.title name']);
+				}
+			])
+			->where([
+				'a.site_id' => $this->module->siteId,
+				'a.type' => [
+					SiteCategory::TYPE_NEWS,
+					SiteCategory::TYPE_PICTURES,
+					SiteCategory::TYPE_PAGE,
+				],
+				'a.status' => SiteCategory::STATUS_ENABLED,
+				'b.status' => [SiteArticle::STATUS_RELEASED, SiteArticle::STATUS_FEATURED],
+			])
+			->orderby('a.list_order desc, a.created_at desc')
+			->asArray()
+			->all();
+		$done = !empty($items);
+
+		return $this->respond([
+			'error' => !$done,
+			'message' => $done ? null : \Yii::t($this->module->messageCategory, 'No matched data') . ', ' . \Yii::t($this->module->messageCategory, 'Please {action} {attribute} first', [
+				'action' => \Yii::t($this->module->messageCategory, 'Add'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'Category'),
+			]),
+			'data' => $items,
+		]);
 	}
 
 	public function actionDelete() {
@@ -52,12 +87,15 @@ class ArticleController extends Controller {
 	}
 
 	public function actionEdit($id = 0, $cid = 0) {
-		$categoryItems = ArrayHelper::map(SiteCategory::find()
-			->select(['id', 'name'])
-			->where(['site_id' => $this->module->siteId])
+		$categorys = SiteCategory::find()
+			->select(['id', 'name', 'type'])
+			->where([
+				'site_id' => $this->module->siteId,
+				'status' => SiteCategory::STATUS_ENABLED,
+			])
 			->orderby('list_order desc, created_at desc')
-			->all(), 'id', 'name');
-		if(!$categoryItems) {
+			->all();
+		if(!$categorys) {
 			\Yii::$app->session->setFlash('error', '1|' . \Yii::t($this->module->messageCategory, 'Please {action} {attribute} first', [
 				'action' => \Yii::t($this->module->messageCategory, 'Add'),
 				'attribute' => \Yii::t($this->module->messageCategory, 'Category'),
@@ -93,28 +131,35 @@ class ArticleController extends Controller {
 			\Yii::$app->session->setFlash('item', '1|' . $item->firstErrorInfirstErrors);
 		}
 
+		$categoryNames = ArrayHelper::map($categorys, 'id', 'name');
+		$categoryTypes = ArrayHelper::map($categorys, 'id', 'type');
+		$categoryTypeItems = SiteCategory::defaultAttributeItems('type');
+
 		return $this->render($this->action->id, [
 			'item' => $item,
-			'categoryItems' => $categoryItems,
+			'categoryNames' => $categoryNames,
+			'categoryTypes' => Json::encode($categoryTypes),
+			'categoryTypeItems' => Json::encode($categoryTypeItems),
 		]);
 	}
 
-	public function actionList($cid = 0, $type = 0, $status = 'all', $stype = null, $sword = null) {
+	public function actionList($cid = 0, $type = 'all', $status = 'all', $stype = null, $sword = null) {
 		$query = SiteArticle::find()
-			->where(['site_id' => $this->module->siteId])
-			->orderby('list_order desc, created_at desc');
+			->alias('a')
+			->where(['a.site_id' => $this->module->siteId])
+			->orderby('a.list_order desc, a.created_at desc');
 
 		if($cid) {
-			$query->andWhere(['category_id' => $cid]);
+			$query->andWhere(['a.category_id' => $cid]);
 		}
-		if($type) {
-			$query->andWhere(['type' => $type]);
+		if($type != 'all') {
+			$query->joinWith('category b')->andWhere(['b.type' => $type]);
 		}
 		if($status != 'all') {
-			$query->andWhere(['status' => $status]);
+			$query->andWhere(['a.status' => $status]);
 		}
 		if($sword !== null) {
-			$query->andWhere("$stype like :sword", [':sword' => "%$sword%"]);
+			$query->andWhere(['like', "a.$stype", $sword]);
 		}
 
 		$pagination = new Pagination([
@@ -135,12 +180,12 @@ class ArticleController extends Controller {
 			->where(['site_id' => $this->module->siteId])
 			->orderby('list_order desc, created_at desc')
 			->all(), 'id', 'name'));
-		$typeItems = ArrayHelper::merge([
-			0 => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
+		$categoryTypeItems = ArrayHelper::merge([
+			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
 				'attribute' => \Yii::t($this->module->messageCategory, 'Type'),
 				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
 			]),
-		], SiteArticle::defaultAttributeItems('type'));
+		], SiteCategory::defaultAttributeItems('type'));
 		$statusItems = ArrayHelper::merge([
 			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
 				'attribute' => \Yii::t($this->module->messageCategory, 'Status'),
@@ -157,7 +202,7 @@ class ArticleController extends Controller {
 			'items' => $items,
 			'pagination' => $pagination,
 			'categoryItems' => $categoryItems,
-			'typeItems' => $typeItems,
+			'categoryTypeItems' => $categoryTypeItems,
 			'statusItems' => $statusItems,
 		]);
 	}

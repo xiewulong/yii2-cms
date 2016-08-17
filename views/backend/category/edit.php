@@ -24,7 +24,20 @@ $this->params['parent'] = $module->url('category/list');
 <!-- begin admin-form -->
 <?= Html::beginForm(null, 'post', ['class' => 'form-horizontal admin-area admin-form']) ?>
 	<div class="fieldset">
-		<div class="form-group">
+		<div class="form-group type">
+			<?= Html::activeLabel($item, 'type', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Html::activeRadioList($item, 'type', $item->getAttributeItems('type'), [
+					'unselect' => 1,
+					'itemOptions' => [
+						'labelOptions' => [
+							'class' => 'radio-inline',
+						],
+					],
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group name">
 			<?= Html::activeLabel($item, 'name', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'name', [
@@ -34,7 +47,7 @@ $this->params['parent'] = $module->url('category/list');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group status">
 			<?= Html::activeLabel($item, 'status', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeRadioList($item, 'status', $item->getAttributeItems('status'), [

@@ -24,27 +24,27 @@ $this->params['parent'] = $module->url('banner/list');
 <!-- begin admin-form -->
 <?= Html::beginForm(null, 'post', ['class' => 'form-horizontal admin-area admin-form']) ?>
 	<div class="fieldset">
-		<div class="form-group">
-			<?= Html::activeLabel($item, 'id', ['class' => 'control-label col-sm-2']) ?>
-			<div class="col-sm-4">
-				<?= Html::activeTextInput($item, 'id', [
-					'class' => 'form-control',
-					'placeholder' => $item->getAttributeHint('id'),
-					'autofocus' => $item->isFirstErrorAttribute('id') || !$item->hasErrors(),
-				]) ?>
-			</div>
-		</div>
-		<div class="form-group">
+		<div class="form-group name">
 			<?= Html::activeLabel($item, 'name', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'name', [
 					'class' => 'form-control',
 					'placeholder' => $item->getAttributeHint('name'),
-					'autofocus' => $item->isFirstErrorAttribute('name'),
+					'autofocus' => $item->isFirstErrorAttribute('name') || !$item->hasErrors(),
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group position">
+			<?= Html::activeLabel($item, 'position', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Html::activeTextInput($item, 'position', [
+					'class' => 'form-control',
+					'placeholder' => $item->getAttributeHint('position'),
+					'autofocus' => $item->isFirstErrorAttribute('position'),
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group status">
 			<?= Html::activeLabel($item, 'status', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeRadioList($item, 'status', $item->getAttributeItems('status'), [

@@ -1,7 +1,5 @@
 <?php
 return [
-	'Nanning Automan Technology Co., Ltd.' => '南宁凹凸曼科技有限责任公司',
-
 	'Site' => '网站',
 	'Site id' => '网站ID',
 	'Id' => 'ID',
@@ -24,10 +22,6 @@ return [
 	'Record number' => '备案编号',
 	'License number' => '许可证编号',
 	'Status' => '状态',
-	'About' => '关于',
-	'About page Status' => '关于页状态',
-	'Contact' => '联系',
-	'Contact page Status' => '联系页状态',
 	'Page view' => '浏览量',
 	'Unique Visitor' => '独立访客',
 	'Operator id' => '操作者ID',
@@ -43,30 +37,53 @@ return [
 	'Article' => '文章',
 	'Article id' => '文章ID',
 	'Title' => '标题',
+	'Thumbnail' => '缩略图',
 	'Content' => '内容',
 	'Picture' => '图片',
-	'Thumbnail' => '缩略图',
 
-	'Banner' => '旗帜广告',
-	'Banner id' => '旗帜广告ID',
+	'Module' => '模块',
+	'Module id' => '模块ID',
+	'Position' => '位置',
 
-	'Banner item' => '旗帜项',
-	'Banner item id' => '旗帜项ID',
+	'Module item' => '模块项',
+	'Module item id' => '模块项ID',
+	'Target id' => '目标ID',
 	'Url' => '链接',
 	'Start time' => '开始时间',
 	'End time' => '结束时间',
 
-	'Deleted' => '已删除',
-	'Active' => '有效',
-	'Inactive' => '无效',
-	'Enabled' => '启用',
-	'Disabled' => '禁用',
-	'Enterprise' => '企业',
+	'Menu' => '菜单',
+	'Menu id' => '菜单ID',
+	'Menu group' => '菜单组',
+	'Menu group id' => '菜单组ID',
+	'Menu item' => '菜单项',
+	'Menu item id' => '菜单项ID',
+
+	'Banner' => '旗帜广告',
+	'Banner id' => '旗帜广告ID',
+	'Banner group' => '旗帜广告组',
+	'Banner group id' => '旗帜广告组ID',
+	'Banner item' => '旗帜项',
+	'Banner item id' => '旗帜项ID',
+
 	'News' => '新闻',
 	'Gallery' => '图库',
+	'Single page' => '单页',
+	'Notice' => '公告',
+	'Target' => '目标',
+
+	'Drafted' => '草稿',
 	'Released' => '发布',
 	'Featured' => '推荐',
-	'Drafted' => '草稿',
+
+	'Personal' => '个人',
+	'Enterprise' => '企业',
+
+	'Link' => '链接',
+
+	'Deleted' => '已删除',
+	'Enabled' => '启用',
+	'Disabled' => '禁用',
 
 	'Management System' => '管理系统',
 	'Dashboard' => '概览',
@@ -87,12 +104,11 @@ return [
 	'Edit' => '编辑',
 	'Delete' => '删除',
 
+	'Required' => '必填',
 	'Reset password' => '修改密码',
 	'Operation succeeded' => '操作成功',
 	'Operation failed' => '操作失败',
 	'Please try again' => '请重试',
-	'No matched data' => '没有匹配的数据',
-
 	'No matched data' => '没有匹配的数据',
 
 	'{attribute} {action}' => '{attribute}{action}',
@@ -114,4 +130,6 @@ return [
 	'About us' => '关于我们',
 	'Contact us' => '联系我们',
 	'Social service account' => '社会服务账户',
+
+	'Nanning Automan Technology Co., Ltd.' => '南宁凹凸曼科技有限责任公司',
 ];

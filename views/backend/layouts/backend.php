@@ -47,40 +47,21 @@ BackendAsset::register($this);
 <?php $this->beginBody(); ?>
 
 <?php
-$global = [
-	'text' => \Yii::t($module->messageCategory, 'Global'),
-	'children' => [
-		[
-			'text' => \Yii::t($module->messageCategory, 'Basic'),
-			'icon' => 'glyphicon glyphicon-cog',
-			'url' => [$module->url('global/basic')],
-		],
-	],
-];
-if($site['type'] == 1) {
-	$global['children'][] = [
-		'text' => \Yii::t($module->messageCategory, 'About us'),
-		'icon' => 'glyphicon glyphicon-book',
-		'url' => [$module->url('global/about')],
-	];
-	$global['children'][] = [
-		'text' => \Yii::t($module->messageCategory, 'Contact us'),
-		'icon' => 'glyphicon glyphicon-earphone',
-		'url' => [$module->url('global/contact')],
-	];
-}
-
 $sidebar = array_merge([
 	[
 		'text' => \Yii::t($module->messageCategory, 'Dashboard'),
 		'icon' => 'glyphicon glyphicon-dashboard',
 		'url' => [$module->url('dashboard/index')],
 	],
-	$global,
 	[
-		'text' => \Yii::t($module->messageCategory, 'Banner'),
-		'icon' => 'glyphicon glyphicon-flag',
-		'url' => [$module->url('banner/list')],
+		'text' => \Yii::t($module->messageCategory, 'Global'),
+		'icon' => 'glyphicon glyphicon-globe',
+		'url' => [$module->url('global/site')],
+	],
+	[
+		'text' => \Yii::t($module->messageCategory, 'Menu'),
+		'icon' => 'glyphicon glyphicon-menu-hamburger',
+		'url' => [$module->url('menu/list')],
 	],
 	[
 		'text' => \Yii::t($module->messageCategory, 'Category'),
@@ -92,8 +73,12 @@ $sidebar = array_merge([
 		'icon' => 'glyphicon glyphicon glyphicon-pencil',
 		'url' => [$module->url('article/list')],
 	],
+	[
+		'text' => \Yii::t($module->messageCategory, 'Banner'),
+		'icon' => 'glyphicon glyphicon-flag',
+		'url' => [$module->url('banner/list')],
+	],
 ], $module->addSidebarItems);
-
 $params = [
 	'brand' => [
 		'logo' => $site['logo'],
@@ -148,7 +133,7 @@ $params['menus'] = array_merge($params['menus'], $module->addMenuItems);
 <?php
 foreach(\Yii::$app->session->allFlashes as $flash) {
 	list($type, $message) = explode('|', $flash);
-	$this->registerJs('$.alert("' . $message . '", "' . $type . '");', 3);
+	$this->registerJs('$.alert("' . addslashes($message) . '", "' . $type . '");', 3);
 }
 ?>
 <!-- end admin-alerts -->

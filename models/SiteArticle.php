@@ -15,13 +15,12 @@ use yii\helpers\Json;
  * @property {string} $site_id
  * @property {integer} $category_id
  * @property {string} $title
- * @property {string} $keywords
- * @property {string} $description
- * @property {integer} $type
- * @property {string} $content
- * @property {string} $pictures
  * @property {string} $thumbnail
  * @property {string} $author
+ * @property {string} $keywords
+ * @property {string} $description
+ * @property {string} $content
+ * @property {string} $pictures
  * @property {integer} $status
  * @property {integer} $list_order
  * @property {integer} $pv
@@ -32,9 +31,6 @@ use yii\helpers\Json;
  * @property {integer} $updated_at
  */
 class SiteArticle extends ActiveRecord {
-
-	const TYPE_NEWS = 1;
-	const TYPE_GALLERY = 2;
 
 	const STATUS_DELETED = 0;
 	const STATUS_DRAFTED = 1;
@@ -64,28 +60,31 @@ class SiteArticle extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['title', 'author', 'keywords', 'description', 'content', 'thumbnail'], 'trim'],
-			[['id', 'site_id', 'category_id', 'type', 'title'], 'required'],
+			[['title', 'thumbnail', 'author', 'keywords', 'description', 'content'], 'trim'],
+			[['id', 'site_id', 'category_id', 'title'], 'required'],
 
-			['type', 'default', 'value' => self::TYPE_NEWS],
-			['type', 'in', 'range' => [
-				self::TYPE_NEWS,
-				self::TYPE_GALLERY,
-			]],
+			[['thumbnail', 'pictures'], 'required', 'when' => function($self) {
+				return $self->category->type == SiteCategory::TYPE_PICTURES;
+			}],
+
+			['description', 'required', 'when' => function($self) {
+				return $self->category->type == SiteCategory::TYPE_NOTICE;
+			}],
 
 			['content', 'required', 'when' => function($self) {
-				return $self->type == $self::TYPE_NEWS;
+				return $self->category->type == SiteCategory::TYPE_NEWS
+					|| $self->category->type == SiteCategory::TYPE_PAGE;
 			}],
 
-			['pictures', 'required', 'when' => function($self) {
-				return $self->type == $self::TYPE_GALLERY;
-			}],
 			['pictures', 'filter', 'filter' => function($value) {
 				if(is_array($value)) {
 					$value = Json::encode($value);
 				}
+
 				return $value;
 			}],
+
+			['list_order', 'default', 'value' => 0],
 
 			['status', 'default', 'value' => self::STATUS_DRAFTED],
 			['status', 'in', 'range' => [
@@ -93,8 +92,6 @@ class SiteArticle extends ActiveRecord {
 				self::STATUS_FEATURED,
 				self::STATUS_DRAFTED,
 			]],
-
-			['list_order', 'default', 'value' => 0],
 
 			// Query data needed
 		];
@@ -109,13 +106,13 @@ class SiteArticle extends ActiveRecord {
 		$common = [
 			'site_id',
 			'category_id',
-			'type',
 			'title',
+			'thumbnail',
+			'author',
 			'keywords',
 			'description',
 			'content',
 			'pictures',
-			'thumbnail',
 			'status',
 			'operator_id',
 			'creator_id',
@@ -126,8 +123,6 @@ class SiteArticle extends ActiveRecord {
 
 		$scenarios['visited'] = [
 			'id',
-			'site_id',
-			'category_id',
 			'pv',
 			'uv',
 		];
@@ -143,14 +138,13 @@ class SiteArticle extends ActiveRecord {
 			'id' => \Yii::t($this->messageCategory, 'Article id'),
 			'site_id' => \Yii::t($this->messageCategory, 'Site'),
 			'category_id' => \Yii::t($this->messageCategory, 'Category'),
-			'type' => \Yii::t($this->messageCategory, 'Type'),
 			'title' => \Yii::t($this->messageCategory, 'Title'),
+			'thumbnail' => \Yii::t($this->messageCategory, 'Thumbnail'),
+			'author' => \Yii::t($this->messageCategory, 'Author'),
 			'keywords' => \Yii::t($this->messageCategory, 'Keyword'),
 			'description' => \Yii::t($this->messageCategory, 'Description'),
 			'content' => \Yii::t($this->messageCategory, 'Content'),
 			'pictures' => \Yii::t($this->messageCategory, 'Picture'),
-			'thumbnail' => \Yii::t($this->messageCategory, 'Thumbnail'),
-			'author' => \Yii::t($this->messageCategory, 'Author'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'pv' => \Yii::t($this->messageCategory, 'Page view'),
 			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
@@ -177,13 +171,17 @@ class SiteArticle extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Category'),
 			]),
-			'type' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Type'),
-			]),
 			'title' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Title'),
+			]),
+			'thumbnail' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'attribute' => \Yii::t($this->messageCategory, 'Thumbnail'),
+			]),
+			'author' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'Author'),
 			]),
 			'keywords' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
@@ -200,10 +198,6 @@ class SiteArticle extends ActiveRecord {
 			'pictures' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Picture'),
-			]),
-			'thumbnail' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'upload'),
-				'attribute' => \Yii::t($this->messageCategory, 'Thumbnail'),
 			]),
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
@@ -222,10 +216,28 @@ class SiteArticle extends ActiveRecord {
 	 * @since 0.0.1
 	 * @return {array}
 	 */
-	public function typeItems() {
+	public function categoryTypeItems() {
 		return [
-			self::TYPE_NEWS => \Yii::t($this->messageCategory, 'News'),
-			self::TYPE_GALLERY => \Yii::t($this->messageCategory, 'Gallery'),
+			[],
+			[
+				SiteCategory::TYPE_NEWS => [
+					'pictures',
+				],
+				SiteCategory::TYPE_PICTURES => [
+					'content',
+				],
+				SiteCategory::TYPE_PAGE => [
+					'author',
+					'keywords',
+					'pictures',
+				],
+				SiteCategory::TYPE_NOTICE => [
+					'author',
+					'keywords',
+					'content',
+					'pictures',
+				],
+			],
 		];
 	}
 
@@ -237,10 +249,12 @@ class SiteArticle extends ActiveRecord {
 	 */
 	public function statusItems() {
 		return [
-			self::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
-			self::STATUS_DRAFTED => \Yii::t($this->messageCategory, 'Drafted'),
-			self::STATUS_RELEASED => \Yii::t($this->messageCategory, 'Released'),
-			self::STATUS_FEATURED => \Yii::t($this->messageCategory, 'Featured'),
+			[
+				self::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
+				self::STATUS_DRAFTED => \Yii::t($this->messageCategory, 'Drafted'),
+				self::STATUS_RELEASED => \Yii::t($this->messageCategory, 'Released'),
+				self::STATUS_FEATURED => \Yii::t($this->messageCategory, 'Featured'),
+			],
 		];
 	}
 
@@ -262,6 +276,16 @@ class SiteArticle extends ActiveRecord {
 	 */
 	public function getCategory() {
 		return $this->hasOne(SiteCategory::classname(), ['id' => 'category_id']);
+	}
+
+	/**
+	 * Superior alias
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getSuperior() {
+		return $this->getCategory();
 	}
 
 	/**

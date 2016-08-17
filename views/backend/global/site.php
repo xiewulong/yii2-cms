@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\fileupload\Fileupload;
 
 $module = \Yii::$app->controller->module;
-$this->title = \Yii::t($module->messageCategory, 'Basic');
+$this->title = \Yii::t($module->messageCategory, 'Global');
 ?>
 
 <!-- begin admin-title -->
@@ -15,19 +15,21 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 <!-- begin admin-form -->
 <?= Html::beginForm(null, null, ['class' => 'form-horizontal admin-area admin-form']) ?>
 	<div class="fieldset">
-		<div class="form-group">
+		<div class="form-group type">
 			<?= Html::activeLabel($item, 'type', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeRadioList($item, 'type', $item->getAttributeItems('type'), [
 					'itemOptions' => [
+						'data-form-switch' => 'radio',
 						'labelOptions' => [
 							'class' => 'radio-inline',
 						],
 					],
 				]) ?>
+				<?php $this->registerJs('$("[data-form-switch=radio]").formSwitch(' . $item->getAttributeItems('type', 1, true) . ', "' . $item['type'] . '");', 3); ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group name">
 			<?= Html::activeLabel($item, 'name', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'name', [
@@ -37,7 +39,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group logo">
 			<?= Html::activeLabel($item, 'logo', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Fileupload::widget([
@@ -60,7 +62,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group brief">
 			<?= Html::activeLabel($item, 'brief', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextarea($item, 'brief', [
@@ -71,7 +73,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group author">
 			<?= Html::activeLabel($item, 'author', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-3">
 				<?= Html::activeTextInput($item, 'author', [
@@ -81,7 +83,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group keywords">
 			<?= Html::activeLabel($item, 'keywords', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextarea($item, 'keywords', [
@@ -92,7 +94,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group description">
 			<?= Html::activeLabel($item, 'description', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextarea($item, 'description', [
@@ -103,7 +105,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group phone">
 			<?= Html::activeLabel($item, 'phone', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-3">
 				<?= Html::activeTextInput($item, 'phone', [
@@ -113,7 +115,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group email">
 			<?= Html::activeLabel($item, 'email', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-3">
 				<?= Html::activeTextInput($item, 'email', [
@@ -123,7 +125,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group address">
 			<?= Html::activeLabel($item, 'address', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextarea($item, 'address', [
@@ -134,7 +136,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group qq">
 			<?= Html::activeLabel($item, 'qq', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'qq', [
@@ -144,7 +146,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<!-- <div class="form-group">
+		<!-- <div class="form-group weixin">
 			<?= Html::activeLabel($item, 'weixin', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Fileupload::widget([
@@ -167,7 +169,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div> -->
-		<div class="form-group">
+		<div class="form-group weibo">
 			<?= Html::activeLabel($item, 'weibo', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'weibo', [
@@ -177,7 +179,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<!-- <div class="form-group">
+		<!-- <div class="form-group copyright">
 			<?= Html::activeLabel($item, 'copyright', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'copyright', [
@@ -187,7 +189,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div> -->
-		<div class="form-group">
+		<div class="form-group powered">
 			<?= Html::activeLabel($item, 'powered', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'powered', [
@@ -197,7 +199,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group powered_url">
 			<?= Html::activeLabel($item, 'powered_url', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'powered_url', [
@@ -207,7 +209,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group record">
 			<?= Html::activeLabel($item, 'record', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'record', [
@@ -217,7 +219,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div>
-		<!-- <div class="form-group">
+		<!-- <div class="form-group license">
 			<?= Html::activeLabel($item, 'license', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'license', [
@@ -227,7 +229,7 @@ $this->title = \Yii::t($module->messageCategory, 'Basic');
 				]) ?>
 			</div>
 		</div> -->
-		<div class="form-group">
+		<div class="form-group status">
 			<?= Html::activeLabel($item, 'status', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeRadioList($item, 'status', $item->getAttributeItems('status'), [

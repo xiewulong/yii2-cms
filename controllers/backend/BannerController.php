@@ -10,12 +10,12 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 
-use yii\cms\models\SiteBanner;
-use yii\cms\models\SiteBannerItem;
+use yii\cms\models\SiteModule;
+use yii\cms\models\SiteModuleItem;
 
 class BannerController extends Controller {
 
-	public $defaultAction = 'List';
+	public $defaultAction = 'list';
 
 	public function behaviors() {
 		return [
@@ -23,103 +23,82 @@ class BannerController extends Controller {
 				'class' => AccessControl::className(),
 				'rules' => [
 					[
-						'actions' => ['list', 'edit', 'delete', 'items', 'item-edit', 'item-delete', 'jump'],
+						'actions' => ['list', 'edit', 'items', 'item-edit'],
 						'allow' => true,
 						'roles' => $this->module->permissions,
 					],
 				],
 			],
-			'verbs' => [
-				'class' => VerbFilter::className(),
-				'actions' => [
-					'delete' => ['post'],
-					'item-delete' => ['post'],
-				],
-			],
 		];
 	}
 
-	public function actionJump($id) {
-		$item = SiteBannerItem::findOne([
-			'id' => $id,
+	public function actionItemEdit($mid, $id = 0) {
+		$module = SiteModule::findOne([
+			'id' => $mid,
 			'site_id' => $this->module->siteId,
+			'type' => SiteModule::TYPE_BANNER,
 		]);
-		if(!$item || !$item->url) {
-			return $this->goBack();
-		}
-
-		return $this->redirect($item->url);
-	}
-
-	public function actionItemDelete() {
-		$item = SiteBannerItem::findOne([
-			'id' => \Yii::$app->request->post('id', 0),
-			'site_id' => $this->module->siteId,
-		]);
-		$done = $item && $item->delete();
-
-		return \Yii::$app->request->isAjax ? $this->respond([
-			'error' => !$done,
-			'message' => \Yii::t($this->module->messageCategory, 'Operation ' . ($done ? 'succeeded' : 'failed')) . ($done ? '' : ', ' . \Yii::t($this->module->messageCategory, 'Please try again')),
-		]) : $this->goBack();
-	}
-
-	public function actionItemEdit($bid, $id = 0) {
-		$banner = SiteBanner::findOne([
-			'id' => $bid,
-			'site_id' => $this->module->siteId,
-		]);
-		if(!$banner) {
+		if(!$module) {
 			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
 		}
 
 		if(!$id) {
-			$item = new SiteBannerItem;
+			$item = new SiteModuleItem;
 			$item->scenario = 'add';
 			$item->site_id = $this->module->siteId;
-			$item->banner_id = $bid;
+			$item->module_id = $mid;
+			$item->type = SiteModuleItem::TYPE_LINK;
 		} else {
-			$item = SiteBannerItem::findOne([
+			$item = SiteModuleItem::findOne([
 				'id' => $id,
 				'site_id' => $this->module->siteId,
-				'banner_id' => $bid,
+				'module_id' => $mid,
 			]);
 			if(!$item) {
 				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
 			}
 			$item->scenario = 'edit';
+			if($item->type == SiteModuleItem::TYPE_CATEGORY) {
+				$item->category_id = $item->target_id;
+			} else if($item->type == SiteModuleItem::TYPE_ARTICLE) {
+				$item->article_id = $item->target_id;
+			}
 		}
 
 		if($item->load(\Yii::$app->request->post())) {
 			if($item->commonHandler()) {
 				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
 
-				return $this->redirect(['banner/items', 'bid' => $bid]);
+				return $this->redirect(['banner/items', 'mid' => $mid]);
 			}
 			\Yii::$app->session->setFlash('item', '1|' . $item->firstErrorInfirstErrors);
 		}
 
 		return $this->render($this->action->id, [
-			'banner' => $banner,
+			'banner' => $module,
 			'item' => $item,
 		]);
 	}
 
-	public function actionItems($bid, $stype = null, $sword = null) {
-		$banner = SiteBanner::findOne([
-			'id' => $bid,
+	public function actionItems($mid, $type = 'all', $stype = null, $sword = null) {
+		$module = SiteModule::findOne([
+			'id' => $mid,
 			'site_id' => $this->module->siteId,
+			'type' => SiteModule::TYPE_BANNER,
 		]);
-		if(!$banner) {
+		if(!$module) {
 			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
 		}
 
-		$query = SiteBannerItem::find()
-			->where(['site_id' => $this->module->siteId, 'banner_id' => $bid])
+		if($type !== 'all') {
+			$query->andWhere(['type' => $type]);
+		}
+		$query = SiteModuleItem::find()
+			->where(['site_id' => $this->module->siteId, 'module_id' => $mid])
 			->orderby('list_order desc, created_at desc');
 
 		if($sword !== null) {
-			$query->andWhere("$stype like :sword", [':sword' => "%$sword%"]);
+			$query->andWhere(['like', "a.$stype", $sword]);
 		}
 
 		$pagination = new Pagination([
@@ -130,37 +109,35 @@ class BannerController extends Controller {
 			->limit($pagination->limit)
 			->all();
 
+		$typeItems = ArrayHelper::merge([
+			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
+				'attribute' => \Yii::t($this->module->messageCategory, 'Type'),
+				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
+			]),
+		], SiteModuleItem::defaultAttributeItems('type'));
+
 		return $this->render($this->action->id, [
+			'type' => $type,
 			'stype' => $stype,
 			'sword' => $sword,
-			'banner' => $banner,
+			'banner' => $module,
 			'items' => $items,
 			'pagination' => $pagination,
+			'typeItems' => $typeItems,
 		]);
-	}
-
-	public function actionDelete() {
-		$item = SiteBanner::findOne([
-			'id' => \Yii::$app->request->post('id', 0),
-			'site_id' => $this->module->siteId,
-		]);
-		$done = $item && $item->delete();
-
-		return \Yii::$app->request->isAjax ? $this->respond([
-			'error' => !$done,
-			'message' => \Yii::t($this->module->messageCategory, 'Operation ' . ($done ? 'succeeded' : 'failed')) . ($done ? '' : ', ' . \Yii::t($this->module->messageCategory, 'Please try again')),
-		]) : $this->goBack();
 	}
 
 	public function actionEdit($id = 0) {
 		if(!$id) {
-			$item = new SiteBanner;
+			$item = new SiteModule;
 			$item->scenario = 'add';
 			$item->site_id = $this->module->siteId;
+			$item->type = SiteModule::TYPE_BANNER;
 		} else {
-			$item = SiteBanner::findOne([
+			$item = SiteModule::findOne([
 				'id' => $id,
 				'site_id' => $this->module->siteId,
+				'type' => SiteModule::TYPE_BANNER,
 			]);
 			if(!$item) {
 				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
@@ -183,12 +160,15 @@ class BannerController extends Controller {
 	}
 
 	public function actionList($stype = null, $sword = null) {
-		$query = SiteBanner::find()
-			->where(['site_id' => $this->module->siteId])
+		$query = SiteModule::find()
+			->where([
+				'site_id' => $this->module->siteId,
+				'type' => SiteModule::TYPE_BANNER,
+			])
 			->orderby('created_at desc');
 
 		if($sword !== null) {
-			$query->andWhere("$stype like :sword", [':sword' => "%$sword%"]);
+			$query->andWhere(['like', "a.$stype", $sword]);
 		}
 
 		$pagination = new Pagination([

@@ -5,7 +5,7 @@
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
- * update: 2016/8/16
+ * update: 2016/8/17
  * since: 0.0.1
  */
 
@@ -13,7 +13,6 @@ namespace yii\cms;
 
 use Yii;
 use yii\components\Module;
-use yii\helpers\Url;
 
 use yii\cms\models\Site;
 
@@ -49,10 +48,10 @@ class BackendModule extends Module {
 		$this->setSite();
 	}
 
-	public function getFrontendUrl() {
+	public function getFrontendUrl($url = null) {
 		$frontendModuleId = $this->siteId ? : $this->id;
 
-		return ($this->frontendHost ? : null) . \Yii::$app->urlManager->createUrl([$this->frontendModuleId ? : $frontendModuleId]);
+		return ($this->frontendHost ? : null) . \Yii::$app->urlManager->createUrl([$this->frontendModuleId ? : $frontendModuleId]) . ($url ? \Yii::$app->urlManager->createUrl($url) : null);
 	}
 
 	public function url($url) {
