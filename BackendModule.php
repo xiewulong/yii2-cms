@@ -5,7 +5,7 @@
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
- * update: 2016/8/17
+ * update: 2016/8/19
  * since: 0.0.1
  */
 
@@ -51,11 +51,11 @@ class BackendModule extends Module {
 	public function getFrontendUrl($url = null) {
 		$frontendModuleId = $this->siteId ? : $this->id;
 
-		return ($this->frontendHost ? : null) . \Yii::$app->urlManager->createUrl([$this->frontendModuleId ? : $frontendModuleId]) . ($url ? \Yii::$app->urlManager->createUrl($url) : null);
+		return rtrim($this->frontendHost ? : null, '/') . \Yii::$app->urlManager->createUrl([$this->frontendModuleId ? : $frontendModuleId]) . ($url ? \Yii::$app->urlManager->createUrl($url) : null);
 	}
 
 	public function url($url) {
-		return '/' . $this->id . '/' . $url;
+		return '/' . $this->uniqueId . '/' . $url;
 	}
 
 	private function setSite() {
@@ -67,7 +67,12 @@ class BackendModule extends Module {
 		if(!$this->site) {
 			$this->site = new Site;
 			$this->site->scenario = 'add';
-			if(!$this->site->load([$this->site->formName() => ['id' => $this->siteId]]) || !$this->site->commonHandler()) {
+			if(!$this->site->load([
+				$this->site->formName() => [
+					'id' => $this->siteId,
+					'powered' => 'Nanning Automan Technology Co., Ltd.',
+				]
+			]) || !$this->site->commonHandler()) {
 				\Yii::$app->end($this->site->getFirstError('id'));
 			}
 		}

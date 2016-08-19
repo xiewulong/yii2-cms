@@ -7,8 +7,8 @@ $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 	'action' => \Yii::t($module->messageCategory, $item['id'] ? 'Edit' : 'Add'),
 ]);
 
-// set parent menu
-$this->params['parent'] = $module->url('category/list');
+// set parent route
+$this->params['route'] = $module->url('category/list');
 ?>
 
 <!-- begin admin-title -->
@@ -17,7 +17,7 @@ $this->params['parent'] = $module->url('category/list');
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
 		'action' => \Yii::t($module->messageCategory, 'Back to'),
 		'attribute' => \Yii::t($module->messageCategory, 'list'),
-	]), [$this->params['parent']], ['class' => 'btn btn-link pull-left']) ?>
+	]), [$this->params['route']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
 <!-- end admin-title -->
 

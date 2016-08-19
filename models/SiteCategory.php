@@ -87,18 +87,24 @@ class SiteCategory extends ActiveRecord {
 	public function scenarios() {
 		$scenarios = parent::scenarios();
 
-		$common = [
+		$scenarios['add'] = [
 			'site_id',
 			'parent_id',
 			'type',
 			'name',
 			'status',
-			'operator_id',
 			'creator_id',
 		];
 
-		$scenarios['add'] = $common;
-		$scenarios['edit'] = $common;
+		$scenarios['edit'] = [
+			'name',
+			'status',
+			'operator_id',
+		];
+
+		$scenarios['sort'] = [
+			'list_order',
+		];
 
 		return $scenarios;
 	}
@@ -198,7 +204,16 @@ class SiteCategory extends ActiveRecord {
 	 * @return {boolean}
 	 */
 	public function commonHandler() {
-		return $this->save();
+		if(!$this->validate()) {
+			return false;
+		}
+
+		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+		if($this->scenario == 'add') {
+			$this->creator_id = $this->operator_id;
+		}
+
+		return $this->save(false);
 	}
 
 	/**

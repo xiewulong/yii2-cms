@@ -32,19 +32,22 @@ class GlobalController extends Controller {
 	}
 
 	public function actionSite() {
-		$site = Site::findOne($this->module->siteId);
-		$site->scenario = 'global';
-		if($site->load(\Yii::$app->request->post())) {
-			if($site->commonHandler()) {
-				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
+		$item = Site::findOne($this->module->siteId);
+		$item->scenario = 'global';
+		if(\Yii::$app->request->isPost) {
+			$item->logo = null;
+			if($item->load(\Yii::$app->request->post())) {
+				if($item->commonHandler()) {
+					\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
 
-				return $this->refresh();
+					return $this->refresh();
+				}
+				\Yii::$app->session->setFlash('item', '1|' . $item->firstErrorInfirstErrors);
 			}
-			\Yii::$app->session->setFlash('item', '1|' . $site->firstErrorInfirstErrors);
 		}
 
 		return $this->render($this->action->id, [
-			'item' => $site,
+			'item' => $item,
 		]);
 	}
 

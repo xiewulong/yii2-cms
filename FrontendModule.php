@@ -5,7 +5,7 @@
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
- * update: 2016/8/17
+ * update: 2016/8/18
  * since: 0.0.1
  */
 
@@ -64,11 +64,11 @@ class FrontendModule extends Module {
 	public function getBackendUrl($url = null) {
 		$backendModuleId = $this->siteId ? : $this->id;
 
-		return ($this->backendHost ? : null) . \Yii::$app->urlManager->createUrl([$this->backendModuleId ? : $backendModuleId]) . ($url ? \Yii::$app->urlManager->createUrl($url) : null);
+		return rtrim($this->backendHost ? : null, '/') . \Yii::$app->urlManager->createUrl([$this->backendModuleId ? : $backendModuleId]) . ($url ? \Yii::$app->urlManager->createUrl($url) : null);
 	}
 
 	public function url($url) {
-		return '/' . $this->id . '/' . $url;
+		return '/' . $this->uniqueId . '/' . $url;
 	}
 
 	private function setSite() {

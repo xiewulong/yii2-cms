@@ -23,7 +23,7 @@ return [
 	'License number' => '许可证编号',
 	'Status' => '状态',
 	'Page view' => '浏览量',
-	'Unique Visitor' => '独立访客',
+	'Unique visitor' => '独立访客',
 	'Operator id' => '操作者ID',
 	'Created time' => '创建时间',
 	'Updated time' => '更新时间',

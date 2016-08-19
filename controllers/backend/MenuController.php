@@ -13,7 +13,7 @@ use yii\web\NotFoundHttpException;
 use yii\cms\models\SiteModule;
 use yii\cms\models\SiteModuleItem;
 
-class BannerController extends Controller {
+class MenuController extends Controller {
 
 	public $defaultAction = 'list';
 
@@ -36,7 +36,7 @@ class BannerController extends Controller {
 		$superior = SiteModule::findOne([
 			'id' => $mid,
 			'site_id' => $this->module->siteId,
-			'type' => SiteModule::TYPE_BANNER,
+			'type' => SiteModule::TYPE_MENU,
 		]);
 		if(!$superior) {
 			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
@@ -71,7 +71,7 @@ class BannerController extends Controller {
 				if($item->commonHandler()) {
 					\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
 
-					return $this->redirect(['banner/items', 'mid' => $mid]);
+					return $this->redirect(['menu/items', 'mid' => $mid]);
 				}
 				\Yii::$app->session->setFlash('item', '1|' . $item->firstErrorInfirstErrors);
 			}
@@ -87,7 +87,7 @@ class BannerController extends Controller {
 		$superior = SiteModule::findOne([
 			'id' => $mid,
 			'site_id' => $this->module->siteId,
-			'type' => SiteModule::TYPE_BANNER,
+			'type' => SiteModule::TYPE_MENU,
 		]);
 		if(!$superior) {
 			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
@@ -135,12 +135,12 @@ class BannerController extends Controller {
 			$item = new SiteModule;
 			$item->scenario = 'add';
 			$item->site_id = $this->module->siteId;
-			$item->type = SiteModule::TYPE_BANNER;
+			$item->type = SiteModule::TYPE_MENU;
 		} else {
 			$item = SiteModule::findOne([
 				'id' => $id,
 				'site_id' => $this->module->siteId,
-				'type' => SiteModule::TYPE_BANNER,
+				'type' => SiteModule::TYPE_MENU,
 			]);
 			if(!$item) {
 				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
@@ -152,7 +152,7 @@ class BannerController extends Controller {
 			if($item->commonHandler()) {
 				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
 
-				return $this->redirect(['banner/list']);
+				return $this->redirect(['menu/list']);
 			}
 			\Yii::$app->session->setFlash('item', '1|' . $item->firstErrorInfirstErrors);
 		}
@@ -166,7 +166,7 @@ class BannerController extends Controller {
 		$query = SiteModule::find()
 			->where([
 				'site_id' => $this->module->siteId,
-				'type' => SiteModule::TYPE_BANNER,
+				'type' => SiteModule::TYPE_MENU,
 			])
 			->orderby('created_at desc');
 

@@ -8,6 +8,9 @@ $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 	'action' => \Yii::t($module->messageCategory, 'list'),
 ]);
 
+// set parent route
+// $this->params['route'] = '';
+
 $categoryStatusClasses = ['text-muted', 'text-success', 'text-danger'];
 $statusClasses = ['text-muted', 'text-warning', 'text-success', 'text-primary'];
 ?>
@@ -81,7 +84,7 @@ $statusClasses = ['text-muted', 'text-warning', 'text-success', 'text-primary'];
 				<th width="15%"><?= \Yii::t($module->messageCategory, 'Category') . \Yii::t($module->messageCategory, 'Name') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Type') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Page view') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Unique Visitor') ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Unique visitor') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Category') . \Yii::t($module->messageCategory, 'Status') ?></th>
 				<th class="text-center"><?= \Yii::t($module->messageCategory, 'Operations') ?></th>

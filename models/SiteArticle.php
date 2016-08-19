@@ -39,6 +39,8 @@ class SiteArticle extends ActiveRecord {
 
 	public $messageCategory = 'cms';
 
+	protected $statisticsEnable = true;
+
 	/**
 	 * @inheritdoc
 	 */
@@ -103,7 +105,7 @@ class SiteArticle extends ActiveRecord {
 	public function scenarios() {
 		$scenarios = parent::scenarios();
 
-		$common = [
+		$scenarios['add'] = [
 			'site_id',
 			'category_id',
 			'title',
@@ -114,17 +116,23 @@ class SiteArticle extends ActiveRecord {
 			'content',
 			'pictures',
 			'status',
-			'operator_id',
 			'creator_id',
 		];
 
-		$scenarios['add'] = $common;
-		$scenarios['edit'] = $common;
+		$scenarios['edit'] = [
+			'title',
+			'thumbnail',
+			'author',
+			'keywords',
+			'description',
+			'content',
+			'pictures',
+			'status',
+			'operator_id',
+		];
 
-		$scenarios['visited'] = [
-			'id',
-			'pv',
-			'uv',
+		$scenarios['sort'] = [
+			'list_order',
 		];
 
 		return $scenarios;
@@ -265,7 +273,16 @@ class SiteArticle extends ActiveRecord {
 	 * @return {boolean}
 	 */
 	public function commonHandler() {
-		return $this->save();
+		if(!$this->validate()) {
+			return false;
+		}
+
+		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+		if($this->scenario == 'add') {
+			$this->creator_id = $this->operator_id;
+		}
+
+		return $this->save(false);
 	}
 
 	/**

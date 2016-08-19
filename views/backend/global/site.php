@@ -4,6 +4,9 @@ use yii\fileupload\Fileupload;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, 'Global');
+
+// set parent route
+// $this->params['route'] = '';
 ?>
 
 <!-- begin admin-title -->
@@ -13,7 +16,7 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 <!-- end admin-title -->
 
 <!-- begin admin-form -->
-<?= Html::beginForm(null, null, ['class' => 'form-horizontal admin-area admin-form']) ?>
+<?= Html::beginForm(null, 'post', ['class' => 'form-horizontal admin-area admin-form']) ?>
 	<div class="fieldset">
 		<div class="form-group type">
 			<?= Html::activeLabel($item, 'type', ['class' => 'control-label col-sm-2']) ?>

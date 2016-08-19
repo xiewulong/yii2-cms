@@ -3,12 +3,12 @@ use yii\helpers\Html;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
-	'attribute' => \Yii::t($module->messageCategory, 'Banner'),
+	'attribute' => \Yii::t($module->messageCategory, 'Menu'),
 	'action' => \Yii::t($module->messageCategory, $item['id'] ? 'Edit' : 'Add'),
 ]);
 
 // set parent route
-$this->params['route'] = $module->url('banner/list');
+$this->params['route'] = $module->url('menu/list');
 ?>
 
 <!-- begin admin-title -->

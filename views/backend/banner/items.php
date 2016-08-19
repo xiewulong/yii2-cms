@@ -1,16 +1,15 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
-use yii\cms\models\SiteArticle;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
-	'attribute' => $banner['name'] . \Yii::t($module->messageCategory, 'Banner item'),
+	'attribute' => $superior['name'] . \Yii::t($module->messageCategory, 'Banner item'),
 	'action' => \Yii::t($module->messageCategory, 'Management'),
 ]);
 
-// set parent menu
-$this->params['parent'] = $module->url('banner/list');
+// set parent route
+$this->params['route'] = $module->url('banner/list');
 
 $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 ?>
@@ -21,7 +20,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
 		'action' => \Yii::t($module->messageCategory, 'Back to'),
 		'attribute' => \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'list'),
-	]), [$this->params['parent']], ['class' => 'btn btn-link pull-left']) ?>
+	]), [$this->params['route']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
 <!-- end admin-title -->
 
@@ -61,7 +60,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		</div>
 	<?= Html::endForm() ?>
 	<div class="pull-right">
-		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['banner/item-edit', 'mid' => $banner['id']], ['class' => 'btn btn-default pull-left']) ?>
+		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['banner/item-edit', 'mid' => $superior['id']], ['class' => 'btn btn-default pull-left']) ?>
 	</div>
 </div>
 <!-- end admin-options -->
@@ -74,9 +73,9 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<!-- <th width="6%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th> -->
 				<th width="18%"><?= \Yii::t($module->messageCategory, 'Title') ?></th>
 				<th width="18%"><?= \Yii::t($module->messageCategory, 'Picture') ?></th>
-				<th width="8%"><?= \Yii::t($module->messageCategory, 'Type') ?></th>
-				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Total') . \Yii::t($module->messageCategory, 'Page view') ?></th>
-				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Total') . \Yii::t($module->messageCategory, 'Unique Visitor') ?></th>
+				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Type') ?></th>
+				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Page view') ?></th>
+				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Unique visitor') ?></th>
 				<th width="10%"><?= \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'Name') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'Status') ?></th>
 				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
@@ -88,16 +87,16 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<?php foreach($items as $item) { ?>
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
-				<td><?= Html::a($item['title'], $item['url'] ? $module->getFrontendUrl(['module/jump', 'id' => $item['id']]) : null, ['target' => '_blank']) ?></td>
-				<td><?= Html::a(Html::img($item['picture'], ['class' => 'admin-image-limit']), $item['url'] ? $module->getFrontendUrl(['module/jump', 'id' => $item['id']]) : null, ['target' => '_blank']) ?></td>
+				<td><?= Html::a($item['title'], ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
+				<td><?= Html::a(Html::img($item['picture'], ['class' => 'admin-image-limit']), ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
 				<td class="text-center"><?= \Yii::t($module->messageCategory, $item->getAttributeText('type')) ?></td>
 				<td class="text-center"><?= $item['pv'] ?></td>
 				<td class="text-center"><?= $item['uv'] ?></td>
-				<td><?= Html::encode($banner['name']) ?></td>
-				<td class="text-center <?= $statusClasses[$banner['status']] ?>"><?= \Yii::t($module->messageCategory, $banner->getAttributeText('status')) ?></td>
+				<td><?= Html::encode($superior['name']) ?></td>
+				<td class="text-center <?= $statusClasses[$superior['status']] ?>"><?= \Yii::t($module->messageCategory, $superior->getAttributeText('status')) ?></td>
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
 				<td class="text-center">
-					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['banner/item-edit', 'mid' => $banner['id'], 'id' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['banner/item-edit', 'mid' => $superior['id'], 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
 					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['/banner/item-delete'], ['data-delete' => $item['id']]) ?>
 				</td>

@@ -64,7 +64,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<th width="10%"><?= \Yii::t($module->messageCategory, 'Position') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Banner item') . \Yii::t($module->messageCategory, 'Quantity') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Total') . \Yii::t($module->messageCategory, 'Page view') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Total') . \Yii::t($module->messageCategory, 'Unique Visitor') ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Total') . \Yii::t($module->messageCategory, 'Unique visitor') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
 				<th class="text-center"><?= \Yii::t($module->messageCategory, 'Operations') ?></th>
 			</tr>
@@ -76,7 +76,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
 				<td><?= Html::encode($item['name']) ?></td>
 				<td><?= Html::encode($item['position']) ?></td>
-				<td class="text-center"><?= $item['itemQuantity'] ?></td>
+				<td class="text-center"><?= Html::a($item['itemQuantity'], ['banner/items', 'mid' => $item['id']]) ?></td>
 				<td class="text-center"><?= $item['itemTotalPageView'] ?></td>
 				<td class="text-center"><?= $item['itemTotalUniqueVisitor'] ?></td>
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>

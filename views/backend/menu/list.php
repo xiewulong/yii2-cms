@@ -4,7 +4,7 @@ use yii\widgets\LinkPager;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
-	'attribute' => \Yii::t($module->messageCategory, 'Category'),
+	'attribute' => \Yii::t($module->messageCategory, 'Menu'),
 	'action' => \Yii::t($module->messageCategory, 'list'),
 ]);
 
@@ -28,14 +28,9 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 <div class="clearfix admin-area-sm admin-options">
 	<?= Html::beginForm(null, 'get', ['class' => 'form-inline pull-left']) ?>
 		<div class="form-group">
-			<?= Html::listBox('type', $type, $typeItems, [
-				'class' => 'form-control',
-				'size' => 1,
-			]) ?>
-		</div>
-		<div class="form-group">
 			<?= Html::listBox('stype', $stype, [
-				'name' => \Yii::t($module->messageCategory, 'Category') . \Yii::t($module->messageCategory, 'Name'),
+				'name' => \Yii::t($module->messageCategory, 'Name'),
+				'position' => \Yii::t($module->messageCategory, 'Position'),
 			], [
 				'class' => 'form-control',
 				'size' => 1,
@@ -56,7 +51,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		</div>
 	<?= Html::endForm() ?>
 	<div class="pull-right">
-		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['category/edit'], ['class' => 'btn btn-default pull-left']) ?>
+		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['menu/edit'], ['class' => 'btn btn-default pull-left']) ?>
 	</div>
 </div>
 <!-- end admin-options -->
@@ -67,9 +62,9 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<thead>
 			<tr>
 				<!-- <th width="6%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th> -->
-				<th width="30%"><?= \Yii::t($module->messageCategory, 'Category') . \Yii::t($module->messageCategory, 'Name') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Type') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Article') . \Yii::t($module->messageCategory, 'Quantity') ?></th>
+				<th width="20%"><?= \Yii::t($module->messageCategory, 'Menu') . \Yii::t($module->messageCategory, 'Name') ?></th>
+				<th width="10%"><?= \Yii::t($module->messageCategory, 'Position') ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Menu item') . \Yii::t($module->messageCategory, 'Quantity') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Total') . \Yii::t($module->messageCategory, 'Page view') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Total') . \Yii::t($module->messageCategory, 'Unique visitor') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
@@ -82,19 +77,19 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
 				<td><?= Html::encode($item['name']) ?></td>
-				<td class="text-center"><?= \Yii::t($module->messageCategory, $item->getAttributeText('type')) ?></td>
-				<td class="text-center"><?= Html::a($item['articleQuantity'], ['article/list', 'cid' => $item['id']]) ?></td>
-				<td class="text-center"><?= $item['articleTotalPageView'] ?></td>
-				<td class="text-center"><?= $item['articleTotalUniqueVisitor'] ?></td>
+				<td><?= Html::encode($item['position']) ?></td>
+				<td class="text-center"><?= Html::a($item['itemQuantity'], ['menu/items', 'mid' => $item['id']]) ?></td>
+				<td class="text-center"><?= $item['itemTotalPageView'] ?></td>
+				<td class="text-center"><?= $item['itemTotalUniqueVisitor'] ?></td>
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
 				<td class="text-center">
-					<?= Html::a(\Yii::t($module->messageCategory, 'Add') . \Yii::t($module->messageCategory, 'Article'), ['article/edit', 'cid' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Add') . \Yii::t($module->messageCategory, 'Menu item'), ['menu/item-edit', 'mid' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Manage') . \Yii::t($module->messageCategory, 'Article'), ['article/list', 'cid' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Manage') . \Yii::t($module->messageCategory, 'Menu item'), ['menu/items', 'mid' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['category/edit', 'id' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['menu/edit', 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['category/delete'], ['data-delete' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['module/delete'], ['data-delete' => $item['id']]) ?>
 				</td>
 			</tr>
 			<? } ?>
@@ -102,7 +97,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<tfoot>
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></td> -->
-				<td colspan="7">
+				<td colspan="8">
 					<!-- <?= Html::button('Batch', ['class' => 'btn btn-default']) ?> -->
 					<div class="pull-right">
 						<?= LinkPager::widget([
@@ -120,7 +115,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<?php } else { ?>
 		<tfoot>
 			<tr>
-				<td colspan="7" class="text-center empty">
+				<td colspan="8" class="text-center empty">
 					<?= Html::tag('i', null, ['class' => 'glyphicon glyphicon-info-sign text-success']) ?>
 					<?= Html::tag('span', \Yii::t($module->messageCategory, 'No matched data')) ?>
 				</td>

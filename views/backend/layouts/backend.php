@@ -122,6 +122,7 @@ $params = [
 		],
 	],
 	'content' => $content,
+	'route' => isset($this->params['route']) ? $this->params['route'] : null;
 ];
 
 $params['menus'] = array_merge($params['menus'], $module->addMenuItems);

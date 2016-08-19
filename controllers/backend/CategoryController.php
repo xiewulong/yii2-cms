@@ -94,7 +94,7 @@ class CategoryController extends Controller {
 			$item->scenario = 'edit';
 		}
 
-		if($item->load(\Yii::$app->request->post())) {
+		if(\Yii::$app->request->isPost && $item->load(\Yii::$app->request->post())) {
 			if($item->commonHandler()) {
 				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
 

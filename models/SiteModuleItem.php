@@ -30,8 +30,8 @@ use yii\components\ActiveRecord;
  * @property {integer} $created_at
  * @property {integer} $updated_at
  *
- * @property {integer} $target_id_category
- * @property {integer} $target_id_article
+ * @property {integer} $category_id
+ * @property {integer} $article_id
  */
 class SiteModuleItem extends ActiveRecord {
 
@@ -49,6 +49,8 @@ class SiteModuleItem extends ActiveRecord {
 	public $article_id;
 
 	public $messageCategory = 'cms';
+
+	protected $statisticsEnable = true;
 
 	/**
 	 * @inheritdoc
@@ -119,7 +121,7 @@ class SiteModuleItem extends ActiveRecord {
 	public function scenarios() {
 		$scenarios = parent::scenarios();
 
-		$common = [
+		$scenarios['add'] = [
 			'site_id',
 			'module_id',
 			'type',
@@ -131,20 +133,30 @@ class SiteModuleItem extends ActiveRecord {
 			'status',
 			'start_at',
 			'end_at',
-			'operator_id',
 			'creator_id',
 
 			'category_id',
 			'article_id',
 		];
 
-		$scenarios['add'] = $common;
-		$scenarios['edit'] = $common;
+		$scenarios['edit'] = [
+			'type',
+			'target_id',
+			'title',
+			'description',
+			'picture',
+			'url',
+			'status',
+			'start_at',
+			'end_at',
+			'operator_id',
 
-		$scenarios['visited'] = [
-			'id',
-			'pv',
-			'uv',
+			'category_id',
+			'article_id',
+		];
+
+		$scenarios['sort'] = [
+			'list_order',
 		];
 
 		return $scenarios;
@@ -328,6 +340,11 @@ class SiteModuleItem extends ActiveRecord {
 			$this->target_id = $this->article_id;
 		}
 
+		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+		if($this->scenario == 'add') {
+			$this->creator_id = $this->operator_id;
+		}
+
 		return $this->save(false);
 	}
 
@@ -358,39 +375,95 @@ class SiteModuleItem extends ActiveRecord {
 	 * @return {object}
 	 */
 	public function getTarget() {
-		if($this->category_id) {
-			return SiteCategory::findOne([
-				'id' => $this->category_id,
-				'site_id' => $this->site_id,
-			]);
-		}
-		if($this->article_id) {
-			return SiteArticle::findOne([
-				'id' => $this->article_id,
-				'site_id' => $this->site_id,
-			]);
-		}
-		if(!$this->id) {
-			return null;
-		}
-
-		$self = static::findOne($this->id);
-		switch($self->type) {
+		switch($this->type) {
 			case self::TYPE_CATEGORY:
 				$classname = SiteCategory::classname();
 				break;
 			case self::TYPE_ARTICLE:
 				$classname = SiteArticle::classname();
 				break;
-			default:
-				$classname = null;
+		}
+
+		return $this->hasOne($classname, ['id' => 'target_id'])->where(['site_id' => $this->site_id]);
+	}
+
+	/**
+	 * Get cache model
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	protected function getCacheTarget($type) {
+		switch($type) {
+			case self::TYPE_CATEGORY:
+				$cache_id = $this->category_id;
+				$classname = SiteCategory::classname();
+				break;
+			case self::TYPE_ARTICLE:
+				$cache_id = $this->article_id;
+				$classname = SiteArticle::classname();
 				break;
 		}
 
-		return $classname ? $classname::findOne([
-			'id' => $self->target_id,
+		if(!$cache_id && $this->getOldAttribute('type') == $type) {
+			$cache_id = $this->getOldAttribute('target_id');
+		}
+
+		return $classname::findOne([
+			'id' => $cache_id,
 			'site_id' => $this->site_id,
-		]) : null;
+		]);
+	}
+
+	/**
+	 * Get category model
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getCategory() {
+		return $this->getCacheTarget(self::TYPE_CATEGORY);
+	}
+
+	/**
+	 * Get article model
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getArticle() {
+		return $this->getCacheTarget(self::TYPE_ARTICLE);
+	}
+
+	/**
+	 * Get jump link
+	 *
+	 * @since 0.0.1
+	 * @param {string} [$host]
+	 * @return {array|string}
+	 */
+	public function getLink($host = null) {
+		switch($this->type) {
+			case self::TYPE_LINK:
+				return $this->url;
+				break;
+			case self::TYPE_CATEGORY:
+				$url = ['article/list', 'id' => $this->target_id];
+				break;
+			case self::TYPE_ARTICLE:
+				$url = ['article/details', 'id' => $this->target_id];
+				break;
+			case self::TYPE_HOME:
+			default:
+				$url = ['/'];
+				break;
+		}
+
+		if($host) {
+			$url = rtrim($host, '/') . \Yii::$app->urlManager->createUrl($url);
+		}
+
+		return $url;
 	}
 
 }

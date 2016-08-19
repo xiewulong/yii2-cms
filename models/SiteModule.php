@@ -83,18 +83,21 @@ class SiteModule extends ActiveRecord {
 	public function scenarios() {
 		$scenarios = parent::scenarios();
 
-		$common = [
+		$scenarios['add'] = [
 			'site_id',
 			'type',
 			'position',
 			'name',
 			'status',
-			'operator_id',
 			'creator_id',
 		];
 
-		$scenarios['add'] = $common;
-		$scenarios['edit'] = $common;
+		$scenarios['edit'] = [
+			'position',
+			'name',
+			'status',
+			'operator_id',
+		];
 
 		return $scenarios;
 	}
@@ -183,7 +186,16 @@ class SiteModule extends ActiveRecord {
 	 * @return {boolean}
 	 */
 	public function commonHandler() {
-		return $this->save();
+		if(!$this->validate()) {
+			return false;
+		}
+
+		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+		if($this->scenario == 'add') {
+			$this->creator_id = $this->operator_id;
+		}
+
+		return $this->save(false);
 	}
 
 	/**

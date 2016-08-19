@@ -46,6 +46,8 @@ class Site extends ActiveRecord {
 
 	public $messageCategory = 'cms';
 
+	protected $statisticsEnable = true;
+
 	/**
 	 * @inheritdoc
 	 */
@@ -126,6 +128,7 @@ class Site extends ActiveRecord {
 
 		$scenarios['add'] = [
 			'id',
+			'powered',
 		];
 
 		$scenarios['global'] = [
@@ -149,12 +152,6 @@ class Site extends ActiveRecord {
 			'license',
 			'status',
 			'operator_id',
-		];
-
-		$scenarios['visited'] = [
-			'id',
-			'pv',
-			'uv',
 		];
 
 		return $scenarios;
@@ -327,7 +324,13 @@ class Site extends ActiveRecord {
 	 * @return {boolean}
 	 */
 	public function commonHandler() {
-		return $this->save();
+		if(!$this->validate()) {
+			return false;
+		}
+
+		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+
+		return $this->save(false);
 	}
 
 }

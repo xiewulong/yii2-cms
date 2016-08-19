@@ -45,7 +45,11 @@ class ArticleController extends Controller {
 			->select(['a.id', 'a.name'])
 			->joinWith([
 				'items b' => function($query) {
-					return $query->select(['b.id', 'b.category_id', 'b.title name']);
+					return $query->select([
+						'b.id',
+						'b.category_id',
+						'b.title name',
+					]);
 				}
 			])
 			->where([
