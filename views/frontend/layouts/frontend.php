@@ -47,6 +47,24 @@ FrontendAsset::register($this);
 <body>
 <?php $this->beginBody(); ?>
 
+<!-- begin x-navbar -->
+<div class="x-navbar">
+	<div class="container">
+		<div class="pull-right">
+			<?php if($module->backendEntrance) { ?>
+			<?= Html::a(Html::tag('i', null, ['class' => 'glyphicon glyphicon-dashboard']) . \Yii::t($module->messageCategory, 'Manage'), $module->backendUrl, ['target' => '_blank']) ?>
+			<? } ?>
+		</div>
+		<?php if($site['type'] == 1 && $site['email']) { ?>
+		<?= Html::a(Html::tag('i', null, ['class' => 'glyphicon glyphicon-envelope']) . $site['email'], 'mailto:' . $site['email'], ['class' => 'pull-left']) ?>
+		<? } ?>
+		<?php if($site['type'] == 2 && $site['phone']) { ?>
+		<?= Html::a(Html::tag('i', null, ['class' => 'glyphicon glyphicon-earphone']) . $site['phone'], 'tel:' . $site['phone'], ['class' => 'pull-left']) ?>
+		<? } ?>
+	</div>
+</div>
+<!-- end x-navbar -->
+
 <div>/******** begin header ********/</div>
 <div><?= Html::a($site['name'], \Yii::$app->homeUrl) ?></div>
 <?php if($module->backendEntrance) { ?>
@@ -81,8 +99,8 @@ FrontendAsset::register($this);
 <div>/******** end footer ********/</div>
 
 <?= Statistics::widget([
-	'baidu' => 'baiduid',
-	'cnzz' => 8,
+	'baidu' => 'id',
+	'cnzz' => 1,
 	'piwik' => [
 		'host' => 'piwik.domain.com',
 		'id' => 1,
