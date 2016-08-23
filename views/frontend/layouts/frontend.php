@@ -81,10 +81,10 @@ FrontendAsset::register($this);
 <div>/******** end footer ********/</div>
 
 <?= Statistics::widget([
-	'baidu' => '41a2c8c1e4b6e0f225db6ce2e6e6dec4',
-	'cnzz' => 1,
+	'baidu' => 'baiduid',
+	'cnzz' => 8,
 	'piwik' => [
-		'host' => 'piwik.diankego.com',
+		'host' => 'piwik.domain.com',
 		'id' => 1,
 	],
 ]) ?>
