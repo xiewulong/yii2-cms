@@ -1,15 +1,317 @@
+@charset "UTF-8";
 /*!
  * frontend
  * xiewulong <xiewulong@vip.qq.com>
  * create: 2016/8/15
  * since: 0.0.1
  */
+/* bootstrap reset */
 a {
-  color: #34495e; }
+  color: #222; }
+  a:hover, a:focus {
+    color: #02294a;
+    text-decoration: none; }
+  a:focus {
+    outline: 0;
+    outline-offset: 0; }
 
 /* body */
-/* navbar */
-.x-navbar {
-  background-color: #3498db; }
+body {
+  color: #333;
+  font-size: 12px;
+  font-family: "微软雅黑", microsoft yahei;
+  background-color: #fff; }
+
+/* x-header */
+.x-header h1 {
+  margin: 0;
+  padding: 10px 0 0;
+  overflow: hidden; }
+  .x-header h1 img {
+    max-height: 60px; }
+  .x-header h1 span {
+    display: none; }
+.x-header ul {
+  margin: 0;
+  padding: 0 60px;
+  list-style: none; }
+  .x-header ul li {
+    float: left;
+    height: 80px;
+    line-height: 80px;
+    padding: 0 15px; }
+    .x-header ul li a {
+      float: left;
+      font-size: 16px; }
+
+/* x-footer */
+.x-footer {
+  color: #fff;
+  padding: 100px 0 20px;
+  background-color: #02294a; }
+  .x-footer h5 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    padding-bottom: 40px; }
+  .x-footer .logo {
+    padding-top: 30px; }
+    .x-footer .logo img {
+      max-width: 100%; }
+  .x-footer .follow p {
+    margin: 0;
+    overflow: hidden; }
+    .x-footer .follow p a {
+      float: left;
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+      background-color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      font-size: 24px;
+      color: #02294a;
+      margin: 0 10px; }
+  .x-footer .contact {
+    font-size: 14px;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: normal; }
+    .x-footer .contact .row {
+      padding-bottom: 10px; }
+  .x-footer .copyright {
+    padding-top: 30px;
+    text-align: center; }
+
+/* x-wave */
+.x-wave {
+  position: relative; }
+  .x-wave:before, .x-wave:after {
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 27px;
+    background-image: url(../images/bg-x-wave.png);
+    background-repeat: repeat-x;
+    z-index: 99; }
+  .x-wave:before {
+    top: 0; }
+  .x-wave:after {
+    bottom: 0; }
+  .x-wave-top-convex:before {
+    content: '';
+    background-position: 50% -27px; }
+  .x-wave-top-concave:before {
+    content: '';
+    background-position: 50% -80px; }
+  .x-wave-bottom-convex:after {
+    content: '';
+    background-position: 50% -53px; }
+  .x-wave-bottom-concave:after {
+    content: '';
+    background-position: 50% 0; }
+
+/* x-box */
+/* x-carousel */
+.x-carousel {
+  height: 450px;
+  overflow: hidden; }
+  .x-carousel,
+  .x-carousel ul {
+    position: relative; }
+  .x-carousel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 1; }
+    .x-carousel ul,
+    .x-carousel ul li,
+    .x-carousel ul li a {
+      width: 100%;
+      height: 100%; }
+    .x-carousel ul li {
+      position: absolute;
+      top: 0;
+      left: 0; }
+      .x-carousel ul li a {
+        display: block;
+        background-repeat: no-repeat;
+        background-position: 50% 0; }
+        .x-carousel ul li a img {
+          width: 100%;
+          height: 100%; }
+        .x-carousel ul li a .title,
+        .x-carousel ul li a .alias,
+        .x-carousel ul li a .description {
+          display: none; }
+  .x-carousel ol {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    bottom: 40px;
+    left: 0;
+    text-align: center;
+    z-index: 2; }
+    .x-carousel ol li {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #f8f8f8;
+      margin: 0 4px;
+      cursor: pointer; }
+      .x-carousel ol li.x-icons-carousel-panel-current {
+        background-color: #02294a; }
+
+/* x-home */
+.x-home {
+  padding: 20px 0; }
+  .x-home .header {
+    text-align: center;
+    position: relative;
+    padding-bottom: 13px; }
+    .x-home .header h5,
+    .x-home .header small {
+      display: inline-block;
+      color: #02294a;
+      font-weight: 700; }
+    .x-home .header h5 {
+      font-size: 24px;
+      margin: 0;
+      padding: 0; }
+    .x-home .header small {
+      font-size: 20px;
+      padding-left: 10px;
+      margin-left: 5px;
+      border-left: 4px solid #fe7000; }
+    .x-home .header span {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      height: 3px;
+      background-color: #02294a;
+      width: 50px;
+      margin-left: -25px; }
+  .x-home ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .x-home ul,
+    .x-home ul li a,
+    .x-home ul li a b {
+      overflow: hidden; }
+    .x-home ul li {
+      float: left; }
+      .x-home ul li a {
+        display: block; }
+        .x-home ul li a b {
+          display: inline-block; }
+          .x-home ul li a b img {
+            width: 100%;
+            height: 100%; }
+    .x-home ul.projects {
+      padding: 80px 0 60px; }
+      .x-home ul.projects li {
+        width: 20%;
+        text-align: center;
+        font-size: 14px;
+        line-height: 1.8; }
+        .x-home ul.projects li a b {
+          color: #fff;
+          width: 100px;
+          height: 100px;
+          line-height: 100px;
+          font-size: 50px;
+          border-radius: 50%;
+          background-color: #02294a; }
+          .x-home ul.projects li a b img {
+            vertical-align: top; }
+        .x-home ul.projects li a .title {
+          color: #fe7000;
+          margin-top: 10px; }
+        .x-home ul.projects li a .alias {
+          color: #02294a; }
+        .x-home ul.projects li a:hover b {
+          color: #fe7000; }
+    .x-home ul.about {
+      padding: 30px 0 50px; }
+      .x-home ul.about li {
+        float: none;
+        text-align: center; }
+        .x-home ul.about li a .title,
+        .x-home ul.about li a .alias {
+          display: none; }
+        .x-home ul.about li a .description {
+          font-size: 14px; }
+    .x-home ul.advantages {
+      padding: 20px 150px; }
+      .x-home ul.advantages li {
+        width: 50%;
+        padding: 60px 30px 0 15px; }
+        .x-home ul.advantages li a b {
+          float: left;
+          font-size: 60px;
+          width: 80px;
+          height: 80px;
+          line-height: 80px;
+          text-align: center; }
+        .x-home ul.advantages li a .title,
+        .x-home ul.advantages li a .alias {
+          font-size: 14px;
+          overflow: hidden; }
+        .x-home ul.advantages li a .title {
+          color: #fe7000; }
+        .x-home ul.advantages li a .alias {
+          padding-top: 18px;
+          line-height: 1.6; }
+    .x-home ul.news {
+      padding: 25px 0 50px; }
+      .x-home ul.news li {
+        font-size: 14px;
+        width: 50%;
+        height: 50px;
+        line-height: 50px;
+        overflow: hidden;
+        padding-left: 30px; }
+        .x-home ul.news li a b,
+        .x-home ul.news li a .alias,
+        .x-home ul.news li a .description {
+          display: none; }
+        .x-home ul.news li a:before {
+          content: '\f29c';
+          font-family: FontAwesome;
+          float: left;
+          margin-right: 30px;
+          font-size: 24px;
+          color: #02294a; }
+        .x-home ul.news li a:hover:before {
+          color: #fe7000; }
+    .x-home ul.links {
+      padding: 50px 0; }
+      .x-home ul.links li {
+        width: 12.5%;
+        padding-right: 15px; }
+        .x-home ul.links li a b {
+          width: 130px;
+          max-width: 100%;
+          border: 1px solid #d7d7d7; }
+        .x-home ul.links li a .title,
+        .x-home ul.links li a .alias,
+        .x-home ul.links li a .description {
+          display: none; }
+        .x-home ul.links li a:hover b {
+          border-color: #02294a; }
+  .x-home-inverse {
+    padding: 100px 0 80px;
+    background-color: #02294a; }
+    .x-home-inverse .header h5,
+    .x-home-inverse .header small {
+      color: #fff; }
+    .x-home-inverse .header span {
+      background-color: #fff; }
+    .x-home-inverse ul li a {
+      color: #fff; }
 
 /*# sourceMappingURL=frontend.css.map */

@@ -5,14 +5,16 @@
  * since: 0.0.1
  */
 
-// config
 @import 'config';
-
-// bootstrap reset
 @import 'bootstrap';
-
-// global
 @import 'global';
 
-// navbar
-@import 'navbar';
+@import 'header';
+@import 'footer';
+
+@import 'wave';
+@import 'box';
+
+@import 'carousel';
+
+@import 'home';

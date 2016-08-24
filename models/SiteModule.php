@@ -15,6 +15,7 @@ use yii\components\ActiveRecord;
  * @property {integer} $type
  * @property {string} $position
  * @property {string} $name
+ * @property {string} $alias
  * @property {integer} $status
  * @property {integer} $operator_id
  * @property {integer} $creator_id
@@ -53,7 +54,7 @@ class SiteModule extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['name', 'position'], 'trim'],
+			[['name', 'alias', 'position'], 'trim'],
 			[['site_id', 'name', 'position'], 'required'],
 
 			['name', 'string', 'max' => 16],
@@ -88,6 +89,7 @@ class SiteModule extends ActiveRecord {
 			'type',
 			'position',
 			'name',
+			'alias',
 			'status',
 			'creator_id',
 		];
@@ -95,6 +97,7 @@ class SiteModule extends ActiveRecord {
 		$scenarios['edit'] = [
 			'position',
 			'name',
+			'alias',
 			'status',
 			'operator_id',
 		];
@@ -112,6 +115,7 @@ class SiteModule extends ActiveRecord {
 			'type' => \Yii::t($this->messageCategory, 'Type'),
 			'position' => \Yii::t($this->messageCategory, 'Position'),
 			'name' => \Yii::t($this->messageCategory, 'Name'),
+			'alias' => \Yii::t($this->messageCategory, 'Alias'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
 			'creator_id' => \Yii::t($this->messageCategory, 'Creator id'),
@@ -140,6 +144,10 @@ class SiteModule extends ActiveRecord {
 			'name' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Name'),
+			]),
+			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
 			]),
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
@@ -196,6 +204,15 @@ class SiteModule extends ActiveRecord {
 		}
 
 		return $this->save(false);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function beforeDelete() {
+		return !$this->getItems()->count() || SiteModuleItem::deleteAll([
+			'module_id' => $this->id,
+		]);
 	}
 
 	/**

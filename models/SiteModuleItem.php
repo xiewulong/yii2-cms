@@ -16,6 +16,7 @@ use yii\components\ActiveRecord;
  * @property {integer} $type
  * @property {integer} $target_id
  * @property {string} $title
+ * @property {string} $alias
  * @property {string} $description
  * @property {string} $picture
  * @property {string} $url
@@ -73,7 +74,7 @@ class SiteModuleItem extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['title', 'picture', 'description'], 'trim'],
+			[['title', 'alias', 'picture', 'description'], 'trim'],
 			[['id', 'site_id', 'module_id', 'type'], 'required'],
 
 			['title', 'required', 'when' => function($self) {
@@ -127,6 +128,7 @@ class SiteModuleItem extends ActiveRecord {
 			'type',
 			'target_id',
 			'title',
+			'alias',
 			'description',
 			'picture',
 			'url',
@@ -143,6 +145,7 @@ class SiteModuleItem extends ActiveRecord {
 			'type',
 			'target_id',
 			'title',
+			'alias',
 			'description',
 			'picture',
 			'url',
@@ -173,6 +176,7 @@ class SiteModuleItem extends ActiveRecord {
 			'type' => \Yii::t($this->messageCategory, 'Type'),
 			'target_id' => \Yii::t($this->messageCategory, 'Target'),
 			'title' => \Yii::t($this->messageCategory, 'Title'),
+			'alias' => \Yii::t($this->messageCategory, 'Alias'),
 			'description' => \Yii::t($this->messageCategory, 'Description'),
 			'picture' => \Yii::t($this->messageCategory, 'Picture'),
 			'url' => \Yii::t($this->messageCategory, 'Url'),
@@ -226,6 +230,10 @@ class SiteModuleItem extends ActiveRecord {
 			'title' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Title'),
+			]),
+			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
 			]),
 			'description' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),

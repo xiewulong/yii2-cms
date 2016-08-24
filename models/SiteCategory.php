@@ -15,6 +15,7 @@ use yii\components\ActiveRecord;
  * @property {integer} $parent_id
  * @property {integer} $type
  * @property {string} $name
+ * @property {string} $alias
  * @property {integer} $status
  * @property {integer} $list_order
  * @property {integer} $operator_id
@@ -57,7 +58,7 @@ class SiteCategory extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['name'], 'trim'],
+			[['name', 'alias'], 'trim'],
 			[['site_id', 'name'], 'required'],
 			[['parent_id', 'list_order'], 'default', 'value' => 0],
 
@@ -92,12 +93,15 @@ class SiteCategory extends ActiveRecord {
 			'parent_id',
 			'type',
 			'name',
+			'alias',
 			'status',
 			'creator_id',
 		];
 
 		$scenarios['edit'] = [
+			'type',
 			'name',
+			'alias',
 			'status',
 			'operator_id',
 		];
@@ -119,6 +123,7 @@ class SiteCategory extends ActiveRecord {
 			'parent_id' => \Yii::t($this->messageCategory, 'Parent'),
 			'type' => \Yii::t($this->messageCategory, 'Type'),
 			'name' => \Yii::t($this->messageCategory, 'Name'),
+			'alias' => \Yii::t($this->messageCategory, 'Alias'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'list_order' => \Yii::t($this->messageCategory, 'List order'),
 			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
@@ -152,6 +157,10 @@ class SiteCategory extends ActiveRecord {
 			'name' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Name'),
+			]),
+			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
 			]),
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
@@ -214,6 +223,15 @@ class SiteCategory extends ActiveRecord {
 		}
 
 		return $this->save(false);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function beforeDelete() {
+		return !$this->getItems()->count() || SiteArticle::deleteAll([
+			'category_id' => $this->id,
+		]);
 	}
 
 	/**

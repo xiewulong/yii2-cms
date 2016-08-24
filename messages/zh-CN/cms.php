@@ -10,7 +10,8 @@ return [
 	'Author' => '作者',
 	'Keyword' => '关键词',
 	'Description' => '描述',
-	'Phone' => '联系电话',
+	'Phone' => '电话',
+	'Tax' => '传真',
 	'Email' => '邮箱',
 	'Address' => '地址',
 	'QQ' => 'QQ',
@@ -31,6 +32,7 @@ return [
 	'Category' => '分类',
 	'Category id' => '分类ID',
 	'Parent id' => '父ID',
+	'Alias' => '别名',
 	'List order' => '列表顺序',
 	'Creator id' => '创建者ID',
 
@@ -127,9 +129,11 @@ return [
 
 	'Go' => '前往',
 	'Home' => '首页',
-	'About us' => '关于我们',
+	'Company' => '公司',
+	'Follow us' => '关注我们',
+	'Contact' => '联系',
 	'Contact us' => '联系我们',
-	'Social service account' => '社会服务账户',
+	'See more' => '查看更多',
 
 	'Nanning Automan Technology Co., Ltd.' => '南宁凹凸曼科技有限责任公司',
 ];

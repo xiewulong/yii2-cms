@@ -35,6 +35,16 @@ $this->params['route'] = $module->url('banner/list');
 				]) ?>
 			</div>
 		</div>
+		<div class="form-group alias">
+			<?= Html::activeLabel($item, 'alias', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Html::activeTextInput($item, 'alias', [
+					'class' => 'form-control',
+					'placeholder' => $item->getAttributeHint('alias'),
+					'autofocus' => $item->isFirstErrorAttribute('alias'),
+				]) ?>
+			</div>
+		</div>
 		<div class="form-group description">
 			<?= Html::activeLabel($item, 'description', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">

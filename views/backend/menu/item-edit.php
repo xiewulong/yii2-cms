@@ -35,6 +35,50 @@ $this->params['route'] = $module->url('menu/list');
 				]) ?>
 			</div>
 		</div>
+		<div class="form-group alias">
+			<?= Html::activeLabel($item, 'alias', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Html::activeTextInput($item, 'alias', [
+					'class' => 'form-control',
+					'placeholder' => $item->getAttributeHint('alias'),
+					'autofocus' => $item->isFirstErrorAttribute('alias'),
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group description">
+			<?= Html::activeLabel($item, 'description', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Html::activeTextarea($item, 'description', [
+					'rows' => 6,
+					'class' => 'form-control',
+					'placeholder' => $item->getAttributeHint('description'),
+					'autofocus' => $item->isFirstErrorAttribute('description'),
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group picture">
+			<?= Html::activeLabel($item, 'picture', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Fileupload::widget([
+					'model' => $item,
+					'attribute' => 'picture',
+					'action' => $module->url('dashboard/fileupload'),
+					'type' => 'image',
+					'max' => '2097152',
+					'sizes' => '80x80|150x150',
+					'options' => [
+						'class' => 'glyphicon glyphicon-picture admin-fileupload J-admin-fileupload',
+						'style' => 'width:80px;height:80px;',
+					],
+					'fileOptions' => [
+						'data-show' => '80x80',
+					],
+					'hiddenOptions' => [
+						'data-thumb' => \Yii::$app->fileupload->addSuf($item['picture'], [80, 80]),
+					],
+				]) ?>
+			</div>
+		</div>
 		<div class="form-group type">
 			<?= Html::activeLabel($item, 'type', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">

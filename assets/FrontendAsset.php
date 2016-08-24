@@ -10,6 +10,7 @@ class FrontendAsset extends ModuleAsset {
 
 	public $depends = [
 		'yii\xui\BootstrapAsset',
+		'yii\xui\FontAwesomeAsset',
 	];
 
 }

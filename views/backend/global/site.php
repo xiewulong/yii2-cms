@@ -118,6 +118,16 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 				]) ?>
 			</div>
 		</div>
+		<div class="form-group tax">
+			<?= Html::activeLabel($item, 'tax', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-3">
+				<?= Html::activeTextInput($item, 'tax', [
+					'class' => 'form-control',
+					'placeholder' => $item->getAttributeHint('tax'),
+					'autofocus' => $item->isFirstErrorAttribute('tax'),
+				]) ?>
+			</div>
+		</div>
 		<div class="form-group email">
 			<?= Html::activeLabel($item, 'email', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-3">
@@ -182,7 +192,7 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 				]) ?>
 			</div>
 		</div>
-		<!-- <div class="form-group copyright">
+		<div class="form-group copyright">
 			<?= Html::activeLabel($item, 'copyright', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::activeTextInput($item, 'copyright', [
@@ -191,7 +201,7 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 					'autofocus' => $item->isFirstErrorAttribute('copyright'),
 				]) ?>
 			</div>
-		</div> -->
+		</div>
 		<div class="form-group powered">
 			<?= Html::activeLabel($item, 'powered', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">

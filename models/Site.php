@@ -19,6 +19,7 @@ use yii\components\ActiveRecord;
  * @property {string} $keywords
  * @property {string} $description
  * @property {string} $phone
+ * @property {string} $tax
  * @property {string} $email
  * @property {string} $address
  * @property {string} $qq
@@ -77,6 +78,7 @@ class Site extends ActiveRecord {
 				'keywords',
 				'description',
 				'phone',
+				'tax',
 				'email',
 				'address',
 				'qq',
@@ -140,6 +142,7 @@ class Site extends ActiveRecord {
 			'keywords',
 			'description',
 			'phone',
+			'tax',
 			'email',
 			'address',
 			'qq',
@@ -171,6 +174,7 @@ class Site extends ActiveRecord {
 			'keywords' => \Yii::t($this->messageCategory, 'Keyword') . '(SEO)',
 			'description' => \Yii::t($this->messageCategory, 'Description') . '(SEO)',
 			'phone' => \Yii::t($this->messageCategory, 'Phone'),
+			'tax' => \Yii::t($this->messageCategory, 'Tax'),
 			'email' => \Yii::t($this->messageCategory, 'Email'),
 			'address' => \Yii::t($this->messageCategory, 'Address'),
 			'qq' => \Yii::t($this->messageCategory, 'QQ'),
@@ -230,6 +234,10 @@ class Site extends ActiveRecord {
 			'phone' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Phone'),
+			]),
+			'tax' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'Tax'),
 			]),
 			'email' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
@@ -292,6 +300,7 @@ class Site extends ActiveRecord {
 			],
 			[
 				self::TYPE_PERSONAL => [
+					'tax',
 					'address',
 					'copyright',
 					'powered',

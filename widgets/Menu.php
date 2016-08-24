@@ -3,45 +3,27 @@ namespace yii\cms\widgets;
 
 use Yii;
 use yii\helpers\Html;
-use yii\xui\Ul;
 
 use yii\cms\models\SiteModule;
 use yii\cms\models\SiteModuleItem;
 
 class Menu extends Ul {
 
-	public $position;
+	public $type = SiteModule::TYPE_MENU;
 
 	public $route = [];
 
 	public $paramKey = 'id';
 
-	public function init() {
-		parent::init();
-
-		if($superior = SiteModule::findOne([
-			'site_id' => \Yii::$app->controller->module->siteId,
-			'type' => SiteModule::TYPE_MENU,
-			'position' => $this->position,
-			'status' => SiteModule::STATUS_ENABLED,
-		])) {
-			$this->items = $superior->getItems()
-				->select('id, type, target_id, title, url')
-				->where([
-					'site_id' => \Yii::$app->controller->module->siteId,
-					'status' => SiteModuleItem::STATUS_ENABLED,
-				])
-				->orderby('list_order desc, created_at desc')
-				->all();
-		}
-	}
+	protected $_home;
 
 	protected function renderItems() {
 		$itemOptions = $this->itemOptions;
 		$blankTarget = $this->blankTarget;
+		$moduleRoute = $this->moduleRoute;
 
-		return Html::ul($this->items, [
-			'item' => function($item) use($itemOptions, $blankTarget) {
+		return Html::ul($this->items, array_merge([
+			'item' => function($item) use($itemOptions, $blankTarget, $moduleRoute) {
 				$_options = [];
 				if($blankTarget) {
 					$_options['target'] = '_blank';
@@ -49,18 +31,16 @@ class Menu extends Ul {
 				if($this->isCurrent($item)) {
 					$itemOptions['class'] = (isset($itemOptions['class']) ? $itemOptions['class'] : '') . ' current';
 				}
-				$content = Html::a($item['title'], ['link/jump', 'id' => $item['id']], $_options);
+				$content = Html::a($item['title'], [$moduleRoute . 'link/jump', 'id' => $item['id']], $_options);
 
 				return Html::tag('li', $content, $itemOptions);
 			},
-		]);
+		], $this->listOptions));
 	}
 
 	private function isCurrent($item) {
 		if($item->type == SiteModuleItem::TYPE_HOME) {
-			$defaultRoutes = $this->moduleDefaultRoute;
-
-			return isset($defaultRoutes[0]) && $defaultRoutes[0] == \Yii::$app->defaultRoute && \Yii::$app->controller->route == implode('/', $defaultRoutes) . '/' . \Yii::$app->controller->defaultAction;
+			return $this->atHome;
 		}
 
 		$url = $item->link;
@@ -74,7 +54,9 @@ class Menu extends Ul {
 		}
 
 		$route = $url[0];
-		if(strpos($route, '/') !== 0) {
+		if($this->moduleRoute) {
+			$route = $this->moduleRoute . $route;
+		} else if(strpos($route, '/') !== 0) {
 			$route = \Yii::$app->controller->module->uniqueId . '/' . $route;
 		}
 
@@ -90,6 +72,22 @@ class Menu extends Ul {
 		return $_route !== null
 			&& $route == $_route
 			&& $id == $_id;
+	}
+
+	public static function atHome() {
+		$static = new static;
+
+		return $static->atHome;
+	}
+
+	protected function getAtHome() {
+		if($this->_home === null) {
+			$defaultRoutes = $this->moduleDefaultRoute;
+
+			$this->_home = isset($defaultRoutes[0]) && $defaultRoutes[0] == \Yii::$app->defaultRoute && \Yii::$app->controller->route == implode('/', $defaultRoutes) . '/' . \Yii::$app->controller->defaultAction;
+		}
+
+		return $this->_home;
 	}
 
 	protected function getModuleDefaultRoute($module = null) {

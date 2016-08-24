@@ -1,5 +1,15 @@
-// bootstrap reset
-
+/* bootstrap reset */
 a {
-	color: $color-font;
+	color: $color-link;
+
+	&:hover,
+	&:focus {
+		color: $color-link-hover;
+		text-decoration: none;
+	}
+
+	&:focus {
+		outline: 0;
+		outline-offset: 0;
+	}
 }

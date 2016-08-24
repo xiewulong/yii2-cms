@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\cms\assets\FrontendAsset;
+use yii\cms\widgets\Banner;
 use yii\cms\widgets\Menu;
 use yii\xui\Statistics;
 
@@ -47,56 +48,95 @@ FrontendAsset::register($this);
 <body>
 <?php $this->beginBody(); ?>
 
-<!-- begin x-navbar -->
-<div class="x-navbar">
+<!-- begin x-header -->
+<div class="x-header">
 	<div class="container">
-		<div class="pull-right">
-			<?php if($module->backendEntrance) { ?>
-			<?= Html::a(Html::tag('i', null, ['class' => 'glyphicon glyphicon-dashboard']) . \Yii::t($module->messageCategory, 'Manage'), $module->backendUrl, ['target' => '_blank']) ?>
-			<? } ?>
+		<div class="row">
+			<h1 class="pull-left">
+				<?= Html::a(Html::img($site['logo']), \Yii::$app->homeUrl) ?>
+				<?= Html::tag('span', $site['name']) ?><!-- for seo -->
+			</h1>
+			<?= Menu::widget([
+				'siteId' => $module->siteId,
+				'position' => 'Menu_main',
+				'route' => isset($this->params['route']) ? $this->params['route'] : null,
+				'options' => [
+					'class' => 'pull-right',
+				],
+				'listOptions' => [
+					'class' => 'clearfix',
+				],
+			]) ?>
 		</div>
-		<?php if($site['type'] == 1 && $site['email']) { ?>
-		<?= Html::a(Html::tag('i', null, ['class' => 'glyphicon glyphicon-envelope']) . $site['email'], 'mailto:' . $site['email'], ['class' => 'pull-left']) ?>
-		<? } ?>
-		<?php if($site['type'] == 2 && $site['phone']) { ?>
-		<?= Html::a(Html::tag('i', null, ['class' => 'glyphicon glyphicon-earphone']) . $site['phone'], 'tel:' . $site['phone'], ['class' => 'pull-left']) ?>
+	</div>
+</div>
+<!-- end x-header -->
+
+<!-- begin x-carousel -->
+<div class="x-wave x-wave-bottom-concave">
+	<div class="container-fluid">
+		<div class="row">
+			<?= Banner::widget([
+				'siteId' => $module->siteId,
+				'position' => 'Carousel_main',
+				'backgroundImage' => true,
+				'blankTarget' => true,
+				'carousel' => true,
+				'options' => [
+					'class' => 'x-carousel',
+				],
+			]) ?>
+		</div>
+	</div>
+</div>
+<!-- end x-carousel -->
+
+<?= $content ?>
+
+<!-- begin x-footer -->
+<div class="x-footer x-wave x-wave-top-convex">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3 logo">
+				<?= Html::a(Html::img($site['logo']), \Yii::$app->homeUrl) ?>
+			</div>
+			<div class="col-xs-3 follow">
+				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Follow us')) ?>
+				<p>
+					<?= $site['qq'] ? Html::a(Html::tag('i', null, ['class' => 'fa fa-qq']), $site['qq'], ['target' => '_blank']) : null ?>
+					<?= $site['weibo'] ? Html::a(Html::tag('i', null, ['class' => 'fa fa-weibo']), $site['weibo'], ['target' => '_blank']) : null ?>
+				</p>
+			</div>
+			<div class="col-xs-6 contact">
+				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Contact us')) ?>
+				<div class="row">
+					<div class="col-xs-6"><?= \Yii::t($module->messageCategory, '{action} {attribute}', [
+						'action' => \Yii::t($module->messageCategory, 'Contact'),
+						'attribute' => \Yii::t($module->messageCategory, 'Phone'),
+					]) ?>：<?= $site['phone'] ?></div>
+					<div class="col-xs-6"><?= Yii::t($module->messageCategory, '{action} {attribute}', [
+						'action' => \Yii::t($module->messageCategory, 'Company'),
+						'attribute' => \Yii::t($module->messageCategory, 'Tax'),
+					]) ?>：<?= $site['tax'] ?></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6"><?= Yii::t($module->messageCategory, '{action} {attribute}', [
+						'action' => \Yii::t($module->messageCategory, 'Company'),
+						'attribute' => \Yii::t($module->messageCategory, 'Email'),
+					]) ?>：<?= $site['email'] ?></div>
+					<div class="col-xs-6"><?= Yii::t($module->messageCategory, '{action} {attribute}', [
+						'action' => \Yii::t($module->messageCategory, 'Company'),
+						'attribute' => \Yii::t($module->messageCategory, 'Address'),
+					]) ?>：<?= $site['address'] ?></div>
+				</div>
+			</div>
+		</div>
+		<?php if($site['type'] == 2 && $site['copyright']) { ?>
+		<div class="row copyright"><?= $site['copyright'] ?></div>
 		<? } ?>
 	</div>
 </div>
-<!-- end x-navbar -->
-
-<div>/******** begin header ********/</div>
-<div><?= Html::a($site['name'], \Yii::$app->homeUrl) ?></div>
-<?php if($module->backendEntrance) { ?>
-<div><?= Html::a(\Yii::t($module->messageCategory, 'Manage'), $module->backendUrl, ['target' => '_blank']) ?></div>
-<? } ?>
-<h1>
-	<?= Html::a(Html::img($site['logo']), \Yii::$app->homeUrl) ?>
-	<?= Html::tag('span', $site['name']) ?><!-- for seo -->
-</h1>
-<?= Menu::widget([
-	'position' => 'Menu_main',
-	'route' => isset($this->params['route']) ? $this->params['route'] : null,
-]) ?>
-<div>/******** end header ********/</div>
-
-<div>/******** begin content ********/</div>
-<?= $content ?>
-<div>/******** end content ********/</div>
-
-<div>/******** begin footer ********/</div>
-<div><?= $site['brief'] ?></div>
-<div><?= $site['type'] == 1 ? null : $site['address'] ?></div>
-<div><?= $site['phone'] ?></div>
-<div><?= $site['email'] ?></div>
-<div><?= $site['qq'] ?></div>
-<div><?= $site['weixin'] ?></div>
-<div><?= $site['weibo'] ?></div>
-<div><?= $site['type'] == 1 ? null : $site['copyright'] ?></div>
-<div><?= $site['record'] ?></div>
-<div><?= $site['type'] == 1 ? null : $site['license'] ?></div>
-<div><?= $site['type'] == 1 ? null : Html::a($site['powered'] . '111', $site['powered_url'] ? : null, ['target' => '_blank']) ?></div>
-<div>/******** end footer ********/</div>
+<!-- end x-footer -->
 
 <?= Statistics::widget([
 	'baidu' => 'id',
