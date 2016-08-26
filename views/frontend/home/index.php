@@ -15,23 +15,6 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 <?= Home::widget([
 	'siteId' => $module->siteId,
 	'type' => 1,
-	'position' => 'Home_projects',
-	'targetBlank' => true,
-	'targetEnabled' => true,
-	'targetListLimit' => 5,
-	'targetMore' => false,
-	'keywordsToIcon' => true,
-	'options' => [
-		'class' => 'x-home',
-	],
-	'listOptions' => [
-		'class' => 'projects',
-	],
-]) ?>
-
-<?= Home::widget([
-	'siteId' => $module->siteId,
-	'type' => 1,
 	'position' => 'Home_about',
 	'targetBlank' => true,
 	'targetEnabled' => true,
@@ -44,6 +27,23 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 	],
 	'listOptions' => [
 		'class' => 'about',
+	],
+]) ?>
+
+<?= Home::widget([
+	'siteId' => $module->siteId,
+	'type' => 1,
+	'position' => 'Home_projects',
+	'targetBlank' => true,
+	'targetEnabled' => true,
+	'targetListLimit' => 5,
+	'targetMore' => false,
+	'keywordsToIcon' => true,
+	'options' => [
+		'class' => 'x-home',
+	],
+	'listOptions' => [
+		'class' => 'projects',
 	],
 ]) ?>
 
