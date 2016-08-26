@@ -42,6 +42,16 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 				]) ?>
 			</div>
 		</div>
+		<div class="form-group alias">
+			<?= Html::activeLabel($item, 'alias', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Html::activeTextInput($item, 'alias', [
+					'class' => 'form-control',
+					'placeholder' => $item->getAttributeHint('alias'),
+					'autofocus' => $item->isFirstErrorAttribute('alias'),
+				]) ?>
+			</div>
+		</div>
 		<div class="form-group logo">
 			<?= Html::activeLabel($item, 'logo', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
@@ -61,6 +71,29 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 					],
 					'hiddenOptions' => [
 						'data-thumb' => \Yii::$app->fileupload->addSuf($item['logo'], [80, 80]),
+					],
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group logo_sub">
+			<?= Html::activeLabel($item, 'logo_sub', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Fileupload::widget([
+					'model' => $item,
+					'attribute' => 'logo_sub',
+					'action' => $module->url('dashboard/fileupload'),
+					'type' => 'image',
+					'max' => '2097152',
+					'sizes' => '80x80',
+					'options' => [
+						'class' => 'glyphicon glyphicon-picture admin-fileupload J-admin-fileupload',
+						'style' => 'width:80px;height:80px;',
+					],
+					'fileOptions' => [
+						'data-show' => '80x80',
+					],
+					'hiddenOptions' => [
+						'data-thumb' => \Yii::$app->fileupload->addSuf($item['logo_sub'], [80, 80]),
 					],
 				]) ?>
 			</div>

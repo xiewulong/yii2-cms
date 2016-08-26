@@ -74,7 +74,7 @@ class SiteModule extends ActiveRecord {
 			]],
 
 			// Query data needed
-			[['position'], 'unique', 'targetAttribute' => ['position', 'type']],
+			[['position'], 'unique', 'targetAttribute' => ['site_id', 'type', 'position']],
 		];
 	}
 

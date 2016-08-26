@@ -13,7 +13,9 @@ use yii\components\ActiveRecord;
  * @property {string} $site
  * @property {integer} $type
  * @property {string} $name
+ * @property {string} $alias
  * @property {string} $logo
+ * @property {string} $logo_sub
  * @property {string} $brief
  * @property {string} $author
  * @property {string} $keywords
@@ -73,7 +75,9 @@ class Site extends ActiveRecord {
 			[[
 				'id',
 				'name',
+				'alias',
 				'logo',
+				'logo_sub',
 				'author',
 				'keywords',
 				'description',
@@ -136,7 +140,9 @@ class Site extends ActiveRecord {
 		$scenarios['global'] = [
 			'type',
 			'name',
+			'alias',
 			'logo',
+			'logo_sub',
 			'brief',
 			'author',
 			'keywords',
@@ -168,7 +174,9 @@ class Site extends ActiveRecord {
 			'id' => \Yii::t($this->messageCategory, 'Site id'),
 			'type' => \Yii::t($this->messageCategory, 'Type'),
 			'name' => \Yii::t($this->messageCategory, 'Name'),
+			'alias' => \Yii::t($this->messageCategory, 'Alias'),
 			'logo' => \Yii::t($this->messageCategory, 'Logo'),
+			'logo_sub' => \Yii::t($this->messageCategory, 'Sub logo'),
 			'brief' => \Yii::t($this->messageCategory, 'Brief'),
 			'author' => \Yii::t($this->messageCategory, 'Author') . '(SEO)',
 			'keywords' => \Yii::t($this->messageCategory, 'Keyword') . '(SEO)',
@@ -211,9 +219,17 @@ class Site extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Name'),
 			]),
+			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
+			]),
 			'logo' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Logo'),
+			]),
+			'logo_sub' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'attribute' => \Yii::t($this->messageCategory, 'Sub logo'),
 			]),
 			'brief' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),

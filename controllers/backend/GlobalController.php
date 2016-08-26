@@ -36,6 +36,7 @@ class GlobalController extends Controller {
 		$item->scenario = 'global';
 		if(\Yii::$app->request->isPost) {
 			$item->logo = null;
+			$item->logo_sub = null;
 			if($item->load(\Yii::$app->request->post())) {
 				if($item->commonHandler()) {
 					\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));

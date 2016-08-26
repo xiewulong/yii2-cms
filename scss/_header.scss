@@ -2,8 +2,12 @@
 .x-header {
 	h1 {
 		margin: 0;
-		padding: 10px 0 0;
+		padding: 10px 0;
 		overflow: hidden;
+
+		a {
+			display:block;
+		}
 
 		img {
 			max-height: 60px;

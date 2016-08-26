@@ -1,0 +1,40 @@
+/* x-crumbs */
+.x-crumbs {
+	font-size: 16px;
+	font-weight: 700;
+	padding: 10px 0;
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+
+		li {
+
+			&,
+			& a,
+			&:before {
+				float: left;
+			}
+
+			&:before {
+				content: ">";
+				margin-left: 5px;
+			}
+
+			&.heading,
+			&.home {
+				&:before {
+					content: '';
+					margin-left: 0;
+				}
+			}
+		}
+	}
+
+	&-arc {
+		height: 35px;
+		background-color: $color-primary;
+	}
+}

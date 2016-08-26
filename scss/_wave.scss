@@ -11,7 +11,7 @@
 		height: 27px;
 		background-image: url(../images/bg-x-wave.png);
 		background-repeat: repeat-x;
-		z-index: 99;
+		z-index: $z-index-wave;
 	}
 
 	&:before {

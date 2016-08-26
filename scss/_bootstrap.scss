@@ -13,3 +13,37 @@ a {
 		outline-offset: 0;
 	}
 }
+
+.btn {
+	border-radius: 17px;
+	padding-left: 30px;
+	padding-right: 30px;
+
+	&-primary {
+		&,
+		&:hover,
+		&:focus,
+		&.focus,
+		&:active:focus,
+		&:active.focus,
+		&.active:focus,
+		&.active.focus {
+			background-color: $color-primary;
+			border-color: $color-primary;
+		}
+	}
+
+	&-lg {
+		border-radius: 23px;
+		padding-left: 45px;
+		padding-right: 45px;
+	}
+}
+
+.non-responsive {
+	min-width: $grid-width;
+
+	.container {
+		width: $grid-width;
+	}
+}

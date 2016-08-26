@@ -15,6 +15,7 @@ use yii\helpers\Json;
  * @property {string} $site_id
  * @property {integer} $category_id
  * @property {string} $title
+ * @property {string} $alias
  * @property {string} $thumbnail
  * @property {string} $author
  * @property {string} $keywords
@@ -62,7 +63,7 @@ class SiteArticle extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['title', 'thumbnail', 'author', 'keywords', 'description', 'content'], 'trim'],
+			[['title', 'alias', 'thumbnail', 'author', 'keywords', 'description', 'content'], 'trim'],
 			[['id', 'site_id', 'category_id', 'title'], 'required'],
 
 			[['thumbnail', 'pictures'], 'required', 'when' => function($self) {
@@ -109,6 +110,7 @@ class SiteArticle extends ActiveRecord {
 			'site_id',
 			'category_id',
 			'title',
+			'alias',
 			'thumbnail',
 			'author',
 			'keywords',
@@ -121,6 +123,7 @@ class SiteArticle extends ActiveRecord {
 
 		$scenarios['edit'] = [
 			'title',
+			'alias',
 			'thumbnail',
 			'author',
 			'keywords',
@@ -147,6 +150,7 @@ class SiteArticle extends ActiveRecord {
 			'site_id' => \Yii::t($this->messageCategory, 'Site'),
 			'category_id' => \Yii::t($this->messageCategory, 'Category'),
 			'title' => \Yii::t($this->messageCategory, 'Title'),
+			'alias' => \Yii::t($this->messageCategory, 'Alias'),
 			'thumbnail' => \Yii::t($this->messageCategory, 'Thumbnail'),
 			'author' => \Yii::t($this->messageCategory, 'Author'),
 			'keywords' => \Yii::t($this->messageCategory, 'Keyword'),
@@ -182,6 +186,10 @@ class SiteArticle extends ActiveRecord {
 			'title' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Title'),
+			]),
+			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
 			]),
 			'thumbnail' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'upload'),

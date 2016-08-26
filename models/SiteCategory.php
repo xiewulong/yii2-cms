@@ -67,7 +67,7 @@ class SiteCategory extends ActiveRecord {
 			['type', 'default', 'value' => self::TYPE_NEWS],
 			['type', 'in', 'range' => [
 				self::TYPE_NEWS,
-				self::TYPE_PICTURES,
+				// self::TYPE_PICTURES,
 				self::TYPE_PAGE,
 				self::TYPE_NOTICE,
 			]],
@@ -252,6 +252,18 @@ class SiteCategory extends ActiveRecord {
 	 */
 	public function getItems() {
 		return $this->getArticles();
+	}
+
+	/**
+	 * Filter articles
+	 *
+	 * @since 0.0.1
+	 * @return {array}
+	 */
+	public function getFeaturedItems() {
+		return $this->getItems()->where([
+			'status' => SiteArticle::STATUS_FEATURED,
+		])->orderby('list_order desc, created_at desc');
 	}
 
 	/**

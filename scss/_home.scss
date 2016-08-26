@@ -2,7 +2,7 @@
 .x-home {
 	padding: 20px 0;
 
-	.header {
+	.heading {
 		text-align: center;
 		position: relative;
 		padding-bottom: 13px;
@@ -99,6 +99,10 @@
 						color: $color-primary;
 					}
 
+					.description{
+						display: none;
+					}
+
 					&:hover {
 						b {
 							color: $color-secondary;
@@ -115,6 +119,7 @@
 				text-align: center;
 
 				a {
+					b,
 					.title,
 					.alias {
 						display: none;
@@ -145,7 +150,7 @@
 					}
 
 					.title,
-					.alias {
+					.description {
 						font-size: 14px;
 						overflow: hidden;
 					}
@@ -154,9 +159,13 @@
 						color: $color-secondary;
 					}
 
-					.alias {
+					.description {
 						padding-top: 18px;
 						line-height: 1.6;
+					}
+
+					.alias {
+						display: none;
 					}
 				}
 			}
@@ -203,7 +212,7 @@
 
 			li {
 				width: 12.5%;
-				padding-right: 15px;
+				padding: 0 15px 10px 0;
 
 				a {
 					b {
@@ -228,11 +237,15 @@
 		}
 	}
 
+	.more {
+		text-align: center;
+	}
+
 	&-inverse {
 		padding: 100px 0 80px;
 		background-color: $color-primary;
 
-		.header {
+		.heading {
 			h5,
 			small {
 				color: #fff;

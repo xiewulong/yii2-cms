@@ -4,99 +4,169 @@ namespace yii\cms\widgets;
 use Yii;
 use yii\helpers\Html;
 
-use yii\cms\models\SiteModule;
+use yii\cms\models\SiteArticle;
+use yii\cms\models\SiteCategory;
 use yii\cms\models\SiteModuleItem;
 
 class Ul extends \yii\xui\Ul {
 
 	public $siteId;
 
-	public $type;
-
 	public $position;
 
 	public $moduleRoute;
 
-	public $titleEnabled = false;
+	public $headingEnabled = false;
 
-	public $titleOptions = [];
+	public $headingOptions = [];
 
-	public $more;
+	public $targetEnabled = false;
+
+	public $targetLimit = 1;
+
+	public $targetListLimit = 10;
+
+	public $targetMore = true;
+
+	public $targetMoreText = 'More';
+
+	public $targetMoreOptions = [];
+
+	public $timeEnabled = false;
+
+	public $timeFormat = 'Y-m-d';
 
 	protected $_superior;
 
-	public function init() {
-		parent::init();
-
-		if($this->_superior = SiteModule::findOne([
-			'site_id' => $this->siteId,
-			'type' => $this->type,
-			'position' => $this->position,
-			'status' => SiteModule::STATUS_ENABLED,
-		])) {
-			$this->items = $this->_superior->getItems()
-				->where([
-					'site_id' => $this->siteId,
-					'status' => SiteModuleItem::STATUS_ENABLED,
-				])
-				->orderby('list_order desc, created_at desc')
-				->all();
-		}
-	}
-
 	public function run() {
-		return empty($this->items) ? null : Html::tag($this->tag, $this->renderTitle() . $this->renderItems() . $this->more, $this->options);
+		return $this->content;
 	}
 
-	protected function renderTitle() {
-		if(!$this->titleEnabled) return null;
+	protected function getContent() {
+		if(!$this->targetEnabled) {
+			return $this->renderAll();
+		}
 
-		$content = (array) Html::tag('h5', $this->_superior->name);
+		$items = $this->items;
+		$content = [];
+		foreach($items as $index => $item) {
+			if($index >= $this->targetLimit) break;
+
+			switch($item->type) {
+				case SiteModuleItem::TYPE_CATEGORY:
+					$this->_superior = $item->target;
+					$this->items = $item->target->getItems()
+						->where([
+							'site_id' => $this->siteId,
+							'status' => [
+								SiteArticle::STATUS_RELEASED,
+								SiteArticle::STATUS_FEATURED,
+							],
+						])
+						->orderby('status desc, list_order desc, created_at desc')
+						->limit($this->targetListLimit)
+						->all();
+					break;
+				case SiteModuleItem::TYPE_ARTICLE:
+					$this->_superior = $item->target;
+					$this->items = [$item->target];
+					break;
+				default:
+					$this->_superior = null;
+					$this->items = [];
+					continue;
+					break;
+			}
+			$content[] = $this->renderAll();
+		}
+
+		return implode('', $content);
+	}
+
+	protected function renderAll() {
+		return $this->items ? Html::tag($this->tag, $this->renderHeading() . $this->renderItems() . $this->renderTargetMore(), $this->options) : null;
+	}
+
+	protected function renderTargetMore() {
+		if(!$this->targetEnabled || !$this->targetMore || !$this->items) return null;
+
+		if($this->targetBlank) {
+			$this->targetMoreOptions['target'] = '_blank';
+		}
+
+		return Html::tag('div', Html::a($this->targetMoreText, $this->createLink($this->_superior), $this->targetMoreOptions), ['class' => 'more']);
+	}
+
+	protected function renderHeading() {
+		if(!$this->headingEnabled || !$this->_superior) return null;
+
+		$content = (array) Html::tag('h5', isset($this->_superior->name) ? $this->_superior->name : $this->_superior->title);
 		if($this->_superior->alias) {
 			$content[] = Html::tag('small', $this->_superior->alias);
 		}
 
-		if(!isset($this->titleOptions['class'])) {
-			$this->titleOptions['class'] = 'header';
+		if(!isset($this->headingOptions['class'])) {
+			$this->headingOptions['class'] = 'heading';
 		}
 
-		return Html::tag('div', implode('', $content), $this->titleOptions);
+		return Html::tag('div', implode('', $content), $this->headingOptions);
 	}
 
 	protected function renderItems() {
-		$itemOptions = $this->itemOptions;
-		$backgroundImage = $this->backgroundImage;
-		$blankTarget = $this->blankTarget;
-		$moduleRoute = $this->moduleRoute;
-
 		return Html::ul($this->items, array_merge([
-			'item' => function($item) use($itemOptions, $backgroundImage, $blankTarget, $moduleRoute) {
+			'item' => function($item) {
 				$_content = [];
 				$_options = [];
-				if($item['picture']) {
-					if($backgroundImage) {
+				if(isset($item['picture']) && $item['picture']) {
+					if($this->backgroundImage) {
 						$_options['style'] = 'background-image:url(' . $item['picture'] . ');';
 					} else {
 						$_content[] = Html::tag('b', Html::img($item['picture']));
 					}
 				}
-				if($item['title']) {
+				if($this->timeEnabled && $item['created_at']) {
+					$_content[] = Html::tag('div', date($this->timeFormat, $item['created_at']), ['class' => 'time']);
+				}
+				if(isset($item['name']) && $item['name']) {
+					$_content[] = Html::tag('div', $item['name'], ['class' => 'name']);
+				} else if(isset($item['title']) && $item['title']) {
 					$_content[] = Html::tag('div', $item['title'], ['class' => 'title']);
 				}
-				if($item['alias']) {
+				if(isset($item['alias']) && $item['alias']) {
 					$_content[] = Html::tag('div', $item['alias'], ['class' => 'alias']);
 				}
-				if($item['description']) {
+				if(isset($item['description']) && $item['description']) {
 					$_content[] = Html::tag('div', $item['description'], ['class' => 'description']);
 				}
-				if($blankTarget) {
+				if($this->targetBlank) {
 					$_options['target'] = '_blank';
 				}
-				$content = Html::a(implode('', $_content), [$moduleRoute . 'link/jump', 'id' => $item['id']], $_options);
+				$content = Html::a(implode('', $_content), $this->createLink($item), $_options);
+
+				$itemOptions = $this->itemOptions;
+				if(isset($item['options'])) {
+					$itemOptions = array_merge($item['options'], $itemOptions);
+				}
 
 				return Html::tag('li', $content, $itemOptions);
 			},
 		], $this->listOptions));
+	}
+
+	protected function createLink($item) {
+		if($item instanceof SiteModuleItem) {
+			$route = [$this->moduleRoute . 'link/jump', 'id' => $item->id];
+		} else if($item instanceof SiteCategory) {
+			$route = [$this->moduleRoute . 'article/list', 'id' => $item->id];
+		} else if($item instanceof SiteArticle) {
+			$route = [$this->moduleRoute . 'article/details', 'id' => $item->id];
+		} else if(isset($item['url'])) {
+			$route = $item['url'];
+		} else {
+			$route = null;
+		}
+
+		return $route;
 	}
 
 }

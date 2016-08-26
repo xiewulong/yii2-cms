@@ -134,6 +134,7 @@
 		switch: function() {
 			var unsupports, itemValue, itemName;
 			if(this.$static) {
+				console.dir(this.parentItems);
 				itemValue = this.parentItems[this.value];
 				this.$static.html(this.parentItemsValue[itemValue] || '');
 				this.value = itemValue;

@@ -9,29 +9,47 @@ use yii\cms\models\SiteModuleItem;
 
 class Menu extends Ul {
 
-	public $type = SiteModule::TYPE_MENU;
-
 	public $route = [];
 
 	public $paramKey = 'id';
 
 	protected $_home;
 
-	protected function renderItems() {
-		$itemOptions = $this->itemOptions;
-		$blankTarget = $this->blankTarget;
-		$moduleRoute = $this->moduleRoute;
+	public function init() {
+		parent::init();
 
+		if($this->_superior = SiteModule::findOne([
+			'site_id' => $this->siteId,
+			'type' => SiteModule::TYPE_MENU,
+			'position' => $this->position,
+			'status' => SiteModule::STATUS_ENABLED,
+		])) {
+			$this->items = $this->_superior->getItems()
+				->where([
+					'site_id' => $this->siteId,
+					'status' => SiteModuleItem::STATUS_ENABLED,
+				])
+				->orderby('list_order desc, created_at desc')
+				->all();
+		}
+	}
+
+	protected function renderItems() {
 		return Html::ul($this->items, array_merge([
-			'item' => function($item) use($itemOptions, $blankTarget, $moduleRoute) {
+			'item' => function($item) {
+				$itemOptions = $this->itemOptions;
+				if(isset($item['options'])) {
+					$itemOptions = array_merge($item['options'], $itemOptions);
+				}
+
 				$_options = [];
-				if($blankTarget) {
+				if($this->targetBlank) {
 					$_options['target'] = '_blank';
 				}
 				if($this->isCurrent($item)) {
 					$itemOptions['class'] = (isset($itemOptions['class']) ? $itemOptions['class'] : '') . ' current';
 				}
-				$content = Html::a($item['title'], [$moduleRoute . 'link/jump', 'id' => $item['id']], $_options);
+				$content = Html::a($item['title'], [$this->moduleRoute . 'link/jump', 'id' => $item['id']], $_options);
 
 				return Html::tag('li', $content, $itemOptions);
 			},

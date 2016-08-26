@@ -56,29 +56,6 @@ $this->params['route'] = $module->url('menu/list');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group picture">
-			<?= Html::activeLabel($item, 'picture', ['class' => 'control-label col-sm-2']) ?>
-			<div class="col-sm-4">
-				<?= Fileupload::widget([
-					'model' => $item,
-					'attribute' => 'picture',
-					'action' => $module->url('dashboard/fileupload'),
-					'type' => 'image',
-					'max' => '2097152',
-					'sizes' => '80x80|150x150',
-					'options' => [
-						'class' => 'glyphicon glyphicon-picture admin-fileupload J-admin-fileupload',
-						'style' => 'width:80px;height:80px;',
-					],
-					'fileOptions' => [
-						'data-show' => '80x80',
-					],
-					'hiddenOptions' => [
-						'data-thumb' => \Yii::$app->fileupload->addSuf($item['picture'], [80, 80]),
-					],
-				]) ?>
-			</div>
-		</div>
 		<div class="form-group type">
 			<?= Html::activeLabel($item, 'type', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">

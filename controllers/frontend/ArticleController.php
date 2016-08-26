@@ -47,7 +47,7 @@ class ArticleController extends Controller {
 				'site_id' => $this->module->siteId,
 				'status' => [SiteArticle::STATUS_RELEASED, SiteArticle::STATUS_FEATURED],
 			])
-			->orderby('list_order desc, created_at desc');
+			->orderby('status desc, list_order desc, created_at desc');
 
 		$pagination = new Pagination([
 			'totalCount' => $query->count(),

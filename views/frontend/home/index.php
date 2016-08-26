@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+
 use yii\cms\widgets\Home;
 use yii\cms\widgets\HomeIcon;
 
@@ -11,10 +12,15 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 // $this->params['route'] = '';
 ?>
 
-<?= HomeIcon::widget([
+<?= Home::widget([
 	'siteId' => $module->siteId,
+	'type' => 1,
 	'position' => 'Home_projects',
-	'blankTarget' => true,
+	'targetBlank' => true,
+	'targetEnabled' => true,
+	'targetListLimit' => 5,
+	'targetMore' => false,
+	'keywordsToIcon' => true,
 	'options' => [
 		'class' => 'x-home',
 	],
@@ -25,46 +31,63 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 
 <?= Home::widget([
 	'siteId' => $module->siteId,
+	'type' => 1,
 	'position' => 'Home_about',
-	'blankTarget' => true,
+	'targetBlank' => true,
+	'targetEnabled' => true,
+	'targetMoreText' => \Yii::t($module->messageCategory, 'See more'),
+	'targetMoreOptions' => [
+		'class' => 'btn btn-primary btn-lg',
+	],
 	'options' => [
 		'class' => 'x-home',
 	],
 	'listOptions' => [
 		'class' => 'about',
 	],
-	'more' => Html::tag('div', Html::a(\Yii::t($module->messageCategory, 'See more'), ['article/list', 'id' => 1], ['class' => 'btn btn-primary btn-lg more', 'target' => '_blank']), ['class' => 'text-center']),
 ]) ?>
 
-<?= HomeIcon::widget([
+<?= Home::widget([
 	'siteId' => $module->siteId,
+	'type' => 1,
 	'position' => 'Home_advantages',
-	'blankTarget' => true,
+	'targetBlank' => true,
+	'targetEnabled' => true,
+	'targetListLimit' => 4,
+	'targetMore' => false,
+	'keywordsToIcon' => true,
 	'options' => [
 		'class' => 'x-home x-home-inverse x-wave x-wave-top-concave x-wave-bottom-concave',
 	],
 	'listOptions' => [
 		'class' => 'advantages',
-	]
+	],
 ]) ?>
 
 <?= Home::widget([
 	'siteId' => $module->siteId,
+	'type' => 1,
 	'position' => 'Home_news',
-	'blankTarget' => true,
+	'targetBlank' => true,
+	'targetEnabled' => true,
+	'targetListLimit' => 8,
+	'targetMoreText' => \Yii::t($module->messageCategory, 'See more'),
+	'targetMoreOptions' => [
+		'class' => 'btn btn-primary btn-lg',
+	],
 	'options' => [
 		'class' => 'x-home',
 	],
 	'listOptions' => [
 		'class' => 'news',
 	],
-	'more' => Html::tag('div', Html::a(\Yii::t($module->messageCategory, 'See more'), ['article/list', 'id' => 2], ['class' => 'btn btn-primary btn-lg more', 'target' => '_blank']), ['class' => 'text-center']),
 ]) ?>
 
 <?= Home::widget([
 	'siteId' => $module->siteId,
-	'position' => 'Home_links',
-	'blankTarget' => true,
+	'type' => 2,
+	'position' => 'Friendly_links',
+	'targetBlank' => true,
 	'options' => [
 		'class' => 'x-home',
 	],

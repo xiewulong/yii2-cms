@@ -1,5 +1,7 @@
 // config
 
+$grid-width: 970px !default;
+
 $color-primary: #02294a !default;
 $color-secondary: #fe7000 !default;
 
@@ -12,3 +14,6 @@ $color-link-hover: $color-primary !default;
 $font-size: 12px !default;
 
 $font-family: '\5FAE\8F6F\96C5\9ED1',microsoft yahei !default;
+
+$z-index-wave: 99;
+$z-index-sidebar: 100;

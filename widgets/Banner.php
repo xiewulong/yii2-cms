@@ -9,8 +9,6 @@ use yii\cms\models\SiteModuleItem;
 
 class Banner extends Ul {
 
-	public $type = SiteModule::TYPE_BANNER;
-
 	public $carousel = false;
 
 	public $carouselIdPre = 'J-x-carousel-';
@@ -19,6 +17,21 @@ class Banner extends Ul {
 
 	public function init() {
 		parent::init();
+
+		if($this->_superior = SiteModule::findOne([
+			'site_id' => $this->siteId,
+			'type' => SiteModule::TYPE_BANNER,
+			'position' => $this->position,
+			'status' => SiteModule::STATUS_ENABLED,
+		])) {
+			$this->items = $this->_superior->getItems()
+				->where([
+					'site_id' => $this->siteId,
+					'status' => SiteModuleItem::STATUS_ENABLED,
+				])
+				->orderby('list_order desc, created_at desc')
+				->all();
+		}
 
 		if($this->items && $this->carousel) {
 			$this->options['id'] = $this->randomId;

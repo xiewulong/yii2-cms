@@ -5,7 +5,9 @@ return [
 	'Id' => 'ID',
 	'Type' => '类型',
 	'Name' => '名称',
+	'Alias' => '别名',
 	'Logo' => '标志',
+	'Sub logo' => '副标志',
 	'Brief' => '简介',
 	'Author' => '作者',
 	'Keyword' => '关键词',
@@ -32,7 +34,6 @@ return [
 	'Category' => '分类',
 	'Category id' => '分类ID',
 	'Parent id' => '父ID',
-	'Alias' => '别名',
 	'List order' => '列表顺序',
 	'Creator id' => '创建者ID',
 
@@ -134,6 +135,7 @@ return [
 	'Contact' => '联系',
 	'Contact us' => '联系我们',
 	'See more' => '查看更多',
+	'Current location' => '当前位置',
 
 	'Nanning Automan Technology Co., Ltd.' => '南宁凹凸曼科技有限责任公司',
 ];

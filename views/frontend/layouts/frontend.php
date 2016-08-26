@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+
 use yii\cms\assets\FrontendAsset;
 use yii\cms\widgets\Banner;
 use yii\cms\widgets\Menu;
@@ -45,7 +46,7 @@ FrontendAsset::register($this);
 <!-- end head -->
 
 <!-- begin body -->
-<body>
+<body class="non-responsive">
 <?php $this->beginBody(); ?>
 
 <!-- begin x-header -->
@@ -80,7 +81,7 @@ FrontendAsset::register($this);
 				'siteId' => $module->siteId,
 				'position' => 'Carousel_main',
 				'backgroundImage' => true,
-				'blankTarget' => true,
+				'targetBlank' => true,
 				'carousel' => true,
 				'options' => [
 					'class' => 'x-carousel',
@@ -98,7 +99,7 @@ FrontendAsset::register($this);
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-3 logo">
-				<?= Html::a(Html::img($site['logo']), \Yii::$app->homeUrl) ?>
+				<?= Html::a(Html::img($site['logo_sub']), \Yii::$app->homeUrl) ?>
 			</div>
 			<div class="col-xs-3 follow">
 				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Follow us')) ?>

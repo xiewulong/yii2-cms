@@ -42,7 +42,7 @@ $this->params['route'] = $module->url('article/list');
 					'size' => 1,
 				])?>
 				<? } ?>
-				<?php $this->registerJs('$("[data-form-switch=radio]").formSwitch(' . $item->getAttributeItems('categoryType', 1, true) . ', "' . $item['category']['type'] . '", ".form-group.category_name .form-control-static", ' . $categoryTypes . ', ' . $categoryTypeItems . ');', 3); ?>
+				<?php $this->registerJs('$("[data-form-switch=radio]").formSwitch(' . $item->getAttributeItems('categoryType', 1, true) . ', "' . $item['category']['id'] . '", ".form-group.category_name .form-control-static", ' . $categoryTypes . ', ' . $categoryTypeItems . ');', 3); ?>
 			</div>
 		</div>
 		<div class="form-group category_name">
@@ -61,6 +61,16 @@ $this->params['route'] = $module->url('article/list');
 					'class' => 'form-control',
 					'placeholder' => $item->getAttributeHint('title'),
 					'autofocus' => $item->isFirstErrorAttribute('title') || !$item->hasErrors(),
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group alias">
+			<?= Html::activeLabel($item, 'alias', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Html::activeTextInput($item, 'alias', [
+					'class' => 'form-control',
+					'placeholder' => $item->getAttributeHint('alias'),
+					'autofocus' => $item->isFirstErrorAttribute('alias'),
 				]) ?>
 			</div>
 		</div>
