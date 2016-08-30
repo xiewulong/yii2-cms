@@ -66,7 +66,7 @@ class BannerController extends Controller {
 		}
 
 		if(\Yii::$app->request->isPost) {
-			$item->picture = null;
+			$item->picture_id = null;
 			if($item->load(\Yii::$app->request->post())) {
 				if($item->commonHandler()) {
 					\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));

@@ -18,7 +18,7 @@ use yii\components\ActiveRecord;
  * @property {string} $title
  * @property {string} $alias
  * @property {string} $description
- * @property {string} $picture
+ * @property {string} $picture_id
  * @property {string} $url
  * @property {integer} $status
  * @property {integer} $start_at
@@ -74,14 +74,14 @@ class SiteModuleItem extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['title', 'alias', 'picture', 'description'], 'trim'],
+			[['title', 'alias', 'picture_id', 'description'], 'trim'],
 			[['id', 'site_id', 'module_id', 'type'], 'required'],
 
 			['title', 'required', 'when' => function($self) {
 				return $self->module->type == SiteModule::TYPE_MENU;
 			}],
 
-			['picture', 'required', 'when' => function($self) {
+			['picture_id', 'required', 'when' => function($self) {
 				return $self->module->type == SiteModule::TYPE_BANNER;
 			}],
 
@@ -130,7 +130,7 @@ class SiteModuleItem extends ActiveRecord {
 			'title',
 			'alias',
 			'description',
-			'picture',
+			'picture_id',
 			'url',
 			'status',
 			'start_at',
@@ -147,7 +147,7 @@ class SiteModuleItem extends ActiveRecord {
 			'title',
 			'alias',
 			'description',
-			'picture',
+			'picture_id',
 			'url',
 			'status',
 			'start_at',
@@ -178,7 +178,7 @@ class SiteModuleItem extends ActiveRecord {
 			'title' => \Yii::t($this->messageCategory, 'Title'),
 			'alias' => \Yii::t($this->messageCategory, 'Alias'),
 			'description' => \Yii::t($this->messageCategory, 'Description'),
-			'picture' => \Yii::t($this->messageCategory, 'Picture'),
+			'picture_id' => \Yii::t($this->messageCategory, 'Picture'),
 			'url' => \Yii::t($this->messageCategory, 'Url'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'start_at' => \Yii::t($this->messageCategory, 'Start time'),
@@ -239,7 +239,7 @@ class SiteModuleItem extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Description'),
 			]),
-			'picture' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+			'picture_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Picture'),
 			]),

@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\fileupload\Fileupload;
+use yii\attachment\widgets\Attachment;
 use yii\xui\Ueditor;
 
 $module = \Yii::$app->controller->module;
@@ -95,68 +95,17 @@ $this->params['route'] = $module->url('article/list');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group thumbnail">
-			<?= Html::activeLabel($item, 'thumbnail', ['class' => 'control-label col-sm-2']) ?>
+		<div class="form-group thumbnail_id">
+			<?= Html::activeLabel($item, 'thumbnail_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Fileupload::widget([
+				<?= Attachment::widget([
 					'model' => $item,
-					'attribute' => 'thumbnail',
-					'action' => $module->url('dashboard/fileupload'),
-					'type' => 'image',
-					'max' => '2097152',
-					'sizes' => '80x80',
+					'attribute' => 'thumbnail_id',
+					'uploadAction' => $module->url('attachment/upload'),
+					'loadAction' => $module->url('attachment'),
 					'options' => [
-						'class' => 'glyphicon glyphicon-picture admin-fileupload J-admin-fileupload',
+						'class' => 'glyphicon glyphicon-picture admin-attachment J-admin-attachment',
 						'style' => 'width:80px;height:80px;',
-					],
-					'fileOptions' => [
-						'data-show' => '80x80',
-					],
-					'hiddenOptions' => [
-						'data-thumb' => \Yii::$app->fileupload->addSuf($item['thumbnail'], [80, 80]),
-					],
-				]) ?>
-			</div>
-		</div>
-		<div class="form-group pictures">
-			<?= Html::activeLabel($item, 'pictures', ['class' => 'control-label col-sm-2']) ?>
-			<div class="col-sm-8">
-				<?php
-				$pictures = is_array($item['pictures']) ? $item['pictures'] : $item['pictureList'];
-				foreach($pictures as $picture) {
-				?>
-				<?= Fileupload::widget([
-					'attribute' => Html::getInputName($item, 'pictures[]'),
-					'value' => $picture,
-					'action' => $module->url('dashboard/fileupload'),
-					'type' => 'image',
-					'max' => '2097152',
-					'sizes' => '80x80|150x150',
-					'options' => [
-						'class' => 'glyphicon glyphicon-picture admin-fileupload admin-fileuploads J-admin-fileupload',
-						'style' => 'width:80px;height:80px;',
-					],
-					'fileOptions' => [
-						'data-show' => '80x80',
-					],
-					'hiddenOptions' => [
-						'data-thumb' => \Yii::$app->fileupload->addSuf($picture, [80, 80]),
-					],
-				]) ?>
-				<? } ?>
-				<?= Fileupload::widget([
-					'attribute' => Html::getInputName($item, 'pictures[]'),
-					'action' => $module->url('dashboard/fileupload'),
-					'type' => 'image',
-					'max' => '2097152',
-					'sizes' => '80x80|150x150',
-					'options' => [
-						'class' => 'glyphicon glyphicon-plus admin-fileupload J-admin-fileupload',
-						'data-fileupload-max' => 0,
-						'style' => 'width:80px;height:80px;',
-					],
-					'fileOptions' => [
-						'data-show' => '80x80',
 					],
 				]) ?>
 			</div>
@@ -168,9 +117,57 @@ $this->params['route'] = $module->url('article/list');
 					'name' => Html::getInputName($item, 'content'),
 					'value' => Html::getAttributeValue($item, 'content'),
 					'id' => Html::getInputId($item, 'content'),
-					'action' => $module->url('dashboard/ueditor'),
+					'action' => $module->url('attachment/upload/ueditor'),
 					'options' => [
 						'initialFrameHeight' => 600,
+					],
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group picture_ids">
+			<?= Html::activeLabel($item, 'picture_ids', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-8">
+				<?php
+				$picture_ids = is_array($item['picture_ids']) ? $item['picture_ids'] : $item['pictureIdList'];
+				foreach($picture_ids as $picture_id) {
+				?>
+				<?= Attachment::widget([
+					'attribute' => Html::getInputName($item, 'picture_ids[]'),
+					'value' => $picture_id,
+					'uploadAction' => $module->url('attachment/upload'),
+					'loadAction' => $module->url('attachment'),
+					'options' => [
+						'class' => 'glyphicon glyphicon-picture admin-attachment admin-attachments J-admin-attachment',
+						'style' => 'width:80px;height:80px;',
+					],
+				]) ?>
+				<? } ?>
+				<?= Attachment::widget([
+					'attribute' => Html::getInputName($item, 'picture_ids[]'),
+					'uploadAction' => $module->url('attachment/upload'),
+					'loadAction' => $module->url('attachment'),
+					'options' => [
+						'class' => 'glyphicon glyphicon-picture admin-attachment J-admin-attachment',
+						'data-attachment-max' => 0,
+						'style' => 'width:80px;height:80px;',
+					],
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group attachment_id">
+			<?= Html::activeLabel($item, 'attachment_id', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Attachment::widget([
+					'model' => $item,
+					'attribute' => 'attachment_id',
+					'uploadAction' => $module->url('attachment/upload'),
+					'loadAction' => $module->url('attachment'),
+					'options' => [
+						'class' => 'glyphicon glyphicon-picture admin-attachment J-admin-attachment',
+					],
+					'hiddenOptions' => [
+						'data-name' => $item['attachment']['fullName'],
+						'data-basename' => $item['attachment']['fullBasename'],
 					],
 				]) ?>
 			</div>

@@ -1,6 +1,5 @@
 <?php
 use yii\helpers\Html;
-use yii\fileupload\Fileupload;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [

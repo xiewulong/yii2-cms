@@ -88,7 +88,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
 				<td><?= Html::a($item['title'], ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
-				<td><?= Html::a(Html::img($item['picture'], ['class' => 'admin-image-limit']), ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
+				<td><?= Html::a(Html::img($module->attachmentRoute($item['picture_id']), ['class' => 'admin-image-limit']), ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
 				<td class="text-center"><?= \Yii::t($module->messageCategory, $item->getAttributeText('type')) ?></td>
 				<td class="text-center"><?= $item['pv'] ?></td>
 				<td class="text-center"><?= $item['uv'] ?></td>

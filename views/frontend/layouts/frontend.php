@@ -54,7 +54,7 @@ FrontendAsset::register($this);
 	<div class="container">
 		<div class="row">
 			<h1 class="pull-left">
-				<?= Html::a(Html::img($site['logo']), \Yii::$app->homeUrl) ?>
+				<?= Html::a(Html::img($module->imageRoute($site['logo_id'])), \Yii::$app->homeUrl) ?>
 				<?= Html::tag('span', $site['name']) ?><!-- for seo -->
 			</h1>
 			<?= Menu::widget([
@@ -98,17 +98,10 @@ FrontendAsset::register($this);
 <div class="x-footer x-wave x-wave-top-convex">
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-3 logo">
-				<?= Html::a(Html::img($site['logo_sub']), \Yii::$app->homeUrl) ?>
+			<div class="col-xs-2 logo">
+				<?= Html::a(Html::img($module->imageRoute($site['logo_sub_id'])), \Yii::$app->homeUrl) ?>
 			</div>
-			<div class="col-xs-3 follow">
-				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Follow us')) ?>
-				<p>
-					<?= $site['qq'] ? Html::a(Html::tag('i', null, ['class' => 'fa fa-qq']), $site['qq'], ['target' => '_blank']) : null ?>
-					<?= $site['weibo'] ? Html::a(Html::tag('i', null, ['class' => 'fa fa-weibo']), $site['weibo'], ['target' => '_blank']) : null ?>
-				</p>
-			</div>
-			<div class="col-xs-6 contact">
+			<div class="col-xs-8 contact">
 				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Contact us')) ?>
 				<div class="row">
 					<div class="col-xs-6"><?= \Yii::t($module->messageCategory, '{action} {attribute}', [
@@ -130,6 +123,13 @@ FrontendAsset::register($this);
 						'attribute' => \Yii::t($module->messageCategory, 'Address'),
 					]) ?>：<?= $site['address'] ?></div>
 				</div>
+			</div>
+			<div class="col-xs-2 follow">
+				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Follow us')) ?>
+				<p>
+					<?= $site['qq'] ? Html::a(Html::tag('i', null, ['class' => 'fa fa-qq']), $site['qq'], ['target' => '_blank']) : null ?>
+					<?= $site['weibo'] ? Html::a(Html::tag('i', null, ['class' => 'fa fa-weibo']), $site['weibo'], ['target' => '_blank']) : null ?>
+				</p>
 			</div>
 		</div>
 		<?php if($site['type'] == 2 && $site['copyright']) { ?>

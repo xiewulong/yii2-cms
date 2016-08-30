@@ -35,8 +35,9 @@ class GlobalController extends Controller {
 		$item = Site::findOne($this->module->siteId);
 		$item->scenario = 'global';
 		if(\Yii::$app->request->isPost) {
-			$item->logo = null;
-			$item->logo_sub = null;
+			$item->logo_id = null;
+			$item->logo_sub_id = null;
+			$item->weixin_id = null;
 			if($item->load(\Yii::$app->request->post())) {
 				if($item->commonHandler()) {
 					\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));

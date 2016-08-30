@@ -7,6 +7,8 @@ use yii\behaviors\TimestampBehavior;
 use yii\components\ActiveRecord;
 use yii\helpers\Json;
 
+use yii\attachment\models\Attachment;
+
 /**
  * Site model
  *
@@ -16,12 +18,13 @@ use yii\helpers\Json;
  * @property {integer} $category_id
  * @property {string} $title
  * @property {string} $alias
- * @property {string} $thumbnail
+ * @property {string} $thumbnail_id
  * @property {string} $author
  * @property {string} $keywords
  * @property {string} $description
  * @property {string} $content
- * @property {string} $pictures
+ * @property {string} $picture_ids
+ * @property {string} $attachment_id
  * @property {integer} $status
  * @property {integer} $list_order
  * @property {integer} $pv
@@ -63,10 +66,20 @@ class SiteArticle extends ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['title', 'alias', 'thumbnail', 'author', 'keywords', 'description', 'content'], 'trim'],
+			[[
+				'title',
+				'alias',
+				'thumbnail_id',
+				'author',
+				'keywords',
+				'description',
+				'content',
+				'attachment_id',
+			], 'trim'],
+
 			[['id', 'site_id', 'category_id', 'title'], 'required'],
 
-			[['thumbnail', 'pictures'], 'required', 'when' => function($self) {
+			[['thumbnail_id', 'pictures'], 'required', 'when' => function($self) {
 				return $self->category->type == SiteCategory::TYPE_PICTURES;
 			}],
 
@@ -79,12 +92,16 @@ class SiteArticle extends ActiveRecord {
 					|| $self->category->type == SiteCategory::TYPE_PAGE;
 			}],
 
-			['pictures', 'filter', 'filter' => function($value) {
+			['picture_ids', 'filter', 'filter' => function($value) {
 				if(is_array($value)) {
 					$value = Json::encode($value);
 				}
 
 				return $value;
+			}],
+
+			['attachment_id', 'required', 'when' => function($self) {
+				return $self->category->type == SiteCategory::TYPE_DOWNLOAD;
 			}],
 
 			['list_order', 'default', 'value' => 0],
@@ -111,12 +128,13 @@ class SiteArticle extends ActiveRecord {
 			'category_id',
 			'title',
 			'alias',
-			'thumbnail',
+			'thumbnail_id',
 			'author',
 			'keywords',
 			'description',
 			'content',
-			'pictures',
+			'picture_ids',
+			'attachment_id',
 			'status',
 			'creator_id',
 		];
@@ -124,12 +142,13 @@ class SiteArticle extends ActiveRecord {
 		$scenarios['edit'] = [
 			'title',
 			'alias',
-			'thumbnail',
+			'thumbnail_id',
 			'author',
 			'keywords',
 			'description',
 			'content',
-			'pictures',
+			'picture_ids',
+			'attachment_id',
 			'status',
 			'operator_id',
 		];
@@ -151,12 +170,13 @@ class SiteArticle extends ActiveRecord {
 			'category_id' => \Yii::t($this->messageCategory, 'Category'),
 			'title' => \Yii::t($this->messageCategory, 'Title'),
 			'alias' => \Yii::t($this->messageCategory, 'Alias'),
-			'thumbnail' => \Yii::t($this->messageCategory, 'Thumbnail'),
+			'thumbnail_id' => \Yii::t($this->messageCategory, 'Thumbnail'),
 			'author' => \Yii::t($this->messageCategory, 'Author'),
 			'keywords' => \Yii::t($this->messageCategory, 'Keyword'),
 			'description' => \Yii::t($this->messageCategory, 'Description'),
 			'content' => \Yii::t($this->messageCategory, 'Content'),
-			'pictures' => \Yii::t($this->messageCategory, 'Picture'),
+			'picture_ids' => \Yii::t($this->messageCategory, 'Picture'),
+			'attachment_id' => \Yii::t($this->messageCategory, 'Attachment'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'pv' => \Yii::t($this->messageCategory, 'Page view'),
 			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
@@ -191,7 +211,7 @@ class SiteArticle extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
 			]),
-			'thumbnail' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+			'thumbnail_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Thumbnail'),
 			]),
@@ -211,9 +231,13 @@ class SiteArticle extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Content'),
 			]),
-			'pictures' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+			'picture_ids' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Picture'),
+			]),
+			'attachment_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'attribute' => \Yii::t($this->messageCategory, 'Attachment'),
 			]),
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
@@ -237,21 +261,29 @@ class SiteArticle extends ActiveRecord {
 			[],
 			[
 				SiteCategory::TYPE_NEWS => [
-					'pictures',
+					'picture_ids',
+					'attachment_id',
 				],
 				SiteCategory::TYPE_PICTURES => [
 					'content',
+					'attachment_id',
 				],
 				SiteCategory::TYPE_PAGE => [
 					'author',
 					'keywords',
-					'pictures',
+					'picture_ids',
+					'attachment_id',
 				],
 				SiteCategory::TYPE_NOTICE => [
 					'author',
 					'keywords',
 					'content',
-					'pictures',
+					'picture_ids',
+					'attachment_id',
+				],
+				SiteCategory::TYPE_DOWNLOAD => [
+					'content',
+					'picture_ids',
 				],
 			],
 		];
@@ -314,13 +346,23 @@ class SiteArticle extends ActiveRecord {
 	}
 
 	/**
+	 * Get attachment object
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getAttachment() {
+		return $this->hasOne(Attachment::classname(), ['client_id' => 'attachment_id']);
+	}
+
+	/**
 	 * Get picture list
 	 *
 	 * @since 0.0.1
 	 * @return {object}
 	 */
-	public function getPictureList() {
-		return $this->pictures ? Json::decode($this->pictures) : [];
+	public function getPictureIdList() {
+		return $this->picture_ids ? Json::decode($this->picture_ids) : [];
 	}
 
 }

@@ -21,7 +21,7 @@
 
 		h5 {
 			margin: 0;
-			font-size: 22px;
+			font-size: 20px;
 			font-weight: 700;
 		}
 
@@ -44,7 +44,7 @@
 			a {
 				color: #fff;
 				font-size: 14px;
-				padding-left: 20px;
+				padding-left: 15px;
 				display: block;
 				height: 34px;
 				line-height: 34px;
@@ -79,12 +79,9 @@
 			}
 
 			&.current {
-				list-style:circle inside;
-
 				a {
 					background-color: #fff;
 					color: $color-primary;
-					padding-left: 8px;
 
 					&:before,
 					&:after {

@@ -43,6 +43,7 @@ return [
 	'Thumbnail' => '缩略图',
 	'Content' => '内容',
 	'Picture' => '图片',
+	'Attachment' => '附件',
 
 	'Module' => '模块',
 	'Module id' => '模块ID',
@@ -50,6 +51,7 @@ return [
 
 	'Module item' => '模块项',
 	'Module item id' => '模块项ID',
+	'Target' => '目标',
 	'Target id' => '目标ID',
 	'Url' => '链接',
 	'Start time' => '开始时间',
@@ -73,7 +75,7 @@ return [
 	'Gallery' => '图库',
 	'Single page' => '单页',
 	'Notice' => '公告',
-	'Target' => '目标',
+	'Download' => '下载',
 
 	'Drafted' => '草稿',
 	'Released' => '发布',
@@ -127,6 +129,8 @@ return [
 	'list' => '列表',
 	'repeat' => '重复',
 	'upload' => '上传',
+	'Upload' => '上传',
+	'Reupload' => '重新上传',
 
 	'Go' => '前往',
 	'Home' => '首页',

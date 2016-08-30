@@ -58,10 +58,13 @@ body {
     float: left;
     height: 80px;
     line-height: 80px;
-    padding: 0 15px; }
+    padding: 0 10px;
+    position: relative; }
     .x-header ul li a {
       float: left;
       font-size: 16px; }
+    .x-header ul li a:hover, .x-header ul li.current a {
+      color: #fe7000; }
 
 /* x-footer */
 .x-footer {
@@ -185,7 +188,7 @@ body {
 
 /* x-crumbs */
 .x-crumbs {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   padding: 10px 0; }
   .x-crumbs ul {
@@ -207,24 +210,23 @@ body {
 
 /* x-home */
 .x-home {
-  padding: 20px 0; }
+  padding: 30px 0; }
   .x-home .heading {
     text-align: center;
-    position: relative;
-    padding-bottom: 13px; }
+    position: relative; }
     .x-home .heading h5,
     .x-home .heading small {
       display: inline-block;
       color: #02294a;
       font-weight: 700; }
     .x-home .heading h5 {
-      font-size: 24px;
+      font-size: 22px;
       margin: 0;
       padding: 0; }
     .x-home .heading small {
-      font-size: 20px;
+      font-size: 18px;
       padding-left: 10px;
-      margin-left: 5px;
+      margin-left: 10px;
       border-left: 4px solid #fe7000; }
     .x-home .heading span {
       position: absolute;
@@ -233,7 +235,8 @@ body {
       height: 3px;
       background-color: #02294a;
       width: 50px;
-      margin-left: -25px; }
+      margin-left: -25px;
+      display: none; }
   .x-home ul {
     margin: 0;
     padding: 0;
@@ -247,7 +250,7 @@ body {
       .x-home ul li a {
         display: block; }
         .x-home ul li a b {
-          display: inline-block; }
+          display: block; }
           .x-home ul li a b img {
             width: 100%;
             height: 100%; }
@@ -259,6 +262,7 @@ body {
         font-size: 14px;
         line-height: 1.8; }
         .x-home ul.projects li a b {
+          display: inline-block;
           color: #fff;
           width: 100px;
           height: 100px;
@@ -280,14 +284,17 @@ body {
     .x-home ul.about {
       padding: 30px 0 50px; }
       .x-home ul.about li {
-        float: none;
-        text-align: center; }
+        float: none; }
         .x-home ul.about li a b,
         .x-home ul.about li a .title,
         .x-home ul.about li a .alias {
           display: none; }
         .x-home ul.about li a .description {
-          font-size: 14px; }
+          font-size: 14px;
+          text-indent: 28px;
+          text-align: justify; }
+        .x-home ul.about li a:hover {
+          color: #fe7000; }
     .x-home ul.advantages {
       padding: 20px 150px; }
       .x-home ul.advantages li {
@@ -336,11 +343,10 @@ body {
     .x-home ul.links {
       padding: 50px 0; }
       .x-home ul.links li {
-        width: 12.5%;
+        width: 16.66666666666667%;
         padding: 0 15px 10px 0; }
         .x-home ul.links li a b {
-          width: 130px;
-          max-width: 100%;
+          height: 70px;
           border: 1px solid #d7d7d7; }
         .x-home ul.links li a .title,
         .x-home ul.links li a .alias,
@@ -377,7 +383,7 @@ body {
       color: #fff; }
     .x-sidebar .heading h5 {
       margin: 0;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700; }
     .x-sidebar .heading small {
       padding-top: 15px;
@@ -393,7 +399,7 @@ body {
       .x-sidebar ul li a {
         color: #fff;
         font-size: 14px;
-        padding-left: 20px;
+        padding-left: 15px;
         display: block;
         height: 34px;
         line-height: 34px;
@@ -417,14 +423,11 @@ body {
           font-size: 42px;
           width: 42px;
           height: 100%; }
-      .x-sidebar ul li.current {
-        list-style: circle inside; }
-        .x-sidebar ul li.current a {
-          background-color: #fff;
-          color: #02294a;
-          padding-left: 8px; }
-          .x-sidebar ul li.current a:before, .x-sidebar ul li.current a:after {
-            display: block; }
+      .x-sidebar ul li.current a {
+        background-color: #fff;
+        color: #02294a; }
+        .x-sidebar ul li.current a:before, .x-sidebar ul li.current a:after {
+          display: block; }
 
 /* x-list */
 .x-list {

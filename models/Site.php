@@ -14,8 +14,8 @@ use yii\components\ActiveRecord;
  * @property {integer} $type
  * @property {string} $name
  * @property {string} $alias
- * @property {string} $logo
- * @property {string} $logo_sub
+ * @property {string} $logo_id
+ * @property {string} $logo_sub_id
  * @property {string} $brief
  * @property {string} $author
  * @property {string} $keywords
@@ -25,7 +25,7 @@ use yii\components\ActiveRecord;
  * @property {string} $email
  * @property {string} $address
  * @property {string} $qq
- * @property {string} $weixin
+ * @property {string} $weixin_id
  * @property {string} $weibo
  * @property {string} $copyright
  * @property {string} $powered
@@ -76,8 +76,8 @@ class Site extends ActiveRecord {
 				'id',
 				'name',
 				'alias',
-				'logo',
-				'logo_sub',
+				'logo_id',
+				'logo_sub_id',
 				'author',
 				'keywords',
 				'description',
@@ -86,7 +86,7 @@ class Site extends ActiveRecord {
 				'email',
 				'address',
 				'qq',
-				'weixin',
+				'weixin_id',
 				'weibo',
 				'copyright',
 				'powered',
@@ -98,7 +98,7 @@ class Site extends ActiveRecord {
 			[[
 				'id',
 				'name',
-				'logo',
+				'logo_id',
 			], 'required'],
 
 			[[
@@ -141,8 +141,8 @@ class Site extends ActiveRecord {
 			'type',
 			'name',
 			'alias',
-			'logo',
-			'logo_sub',
+			'logo_id',
+			'logo_sub_id',
 			'brief',
 			'author',
 			'keywords',
@@ -152,7 +152,7 @@ class Site extends ActiveRecord {
 			'email',
 			'address',
 			'qq',
-			'weixin',
+			'weixin_id',
 			'weibo',
 			'copyright',
 			'powered',
@@ -175,8 +175,8 @@ class Site extends ActiveRecord {
 			'type' => \Yii::t($this->messageCategory, 'Type'),
 			'name' => \Yii::t($this->messageCategory, 'Name'),
 			'alias' => \Yii::t($this->messageCategory, 'Alias'),
-			'logo' => \Yii::t($this->messageCategory, 'Logo'),
-			'logo_sub' => \Yii::t($this->messageCategory, 'Sub logo'),
+			'logo_id' => \Yii::t($this->messageCategory, 'Logo'),
+			'logo_sub_id' => \Yii::t($this->messageCategory, 'Sub logo'),
 			'brief' => \Yii::t($this->messageCategory, 'Brief'),
 			'author' => \Yii::t($this->messageCategory, 'Author') . '(SEO)',
 			'keywords' => \Yii::t($this->messageCategory, 'Keyword') . '(SEO)',
@@ -186,7 +186,7 @@ class Site extends ActiveRecord {
 			'email' => \Yii::t($this->messageCategory, 'Email'),
 			'address' => \Yii::t($this->messageCategory, 'Address'),
 			'qq' => \Yii::t($this->messageCategory, 'QQ'),
-			'weixin' => \Yii::t($this->messageCategory, 'Weixin'),
+			'weixin_id' => \Yii::t($this->messageCategory, 'Weixin'),
 			'weibo' => \Yii::t($this->messageCategory, 'Weibo'),
 			'copyright' => \Yii::t($this->messageCategory, 'Copyright'),
 			'powered' => \Yii::t($this->messageCategory, 'Powered by'),
@@ -223,11 +223,11 @@ class Site extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
 			]),
-			'logo' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+			'logo_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Logo'),
 			]),
-			'logo_sub' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+			'logo_sub_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Sub logo'),
 			]),
@@ -267,7 +267,7 @@ class Site extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'QQ'),
 			]),
-			'weixin' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+			'weixin_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Weixin'),
 			]),

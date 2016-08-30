@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-use yii\fileupload\Fileupload;
+use yii\attachment\widgets\Attachment;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
@@ -56,25 +56,17 @@ $this->params['route'] = $module->url('banner/list');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group picture">
-			<?= Html::activeLabel($item, 'picture', ['class' => 'control-label col-sm-2']) ?>
+		<div class="form-group picture_id">
+			<?= Html::activeLabel($item, 'picture_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Fileupload::widget([
+				<?= Attachment::widget([
 					'model' => $item,
-					'attribute' => 'picture',
-					'action' => $module->url('dashboard/fileupload'),
-					'type' => 'image',
-					'max' => '2097152',
-					'sizes' => '80x80|150x150',
+					'attribute' => 'picture_id',
+					'uploadAction' => $module->url('attachment/upload'),
+					'loadAction' => $module->url('attachment'),
 					'options' => [
-						'class' => 'glyphicon glyphicon-picture admin-fileupload J-admin-fileupload',
+						'class' => 'glyphicon glyphicon-picture admin-attachment J-admin-attachment',
 						'style' => 'width:80px;height:80px;',
-					],
-					'fileOptions' => [
-						'data-show' => '80x80',
-					],
-					'hiddenOptions' => [
-						'data-thumb' => \Yii::$app->fileupload->addSuf($item['picture'], [80, 80]),
 					],
 				]) ?>
 			</div>

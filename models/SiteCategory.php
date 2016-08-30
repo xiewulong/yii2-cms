@@ -30,6 +30,7 @@ class SiteCategory extends ActiveRecord {
 	const TYPE_PICTURES = 2;
 	const TYPE_PAGE = 3;
 	const TYPE_NOTICE = 4;
+	const TYPE_DOWNLOAD = 5;
 
 	const STATUS_DELETED = 0;
 	const STATUS_ENABLED = 1;
@@ -70,6 +71,7 @@ class SiteCategory extends ActiveRecord {
 				// self::TYPE_PICTURES,
 				self::TYPE_PAGE,
 				self::TYPE_NOTICE,
+				self::TYPE_DOWNLOAD,
 			]],
 
 			['status', 'default', 'value' => self::STATUS_ENABLED],
@@ -186,6 +188,7 @@ class SiteCategory extends ActiveRecord {
 				self::TYPE_PICTURES => \Yii::t($this->messageCategory, 'Gallery'),
 				self::TYPE_PAGE => \Yii::t($this->messageCategory, 'Single page'),
 				self::TYPE_NOTICE => \Yii::t($this->messageCategory, 'Notice'),
+				self::TYPE_DOWNLOAD => \Yii::t($this->messageCategory, 'Download'),
 			],
 		];
 	}

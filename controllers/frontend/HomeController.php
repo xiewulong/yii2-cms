@@ -21,7 +21,7 @@ class HomeController extends Controller {
 	}
 
 	public function actionIndex() {
-		return $this->accessed()->render($this->action->id);
+		return $this->accessed($this->module->statisticsEnable)->render($this->action->id);
 	}
 
 }

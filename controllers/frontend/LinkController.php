@@ -38,7 +38,7 @@ class LinkController extends Controller {
 			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
 		}
 
-		return $this->redirect($item->accessed()->link);
+		return $this->redirect($item->accessed($this->module->statisticsEnable)->link);
 	}
 
 }

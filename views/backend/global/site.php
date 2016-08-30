@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-use yii\fileupload\Fileupload;
+use yii\attachment\widgets\Attachment;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, 'Global');
@@ -52,48 +52,32 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group logo">
-			<?= Html::activeLabel($item, 'logo', ['class' => 'control-label col-sm-2']) ?>
+		<div class="form-group logo_id">
+			<?= Html::activeLabel($item, 'logo_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Fileupload::widget([
+				<?= Attachment::widget([
 					'model' => $item,
-					'attribute' => 'logo',
-					'action' => $module->url('dashboard/fileupload'),
-					'type' => 'image',
-					'max' => '2097152',
-					'sizes' => '80x80',
+					'attribute' => 'logo_id',
+					'uploadAction' => $module->url('attachment/upload'),
+					'loadAction' => $module->url('attachment'),
 					'options' => [
-						'class' => 'glyphicon glyphicon-picture admin-fileupload J-admin-fileupload',
+						'class' => 'glyphicon glyphicon-picture admin-attachment J-admin-attachment',
 						'style' => 'width:80px;height:80px;',
-					],
-					'fileOptions' => [
-						'data-show' => '80x80',
-					],
-					'hiddenOptions' => [
-						'data-thumb' => \Yii::$app->fileupload->addSuf($item['logo'], [80, 80]),
 					],
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group logo_sub">
-			<?= Html::activeLabel($item, 'logo_sub', ['class' => 'control-label col-sm-2']) ?>
+		<div class="form-group logo_sub_id">
+			<?= Html::activeLabel($item, 'logo_sub_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Fileupload::widget([
+				<?= Attachment::widget([
 					'model' => $item,
-					'attribute' => 'logo_sub',
-					'action' => $module->url('dashboard/fileupload'),
-					'type' => 'image',
-					'max' => '2097152',
-					'sizes' => '80x80',
+					'attribute' => 'logo_sub_id',
+					'uploadAction' => $module->url('attachment/upload'),
+					'loadAction' => $module->url('attachment'),
 					'options' => [
-						'class' => 'glyphicon glyphicon-picture admin-fileupload J-admin-fileupload',
+						'class' => 'glyphicon glyphicon-picture admin-attachment J-admin-attachment',
 						'style' => 'width:80px;height:80px;',
-					],
-					'fileOptions' => [
-						'data-show' => '80x80',
-					],
-					'hiddenOptions' => [
-						'data-thumb' => \Yii::$app->fileupload->addSuf($item['logo_sub'], [80, 80]),
 					],
 				]) ?>
 			</div>
@@ -192,25 +176,17 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 				]) ?>
 			</div>
 		</div>
-		<!-- <div class="form-group weixin">
-			<?= Html::activeLabel($item, 'weixin', ['class' => 'control-label col-sm-2']) ?>
+		<!-- <div class="form-group weixin_id">
+			<?= Html::activeLabel($item, 'weixin_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
-				<?= Fileupload::widget([
+				<?= Attachment::widget([
 					'model' => $item,
-					'attribute' => 'weixin',
-					'action' => $module->url('dashboard/fileupload'),
-					'type' => 'image',
-					'max' => '2097152',
-					'sizes' => '80x80',
+					'attribute' => 'weixin_id',
+					'uploadAction' => $module->url('attachment/upload'),
+					'loadAction' => $module->url('attachment'),
 					'options' => [
-						'class' => 'glyphicon glyphicon-picture admin-fileupload J-admin-fileupload',
+						'class' => 'glyphicon glyphicon-picture admin-attachment J-admin-attachment',
 						'style' => 'width:80px;height:80px;',
-					],
-					'fileOptions' => [
-						'data-show' => '80x80',
-					],
-					'hiddenOptions' => [
-						'data-thumb' => \Yii::$app->fileupload->addSuf($item['weixin'], [80, 80]),
 					],
 				]) ?>
 			</div>

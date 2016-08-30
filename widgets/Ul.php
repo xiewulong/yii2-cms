@@ -3,6 +3,7 @@ namespace yii\cms\widgets;
 
 use Yii;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 use yii\cms\models\SiteArticle;
 use yii\cms\models\SiteCategory;
@@ -117,11 +118,11 @@ class Ul extends \yii\xui\Ul {
 			'item' => function($item) {
 				$_content = [];
 				$_options = [];
-				if(isset($item['picture']) && $item['picture']) {
+				if(isset($item['picture_id']) && $item['picture_id']) {
 					if($this->backgroundImage) {
-						$_options['style'] = 'background-image:url(' . $item['picture'] . ');';
+						$_options['style'] = 'background-image:url(' . Url::to($this->createAttachmentRoute($item['picture_id'])) . ');';
 					} else {
-						$_content[] = Html::tag('b', Html::img($item['picture']));
+						$_content[] = Html::tag('b', Html::img($this->createAttachmentRoute($item['picture_id'])));
 					}
 				}
 				if($this->timeEnabled && $item['created_at']) {
@@ -151,6 +152,10 @@ class Ul extends \yii\xui\Ul {
 				return Html::tag('li', $content, $itemOptions);
 			},
 		], $this->listOptions));
+	}
+
+	protected function createAttachmentRoute($id) {
+		return [$this->moduleRoute . 'image/', 'id' => $id];
 	}
 
 	protected function createLink($item) {

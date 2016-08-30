@@ -28,7 +28,7 @@ class ArticleController extends Controller {
 		}
 
 		return $this->accessed()->render($this->action->id, [
-			'item' => $item->accessed(),
+			'item' => $item->accessed($this->module->statisticsEnable),
 		]);
 	}
 

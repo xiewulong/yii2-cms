@@ -81,7 +81,7 @@ $sidebar = array_merge([
 ], $module->addSidebarItems);
 $params = [
 	'brand' => [
-		'logo' => $site['logo'],
+		'logo' => $module->attachmentRoute($site['logo_id']),
 		'text' => ($site['name'] ? : \Yii::$app->name) . \Yii::t($module->messageCategory, 'Management System'),
 		'url' => [$module->url('dashboard/index')],
 	],
