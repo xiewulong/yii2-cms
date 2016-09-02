@@ -95,7 +95,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<tfoot>
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></td> -->
-				<td colspan="8">
+				<td colspan="7">
 					<!-- <?= Html::button('Batch', ['class' => 'btn btn-default']) ?> -->
 					<div class="pull-right">
 						<?= LinkPager::widget([
@@ -113,7 +113,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<?php } else { ?>
 		<tfoot>
 			<tr>
-				<td colspan="8" class="text-center empty">
+				<td colspan="7" class="text-center empty">
 					<?= Html::tag('i', null, ['class' => 'glyphicon glyphicon-info-sign text-success']) ?>
 					<?= Html::tag('span', \Yii::t($module->messageCategory, 'No matched data')) ?>
 				</td>

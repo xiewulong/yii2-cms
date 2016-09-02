@@ -156,18 +156,17 @@ $this->params['route'] = $module->url('article/list');
 		</div>
 		<div class="form-group attachment_id">
 			<?= Html::activeLabel($item, 'attachment_id', ['class' => 'control-label col-sm-2']) ?>
-			<div class="col-sm-4">
+			<div class="col-sm-8">
 				<?= Attachment::widget([
 					'model' => $item,
 					'attribute' => 'attachment_id',
 					'uploadAction' => $module->url('attachment/upload'),
 					'loadAction' => $module->url('attachment'),
 					'options' => [
-						'class' => 'glyphicon glyphicon-picture admin-attachment J-admin-attachment',
+						'class' => 'admin-attachment admin-attachment-name J-admin-attachment',
 					],
 					'hiddenOptions' => [
 						'data-name' => $item['attachment']['fullName'],
-						'data-basename' => $item['attachment']['fullBasename'],
 					],
 				]) ?>
 			</div>

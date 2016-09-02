@@ -17,6 +17,13 @@ class HomeController extends Controller {
 			'error' => [
 				'class' => 'yii\web\ErrorAction',
 			],
+			'captcha' => [
+				'class' => 'yii\captcha\CaptchaAction',
+				'testLimit' => 1,
+				'minLength' => 4,
+				'maxLength' => 6,
+				'fixedVerifyCode' => YII_ENV_TEST ? 'test' : null,
+			],
 		];
 	}
 

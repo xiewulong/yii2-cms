@@ -23,7 +23,7 @@ class m160807_123425_cms_init extends Migration {
 			'name' => $this->string(68)->comment(\Yii::t($this->messageCategory, 'Name')),
 			'alias' => $this->string(68)->notNull()->comment(\Yii::t($this->messageCategory, 'Alias')),
 			'logo_id' => $this->string(68)->comment(\Yii::t($this->messageCategory, 'Logo')),
-			'logo_sub_id' => $this->string(68)->comment(\Yii::t($this->messageCategory, 'Sub logo')),
+			'sub_logo_id' => $this->string(68)->comment(\Yii::t($this->messageCategory, 'Sub logo')),
 			'brief' => $this->string(688)->comment(\Yii::t($this->messageCategory, 'Brief')),
 			'author' => $this->string(68)->comment(\Yii::t($this->messageCategory, 'Author')),
 			'keywords' => $this->string()->comment(\Yii::t($this->messageCategory, 'Keyword')),
@@ -55,22 +55,18 @@ class m160807_123425_cms_init extends Migration {
 		$this->createTable('{{%site_category}}', [
 			'id' => $this->primaryKey()->comment(\Yii::t($this->messageCategory, 'Id')),
 			'site_id' => $this->string(68)->notNull()->comment(\Yii::t($this->messageCategory, 'Site id')),
-			'parent_id' => $this->integer()->notNull()->defaultValue(0)->comment(\Yii::t($this->messageCategory, 'Parent id')),
 			'type' => $this->smallInteger()->notNull()->defaultValue(1)->comment(\Yii::t($this->messageCategory, 'Type')),
 			'name' => $this->string(68)->notNull()->comment(\Yii::t($this->messageCategory, 'Name')),
 			'alias' => $this->string(68)->notNull()->comment(\Yii::t($this->messageCategory, 'Alias')),
 			'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment(\Yii::t($this->messageCategory, 'Status')),
-			'list_order' => $this->integer()->notNull()->defaultValue(0)->comment(\Yii::t($this->messageCategory, 'List order')),
 			'operator_id' => $this->integer()->notNull()->defaultValue(0)->comment(\Yii::t($this->messageCategory, 'Operator id')),
 			'creator_id' => $this->integer()->notNull()->defaultValue(0)->comment(\Yii::t($this->messageCategory, 'Creator id')),
 			'created_at' => $this->integer()->notNull()->comment(\Yii::t($this->messageCategory, 'Created time')),
 			'updated_at' => $this->integer()->notNull()->comment(\Yii::t($this->messageCategory, 'Updated time')),
 		], $tableOptions);
 		$this->createIndex('site_id', '{{%site_category}}', 'site_id');
-		$this->createIndex('parent_id', '{{%site_category}}', 'parent_id');
 		$this->createIndex('type', '{{%site_category}}', 'type');
 		$this->createIndex('status', '{{%site_category}}', 'status');
-		$this->createIndex('list_order', '{{%site_category}}', 'list_order');
 		$this->addCommentOnTable('{{%site_category}}', \Yii::t($this->messageCategory, 'Category'));
 
 		$this->createTable('{{%site_article}}', [
@@ -87,7 +83,6 @@ class m160807_123425_cms_init extends Migration {
 			'picture_ids' => $this->text()->comment(\Yii::t($this->messageCategory, 'Picture')),
 			'attachment_id' => $this->string(68)->comment(\Yii::t($this->messageCategory, 'Attachment')),
 			'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment(\Yii::t($this->messageCategory, 'Status')),
-			'list_order' => $this->integer()->notNull()->defaultValue(0)->comment(\Yii::t($this->messageCategory, 'List order')),
 			'pv' => $this->integer()->notNull()->defaultValue(0)->comment(\Yii::t($this->messageCategory, 'Page view')),
 			'uv' => $this->integer()->notNull()->defaultValue(0)->comment(\Yii::t($this->messageCategory, 'Unique visitor')),
 			'operator_id' => $this->integer()->notNull()->defaultValue(0)->comment(\Yii::t($this->messageCategory, 'Operator id')),
@@ -98,7 +93,6 @@ class m160807_123425_cms_init extends Migration {
 		$this->createIndex('site_id', '{{%site_article}}', 'site_id');
 		$this->createIndex('category_id', '{{%site_article}}', 'category_id');
 		$this->createIndex('status', '{{%site_article}}', 'status');
-		$this->createIndex('list_order', '{{%site_article}}', 'list_order');
 		$this->addCommentOnTable('{{%site_article}}', \Yii::t($this->messageCategory, 'Article'));
 
 		$this->createTable('{{%site_module}}', [
@@ -115,6 +109,7 @@ class m160807_123425_cms_init extends Migration {
 			'updated_at' => $this->integer()->notNull()->comment(\Yii::t($this->messageCategory, 'Updated time')),
 		], $tableOptions);
 		$this->createIndex('site_id', '{{%site_module}}', 'site_id');
+		$this->createIndex('parent_id', '{{%site_module}}', 'parent_id');
 		$this->createIndex('type', '{{%site_module}}', 'type');
 		$this->createIndex('position', '{{%site_module}}', 'position');
 		$this->createIndex('status', '{{%site_module}}', 'status');
@@ -124,6 +119,7 @@ class m160807_123425_cms_init extends Migration {
 			'id' => $this->primaryKey()->comment(\Yii::t($this->messageCategory, 'Id')),
 			'site_id' => $this->string(68)->notNull()->comment(\Yii::t($this->messageCategory, 'Site id')),
 			'module_id' => $this->integer()->notNull()->comment(\Yii::t($this->messageCategory, 'Module id')),
+			'sub_module_id' => $this->integer()->comment(\Yii::t($this->messageCategory, 'Sub module id')),
 			'type' => $this->smallInteger()->notNull()->defaultValue(1)->comment(\Yii::t($this->messageCategory, 'Type')),
 			'target_id' => $this->integer()->comment(\Yii::t($this->messageCategory, 'Target id')),
 			'title' => $this->string(68)->comment(\Yii::t($this->messageCategory, 'Title')),
@@ -144,6 +140,7 @@ class m160807_123425_cms_init extends Migration {
 		], $tableOptions);
 		$this->createIndex('site_id', '{{%site_module_item}}', 'site_id');
 		$this->createIndex('module_id', '{{%site_module_item}}', 'module_id');
+		$this->createIndex('sub_module_id', '{{%site_module_item}}', 'sub_module_id');
 		$this->createIndex('type', '{{%site_module_item}}', 'type');
 		$this->createIndex('status', '{{%site_module_item}}', 'status');
 		$this->createIndex('start_at', '{{%site_module_item}}', 'start_at');

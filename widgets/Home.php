@@ -60,7 +60,7 @@ class Home extends Ul {
 				$_content = [];
 				$_options = [];
 				if(isset($item['picture_id']) && $item['picture_id']) {
-					$_content[] = Html::tag('b', Html::img($this->createAttachmentRoute($item['picture_id'])));
+					$_content[] = Html::tag('b', Html::img($this->createImageRoute($item['picture_id'])));
 				} else if($this->keywordsToIcon && isset($item['keywords']) && $item['keywords']) {
 					$_content[] = Html::tag('b', Html::tag('i', null, ['class' => 'fa fa-' . $item['keywords']]));
 				}

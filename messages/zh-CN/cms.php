@@ -33,8 +33,6 @@ return [
 
 	'Category' => '分类',
 	'Category id' => '分类ID',
-	'Parent id' => '父ID',
-	'List order' => '列表顺序',
 	'Creator id' => '创建者ID',
 
 	'Article' => '文章',
@@ -51,11 +49,14 @@ return [
 
 	'Module item' => '模块项',
 	'Module item id' => '模块项ID',
+	'Sub module' => '子模块',
+	'Sub module id' => '子模块ID',
 	'Target' => '目标',
 	'Target id' => '目标ID',
 	'Url' => '链接',
 	'Start time' => '开始时间',
 	'End time' => '结束时间',
+	'List order' => '列表顺序',
 
 	'Menu' => '菜单',
 	'Menu id' => '菜单ID',
@@ -63,6 +64,7 @@ return [
 	'Menu group id' => '菜单组ID',
 	'Menu item' => '菜单项',
 	'Menu item id' => '菜单项ID',
+	'Sub menu' => '子菜单',
 
 	'Banner' => '旗帜广告',
 	'Banner id' => '旗帜广告ID',
@@ -108,6 +110,9 @@ return [
 	'Add' => '添加',
 	'Edit' => '编辑',
 	'Delete' => '删除',
+	'Sub menu' => '子菜单',
+	'Sort' => '排序',
+	'Batch' => '批量',
 
 	'Required' => '必填',
 	'Reset password' => '修改密码',

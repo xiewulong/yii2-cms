@@ -15,7 +15,7 @@ use yii\components\ActiveRecord;
  * @property {string} $name
  * @property {string} $alias
  * @property {string} $logo_id
- * @property {string} $logo_sub_id
+ * @property {string} $sub_logo_id
  * @property {string} $brief
  * @property {string} $author
  * @property {string} $keywords
@@ -77,7 +77,7 @@ class Site extends ActiveRecord {
 				'name',
 				'alias',
 				'logo_id',
-				'logo_sub_id',
+				'sub_logo_id',
 				'author',
 				'keywords',
 				'description',
@@ -121,6 +121,10 @@ class Site extends ActiveRecord {
 				self::STATUS_DISABLED,
 			]],
 
+			[['operator_id'], 'filter', 'filter' => function($value) {
+				return \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+			}],
+
 			// Query data needed
 			[['id'], 'unique'],
 		];
@@ -142,7 +146,7 @@ class Site extends ActiveRecord {
 			'name',
 			'alias',
 			'logo_id',
-			'logo_sub_id',
+			'sub_logo_id',
 			'brief',
 			'author',
 			'keywords',
@@ -176,7 +180,7 @@ class Site extends ActiveRecord {
 			'name' => \Yii::t($this->messageCategory, 'Name'),
 			'alias' => \Yii::t($this->messageCategory, 'Alias'),
 			'logo_id' => \Yii::t($this->messageCategory, 'Logo'),
-			'logo_sub_id' => \Yii::t($this->messageCategory, 'Sub logo'),
+			'sub_logo_id' => \Yii::t($this->messageCategory, 'Sub logo'),
 			'brief' => \Yii::t($this->messageCategory, 'Brief'),
 			'author' => \Yii::t($this->messageCategory, 'Author') . '(SEO)',
 			'keywords' => \Yii::t($this->messageCategory, 'Keyword') . '(SEO)',
@@ -227,7 +231,7 @@ class Site extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Logo'),
 			]),
-			'logo_sub_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+			'sub_logo_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Sub logo'),
 			]),
@@ -349,13 +353,7 @@ class Site extends ActiveRecord {
 	 * @return {boolean}
 	 */
 	public function commonHandler() {
-		if(!$this->validate()) {
-			return false;
-		}
-
-		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
-
-		return $this->save(false);
+		return $this->save();
 	}
 
 }

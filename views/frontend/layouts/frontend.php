@@ -60,6 +60,7 @@ FrontendAsset::register($this);
 			<?= Menu::widget([
 				'siteId' => $module->siteId,
 				'position' => 'Menu_main',
+				'recursive' => true,
 				'route' => isset($this->params['route']) ? $this->params['route'] : null,
 				'options' => [
 					'class' => 'pull-right',
@@ -99,7 +100,7 @@ FrontendAsset::register($this);
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-2 logo">
-				<?= Html::a(Html::img($module->imageRoute($site['logo_sub_id'])), \Yii::$app->homeUrl) ?>
+				<?= Html::a(Html::img($module->imageRoute($site['sub_logo_id'])), \Yii::$app->homeUrl) ?>
 			</div>
 			<div class="col-xs-8 contact">
 				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Contact us')) ?>

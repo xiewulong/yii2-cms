@@ -2,9 +2,9 @@
 use yii\helpers\Html;
 
 $module = \Yii::$app->controller->module;
-$this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
+$this->title = \Yii::t($module->messageCategory, '{action} {attribute}', [
 	'attribute' => \Yii::t($module->messageCategory, 'Menu'),
-	'action' => \Yii::t($module->messageCategory, $item['id'] ? 'Edit' : 'Add'),
+	'action' => \Yii::t($module->messageCategory, $item['isNewRecord'] ? 'Add' : 'Edit'),
 ]);
 
 // set parent route

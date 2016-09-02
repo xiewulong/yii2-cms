@@ -10,7 +10,7 @@ use yii\helpers\Json;
 use yii\attachment\models\Attachment;
 
 /**
- * Site model
+ * Article model
  *
  * @since 0.0.1
  * @property {integer} $id
@@ -26,7 +26,6 @@ use yii\attachment\models\Attachment;
  * @property {string} $picture_ids
  * @property {string} $attachment_id
  * @property {integer} $status
- * @property {integer} $list_order
  * @property {integer} $pv
  * @property {integer} $uv
  * @property {integer} $operator_id
@@ -104,14 +103,16 @@ class SiteArticle extends ActiveRecord {
 				return $self->category->type == SiteCategory::TYPE_DOWNLOAD;
 			}],
 
-			['list_order', 'default', 'value' => 0],
-
 			['status', 'default', 'value' => self::STATUS_DRAFTED],
 			['status', 'in', 'range' => [
 				self::STATUS_RELEASED,
 				self::STATUS_FEATURED,
 				self::STATUS_DRAFTED,
 			]],
+
+			[['operator_id', 'creator_id'], 'filter', 'filter' => function($value) {
+				return \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+			}],
 
 			// Query data needed
 		];
@@ -136,6 +137,7 @@ class SiteArticle extends ActiveRecord {
 			'picture_ids',
 			'attachment_id',
 			'status',
+			'operator_id',
 			'creator_id',
 		];
 
@@ -151,10 +153,6 @@ class SiteArticle extends ActiveRecord {
 			'attachment_id',
 			'status',
 			'operator_id',
-		];
-
-		$scenarios['sort'] = [
-			'list_order',
 		];
 
 		return $scenarios;
@@ -180,7 +178,6 @@ class SiteArticle extends ActiveRecord {
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'pv' => \Yii::t($this->messageCategory, 'Page view'),
 			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
-			'list_order' => \Yii::t($this->messageCategory, 'List order'),
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
 			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
 		];
@@ -242,10 +239,6 @@ class SiteArticle extends ActiveRecord {
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Status'),
-			]),
-			'list_order' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'List order'),
 			]),
 		];
 	}
@@ -313,16 +306,7 @@ class SiteArticle extends ActiveRecord {
 	 * @return {boolean}
 	 */
 	public function commonHandler() {
-		if(!$this->validate()) {
-			return false;
-		}
-
-		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
-		if($this->scenario == 'add') {
-			$this->creator_id = $this->operator_id;
-		}
-
-		return $this->save(false);
+		return $this->save();
 	}
 
 	/**

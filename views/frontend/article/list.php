@@ -10,7 +10,7 @@ $module = \Yii::$app->controller->module;
 $this->title = $superior['name'];
 
 // set parent route
-// $this->params['route'] = '';
+// $this->params['route'] = [];
 
 // set crumbs
 $this->params['crumbs'] = [['title' => $this->title]];
@@ -43,19 +43,22 @@ $this->params['crumbs'] = [['title' => $this->title]];
 		<div class="col-xs-9">
 			<?= Ul::widget([
 				'items' => $items,
-				'timeEnabled' => true,
+				'timeEnabled' => $superior['type'] != 5,
+				'download' => $superior['type'] == 5 ? 'attachment_id' : false,
+				'downloadText' => \Yii::t($module->messageCategory, 'Download'),
 				'options' => [
 					'class' => 'x-list x-list-' . $superior['type'],
 				],
 			]) ?>
+			<div class="x-pagination">
+				<?= LinkPager::widget([
+					'pagination' => $pagination,
+					'prevPageLabel' => '&lt;',
+					'nextPageLabel' => '&gt;',
+					'firstPageLabel' => '&laquo;',
+					'lastPageLabel' => '&raquo;',
+				]) ?>
+			</div>
 		</div>
 	</div>
 </div>
-
-<?= LinkPager::widget([
-	'pagination' => $pagination,
-	'prevPageLabel' => '&lt;',
-	'nextPageLabel' => '&gt;',
-	'firstPageLabel' => '&laquo;',
-	'lastPageLabel' => '&raquo;',
-]) ?>

@@ -23,7 +23,7 @@ class ArticleController extends Controller {
 			'site_id' => $this->module->siteId,
 			'status' => [SiteArticle::STATUS_RELEASED, SiteArticle::STATUS_FEATURED],
 		]);
-		if(!$item || $item->superior->status != SiteCategory::STATUS_ENABLED) {
+		if(!$item || $item->superior->status != SiteCategory::STATUS_ENABLED || $item->superior->type == SiteCategory::TYPE_DOWNLOAD) {
 			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
 		}
 
@@ -47,7 +47,7 @@ class ArticleController extends Controller {
 				'site_id' => $this->module->siteId,
 				'status' => [SiteArticle::STATUS_RELEASED, SiteArticle::STATUS_FEATURED],
 			])
-			->orderby('status desc, list_order desc, created_at desc');
+			->orderby('status desc, created_at desc');
 
 		$pagination = new Pagination([
 			'totalCount' => $query->count(),

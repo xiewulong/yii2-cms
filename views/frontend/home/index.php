@@ -9,7 +9,7 @@ $site = $module->site;
 $this->title = \Yii::t($module->messageCategory, 'Home');
 
 // set parent route
-// $this->params['route'] = '';
+// $this->params['route'] = [];
 ?>
 
 <?= Home::widget([

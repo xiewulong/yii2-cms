@@ -5,7 +5,7 @@
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
- * update: 2016/8/30
+ * update: 2016/9/2
  * since: 0.0.1
  */
 
@@ -17,8 +17,6 @@ use yii\components\Module;
 use yii\cms\models\Site;
 
 class BackendModule extends Module {
-
-	public $site;
 
 	public $siteId;
 
@@ -36,15 +34,17 @@ class BackendModule extends Module {
 
 	public $layout = 'backend';
 
-	public $viewsPath = '@vendor/xiewulong/yii2-cms/views/backend';
+	public $customViewsPath = '@vendor/xiewulong/yii2-cms/views/backend';
 
 	public $permissions = ['@'];
 
-	public $addSidebarItems = [];
-
 	public $addMenuItems = [];
 
+	public $addSidebarItems = [];
+
 	public $messageCategory = 'cms';
+
+	private $_site;
 
 	public function init() {
 		parent::init();
@@ -77,19 +77,23 @@ class BackendModule extends Module {
 		$this->modules = $modules;
 	}
 
+	public function getSite() {
+		return $this->_site;
+	}
+
 	private function setSite() {
 		if(!$this->siteId) {
 			$this->siteId = $this->id;
 		}
 
-		$this->site = Site::findOne($this->siteId);
-		if(!$this->site) {
-			$this->site = new Site;
-			$this->site->scenario = 'add';
-			$this->site->id = $this->siteId;
-			$this->site->powered = 'Nanning Automan Technology Co., Ltd.';
-			if(!$this->site->commonHandler()) {
-				\Yii::$app->end($this->site->getFirstError('id'));
+		$this->_site = Site::findOne($this->siteId);
+		if(!$this->_site) {
+			$this->_site = new Site;
+			$this->_site->scenario = 'add';
+			$this->_site->id = $this->siteId;
+			$this->_site->powered = 'Nanning Automan Technology Co., Ltd.';
+			if(!$this->_site->commonHandler()) {
+				\Yii::$app->end($this->_site->getFirstError('id'));
 			}
 		}
 	}

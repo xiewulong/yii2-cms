@@ -7,7 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\components\ActiveRecord;
 
 /**
- * Site model
+ * Module model
  *
  * @since 0.0.1
  * @property {integer} $id
@@ -73,6 +73,10 @@ class SiteModule extends ActiveRecord {
 				self::STATUS_DISABLED,
 			]],
 
+			[['operator_id', 'creator_id'], 'filter', 'filter' => function($value) {
+				return \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+			}],
+
 			// Query data needed
 			[['position'], 'unique', 'targetAttribute' => ['site_id', 'type', 'position']],
 		];
@@ -91,6 +95,7 @@ class SiteModule extends ActiveRecord {
 			'name',
 			'alias',
 			'status',
+			'operator_id',
 			'creator_id',
 		];
 
@@ -194,16 +199,7 @@ class SiteModule extends ActiveRecord {
 	 * @return {boolean}
 	 */
 	public function commonHandler() {
-		if(!$this->validate()) {
-			return false;
-		}
-
-		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
-		if($this->scenario == 'add') {
-			$this->creator_id = $this->operator_id;
-		}
-
-		return $this->save(false);
+		return $this->save();
 	}
 
 	/**
@@ -226,7 +222,7 @@ class SiteModule extends ActiveRecord {
 	}
 
 	/**
-	 * Get it's articles quantity
+	 * Get it's items quantity
 	 *
 	 * @since 0.0.1
 	 * @return {integer}
@@ -236,7 +232,7 @@ class SiteModule extends ActiveRecord {
 	}
 
 	/**
-	 * Get it's articles total page view
+	 * Get it's items total page view
 	 *
 	 * @since 0.0.1
 	 * @return {integer}
@@ -246,7 +242,7 @@ class SiteModule extends ActiveRecord {
 	}
 
 	/**
-	 * Get it's articles total unique visitor
+	 * Get it's items total unique visitor
 	 *
 	 * @since 0.0.1
 	 * @return {integer}

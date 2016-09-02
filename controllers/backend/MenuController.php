@@ -23,13 +23,43 @@ class MenuController extends Controller {
 				'class' => AccessControl::className(),
 				'rules' => [
 					[
-						'actions' => ['list', 'edit', 'items', 'item-edit'],
+						'actions' => ['list', 'edit', 'items', 'item-edit', 'get'],
 						'allow' => true,
 						'roles' => $this->module->permissions,
 					],
 				],
 			],
+			'verbs' => [
+				'class' => VerbFilter::className(),
+				'actions' => [
+					'get' => ['get'],
+				],
+			],
 		];
+	}
+
+	public function actionGet($id = 0) {
+		$items = SiteModule::find()
+			->select(['id', 'name'])
+			->where([
+				'site_id' => $this->module->siteId,
+				'type' => SiteModule::TYPE_MENU,
+				'status' => SiteModule::STATUS_ENABLED,
+			])
+			->andWhere('id != :id', [':id' => $id])
+			->orderby('created_at desc')
+			->asArray()
+			->all();
+		$done = !empty($items);
+
+		return $this->respond([
+			'error' => !$done,
+			'message' => $done ? null : \Yii::t($this->module->messageCategory, 'No matched data') . ', ' . \Yii::t($this->module->messageCategory, 'Please {action} {attribute} first', [
+				'action' => \Yii::t($this->module->messageCategory, 'Add'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'Menu Group'),
+			]),
+			'data' => $items,
+		]);
 	}
 
 	public function actionItemEdit($mid, $id = 0) {
@@ -66,6 +96,7 @@ class MenuController extends Controller {
 		}
 
 		if(\Yii::$app->request->isPost) {
+			$item->sub_module_id = null;
 			$item->picture_id = null;
 			if($item->load(\Yii::$app->request->post())) {
 				if($item->commonHandler()) {
@@ -84,6 +115,24 @@ class MenuController extends Controller {
 	}
 
 	public function actionItems($mid, $type = 'all', $stype = null, $sword = null) {
+		if(\Yii::$app->request->isPost) {
+			$scenario = \Yii::$app->request->post('scenario');
+			$items = \Yii::$app->request->post('items');
+			if($scenario && $items) {
+				foreach($items as $id => $attributes) {
+					if(($item = SiteModuleItem::findOne($id)) && $attributes) {
+						$item->scenario = $scenario;
+						foreach($attributes as $attribute => $value) {
+							$item->$attribute = $value;
+						}
+						$item->commonHandler();
+					}
+				}
+			}
+
+			return $this->refresh();
+		}
+
 		$superior = SiteModule::findOne([
 			'id' => $mid,
 			'site_id' => $this->module->siteId,
@@ -101,7 +150,7 @@ class MenuController extends Controller {
 			->orderby('list_order desc, created_at desc');
 
 		if($sword !== null) {
-			$query->andWhere(['like', "a.$stype", $sword]);
+			$query->andWhere(['like', "$stype", $sword]);
 		}
 
 		$pagination = new Pagination([
@@ -171,7 +220,7 @@ class MenuController extends Controller {
 			->orderby('created_at desc');
 
 		if($sword !== null) {
-			$query->andWhere(['like', "a.$stype", $sword]);
+			$query->andWhere(['like', "$stype", $sword]);
 		}
 
 		$pagination = new Pagination([

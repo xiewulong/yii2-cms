@@ -49,7 +49,7 @@ class ArticleController extends Controller {
 						'b.id',
 						'b.category_id',
 						'b.title name',
-					]);
+					])->orderby('b.status desc, b.created_at desc');
 				}
 			])
 			->where([
@@ -62,7 +62,7 @@ class ArticleController extends Controller {
 				'a.status' => SiteCategory::STATUS_ENABLED,
 				'b.status' => [SiteArticle::STATUS_RELEASED, SiteArticle::STATUS_FEATURED],
 			])
-			->orderby('a.list_order desc, a.created_at desc')
+			->orderby('a.created_at desc')
 			->asArray()
 			->all();
 		$done = !empty($items);
@@ -97,7 +97,7 @@ class ArticleController extends Controller {
 				'site_id' => $this->module->siteId,
 				'status' => SiteCategory::STATUS_ENABLED,
 			])
-			->orderby('list_order desc, created_at desc')
+			->orderby('created_at desc')
 			->all();
 		if(!$categorys) {
 			\Yii::$app->session->setFlash('error', '1|' . \Yii::t($this->module->messageCategory, 'Please {action} {attribute} first', [
@@ -153,7 +153,7 @@ class ArticleController extends Controller {
 		$query = SiteArticle::find()
 			->alias('a')
 			->where(['a.site_id' => $this->module->siteId])
-			->orderby('a.list_order desc, a.created_at desc');
+			->orderby('a.status desc, a.created_at desc');
 
 		if($cid) {
 			$query->andWhere(['a.category_id' => $cid]);
@@ -184,7 +184,7 @@ class ArticleController extends Controller {
 		], ArrayHelper::map(SiteCategory::find()
 			->select(['id', 'name'])
 			->where(['site_id' => $this->module->siteId])
-			->orderby('list_order desc, created_at desc')
+			->orderby('created_at desc')
 			->all(), 'id', 'name'));
 		$categoryTypeItems = ArrayHelper::merge([
 			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [

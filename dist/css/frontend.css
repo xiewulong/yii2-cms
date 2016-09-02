@@ -27,6 +27,21 @@ a {
     padding-left: 45px;
     padding-right: 45px; }
 
+.pagination {
+  margin: 0; }
+  .pagination > li > a, .pagination > li > a:hover, .pagination > li > a:focus,
+  .pagination > li > span,
+  .pagination > li > span:hover,
+  .pagination > li > span:focus {
+    color: #02294a; }
+  .pagination > li.active > a, .pagination > li.active > a:hover, .pagination > li.active > a:focus,
+  .pagination > li.active > span,
+  .pagination > li.active > span:hover,
+  .pagination > li.active > span:focus {
+    color: #fff;
+    background-color: #02294a;
+    border-color: #02294a; }
+
 .non-responsive {
   min-width: 970px; }
   .non-responsive .container {
@@ -54,17 +69,19 @@ body {
   margin: 0;
   padding: 0 60px;
   list-style: none; }
-  .x-header ul li {
+  .x-header ul > li {
     float: left;
     height: 80px;
     line-height: 80px;
     padding: 0 10px;
     position: relative; }
-    .x-header ul li a {
+    .x-header ul > li a {
       float: left;
       font-size: 16px; }
-    .x-header ul li a:hover, .x-header ul li.current a {
+    .x-header ul > li a:hover, .x-header ul > li.current > a {
       color: #fe7000; }
+    .x-header ul > li > .dropdown {
+      display: none; }
 
 /* x-footer */
 .x-footer {
@@ -436,27 +453,36 @@ body {
     padding: 0;
     margin: 0;
     list-style: none; }
-  .x-list-1 ul li, .x-list-3 ul li, .x-list-4 ul li {
+  .x-list-1 ul li, .x-list-3 ul li, .x-list-4 ul li, .x-list-5 ul li {
     font-size: 16px;
     border-bottom: 1px dotted #ccc;
     height: 50px;
     overflow: hidden;
     line-height: 50px; }
-    .x-list-1 ul li a, .x-list-3 ul li a, .x-list-4 ul li a {
+    .x-list-1 ul li a, .x-list-3 ul li a, .x-list-4 ul li a, .x-list-5 ul li a {
       display: block; }
-      .x-list-1 ul li a .title, .x-list-3 ul li a .title, .x-list-4 ul li a .title {
+      .x-list-1 ul li a .title, .x-list-3 ul li a .title, .x-list-4 ul li a .title, .x-list-5 ul li a .title {
         overflow: hidden; }
-      .x-list-1 ul li a .time, .x-list-3 ul li a .time, .x-list-4 ul li a .time {
+      .x-list-1 ul li a .time,
+      .x-list-1 ul li a .download, .x-list-3 ul li a .time,
+      .x-list-3 ul li a .download, .x-list-4 ul li a .time,
+      .x-list-4 ul li a .download, .x-list-5 ul li a .time,
+      .x-list-5 ul li a .download {
         float: right;
         color: #666; }
-      .x-list-1 ul li a:before, .x-list-3 ul li a:before, .x-list-4 ul li a:before {
+      .x-list-1 ul li a:before, .x-list-3 ul li a:before, .x-list-4 ul li a:before, .x-list-5 ul li a:before {
         content: '\e250';
         font-family: 'Glyphicons Halflings';
         float: left;
         font-size: 10px;
         margin: 0 10px; }
-      .x-list-1 ul li a:hover:before, .x-list-3 ul li a:hover:before, .x-list-4 ul li a:hover:before {
+      .x-list-1 ul li a:hover .download, .x-list-1 ul li a:hover:before, .x-list-3 ul li a:hover .download, .x-list-3 ul li a:hover:before, .x-list-4 ul li a:hover .download, .x-list-4 ul li a:hover:before, .x-list-5 ul li a:hover .download, .x-list-5 ul li a:hover:before {
         color: #fe7000; }
+
+/* x-pagination */
+.x-pagination {
+  text-align: right;
+  padding-right: 30px; }
 
 /* x-details */
 .x-details {

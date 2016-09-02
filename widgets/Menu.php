@@ -51,9 +51,27 @@ class Menu extends Ul {
 				}
 				$content = Html::a($item['title'], [$this->moduleRoute . 'link/jump', 'id' => $item['id']], $_options);
 
+				if($this->recursive) {
+					$content .= $this->children($item);
+				}
+
 				return Html::tag('li', $content, $itemOptions);
 			},
 		], $this->listOptions));
+	}
+
+	protected function children($item) {
+		if(!$item->subModule) return null;
+
+		return static::widget([
+			'siteId' => $this->siteId,
+			'position' => $item->subModule->position,
+			'route' => $this->route,
+			'options' => ['class' => 'dropdown'],
+			'listOptions' => [
+				'class' => 'clearfix',
+			],
+		]);
 	}
 
 	private function isCurrent($item) {
@@ -63,7 +81,7 @@ class Menu extends Ul {
 
 		$url = $item->link;
 		if(!is_array($url) || !isset($url[0])) {
-			return false;
+			return \Yii::$app->request->absoluteUrl == ltrim(\Yii::$app->urlManager->createAbsoluteUrl($url), '/');
 		}
 
 		$id = isset($url[$this->paramKey]) ? $url[$this->paramKey] : null;

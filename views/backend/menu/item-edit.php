@@ -4,7 +4,7 @@ use yii\helpers\Html;
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 	'attribute' => $superior['name'] . \Yii::t($module->messageCategory, 'Menu item'),
-	'action' => \Yii::t($module->messageCategory, $item['id'] ? 'Edit' : 'Add'),
+	'action' => \Yii::t($module->messageCategory, $item['isNewRecord'] ? 'Add' : 'Edit'),
 ]);
 
 // set parent route
@@ -99,6 +99,18 @@ $this->params['route'] = $module->url('menu/list');
 					'data-form-selection' => $module->url('article/get'),
 				]) ?>
 				<?= Html::tag('span', $item['article'] ? $item['article']['title'] : null) ?>
+			</div>
+		</div>
+		<div class="form-group sub_module_id">
+			<?= Html::activeLabel($item, 'sub_module_id', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-8">
+				<?= Html::activeHiddenInput($item, 'sub_module_id') ?>
+				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
+					'class' => 'btn btn-default',
+					'data-form-selection' => $module->url('menu/get?id=' . $superior['id']),
+					'data-form-selected-clear' => 'enabled',
+				]) ?>
+				<?= Html::tag('span', $item['subModule'] ? Html::tag('i', null, ['class' => 'glyphicon glyphicon-remove', 'data-form-selected' => 'clear']) . $item['subModule']['name'] : null, ['class' => 'selection-name']) ?>
 			</div>
 		</div>
 		<div class="form-group status">

@@ -120,3 +120,39 @@
 		});
 	};
 })(jQuery);
+
+// captcha
+(function() {
+	var Captcha	= function(button) {
+		this.button = button;
+		this.$button = $(this.button);
+		this.$img = this.$button.attr('data-captcha-img') ? $(this.$button.attr('data-captcha-img')) : this.$button;
+		this.url = this.$button.attr('data-captcha');
+
+		return this.init();
+	};
+	Captcha.prototype = {
+		init: function() {
+			this.refresh();
+			return false;
+		},
+		refresh: function() {
+			var _this = this;
+			$.ajax({
+				url: this.url,
+				data: {refresh: 1},
+				method: 'get',
+				dataType: 'json',
+				success: function(d) {
+					d.url && _this.src(d.url);
+				}
+			});
+		},
+		src: function(src) {
+			this.$img.attr('src', src);
+		}
+	};
+	$(document).on('click', '[data-captcha]', function() {
+		return new Captcha(this);
+	});
+})(jQuery, document);

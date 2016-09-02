@@ -84,6 +84,24 @@ class BannerController extends Controller {
 	}
 
 	public function actionItems($mid, $type = 'all', $stype = null, $sword = null) {
+		if(\Yii::$app->request->isPost) {
+			$scenario = \Yii::$app->request->post('scenario');
+			$items = \Yii::$app->request->post('items');
+			if($scenario && $items) {
+				foreach($items as $id => $attributes) {
+					if(($item = SiteModuleItem::findOne($id)) && $attributes) {
+						$item->scenario = $scenario;
+						foreach($attributes as $attribute => $value) {
+							$item->$attribute = $value;
+						}
+						$item->commonHandler();
+					}
+				}
+			}
+
+			return $this->refresh();
+		}
+
 		$superior = SiteModule::findOne([
 			'id' => $mid,
 			'site_id' => $this->module->siteId,
@@ -101,7 +119,7 @@ class BannerController extends Controller {
 			->orderby('list_order desc, created_at desc');
 
 		if($sword !== null) {
-			$query->andWhere(['like', "a.$stype", $sword]);
+			$query->andWhere(['like', "$stype", $sword]);
 		}
 
 		$pagination = new Pagination([
@@ -171,7 +189,7 @@ class BannerController extends Controller {
 			->orderby('created_at desc');
 
 		if($sword !== null) {
-			$query->andWhere(['like', "a.$stype", $sword]);
+			$query->andWhere(['like', "$stype", $sword]);
 		}
 
 		$pagination = new Pagination([

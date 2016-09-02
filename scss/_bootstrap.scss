@@ -40,6 +40,34 @@ a {
 	}
 }
 
+.pagination {
+	margin: 0;
+
+	> li {
+		> a,
+		> span {
+			&,
+			&:hover,
+			&:focus {
+				color: $color-primary;
+			}
+		}
+
+		&.active {
+			> a,
+			> span {
+				&,
+				&:hover,
+				&:focus {
+					color: #fff;
+					background-color: $color-primary;
+					border-color: $color-primary;
+				}
+			}
+		}
+	}
+}
+
 .non-responsive {
 	min-width: $grid-width;
 

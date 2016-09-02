@@ -23,7 +23,7 @@
 		padding: 0 60px;
 		list-style: none;
 
-		li {
+		> li {
 			float: left;
 			height: 80px;
 			line-height: 80px;
@@ -36,7 +36,7 @@
 			}
 
 			a:hover,
-			&.current a {
+			&.current > a {
 				color: $color-secondary;
 			}
 
@@ -54,6 +54,10 @@
 			// 		content: '';
 			// 	}
 			// }
+
+			> .dropdown {
+				display: none;
+			}
 		}
 	}
 }

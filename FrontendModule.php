@@ -5,7 +5,7 @@
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
- * update: 2016/8/30
+ * update: 2016/9/2
  * since: 0.0.1
  */
 
@@ -17,8 +17,6 @@ use yii\components\Module;
 use yii\cms\models\Site;
 
 class FrontendModule extends Module {
-
-	public $site;
 
 	public $siteId;
 
@@ -32,13 +30,15 @@ class FrontendModule extends Module {
 
 	public $layout = 'frontend';
 
-	public $viewsPath = '@vendor/xiewulong/yii2-cms/views/frontend';
+	public $customViewsPath = '@vendor/xiewulong/yii2-cms/views/frontend';
 
 	public $backendEntrance = false;
 
 	public $statisticsEnable = false;
 
 	public $messageCategory = 'cms';
+
+	private $_site;
 
 	public function init() {
 		parent::init();
@@ -80,16 +80,20 @@ class FrontendModule extends Module {
 		$this->modules = $modules;
 	}
 
+	public function getSite() {
+		return $this->_site;
+	}
+
 	private function setSite() {
 		if(!$this->siteId) {
 			$this->siteId = $this->id;
 		}
 
-		$this->site = Site::findOne([
+		$this->_site = Site::findOne([
 			'id' => $this->siteId,
 			'status' => Site::STATUS_ENABLED,
 		]);
-		if(!$this->site || !$this->site->name || !$this->site->logo_id) {
+		if(!$this->_site || !$this->_site->name || !$this->_site->logo_id) {
 			\Yii::$app->end(\Yii::t('yii', 'Page not found.'));
 		}
 	}

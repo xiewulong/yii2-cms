@@ -37,6 +37,12 @@ class Ul extends \yii\xui\Ul {
 
 	public $timeFormat = 'Y-m-d';
 
+	public $download = false;
+
+	public $downloadText = 'Download';
+
+	public $recursive = false;
+
 	protected $_superior;
 
 	public function run() {
@@ -120,13 +126,20 @@ class Ul extends \yii\xui\Ul {
 				$_options = [];
 				if(isset($item['picture_id']) && $item['picture_id']) {
 					if($this->backgroundImage) {
-						$_options['style'] = 'background-image:url(' . Url::to($this->createAttachmentRoute($item['picture_id'])) . ');';
+						$_options['style'] = 'background-image:url(' . Url::to($this->createImageRoute($item['picture_id'])) . ');';
 					} else {
-						$_content[] = Html::tag('b', Html::img($this->createAttachmentRoute($item['picture_id'])));
+						$_content[] = Html::tag('b', Html::img($this->createImageRoute($item['picture_id'])));
 					}
 				}
 				if($this->timeEnabled && $item['created_at']) {
 					$_content[] = Html::tag('div', date($this->timeFormat, $item['created_at']), ['class' => 'time']);
+				}
+				if($this->download && $item[$this->download]) {
+					$_content[] = Html::tag('div', $this->downloadText, ['class' => 'download']);
+					$_options['target'] = '_blank';
+					$link = $this->createAttachmentRoute($item[$this->download]);
+				} else {
+					$link = $this->createLink($item);
 				}
 				if(isset($item['name']) && $item['name']) {
 					$_content[] = Html::tag('div', $item['name'], ['class' => 'name']);
@@ -142,7 +155,11 @@ class Ul extends \yii\xui\Ul {
 				if($this->targetBlank) {
 					$_options['target'] = '_blank';
 				}
-				$content = Html::a(implode('', $_content), $this->createLink($item), $_options);
+				$content = Html::a(implode('', $_content), $link, $_options);
+
+				if($this->recursive) {
+					$content .= $this->children($item);
+				}
 
 				$itemOptions = $this->itemOptions;
 				if(isset($item['options'])) {
@@ -154,7 +171,15 @@ class Ul extends \yii\xui\Ul {
 		], $this->listOptions));
 	}
 
+	protected function children($item) {
+		return null;
+	}
+
 	protected function createAttachmentRoute($id) {
+		return [$this->moduleRoute . 'attachment/', 'id' => $id];
+	}
+
+	protected function createImageRoute($id) {
 		return [$this->moduleRoute . 'image/', 'id' => $id];
 	}
 

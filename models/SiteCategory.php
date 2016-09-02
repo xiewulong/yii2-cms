@@ -7,17 +7,15 @@ use yii\behaviors\TimestampBehavior;
 use yii\components\ActiveRecord;
 
 /**
- * Site model
+ * Category model
  *
  * @since 0.0.1
  * @property {integer} $id
  * @property {string} $site_id
- * @property {integer} $parent_id
  * @property {integer} $type
  * @property {string} $name
  * @property {string} $alias
  * @property {integer} $status
- * @property {integer} $list_order
  * @property {integer} $operator_id
  * @property {integer} $creator_id
  * @property {integer} $created_at
@@ -61,7 +59,6 @@ class SiteCategory extends ActiveRecord {
 		return [
 			[['name', 'alias'], 'trim'],
 			[['site_id', 'name'], 'required'],
-			[['parent_id', 'list_order'], 'default', 'value' => 0],
 
 			['name', 'string', 'max' => 16],
 
@@ -80,6 +77,10 @@ class SiteCategory extends ActiveRecord {
 				self::STATUS_DISABLED,
 			]],
 
+			[['operator_id', 'creator_id'], 'filter', 'filter' => function($value) {
+				return \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+			}],
+
 			// Query data needed
 		];
 	}
@@ -92,11 +93,11 @@ class SiteCategory extends ActiveRecord {
 
 		$scenarios['add'] = [
 			'site_id',
-			'parent_id',
 			'type',
 			'name',
 			'alias',
 			'status',
+			'operator_id',
 			'creator_id',
 		];
 
@@ -106,10 +107,6 @@ class SiteCategory extends ActiveRecord {
 			'alias',
 			'status',
 			'operator_id',
-		];
-
-		$scenarios['sort'] = [
-			'list_order',
 		];
 
 		return $scenarios;
@@ -122,12 +119,10 @@ class SiteCategory extends ActiveRecord {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Category id'),
 			'site_id' => \Yii::t($this->messageCategory, 'Site'),
-			'parent_id' => \Yii::t($this->messageCategory, 'Parent'),
 			'type' => \Yii::t($this->messageCategory, 'Type'),
 			'name' => \Yii::t($this->messageCategory, 'Name'),
 			'alias' => \Yii::t($this->messageCategory, 'Alias'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
-			'list_order' => \Yii::t($this->messageCategory, 'List order'),
 			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
 			'creator_id' => \Yii::t($this->messageCategory, 'Creator id'),
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
@@ -148,10 +143,6 @@ class SiteCategory extends ActiveRecord {
 				'action' => \Yii::t($this->messageCategory, 'choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Site'),
 			]),
-			'parent_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Parent'),
-			]),
 			'type' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Type'),
@@ -167,10 +158,6 @@ class SiteCategory extends ActiveRecord {
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Status'),
-			]),
-			'list_order' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'List order'),
 			]),
 		];
 	}
@@ -216,16 +203,7 @@ class SiteCategory extends ActiveRecord {
 	 * @return {boolean}
 	 */
 	public function commonHandler() {
-		if(!$this->validate()) {
-			return false;
-		}
-
-		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
-		if($this->scenario == 'add') {
-			$this->creator_id = $this->operator_id;
-		}
-
-		return $this->save(false);
+		return $this->save();
 	}
 
 	/**
@@ -264,54 +242,39 @@ class SiteCategory extends ActiveRecord {
 	 * @return {array}
 	 */
 	public function getFeaturedItems() {
-		return $this->getItems()->where([
+		return $this->getItems()->onCondition([
 			'status' => SiteArticle::STATUS_FEATURED,
-		])->orderby('list_order desc, created_at desc');
+		])->orderby('created_at desc');
 	}
 
 	/**
-	 * Get it's articles quantity
+	 * Get it's items quantity
 	 *
 	 * @since 0.0.1
 	 * @return {integer}
 	 */
-	public function getArticleQuantity($status = null) {
-		$query = $this->getArticles();
-		if($status !== null) {
-			$query->where(['status' => $status]);
-		}
-
-		return $query->count();
+	public function getItemQuantity() {
+		return $this->getItems()->count();
 	}
 
 	/**
-	 * Get it's articles total page view
+	 * Get it's items total page view
 	 *
 	 * @since 0.0.1
 	 * @return {integer}
 	 */
-	public function getArticleTotalPageView($status = null) {
-		$query = $this->getArticles();
-		if($status !== null) {
-			$query->where(['status' => $status]);
-		}
-
-		return $query->sum('pv') ? : 0;
+	public function getItemTotalPageView() {
+		return $this->getItems()->sum('pv') ? : 0;
 	}
 
 	/**
-	 * Get it's articles total unique visitor
+	 * Get it's items total unique visitor
 	 *
 	 * @since 0.0.1
 	 * @return {integer}
 	 */
-	public function getArticleTotalUniqueVisitor($status = null) {
-		$query = $this->getArticles();
-		if($status !== null) {
-			$query->where(['status' => $status]);
-		}
-
-		return $query->sum('uv') ? : 0;
+	public function getItemTotalUniqueVisitor() {
+		return $this->getItems()->sum('uv') ? : 0;
 	}
 
 }

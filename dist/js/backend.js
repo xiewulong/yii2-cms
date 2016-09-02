@@ -183,7 +183,7 @@
 		events: function() {
 			var _this	= this;
 			this.$modal.on('click', 'ul li p', function() {
-				var $this		= $(this);
+				var $this	= $(this);
 				if($this.next('ul').length) {
 					$this.parent('li').toggleClass('unfold');
 					return false;
@@ -196,10 +196,13 @@
 				_this.setValue();
 				return false;
 			});
+			this.$name.on('click', 'i', function() {
+				_this.clearAll();
+			});
 		},
 		setValue: function() {
 			this.$hidden.val(this.value);
-			this.$name.html(this.name);
+			this.$name.html((this.$button.attr('data-form-selected-clear') ? '<i class="glyphicon glyphicon-remove" data-form-selected="clear"></i>' : '') + this.name);
 			this.close();
 		},
 		close: function() {
@@ -263,5 +266,8 @@
 	};
 	$doc.on('click', '[data-form-selection]', function() {
 		new Selection(this);
+	}).on('click', '[data-form-selected=clear]', function() {
+		var $this	= $(this);
+		$this.parent('.selection-name').html('').prevAll('input[type=hidden]').val('');
 	});
 })(jQuery, document);

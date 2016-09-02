@@ -56,6 +56,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			]) ?>
 		</div>
 		<div class="form-group">
+			<?= Html::hiddenInput('mid', $superior['id']) ?>
 			<?= Html::submitButton(\Yii::t($module->messageCategory, 'Search'), ['class' => 'btn btn-primary']) ?>
 		</div>
 	<?= Html::endForm() ?>
@@ -66,19 +67,20 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 <!-- end admin-options -->
 
 <!-- begin admin-table -->
-<div class="admin-area-sm admin-table">
+<?= Html::beginForm(null, 'post', ['class' => 'admin-area-sm admin-table']) ?>
 	<table class="table">
 		<thead>
 			<tr>
 				<!-- <th width="6%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th> -->
+				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'Sort') ?></th>
 				<th width="18%"><?= \Yii::t($module->messageCategory, 'Title') ?></th>
 				<th width="18%"><?= \Yii::t($module->messageCategory, 'Picture') ?></th>
-				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Type') ?></th>
+				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'Type') ?></th>
 				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Page view') ?></th>
 				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Unique visitor') ?></th>
 				<th width="10%"><?= \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'Name') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'Status') ?></th>
-				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
+				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'Status') ?></th>
+				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
 				<th class="text-center"><?= \Yii::t($module->messageCategory, 'Operations') ?></th>
 			</tr>
 		</thead>
@@ -87,6 +89,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<?php foreach($items as $item) { ?>
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
+				<td class="text-center"><?= Html::textInput('items[' . $item['id'] . '][list_order]', $item['list_order'], ['class' => 'form-control text-center']) ?></td>
 				<td><?= Html::a($item['title'], ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
 				<td><?= Html::a(Html::img($module->attachmentRoute($item['picture_id']), ['class' => 'admin-image-limit']), ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
 				<td class="text-center"><?= \Yii::t($module->messageCategory, $item->getAttributeText('type')) ?></td>
@@ -106,8 +109,15 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<tfoot>
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></td> -->
-				<td colspan="9">
-					<!-- <?= Html::button('Batch', ['class' => 'btn btn-default']) ?> -->
+				<td colspan="10">
+					<?= Html::submitButton(\Yii::t($module->messageCategory, '{attribute} {action}', [
+						'attribute' => \Yii::t($module->messageCategory, 'Batch'),
+						'action' => \Yii::t($module->messageCategory, 'Sort'),
+					]), [
+						'class' => 'btn btn-primary',
+						'name' => 'scenario',
+						'value' => 'sort',
+					]) ?>
 					<div class="pull-right">
 						<?= LinkPager::widget([
 							'pagination' => $pagination,
@@ -124,7 +134,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<?php } else { ?>
 		<tfoot>
 			<tr>
-				<td colspan="9" class="text-center empty">
+				<td colspan="10" class="text-center empty">
 					<?= Html::tag('i', null, ['class' => 'glyphicon glyphicon-info-sign text-success']) ?>
 					<?= Html::tag('span', \Yii::t($module->messageCategory, 'No matched data')) ?>
 				</td>
@@ -132,5 +142,5 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		</tfoot>
 		<? } ?>
 	</table>
-</div>
+<?= Html::endForm() ?>
 <!-- end admin-table -->

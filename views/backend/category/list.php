@@ -83,9 +83,9 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
 				<td><?= Html::encode($item['name']) ?></td>
 				<td class="text-center"><?= \Yii::t($module->messageCategory, $item->getAttributeText('type')) ?></td>
-				<td class="text-center"><?= Html::a($item['articleQuantity'], ['article/list', 'cid' => $item['id']]) ?></td>
-				<td class="text-center"><?= $item['articleTotalPageView'] ?></td>
-				<td class="text-center"><?= $item['articleTotalUniqueVisitor'] ?></td>
+				<td class="text-center"><?= Html::a($item['itemQuantity'], ['article/list', 'cid' => $item['id']]) ?></td>
+				<td class="text-center"><?= $item['itemTotalPageView'] ?></td>
+				<td class="text-center"><?= $item['itemTotalUniqueVisitor'] ?></td>
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
 				<td class="text-center">
 					<?= Html::a(\Yii::t($module->messageCategory, 'Add') . \Yii::t($module->messageCategory, 'Article'), ['article/edit', 'cid' => $item['id']]) ?>

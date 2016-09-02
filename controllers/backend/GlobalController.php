@@ -36,7 +36,7 @@ class GlobalController extends Controller {
 		$item->scenario = 'global';
 		if(\Yii::$app->request->isPost) {
 			$item->logo_id = null;
-			$item->logo_sub_id = null;
+			$item->sub_logo_id = null;
 			$item->weixin_id = null;
 			if($item->load(\Yii::$app->request->post())) {
 				if($item->commonHandler()) {

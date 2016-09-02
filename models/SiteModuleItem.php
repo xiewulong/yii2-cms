@@ -7,12 +7,13 @@ use yii\behaviors\TimestampBehavior;
 use yii\components\ActiveRecord;
 
 /**
- * Site model
+ * Module item model
  *
  * @since 0.0.1
  * @property {integer} $id
  * @property {string} $site_id
  * @property {integer} $module_id
+ * @property {integer} $sub_module_id
  * @property {integer} $type
  * @property {integer} $target_id
  * @property {string} $title
@@ -85,7 +86,6 @@ class SiteModuleItem extends ActiveRecord {
 				return $self->module->type == SiteModule::TYPE_BANNER;
 			}],
 
-			['url', 'url'],
 			['url', 'required', 'when' => function($self) {
 				return $self->type == self::TYPE_LINK;
 			}],
@@ -112,6 +112,10 @@ class SiteModuleItem extends ActiveRecord {
 				self::STATUS_DISABLED,
 			]],
 
+			[['operator_id', 'creator_id'], 'filter', 'filter' => function($value) {
+				return \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
+			}],
+
 			// Query data needed
 		];
 	}
@@ -125,6 +129,7 @@ class SiteModuleItem extends ActiveRecord {
 		$scenarios['add'] = [
 			'site_id',
 			'module_id',
+			'sub_module_id',
 			'type',
 			'target_id',
 			'title',
@@ -135,6 +140,7 @@ class SiteModuleItem extends ActiveRecord {
 			'status',
 			'start_at',
 			'end_at',
+			'operator_id',
 			'creator_id',
 
 			'category_id',
@@ -142,6 +148,7 @@ class SiteModuleItem extends ActiveRecord {
 		];
 
 		$scenarios['edit'] = [
+			'sub_module_id',
 			'type',
 			'target_id',
 			'title',
@@ -160,6 +167,7 @@ class SiteModuleItem extends ActiveRecord {
 
 		$scenarios['sort'] = [
 			'list_order',
+			'operator_id',
 		];
 
 		return $scenarios;
@@ -173,6 +181,7 @@ class SiteModuleItem extends ActiveRecord {
 			'id' => \Yii::t($this->messageCategory, 'Module item id'),
 			'site_id' => \Yii::t($this->messageCategory, 'Site'),
 			'module_id' => \Yii::t($this->messageCategory, 'Module'),
+			'sub_module_id' => \Yii::t($this->messageCategory, 'Sub module'),
 			'type' => \Yii::t($this->messageCategory, 'Type'),
 			'target_id' => \Yii::t($this->messageCategory, 'Target'),
 			'title' => \Yii::t($this->messageCategory, 'Title'),
@@ -191,14 +200,8 @@ class SiteModuleItem extends ActiveRecord {
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
 			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
 
-			'category_id' => \Yii::t($this->messageCategory, '{action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Category'),
-			]),
-			'article_id' => \Yii::t($this->messageCategory, '{action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Article'),
-			]),
+			'category_id' => \Yii::t($this->messageCategory, 'Category'),
+			'article_id' => \Yii::t($this->messageCategory, 'Article'),
 		];
 	}
 
@@ -218,6 +221,10 @@ class SiteModuleItem extends ActiveRecord {
 			'module_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Module'),
+			]),
+			'sub_module_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'Sub module'),
 			]),
 			'type' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
@@ -341,19 +348,26 @@ class SiteModuleItem extends ActiveRecord {
 			return false;
 		}
 
-		if($this->type == self::TYPE_CATEGORY) {
-			$this->target_id = $this->category_id;
-		}
-		if($this->type == self::TYPE_ARTICLE) {
-			$this->target_id = $this->article_id;
-		}
-
-		$this->operator_id = \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
-		if($this->scenario == 'add') {
-			$this->creator_id = $this->operator_id;
+		if(in_array($this->scenario, ['add', 'edit'])) {
+			if($this->type == self::TYPE_CATEGORY) {
+				$this->target_id = $this->category_id;
+			}
+			if($this->type == self::TYPE_ARTICLE) {
+				$this->target_id = $this->article_id;
+			}
 		}
 
 		return $this->save(false);
+	}
+
+	/**
+	 * Superior alias
+	 *
+	 * @since 0.0.1
+	 * @return {object}
+	 */
+	public function getSuperior() {
+		return $this->getModule();
 	}
 
 	/**
@@ -367,13 +381,13 @@ class SiteModuleItem extends ActiveRecord {
 	}
 
 	/**
-	 * Superior alias
+	 * Get sub module belongs it
 	 *
 	 * @since 0.0.1
 	 * @return {object}
 	 */
-	public function getSuperior() {
-		return $this->getModule();
+	public function getSubModule() {
+		return $this->hasOne(SiteModule::classname(), ['id' => 'sub_module_id']);
 	}
 
 	/**
@@ -392,7 +406,7 @@ class SiteModuleItem extends ActiveRecord {
 				break;
 		}
 
-		return $this->hasOne($classname, ['id' => 'target_id'])->where(['site_id' => $this->site_id]);
+		return $this->hasOne($classname, ['id' => 'target_id'])->onCondition(['site_id' => $this->site_id]);
 	}
 
 	/**

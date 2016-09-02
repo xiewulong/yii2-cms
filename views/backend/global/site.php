@@ -67,12 +67,12 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 				]) ?>
 			</div>
 		</div>
-		<div class="form-group logo_sub_id">
-			<?= Html::activeLabel($item, 'logo_sub_id', ['class' => 'control-label col-sm-2']) ?>
+		<div class="form-group sub_logo_id">
+			<?= Html::activeLabel($item, 'sub_logo_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Attachment::widget([
 					'model' => $item,
-					'attribute' => 'logo_sub_id',
+					'attribute' => 'sub_logo_id',
 					'uploadAction' => $module->url('attachment/upload'),
 					'loadAction' => $module->url('attachment'),
 					'options' => [

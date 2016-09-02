@@ -50,7 +50,7 @@ class CategoryController extends Controller {
 				],
 				'status' => SiteCategory::STATUS_ENABLED,
 			])
-			->orderby('list_order desc, created_at desc')
+			->orderby('created_at desc')
 			->asArray()
 			->all();
 		$done = !empty($items);
@@ -111,13 +111,13 @@ class CategoryController extends Controller {
 	public function actionList($type = 'all', $stype = null, $sword = null) {
 		$query = SiteCategory::find()
 			->where(['site_id' => $this->module->siteId])
-			->orderby('list_order desc, created_at');
+			->orderby('created_at');
 
 		if($type !== 'all') {
 			$query->andWhere(['type' => $type]);
 		}
 		if($sword !== null) {
-			$query->andWhere(['like', "a.$stype", $sword]);
+			$query->andWhere(['like', "$stype", $sword]);
 		}
 
 		$pagination = new Pagination([
