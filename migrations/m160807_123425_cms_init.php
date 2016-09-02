@@ -109,7 +109,6 @@ class m160807_123425_cms_init extends Migration {
 			'updated_at' => $this->integer()->notNull()->comment(\Yii::t($this->messageCategory, 'Updated time')),
 		], $tableOptions);
 		$this->createIndex('site_id', '{{%site_module}}', 'site_id');
-		$this->createIndex('parent_id', '{{%site_module}}', 'parent_id');
 		$this->createIndex('type', '{{%site_module}}', 'type');
 		$this->createIndex('position', '{{%site_module}}', 'position');
 		$this->createIndex('status', '{{%site_module}}', 'status');
@@ -140,11 +139,8 @@ class m160807_123425_cms_init extends Migration {
 		], $tableOptions);
 		$this->createIndex('site_id', '{{%site_module_item}}', 'site_id');
 		$this->createIndex('module_id', '{{%site_module_item}}', 'module_id');
-		$this->createIndex('sub_module_id', '{{%site_module_item}}', 'sub_module_id');
 		$this->createIndex('type', '{{%site_module_item}}', 'type');
 		$this->createIndex('status', '{{%site_module_item}}', 'status');
-		$this->createIndex('start_at', '{{%site_module_item}}', 'start_at');
-		$this->createIndex('end_at', '{{%site_module_item}}', 'end_at');
 		$this->createIndex('list_order', '{{%site_module_item}}', 'list_order');
 		$this->addCommentOnTable('{{%site_module_item}}', \Yii::t($this->messageCategory, 'Module item'));
 	}
