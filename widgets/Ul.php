@@ -70,7 +70,7 @@ class Ul extends \yii\xui\Ul {
 								SiteArticle::STATUS_FEATURED,
 							],
 						])
-						->orderby('status desc, list_order desc, created_at desc')
+						->orderby('status desc, created_at desc')
 						->limit($this->targetListLimit)
 						->all();
 					break;
