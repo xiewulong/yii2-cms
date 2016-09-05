@@ -5,7 +5,7 @@
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
- * update: 2016/9/2
+ * update: 2016/9/3
  * since: 0.0.1
  */
 
@@ -36,6 +36,10 @@ class FrontendModule extends Module {
 
 	public $statisticsEnable = false;
 
+	public $hooks = [];
+
+	public $hookShowKey = 'show';
+
 	public $messageCategory = 'cms';
 
 	private $_site;
@@ -50,6 +54,29 @@ class FrontendModule extends Module {
 		$this->setAttachmentModule('image', [
 			'lockTypes' => ['Image'],
 		]);
+	}
+
+	public function hook($position) {
+		if(YII_ENV != 'prod' && $this->hookShowKey && \Yii::$app->request->get('hook') == $this->hookShowKey) {
+			echo $position;
+		}
+
+		if(!isset($this->hooks[$position])) {
+			return null;
+		}
+
+		ob_start();
+		ob_implicit_flush(false);
+		try {
+			$out = \Yii::createObject($this->hooks[$position])->run();
+		} catch (\Exception $e) {
+			if (ob_get_level() > 0) {
+				ob_end_clean();
+			}
+			throw $e;
+		}
+
+		return ob_get_clean() . $out;
 	}
 
 	public function imageRoute($id) {

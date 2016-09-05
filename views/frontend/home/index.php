@@ -12,6 +12,8 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 // $this->params['route'] = [];
 ?>
 
+<?= $module->hook('Hook_home_begin') ?>
+
 <?= Home::widget([
 	'siteId' => $module->siteId,
 	'type' => 1,
@@ -30,6 +32,8 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 	],
 ]) ?>
 
+<?= $module->hook('Hook_home_0') ?>
+
 <?= Home::widget([
 	'siteId' => $module->siteId,
 	'type' => 1,
@@ -47,6 +51,8 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 	],
 ]) ?>
 
+<?= $module->hook('Hook_home_1') ?>
+
 <?= Home::widget([
 	'siteId' => $module->siteId,
 	'type' => 1,
@@ -63,6 +69,8 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 		'class' => 'advantages',
 	],
 ]) ?>
+
+<?= $module->hook('Hook_home_2') ?>
 
 <?= Home::widget([
 	'siteId' => $module->siteId,
@@ -83,6 +91,8 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 	],
 ]) ?>
 
+<?= $module->hook('Hook_home_3') ?>
+
 <?= Home::widget([
 	'siteId' => $module->siteId,
 	'type' => 2,
@@ -95,3 +105,5 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 		'class' => 'links',
 	],
 ]) ?>
+
+<?= $module->hook('Hook_home_end') ?>

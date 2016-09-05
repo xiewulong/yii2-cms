@@ -59,8 +59,8 @@ class Home extends Ul {
 			'item' => function($item) {
 				$_content = [];
 				$_options = [];
-				if(isset($item['picture_id']) && $item['picture_id']) {
-					$_content[] = Html::tag('b', Html::img($this->createImageRoute($item['picture_id'])));
+				if(isset($item['thumbnail_id']) && $item['thumbnail_id']) {
+					$_content[] = Html::tag('b', Html::img($this->createImageRoute($item['thumbnail_id'])));
 				} else if($this->keywordsToIcon && isset($item['keywords']) && $item['keywords']) {
 					$_content[] = Html::tag('b', Html::tag('i', null, ['class' => 'fa fa-' . $item['keywords']]));
 				}

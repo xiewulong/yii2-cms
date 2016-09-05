@@ -48,7 +48,7 @@ $this->params['crumbs'] = [
 				</ul>
 			</div>
 		</div>
-		<div class="col-xs-9">
+		<div class="col-xs-9 x-height-min">
 			<div class="x-details"><?= $item['content'] ?></div>
 		</div>
 	</div>

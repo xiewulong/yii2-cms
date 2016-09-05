@@ -40,7 +40,7 @@ $this->params['crumbs'] = [['title' => $this->title]];
 				],
 			]) ?>
 		</div>
-		<div class="col-xs-9">
+		<div class="col-xs-9 x-height-min">
 			<?= Ul::widget([
 				'items' => $items,
 				'timeEnabled' => $superior['type'] != 5,

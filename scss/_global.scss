@@ -7,3 +7,8 @@ body {
 	font-family: $font-family;
 	background-color: $color-background-body;
 }
+
+/* x-height-min */
+.x-height-min {
+	min-height: 600px;
+}

@@ -3,5 +3,5 @@
 "mappings": "AAAA;;;;;GAKG",
 "sources": ["../../scss/backend.scss"],
 "names": [],
-"file": "backend.css"
+"file": "backend.min.css"
 }
