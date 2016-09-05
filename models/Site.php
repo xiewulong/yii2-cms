@@ -10,7 +10,7 @@ use yii\components\ActiveRecord;
  * Site model
  *
  * @since 0.0.1
- * @property {string} $site
+ * @property {string} $id
  * @property {integer} $type
  * @property {string} $name
  * @property {string} $alias
@@ -35,8 +35,8 @@ use yii\components\ActiveRecord;
  * @property {integer} $status
  * @property {integer} $pv
  * @property {integer} $uv
- * @property {integer} $operator_id
  * @property {integer} $created_at
+ * @property {integer} $operator_id
  * @property {integer} $updated_at
  */
 class Site extends ActiveRecord {
@@ -78,6 +78,7 @@ class Site extends ActiveRecord {
 				'alias',
 				'logo_id',
 				'sub_logo_id',
+				'brief',
 				'author',
 				'keywords',
 				'description',
@@ -200,8 +201,8 @@ class Site extends ActiveRecord {
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'pv' => \Yii::t($this->messageCategory, 'Page view'),
 			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
-			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
+			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
 			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
 		];
 	}

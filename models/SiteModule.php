@@ -17,9 +17,9 @@ use yii\components\ActiveRecord;
  * @property {string} $name
  * @property {string} $alias
  * @property {integer} $status
- * @property {integer} $operator_id
  * @property {integer} $creator_id
  * @property {integer} $created_at
+ * @property {integer} $operator_id
  * @property {integer} $updated_at
  */
 class SiteModule extends ActiveRecord {
@@ -73,7 +73,7 @@ class SiteModule extends ActiveRecord {
 				self::STATUS_DISABLED,
 			]],
 
-			[['operator_id', 'creator_id'], 'filter', 'filter' => function($value) {
+			[['creator_id', 'operator_id'], 'filter', 'filter' => function($value) {
 				return \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
 			}],
 
@@ -95,8 +95,8 @@ class SiteModule extends ActiveRecord {
 			'name',
 			'alias',
 			'status',
-			'operator_id',
 			'creator_id',
+			'operator_id',
 		];
 
 		$scenarios['edit'] = [
@@ -122,9 +122,9 @@ class SiteModule extends ActiveRecord {
 			'name' => \Yii::t($this->messageCategory, 'Name'),
 			'alias' => \Yii::t($this->messageCategory, 'Alias'),
 			'status' => \Yii::t($this->messageCategory, 'Status'),
-			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
 			'creator_id' => \Yii::t($this->messageCategory, 'Creator id'),
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
+			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
 			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
 		];
 	}
@@ -134,6 +134,10 @@ class SiteModule extends ActiveRecord {
 	 */
 	public function attributeHints() {
 		return [
+			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'Module id'),
+			]),
 			'site_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Site'),

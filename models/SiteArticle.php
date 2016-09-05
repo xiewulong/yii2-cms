@@ -28,9 +28,9 @@ use yii\attachment\models\Attachment;
  * @property {integer} $status
  * @property {integer} $pv
  * @property {integer} $uv
- * @property {integer} $operator_id
  * @property {integer} $creator_id
  * @property {integer} $created_at
+ * @property {integer} $operator_id
  * @property {integer} $updated_at
  */
 class SiteArticle extends ActiveRecord {
@@ -110,7 +110,7 @@ class SiteArticle extends ActiveRecord {
 				self::STATUS_DRAFTED,
 			]],
 
-			[['operator_id', 'creator_id'], 'filter', 'filter' => function($value) {
+			[['creator_id', 'operator_id'], 'filter', 'filter' => function($value) {
 				return \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->id;
 			}],
 
@@ -137,8 +137,8 @@ class SiteArticle extends ActiveRecord {
 			'picture_ids',
 			'attachment_id',
 			'status',
-			'operator_id',
 			'creator_id',
+			'operator_id',
 		];
 
 		$scenarios['edit'] = [
@@ -178,7 +178,9 @@ class SiteArticle extends ActiveRecord {
 			'status' => \Yii::t($this->messageCategory, 'Status'),
 			'pv' => \Yii::t($this->messageCategory, 'Page view'),
 			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
+			'creator_id' => \Yii::t($this->messageCategory, 'Creator id'),
 			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
+			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
 			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
 		];
 	}
