@@ -7,6 +7,8 @@ function compress() {
 	sass --scss --style compressed $1.scss $2.min.css
 }
 
+cd $dir
+
 case $1 in
 
 	release)
