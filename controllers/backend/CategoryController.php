@@ -131,7 +131,7 @@ class CategoryController extends Controller {
 		$typeItems = ArrayHelper::merge([
 			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
 				'attribute' => \Yii::t($this->module->messageCategory, 'Type'),
-				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
+				'action' => \Yii::t($this->module->messageCategory, 'Filtering'),
 			]),
 		], SiteCategory::defaultAttributeItems('type'));
 

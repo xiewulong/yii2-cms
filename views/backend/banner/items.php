@@ -19,7 +19,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 	<?= Html::tag('h5', $this->title, ['class' => 'pull-left admin-heading']) ?>
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
 		'action' => \Yii::t($module->messageCategory, 'Back to'),
-		'attribute' => \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'list'),
+		'attribute' => \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'List'),
 	]), [$this->params['route']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
 <!-- end admin-title -->
@@ -49,7 +49,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<?= Html::textInput('sword', $sword, [
 				'class' => 'form-control',
 				'placeholder' => \Yii::t($module->messageCategory, 'Please {action} {attribute}', [
-					'action' => \Yii::t($module->messageCategory, 'enter'),
+					'action' => \Yii::t($module->messageCategory, 'Enter'),
 					'attribute' => \Yii::t($module->messageCategory, 'Search word'),
 				]),
 				'autofocus' => true,

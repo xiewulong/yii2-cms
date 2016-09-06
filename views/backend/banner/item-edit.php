@@ -17,7 +17,7 @@ $this->params['route'] = $module->url('banner/list');
 	<?= Html::tag('h5', $this->title, ['class' => 'pull-left admin-heading']) ?>
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
 		'action' => \Yii::t($module->messageCategory, 'Back to'),
-		'attribute' => \Yii::t($module->messageCategory, 'Banner item') . \Yii::t($module->messageCategory, 'list'),
+		'attribute' => \Yii::t($module->messageCategory, 'Banner item') . \Yii::t($module->messageCategory, 'List'),
 	]), ['banner/items', 'mid' => $superior['id']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
 <!-- end admin-title -->
@@ -99,7 +99,7 @@ $this->params['route'] = $module->url('banner/list');
 			<?= Html::activeLabel($item, 'category_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-8">
 				<?= Html::activeHiddenInput($item, 'category_id') ?>
-				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
+				<?= Html::button(\Yii::t($module->messageCategory, 'Choose'), [
 					'class' => 'btn btn-default',
 					'data-form-selection' => $module->url('category/get'),
 				]) ?>
@@ -110,7 +110,7 @@ $this->params['route'] = $module->url('banner/list');
 			<?= Html::activeLabel($item, 'article_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-8">
 				<?= Html::activeHiddenInput($item, 'article_id') ?>
-				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
+				<?= Html::button(\Yii::t($module->messageCategory, 'Choose'), [
 					'class' => 'btn btn-default',
 					'data-form-selection' => $module->url('article/get'),
 				]) ?>

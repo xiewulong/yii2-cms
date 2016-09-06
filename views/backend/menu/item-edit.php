@@ -16,7 +16,7 @@ $this->params['route'] = $module->url('menu/list');
 	<?= Html::tag('h5', $this->title, ['class' => 'pull-left admin-heading']) ?>
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
 		'action' => \Yii::t($module->messageCategory, 'Back to'),
-		'attribute' => \Yii::t($module->messageCategory, 'Menu item') . \Yii::t($module->messageCategory, 'list'),
+		'attribute' => \Yii::t($module->messageCategory, 'Menu item') . \Yii::t($module->messageCategory, 'List'),
 	]), ['menu/items', 'mid' => $superior['id']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
 <!-- end admin-title -->
@@ -83,7 +83,7 @@ $this->params['route'] = $module->url('menu/list');
 			<?= Html::activeLabel($item, 'category_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-8">
 				<?= Html::activeHiddenInput($item, 'category_id') ?>
-				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
+				<?= Html::button(\Yii::t($module->messageCategory, 'Choose'), [
 					'class' => 'btn btn-default',
 					'data-form-selection' => $module->url('category/get'),
 				]) ?>
@@ -94,7 +94,7 @@ $this->params['route'] = $module->url('menu/list');
 			<?= Html::activeLabel($item, 'article_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-8">
 				<?= Html::activeHiddenInput($item, 'article_id') ?>
-				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
+				<?= Html::button(\Yii::t($module->messageCategory, 'Choose'), [
 					'class' => 'btn btn-default',
 					'data-form-selection' => $module->url('article/get'),
 				]) ?>
@@ -105,7 +105,7 @@ $this->params['route'] = $module->url('menu/list');
 			<?= Html::activeLabel($item, 'sub_module_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-8">
 				<?= Html::activeHiddenInput($item, 'sub_module_id') ?>
-				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
+				<?= Html::button(\Yii::t($module->messageCategory, 'Choose'), [
 					'class' => 'btn btn-default',
 					'data-form-selection' => $module->url('menu/get?id=' . $superior['id']),
 					'data-form-selected-clear' => 'enabled',

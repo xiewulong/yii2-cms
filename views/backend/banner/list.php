@@ -6,7 +6,7 @@ use yii\cms\models\SiteArticle;
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 	'attribute' => \Yii::t($module->messageCategory, 'Banner'),
-	'action' => \Yii::t($module->messageCategory, 'list'),
+	'action' => \Yii::t($module->messageCategory, 'List'),
 ]);
 
 $statusClasses = ['text-muted', 'text-success', 'text-danger'];
@@ -38,7 +38,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<?= Html::textInput('sword', $sword, [
 				'class' => 'form-control',
 				'placeholder' => \Yii::t($module->messageCategory, 'Please {action} {attribute}', [
-					'action' => \Yii::t($module->messageCategory, 'enter'),
+					'action' => \Yii::t($module->messageCategory, 'Enter'),
 					'attribute' => \Yii::t($module->messageCategory, 'Search word'),
 				]),
 				'autofocus' => true,

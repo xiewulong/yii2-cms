@@ -179,7 +179,7 @@ class ArticleController extends Controller {
 		$categoryItems = ArrayHelper::merge([
 			0 => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
 				'attribute' => \Yii::t($this->module->messageCategory, 'Category'),
-				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
+				'action' => \Yii::t($this->module->messageCategory, 'Filtering'),
 			]),
 		], ArrayHelper::map(SiteCategory::find()
 			->select(['id', 'name'])
@@ -189,13 +189,13 @@ class ArticleController extends Controller {
 		$categoryTypeItems = ArrayHelper::merge([
 			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
 				'attribute' => \Yii::t($this->module->messageCategory, 'Type'),
-				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
+				'action' => \Yii::t($this->module->messageCategory, 'Filtering'),
 			]),
 		], SiteCategory::defaultAttributeItems('type'));
 		$statusItems = ArrayHelper::merge([
 			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
 				'attribute' => \Yii::t($this->module->messageCategory, 'Status'),
-				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
+				'action' => \Yii::t($this->module->messageCategory, 'Filtering'),
 			]),
 		], SiteArticle::defaultAttributeItems('status'));
 
