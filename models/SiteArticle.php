@@ -191,55 +191,55 @@ class SiteArticle extends ActiveRecord {
 	public function attributeHints() {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Article id'),
 			]),
 			'site_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Site'),
 			]),
 			'category_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Category'),
 			]),
 			'title' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Title'),
 			]),
 			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
 			]),
 			'thumbnail_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'action' => \Yii::t($this->messageCategory, 'Upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Thumbnail'),
 			]),
 			'author' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Author'),
 			]),
 			'keywords' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Keyword'),
 			]),
 			'description' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Description'),
 			]),
 			'content' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Content'),
 			]),
 			'picture_ids' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'action' => \Yii::t($this->messageCategory, 'Upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Picture'),
 			]),
 			'attachment_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'action' => \Yii::t($this->messageCategory, 'Upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Attachment'),
 			]),
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Status'),
 			]),
 		];
@@ -342,13 +342,18 @@ class SiteArticle extends ActiveRecord {
 	}
 
 	/**
-	 * Get picture list
+	 * Get picture id list
 	 *
 	 * @since 0.0.1
-	 * @return {object}
+	 * @return {array}
 	 */
 	public function getPictureIdList() {
-		return $this->picture_ids ? Json::decode($this->picture_ids) : [];
+		if($this->picture_ids && $this->_picture_id_list === null) {
+			$this->_picture_id_list = Json::decode($this->picture_ids);
+		}
+
+		return $this->_picture_id_list;
 	}
+	private $_picture_id_list;
 
 }

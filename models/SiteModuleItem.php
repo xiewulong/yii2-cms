@@ -211,72 +211,72 @@ class SiteModuleItem extends ActiveRecord {
 	public function attributeHints() {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Module item id'),
 			]),
 			'site_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Site'),
 			]),
 			'module_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Module'),
 			]),
 			'sub_module_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Sub module'),
 			]),
 			'type' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Type'),
 			]),
 			'target_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Target'),
 			]),
 			'title' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Title'),
 			]),
 			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
 			]),
 			'description' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Description'),
 			]),
 			'picture_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'action' => \Yii::t($this->messageCategory, 'Upload'),
 				'attribute' => \Yii::t($this->messageCategory, 'Picture'),
 			]),
 			'url' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Url'),
 			]),
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Status'),
 			]),
 			'start_at' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Start time'),
 			]),
 			'end_at' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'End time'),
 			]),
 			'list_order' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'List order'),
 			]),
 
 			'category_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Category'),
 			]),
 			'article_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Article'),
 			]),
 		];

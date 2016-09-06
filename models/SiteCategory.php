@@ -136,27 +136,27 @@ class SiteCategory extends ActiveRecord {
 	public function attributeHints() {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Category id'),
 			]),
 			'site_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Site'),
 			]),
 			'type' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Type'),
 			]),
 			'name' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Name'),
 			]),
 			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
 			]),
 			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'action' => \Yii::t($this->messageCategory, 'Choose'),
 				'attribute' => \Yii::t($this->messageCategory, 'Status'),
 			]),
 		];
