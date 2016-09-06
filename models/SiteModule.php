@@ -61,16 +61,16 @@ class SiteModule extends ActiveRecord {
 
 			['position', 'match', 'pattern' => '/^[a-z][a-z0-9_-]{0,15}$/i'],
 
-			['type', 'default', 'value' => self::TYPE_MENU],
+			['type', 'default', 'value' => static::TYPE_MENU],
 			['type', 'in', 'range' => [
-				self::TYPE_MENU,
-				self::TYPE_BANNER,
+				static::TYPE_MENU,
+				static::TYPE_BANNER,
 			]],
 
-			['status', 'default', 'value' => self::STATUS_ENABLED],
+			['status', 'default', 'value' => static::STATUS_ENABLED],
 			['status', 'in', 'range' => [
-				self::STATUS_ENABLED,
-				self::STATUS_DISABLED,
+				static::STATUS_ENABLED,
+				static::STATUS_DISABLED,
 			]],
 
 			[['creator_id', 'operator_id'], 'filter', 'filter' => function($value) {
@@ -174,8 +174,8 @@ class SiteModule extends ActiveRecord {
 	public function typeItems() {
 		return [
 			[
-				self::TYPE_MENU => \Yii::t($this->messageCategory, 'Menu'),
-				self::TYPE_BANNER => \Yii::t($this->messageCategory, 'Banner'),
+				static::TYPE_MENU => \Yii::t($this->messageCategory, 'Menu'),
+				static::TYPE_BANNER => \Yii::t($this->messageCategory, 'Banner'),
 			],
 		];
 	}
@@ -189,9 +189,9 @@ class SiteModule extends ActiveRecord {
 	public function statusItems() {
 		return [
 			[
-				self::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
-				self::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
-				self::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
+				static::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
+				static::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
+				static::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
 			],
 		];
 	}

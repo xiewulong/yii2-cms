@@ -110,16 +110,16 @@ class Site extends ActiveRecord {
 
 			['email', 'email'],
 
-			['type', 'default', 'value' => self::TYPE_ENTERPRISE],
+			['type', 'default', 'value' => static::TYPE_ENTERPRISE],
 			['type', 'in', 'range' => [
-				self::TYPE_PERSONAL,
-				self::TYPE_ENTERPRISE,
+				static::TYPE_PERSONAL,
+				static::TYPE_ENTERPRISE,
 			]],
 
-			['status', 'default', 'value' => self::STATUS_ENABLED],
+			['status', 'default', 'value' => static::STATUS_ENABLED],
 			['status', 'in', 'range' => [
-				self::STATUS_ENABLED,
-				self::STATUS_DISABLED,
+				static::STATUS_ENABLED,
+				static::STATUS_DISABLED,
 			]],
 
 			[['operator_id'], 'filter', 'filter' => function($value) {
@@ -316,11 +316,11 @@ class Site extends ActiveRecord {
 	public function typeItems() {
 		return [
 			[
-				self::TYPE_PERSONAL => \Yii::t($this->messageCategory, 'Personal'),
-				self::TYPE_ENTERPRISE => \Yii::t($this->messageCategory, 'Enterprise'),
+				static::TYPE_PERSONAL => \Yii::t($this->messageCategory, 'Personal'),
+				static::TYPE_ENTERPRISE => \Yii::t($this->messageCategory, 'Enterprise'),
 			],
 			[
-				self::TYPE_PERSONAL => [
+				static::TYPE_PERSONAL => [
 					'tax',
 					'address',
 					'copyright',
@@ -341,8 +341,8 @@ class Site extends ActiveRecord {
 	public function statusItems() {
 		return [
 			[
-				self::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
-				self::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
+				static::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
+				static::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
 			],
 		];
 	}

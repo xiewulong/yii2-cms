@@ -87,29 +87,29 @@ class SiteModuleItem extends ActiveRecord {
 			}],
 
 			['url', 'required', 'when' => function($self) {
-				return $self->type == self::TYPE_LINK;
+				return $self->type == static::TYPE_LINK;
 			}],
 
 			['category_id', 'required', 'when' => function($self) {
-				return $self->type == self::TYPE_CATEGORY;
+				return $self->type == static::TYPE_CATEGORY;
 			}],
 
 			['article_id', 'required', 'when' => function($self) {
-				return $self->type == self::TYPE_ARTICLE;
+				return $self->type == static::TYPE_ARTICLE;
 			}],
 
-			['type', 'default', 'value' => self::TYPE_LINK],
+			['type', 'default', 'value' => static::TYPE_LINK],
 			['type', 'in', 'range' => [
-				self::TYPE_LINK,
-				self::TYPE_HOME,
-				self::TYPE_CATEGORY,
-				self::TYPE_ARTICLE,
+				static::TYPE_LINK,
+				static::TYPE_HOME,
+				static::TYPE_CATEGORY,
+				static::TYPE_ARTICLE,
 			]],
 
-			['status', 'default', 'value' => self::STATUS_ENABLED],
+			['status', 'default', 'value' => static::STATUS_ENABLED],
 			['status', 'in', 'range' => [
-				self::STATUS_ENABLED,
-				self::STATUS_DISABLED,
+				static::STATUS_ENABLED,
+				static::STATUS_DISABLED,
 			]],
 
 			[['creator_id', 'operator_id'], 'filter', 'filter' => function($value) {
@@ -291,28 +291,28 @@ class SiteModuleItem extends ActiveRecord {
 	public function typeItems() {
 		return [
 			[
-				self::TYPE_LINK => \Yii::t($this->messageCategory, 'Link'),
-				self::TYPE_HOME => \Yii::t($this->messageCategory, 'Home'),
-				self::TYPE_CATEGORY => \Yii::t($this->messageCategory, 'Category'),
-				self::TYPE_ARTICLE => \Yii::t($this->messageCategory, 'Article'),
+				static::TYPE_LINK => \Yii::t($this->messageCategory, 'Link'),
+				static::TYPE_HOME => \Yii::t($this->messageCategory, 'Home'),
+				static::TYPE_CATEGORY => \Yii::t($this->messageCategory, 'Category'),
+				static::TYPE_ARTICLE => \Yii::t($this->messageCategory, 'Article'),
 			],
 			[
-				self::TYPE_LINK => [
+				static::TYPE_LINK => [
 					'category_id',
 					'article_id',
 				],
-				self::TYPE_HOME => [
+				static::TYPE_HOME => [
 					'url',
 
 					'category_id',
 					'article_id',
 				],
-				self::TYPE_CATEGORY => [
+				static::TYPE_CATEGORY => [
 					'url',
 
 					'article_id',
 				],
-				self::TYPE_ARTICLE => [
+				static::TYPE_ARTICLE => [
 					'url',
 
 					'category_id',
@@ -330,9 +330,9 @@ class SiteModuleItem extends ActiveRecord {
 	public function statusItems() {
 		return [
 			[
-				self::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
-				self::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
-				self::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
+				static::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
+				static::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
+				static::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
 			],
 		];
 	}
@@ -349,10 +349,10 @@ class SiteModuleItem extends ActiveRecord {
 		}
 
 		if(in_array($this->scenario, ['add', 'edit'])) {
-			if($this->type == self::TYPE_CATEGORY) {
+			if($this->type == static::TYPE_CATEGORY) {
 				$this->target_id = $this->category_id;
 			}
-			if($this->type == self::TYPE_ARTICLE) {
+			if($this->type == static::TYPE_ARTICLE) {
 				$this->target_id = $this->article_id;
 			}
 		}
@@ -398,10 +398,10 @@ class SiteModuleItem extends ActiveRecord {
 	 */
 	public function getTarget() {
 		switch($this->type) {
-			case self::TYPE_CATEGORY:
+			case static::TYPE_CATEGORY:
 				$classname = SiteCategory::classname();
 				break;
-			case self::TYPE_ARTICLE:
+			case static::TYPE_ARTICLE:
 				$classname = SiteArticle::classname();
 				break;
 		}
@@ -417,11 +417,11 @@ class SiteModuleItem extends ActiveRecord {
 	 */
 	protected function getCacheTarget($type) {
 		switch($type) {
-			case self::TYPE_CATEGORY:
+			case static::TYPE_CATEGORY:
 				$cache_id = $this->category_id;
 				$classname = SiteCategory::classname();
 				break;
-			case self::TYPE_ARTICLE:
+			case static::TYPE_ARTICLE:
 				$cache_id = $this->article_id;
 				$classname = SiteArticle::classname();
 				break;
@@ -444,7 +444,7 @@ class SiteModuleItem extends ActiveRecord {
 	 * @return {object}
 	 */
 	public function getCategory() {
-		return $this->getCacheTarget(self::TYPE_CATEGORY);
+		return $this->getCacheTarget(static::TYPE_CATEGORY);
 	}
 
 	/**
@@ -454,7 +454,7 @@ class SiteModuleItem extends ActiveRecord {
 	 * @return {object}
 	 */
 	public function getArticle() {
-		return $this->getCacheTarget(self::TYPE_ARTICLE);
+		return $this->getCacheTarget(static::TYPE_ARTICLE);
 	}
 
 	/**
@@ -466,16 +466,16 @@ class SiteModuleItem extends ActiveRecord {
 	 */
 	public function getLink($host = null) {
 		switch($this->type) {
-			case self::TYPE_LINK:
+			case static::TYPE_LINK:
 				return $this->url;
 				break;
-			case self::TYPE_CATEGORY:
+			case static::TYPE_CATEGORY:
 				$url = ['article/list', 'id' => $this->target_id];
 				break;
-			case self::TYPE_ARTICLE:
+			case static::TYPE_ARTICLE:
 				$url = ['article/details', 'id' => $this->target_id];
 				break;
-			case self::TYPE_HOME:
+			case static::TYPE_HOME:
 			default:
 				$url = ['/'];
 				break;

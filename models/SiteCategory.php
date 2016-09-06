@@ -62,19 +62,19 @@ class SiteCategory extends ActiveRecord {
 
 			['name', 'string', 'max' => 16],
 
-			['type', 'default', 'value' => self::TYPE_NEWS],
+			['type', 'default', 'value' => static::TYPE_NEWS],
 			['type', 'in', 'range' => [
-				self::TYPE_NEWS,
-				// self::TYPE_PICTURES,
-				self::TYPE_PAGE,
-				self::TYPE_NOTICE,
-				self::TYPE_DOWNLOAD,
+				static::TYPE_NEWS,
+				// static::TYPE_PICTURES,
+				static::TYPE_PAGE,
+				static::TYPE_NOTICE,
+				static::TYPE_DOWNLOAD,
 			]],
 
-			['status', 'default', 'value' => self::STATUS_ENABLED],
+			['status', 'default', 'value' => static::STATUS_ENABLED],
 			['status', 'in', 'range' => [
-				self::STATUS_ENABLED,
-				self::STATUS_DISABLED,
+				static::STATUS_ENABLED,
+				static::STATUS_DISABLED,
 			]],
 
 			[['creator_id', 'operator_id'], 'filter', 'filter' => function($value) {
@@ -171,11 +171,11 @@ class SiteCategory extends ActiveRecord {
 	public function typeItems() {
 		return [
 			[
-				self::TYPE_NEWS => \Yii::t($this->messageCategory, 'News'),
-				self::TYPE_PICTURES => \Yii::t($this->messageCategory, 'Gallery'),
-				self::TYPE_PAGE => \Yii::t($this->messageCategory, 'Single page'),
-				self::TYPE_NOTICE => \Yii::t($this->messageCategory, 'Notice'),
-				self::TYPE_DOWNLOAD => \Yii::t($this->messageCategory, 'Download'),
+				static::TYPE_NEWS => \Yii::t($this->messageCategory, 'News'),
+				static::TYPE_PICTURES => \Yii::t($this->messageCategory, 'Gallery'),
+				static::TYPE_PAGE => \Yii::t($this->messageCategory, 'Single page'),
+				static::TYPE_NOTICE => \Yii::t($this->messageCategory, 'Notice'),
+				static::TYPE_DOWNLOAD => \Yii::t($this->messageCategory, 'Download'),
 			],
 		];
 	}
@@ -189,9 +189,9 @@ class SiteCategory extends ActiveRecord {
 	public function statusItems() {
 		return [
 			[
-				self::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
-				self::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
-				self::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
+				static::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
+				static::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
+				static::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
 			],
 		];
 	}

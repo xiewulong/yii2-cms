@@ -103,11 +103,11 @@ class SiteArticle extends ActiveRecord {
 				return $self->category->type == SiteCategory::TYPE_DOWNLOAD;
 			}],
 
-			['status', 'default', 'value' => self::STATUS_DRAFTED],
+			['status', 'default', 'value' => static::STATUS_DRAFTED],
 			['status', 'in', 'range' => [
-				self::STATUS_RELEASED,
-				self::STATUS_FEATURED,
-				self::STATUS_DRAFTED,
+				static::STATUS_RELEASED,
+				static::STATUS_FEATURED,
+				static::STATUS_DRAFTED,
 			]],
 
 			[['creator_id', 'operator_id'], 'filter', 'filter' => function($value) {
@@ -293,10 +293,10 @@ class SiteArticle extends ActiveRecord {
 	public function statusItems() {
 		return [
 			[
-				self::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
-				self::STATUS_DRAFTED => \Yii::t($this->messageCategory, 'Drafted'),
-				self::STATUS_RELEASED => \Yii::t($this->messageCategory, 'Released'),
-				self::STATUS_FEATURED => \Yii::t($this->messageCategory, 'Featured'),
+				static::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
+				static::STATUS_DRAFTED => \Yii::t($this->messageCategory, 'Drafted'),
+				static::STATUS_RELEASED => \Yii::t($this->messageCategory, 'Released'),
+				static::STATUS_FEATURED => \Yii::t($this->messageCategory, 'Featured'),
 			],
 		];
 	}
