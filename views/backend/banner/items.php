@@ -4,7 +4,10 @@ use yii\widgets\LinkPager;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
-	'attribute' => $superior['name'] . \Yii::t($module->messageCategory, 'Banner item'),
+	'attribute' => \Yii::t($module->messageCategory, '{attribute} {action}', [
+		'attribute' => $superior['name'],
+		'action' => \Yii::t($module->messageCategory, 'Banner item'),
+	]),
 	'action' => \Yii::t($module->messageCategory, 'Management'),
 ]);
 
@@ -19,7 +22,10 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 	<?= Html::tag('h5', $this->title, ['class' => 'pull-left admin-heading']) ?>
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
 		'action' => \Yii::t($module->messageCategory, 'Back to'),
-		'attribute' => \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'List'),
+		'attribute' => \Yii::t($module->messageCategory, '{attribute} {action}', [
+			'attribute' => \Yii::t($module->messageCategory, 'Banner'),
+			'action' => \Yii::t($module->messageCategory, 'List'),
+		]),
 	]), [$this->params['route']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
 <!-- end admin-title -->
@@ -78,8 +84,14 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'Type') ?></th>
 				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Page view') ?></th>
 				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Unique visitor') ?></th>
-				<th width="10%"><?= \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'Name') ?></th>
-				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'Status') ?></th>
+				<th width="10%"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
+					'attribute' => \Yii::t($module->messageCategory, 'Banner'),
+					'action' => \Yii::t($module->messageCategory, 'Name'),
+				]) ?></th>
+				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
+					'attribute' => \Yii::t($module->messageCategory, 'Banner'),
+					'action' => \Yii::t($module->messageCategory, 'Status'),
+				]) ?></th>
 				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
 				<th class="text-center"><?= \Yii::t($module->messageCategory, 'Operations') ?></th>
 			</tr>

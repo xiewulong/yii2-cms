@@ -347,13 +347,13 @@ class SiteArticle extends ActiveRecord {
 	 * @since 0.0.1
 	 * @return {array}
 	 */
+	private $_picture_id_list;
 	public function getPictureIdList() {
-		if($this->picture_ids && $this->_picture_id_list === null) {
-			$this->_picture_id_list = Json::decode($this->picture_ids);
+		if($this->_picture_id_list === null) {
+			$this->_picture_id_list = $this->picture_ids ? Json::decode($this->picture_ids) : [];
 		}
 
 		return $this->_picture_id_list;
 	}
-	private $_picture_id_list;
 
 }

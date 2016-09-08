@@ -1,13 +1,12 @@
 <?php
 use yii\helpers\Html;
-use yii\helpers\Json;
 use yii\attachment\widgets\Attachment;
 use yii\xui\Ueditor;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 	'attribute' => \Yii::t($module->messageCategory, 'Article'),
-	'action' => \Yii::t($module->messageCategory, $item['id'] ? 'Edit' : 'Add'),
+	'action' => \Yii::t($module->messageCategory, $item['isNewRecord'] ? 'Add' : 'Edit'),
 ]);
 
 // set parent route

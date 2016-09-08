@@ -64,9 +64,18 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<!-- <th width="6%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th> -->
 				<th width="20%"><?= \Yii::t($module->messageCategory, 'Menu') . \Yii::t($module->messageCategory, 'Name') ?></th>
 				<th width="10%"><?= \Yii::t($module->messageCategory, 'Position') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Menu item') . \Yii::t($module->messageCategory, 'Quantity') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Total') . \Yii::t($module->messageCategory, 'Page view') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Total') . \Yii::t($module->messageCategory, 'Unique visitor') ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
+					'attribute' => \Yii::t($module->messageCategory, 'Menu item'),
+					'action' => \Yii::t($module->messageCategory, 'Quantity'),
+				]) ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, '{action} {attribute}', [
+					'action' => \Yii::t($module->messageCategory, 'Total'),
+					'attribute' => \Yii::t($module->messageCategory, 'Page view'),
+				]) ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, '{action} {attribute}', [
+					'action' => \Yii::t($module->messageCategory, 'Total'),
+					'attribute' => \Yii::t($module->messageCategory, 'Unique visitor'),
+				]) ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
 				<th class="text-center"><?= \Yii::t($module->messageCategory, 'Operations') ?></th>
 			</tr>

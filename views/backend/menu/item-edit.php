@@ -3,7 +3,10 @@ use yii\helpers\Html;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
-	'attribute' => $superior['name'] . \Yii::t($module->messageCategory, 'Menu item'),
+	'attribute' => \Yii::t($module->messageCategory, '{attribute} {action}', [
+		'attribute' => $superior['name'],
+		'action' => \Yii::t($module->messageCategory, 'Menu item'),
+	]),
 	'action' => \Yii::t($module->messageCategory, $item['isNewRecord'] ? 'Add' : 'Edit'),
 ]);
 
@@ -16,7 +19,10 @@ $this->params['route'] = $module->url('menu/list');
 	<?= Html::tag('h5', $this->title, ['class' => 'pull-left admin-heading']) ?>
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
 		'action' => \Yii::t($module->messageCategory, 'Back to'),
-		'attribute' => \Yii::t($module->messageCategory, 'Menu item') . \Yii::t($module->messageCategory, 'List'),
+		'attribute' => \Yii::t($module->messageCategory, '{attribute} {action}', [
+			'attribute' => \Yii::t($module->messageCategory, 'Menu item'),
+			'action' => \Yii::t($module->messageCategory, 'List'),
+		]),
 	]), ['menu/items', 'mid' => $superior['id']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
 <!-- end admin-title -->

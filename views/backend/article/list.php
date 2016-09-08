@@ -48,7 +48,10 @@ $statusClasses = ['text-muted', 'text-warning', 'text-success', 'text-primary'];
 		</div>
 		<div class="form-group">
 			<?= Html::listBox('stype', $stype, [
-				'title' => \Yii::t($module->messageCategory, 'Article') . \Yii::t($module->messageCategory, 'Title'),
+				'title' => \Yii::t($module->messageCategory, '{attribute} {action}', [
+					'attribute' => \Yii::t($module->messageCategory, 'Article'),
+					'action' => \Yii::t($module->messageCategory, 'Title'),
+				]),
 			], [
 				'class' => 'form-control',
 				'size' => 1,
@@ -86,7 +89,10 @@ $statusClasses = ['text-muted', 'text-warning', 'text-success', 'text-primary'];
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Page view') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Unique visitor') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Category') . \Yii::t($module->messageCategory, 'Status') ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
+					'attribute' => \Yii::t($module->messageCategory, 'Category'),
+					'action' => \Yii::t($module->messageCategory, 'Status'),
+				]) ?></th>
 				<th class="text-center"><?= \Yii::t($module->messageCategory, 'Operations') ?></th>
 			</tr>
 		</thead>

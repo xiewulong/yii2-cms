@@ -56,7 +56,7 @@ class MenuController extends Controller {
 			'error' => !$done,
 			'message' => $done ? null : \Yii::t($this->module->messageCategory, 'No matched data') . ', ' . \Yii::t($this->module->messageCategory, 'Please {action} {attribute} first', [
 				'action' => \Yii::t($this->module->messageCategory, 'Add'),
-				'attribute' => \Yii::t($this->module->messageCategory, 'Menu Group'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'Menu group'),
 			]),
 			'data' => $items,
 		]);
