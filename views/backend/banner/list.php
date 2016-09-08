@@ -60,7 +60,10 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<thead>
 			<tr>
 				<!-- <th width="6%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th> -->
-				<th width="20%"><?= \Yii::t($module->messageCategory, 'Banner') . \Yii::t($module->messageCategory, 'Name') ?></th>
+				<th width="20%"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
+					'attribute' => \Yii::t($module->messageCategory, 'Banner'),
+					'action' => \Yii::t($module->messageCategory, 'Name'),
+				]) ?></th>
 				<th width="10%"><?= \Yii::t($module->messageCategory, 'Position') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
 					'attribute' => \Yii::t($module->messageCategory, 'Banner item'),

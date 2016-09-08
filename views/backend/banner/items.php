@@ -45,7 +45,10 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		</div>
 		<div class="form-group">
 			<?= Html::listBox('stype', $stype, [
-				'title' => \Yii::t($module->messageCategory, 'Banner item') . \Yii::t($module->messageCategory, 'Title'),
+				'title' => \Yii::t($module->messageCategory, '{attribute} {action}', [
+					'attribute' => \Yii::t($module->messageCategory, 'Banner item'),
+					'action' => \Yii::t($module->messageCategory, 'Title'),
+				]),
 			], [
 				'class' => 'form-control',
 				'size' => 1,
