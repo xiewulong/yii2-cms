@@ -132,7 +132,7 @@ class ArticleController extends Controller {
 			if($item->load(\Yii::$app->request->post()) && $item->commonHandler()) {
 				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
 
-				return $this->redirect(['article/list']);
+				return $this->redirect(['article/list', 'cid' => $item->category_id]);
 			}
 			\Yii::$app->session->setFlash('item', '1|' . $item->firstErrorInfirstErrors);
 		}

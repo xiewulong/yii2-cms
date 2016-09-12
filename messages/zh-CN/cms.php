@@ -20,6 +20,7 @@ return [
 	'Batch' => '批量',
 	'Basic' => '基础设置',
 	'Brief' => '简介',
+	'Business' => '业务',
 	'Category' => '分类',
 	'Category id' => '分类ID',
 	'Choose' => '选择',

@@ -105,9 +105,9 @@ FrontendAsset::register($this);
 			<div class="col-xs-8 contact">
 				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Contact us')) ?>
 				<div class="row">
-					<div class="col-xs-6"><?= \Yii::t($module->messageCategory, '{action} {attribute}', [
+					<div class="col-xs-6"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
+						'attribute' => \Yii::t($module->messageCategory, 'Business'),
 						'action' => \Yii::t($module->messageCategory, 'Contact'),
-						'attribute' => \Yii::t($module->messageCategory, 'Phone'),
 					]) ?>：<?= $site['phone'] ?></div>
 					<div class="col-xs-6"><?= Yii::t($module->messageCategory, '{action} {attribute}', [
 						'action' => \Yii::t($module->messageCategory, 'Company'),

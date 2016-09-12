@@ -13,6 +13,8 @@ class Home extends Ul {
 
 	public $headingEnabled = true;
 
+	public $aliasToIcon = false;
+
 	public $keywordsToIcon = false;
 
 	public function init() {
@@ -61,6 +63,8 @@ class Home extends Ul {
 				$_options = [];
 				if(isset($item['thumbnail_id']) && $item['thumbnail_id']) {
 					$_content[] = Html::tag('b', Html::img($this->createImageRoute($item['thumbnail_id'])));
+				} else if($this->aliasToIcon && isset($item['alias']) && $item['alias']) {
+					$_content[] = Html::tag('b', Html::tag('i', null, ['class' => 'fa fa-' . $item['alias']]));
 				} else if($this->keywordsToIcon && isset($item['keywords']) && $item['keywords']) {
 					$_content[] = Html::tag('b', Html::tag('i', null, ['class' => 'fa fa-' . $item['keywords']]));
 				}

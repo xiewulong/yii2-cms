@@ -1,5 +1,8 @@
 /* x-header */
 .x-header {
+	position: relative;
+	z-index: $z-index-header;
+
 	h1 {
 		margin: 0;
 		padding: 10px 0;
@@ -40,23 +43,35 @@
 				color: $color-secondary;
 			}
 
-			// &:before {
-			// 	content: '|';
-			// 	color: $color-primary;
-			// 	position: absolute;
-			// 	left: 0;
-			// 	top: 0;
-			// 	font-size: 18px;
-			// }
-
-			// &:first-child {
-			// 	&:before {
-			// 		content: '';
-			// 	}
-			// }
-
 			> .dropdown {
+				position: absolute;
+				left: 0;
+				top: 100%;
 				display: none;
+				background-color: #fff;
+
+				> ul {
+					padding: 0;
+
+					> li {
+						height: 40px;
+						line-height: 40px;
+						padding: 0;
+
+						a {
+							word-break: keep-all;
+							white-space: nowrap;
+						}
+
+						> a {
+							padding: 0 10px;
+						}
+					}
+				}
+			}
+
+			&:hover .dropdown {
+				display: block;
 			}
 		}
 	}
