@@ -37,17 +37,14 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 <?= Home::widget([
 	'siteId' => $module->siteId,
 	'type' => 1,
-	'position' => 'Home_projects',
+	'position' => 'Home_advantages',
 	'targetBlank' => true,
-	'targetEnabled' => true,
-	'targetListLimit' => 6,
-	'targetMore' => false,
-	'keywordsToIcon' => true,
+	'aliasToIcon' => true,
 	'options' => [
 		'class' => 'x-home',
 	],
 	'listOptions' => [
-		'class' => 'projects',
+		'class' => 'advantages',
 	],
 ]) ?>
 
@@ -56,14 +53,17 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 <?= Home::widget([
 	'siteId' => $module->siteId,
 	'type' => 1,
-	'position' => 'Home_advantages',
+	'position' => 'Home_projects',
 	'targetBlank' => true,
-	'aliasToIcon' => true,
+	'targetEnabled' => true,
+	'targetListLimit' => 6,
+	'targetMore' => false,
+	'keywordsToIcon' => true,
 	'options' => [
 		'class' => 'x-home x-home-inverse x-wave x-wave-top-concave x-wave-bottom-concave',
 	],
 	'listOptions' => [
-		'class' => 'advantages',
+		'class' => 'projects',
 	],
 ]) ?>
 
