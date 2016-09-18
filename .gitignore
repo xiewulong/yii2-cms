@@ -1,6 +1,3 @@
-# nohup
-nohup.out
-
-# sass
-.sass-cache
-sass.out
+# node
+node_modules/
+npm-debug.log

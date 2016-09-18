@@ -1,7 +1,1 @@
-{
-"version": 3,
-"mappings": "AAAA;;;;;GAKG",
-"sources": ["../../scss/backend.scss"],
-"names": [],
-"file": "backend.min.css"
-}
+{"version":3,"file":"backend.min.css","sources":["backend.scss"],"sourcesContent":["/*!\n * backend\n * xiewulong <xiewulong@vip.qq.com>\n * create: 2016/8/8\n * since: 0.0.1\n */\n"],"mappings":"AAAA;;;;;GAKG","names":[],"sourceRoot":"/source/"}

@@ -1,0 +1,32 @@
+{
+  "name": "yii2-cms",
+  "version": "0.0.1",
+  "description": "yii2 cms module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiewulong/yii2-cms.git"
+  },
+  "keywords": [
+    "yii2",
+    "cms"
+  ],
+  "author": {
+    "name": "xiewulong",
+    "email": "xiewulong@vip.qq.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xiewulong/yii2-cms/issues"
+  },
+  "homepage": "https://github.com/xiewulong/yii2-cms#readme",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-load-plugins": "^1.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-webpack": "^1.5.0"
+  }
+}
