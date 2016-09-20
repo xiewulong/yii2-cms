@@ -1,3 +1,9 @@
+/*!
+ * frontend
+ * xiewulong <xiewulong@vip.qq.com>
+ * create: 2016/8/8
+ * since: 0.0.1
+ */
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -152,11 +158,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		});
 	};
 })(jQuery);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /*!
  * captcha
@@ -187,7 +188,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}, {
 			key: 'refresh',
 			value: function refresh() {
-				var _this = this;
+				var _this3 = this;
 
 				$.ajax({
 					url: this.url,
@@ -195,7 +196,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					method: 'get',
 					dataType: 'json',
 					success: function success(d) {
-						d.url && _this.src(d.url);
+						d.url && _this3.src(d.url);
 					}
 				});
 			}

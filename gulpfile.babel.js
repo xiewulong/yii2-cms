@@ -21,14 +21,30 @@ const config = {
 		src: path.join(basePath, 'js'),
 		dist: path.join(basePath, 'dist', 'js'),
 		concat: {
-			'backend.js': [
-				'user.js',
-				'form.js',
-			],
-			'frontend.js': [
-				'carousel.js',
-				'captcha.js',
-			],
+			'backend.js': {
+				header: {
+					author: 'xiewulong',
+					email: 'xiewulong@vip.qq.com',
+					create: '2016/8/8',
+					since: '0.0.1',
+				},
+				deps: [
+					'user.js',
+					'form.js',
+				],
+			},
+			'frontend.js': {
+				header: {
+					author: 'xiewulong',
+					email: 'xiewulong@vip.qq.com',
+					create: '2016/8/8',
+					since: '0.0.1',
+				},
+				deps: [
+					'carousel.js',
+					'captcha.js',
+				],
+			},
 		},
 	},
 };
@@ -54,23 +70,40 @@ gulp.task(_ns('scss'), function() {
 let jsTasks = [];
 let jsWatchConfigs = [];
 for(let distName of Object.keys(config.js.concat)) {
+	let concatConfig = config.js.concat[distName];
 	let jsTask = _ns('babel:concat:' + distName);
 	let globs = [];
-	config.js.concat[distName].forEach((file) => {
+	concatConfig.deps.forEach((file) => {
 		globs.push(path.join(config.js.src, file));
 	});
 	gulp.task(jsTask, function() {
 		gulp.src(globs)
 			.pipe(plugins.sourcemaps.init())
-			.pipe(plugins.babel())
 			.pipe(plugins.concat(distName))
+			.pipe(plugins.babel())
+			.pipe(plugins.header([
+				'/*!',
+				' * ' + distName.replace('.js', ''),
+				' * ' + concatConfig.header.author + ' <' + concatConfig.header.email + '>',
+				' * create: ' + concatConfig.header.create,
+				' * since: ' + concatConfig.header.since,
+				' */',
+			].join('\n') + '\n'))
 			.pipe(plugins.sourcemaps.write('.'))
 			.pipe(gulp.dest(config.js.dist));
 		gulp.src(globs)
 			.pipe(plugins.sourcemaps.init())
-			.pipe(plugins.babel())
 			.pipe(plugins.concat(distName))
+			.pipe(plugins.babel())
 			.pipe(plugins.uglify())
+			.pipe(plugins.header([
+				'/*!',
+				' * ' + distName.replace('.js', ' minify'),
+				' * ' + concatConfig.header.author + ' <' + concatConfig.header.email + '>',
+				' * create: ' + concatConfig.header.create,
+				' * since: ' + concatConfig.header.since,
+				' */',
+			].join('\n') + '\n'))
 			.pipe(plugins.rename(function(path) {
 				path.basename += '.min';
 			}))
