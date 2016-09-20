@@ -12,7 +12,7 @@ const PLUGINS = require('gulp-load-plugins')();
 const BASE_PATH = __dirname;
 const CONFIG = {
 	css: {
-		src: PATH.join(BASE_PATH, 'scss', '*.scss'),
+		src: PATH.join(BASE_PATH, 'scss', '**', '*.scss'),
 		dist: PATH.join(BASE_PATH, 'dist', 'css'),
 		outputStyles: ['compact', 'compressed'],
 	},
