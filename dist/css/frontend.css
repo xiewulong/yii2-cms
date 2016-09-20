@@ -3,21 +3,21 @@
 /* bootstrap reset */
 a { color: #222; }
 
-a:hover, a:focus { color: #02294a; text-decoration: none; }
+a:hover, a:focus { color: #0a3f89; text-decoration: none; }
 
 a:focus { outline: 0; outline-offset: 0; }
 
 .btn { border-radius: 17px; padding-left: 30px; padding-right: 30px; }
 
-.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:focus, .btn-primary.active.focus { background-color: #02294a; border-color: #02294a; }
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:focus, .btn-primary.active.focus { background-color: #0a3f89; border-color: #0a3f89; }
 
 .btn-lg { border-radius: 23px; padding-left: 45px; padding-right: 45px; }
 
 .pagination { margin: 0; }
 
-.pagination > li > a, .pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span, .pagination > li > span:hover, .pagination > li > span:focus { color: #02294a; }
+.pagination > li > a, .pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span, .pagination > li > span:hover, .pagination > li > span:focus { color: #0a3f89; }
 
-.pagination > li.active > a, .pagination > li.active > a:hover, .pagination > li.active > a:focus, .pagination > li.active > span, .pagination > li.active > span:hover, .pagination > li.active > span:focus { color: #fff; background-color: #02294a; border-color: #02294a; }
+.pagination > li.active > a, .pagination > li.active > a:hover, .pagination > li.active > a:focus, .pagination > li.active > span, .pagination > li.active > span:hover, .pagination > li.active > span:focus { color: #fff; background-color: #0a3f89; border-color: #0a3f89; }
 
 .non-responsive { min-width: 970px; }
 
@@ -46,7 +46,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-header ul > li a { float: left; font-size: 16px; }
 
-.x-header ul > li a:hover, .x-header ul > li.current > a { color: #fe7000; }
+.x-header ul > li a:hover, .x-header ul > li.current > a { color: #fa7800; }
 
 .x-header ul > li > .dropdown { position: absolute; left: 0; top: 100%; display: none; background-color: #fff; }
 
@@ -61,7 +61,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 .x-header ul > li:hover .dropdown { display: block; }
 
 /* x-footer */
-.x-footer { color: #fff; padding: 100px 0 20px; background-color: #02294a; }
+.x-footer { color: #fff; padding: 100px 0 20px; background-color: #0a3f89; }
 
 .x-footer h5 { margin: 0; font-size: 20px; font-weight: 700; padding-bottom: 40px; }
 
@@ -71,7 +71,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-footer .follow p { margin: 0; overflow: hidden; }
 
-.x-footer .follow p a { float: left; width: 40px; height: 40px; overflow: hidden; background-color: #fff; border-radius: 50%; text-align: center; line-height: 40px; font-size: 24px; color: #02294a; margin: 0 10px; }
+.x-footer .follow p a { float: left; width: 40px; height: 40px; overflow: hidden; background-color: #fff; border-radius: 50%; text-align: center; line-height: 40px; font-size: 24px; color: #0a3f89; margin: 0 10px; }
 
 .x-footer .contact { font-size: 14px; word-break: break-all; word-wrap: break-word; white-space: normal; }
 
@@ -117,7 +117,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-carousel ol li { display: inline-block; width: 15px; height: 15px; border-radius: 50%; background-color: #f8f8f8; margin: 0 4px; cursor: pointer; }
 
-.x-carousel ol li.x-icons-carousel-panel-current { background-color: #02294a; }
+.x-carousel ol li.x-icons-carousel-panel-current { background-color: #0a3f89; }
 
 /* x-crumbs */
 .x-crumbs { font-size: 15px; font-weight: 700; padding: 10px 0; }
@@ -130,7 +130,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-crumbs ul li.heading:before, .x-crumbs ul li.home:before { content: ''; margin-left: 0; }
 
-.x-crumbs-arc { height: 35px; background-color: #02294a; }
+.x-crumbs-arc { height: 35px; background-color: #0a3f89; }
 
 /* x-home */
 .x-home { padding: 30px 0; }
@@ -141,9 +141,9 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home .heading h5 { font-size: 22px; margin: 0; padding: 0; }
 
-.x-home .heading small { font-size: 18px; padding-left: 10px; margin-left: 10px; border-left: 4px solid #fe7000; }
+.x-home .heading small { font-size: 18px; padding-left: 10px; margin-left: 10px; border-left: 4px solid #fa7800; }
 
-.x-home .heading span { position: absolute; bottom: 0; left: 50%; height: 3px; background-color: #02294a; width: 50px; margin-left: -25px; display: none; }
+.x-home .heading span { position: absolute; bottom: 0; left: 50%; height: 3px; background-color: #0a3f89; width: 50px; margin-left: -25px; display: none; }
 
 .x-home ul { margin: 0; padding: 0; list-style: none; }
 
@@ -161,17 +161,17 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home ul.projects li { width: 16.66666667%; text-align: center; font-size: 14px; line-height: 1.8; }
 
-.x-home ul.projects li a b { display: inline-block; color: #fff; width: 100px; height: 100px; line-height: 100px; font-size: 50px; border-radius: 50%; background-color: #02294a; }
+.x-home ul.projects li a b { display: inline-block; color: #fff; width: 100px; height: 100px; line-height: 100px; font-size: 50px; border-radius: 50%; background-color: #0a3f89; }
 
 .x-home ul.projects li a b img { vertical-align: top; }
 
-.x-home ul.projects li a .title { color: #fe7000; margin-top: 10px; }
+.x-home ul.projects li a .title { color: #fa7800; margin-top: 10px; }
 
-.x-home ul.projects li a .alias { color: #02294a; }
+.x-home ul.projects li a .alias { color: #0a3f89; }
 
 .x-home ul.projects li a .description { display: none; }
 
-.x-home ul.projects li a:hover b { color: #fe7000; }
+.x-home ul.projects li a:hover b { color: #fa7800; }
 
 .x-home ul.about { padding: 30px 0 50px; }
 
@@ -181,23 +181,23 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home ul.about li a .description { font-size: 14px; text-indent: 28px; text-align: justify; }
 
-.x-home ul.about li a:hover { color: #fe7000; }
+.x-home ul.about li a:hover { color: #fa7800; }
 
-.x-home ul.advantages { padding: 80px 0 60px; }
+.x-home ul.advantages { padding: 80px 15% 60px; }
 
 .x-home ul.advantages li { width: 33.33333334%; text-align: center; font-size: 14px; line-height: 1.8; }
 
-.x-home ul.advantages li a b { display: inline-block; color: #fff; width: 100px; height: 100px; line-height: 100px; font-size: 50px; border-radius: 50%; background-color: #02294a; }
+.x-home ul.advantages li a b { display: inline-block; color: #fff; width: 100px; height: 100px; line-height: 100px; font-size: 50px; border-radius: 50%; background-color: #0a3f89; }
 
 .x-home ul.advantages li a b img { vertical-align: top; }
 
-.x-home ul.advantages li a .title { color: #fe7000; margin-top: 10px; }
+.x-home ul.advantages li a .title { color: #fa7800; margin-top: 10px; }
 
 .x-home ul.advantages li a .alias { display: none; }
 
 .x-home ul.advantages li a .description { color: #fff; }
 
-.x-home ul.advantages li a:hover b { color: #fe7000; }
+.x-home ul.advantages li a:hover b { color: #fa7800; }
 
 .x-home ul.news { padding: 25px 0 50px; }
 
@@ -205,9 +205,9 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home ul.news li a b, .x-home ul.news li a .alias, .x-home ul.news li a .description { display: none; }
 
-.x-home ul.news li a:before { content: '\f29c'; font-family: FontAwesome; float: left; margin-right: 30px; font-size: 24px; color: #02294a; }
+.x-home ul.news li a:before { content: '\f29c'; font-family: FontAwesome; float: left; margin-right: 30px; font-size: 24px; color: #0a3f89; }
 
-.x-home ul.news li a:hover:before { color: #fe7000; }
+.x-home ul.news li a:hover:before { color: #fa7800; }
 
 .x-home ul.links { padding: 50px 0; }
 
@@ -217,11 +217,11 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home ul.links li a .title, .x-home ul.links li a .alias, .x-home ul.links li a .description { display: none; }
 
-.x-home ul.links li a:hover b { border-color: #02294a; }
+.x-home ul.links li a:hover b { border-color: #0a3f89; }
 
 .x-home .more { text-align: center; }
 
-.x-home-inverse { padding: 100px 0 80px; background-color: #02294a; }
+.x-home-inverse { padding: 100px 0 80px; background-color: #0a3f89; }
 
 .x-home-inverse .heading h5, .x-home-inverse .heading small { color: #fff; }
 
@@ -232,7 +232,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 /* x-sidebar */
 .x-sidebar { background-color: #fff; margin-top: -60px; position: relative; z-index: 98; padding: 0 30px 15px 0; }
 
-.x-sidebar .heading, .x-sidebar ul { background-color: #02294a; }
+.x-sidebar .heading, .x-sidebar ul { background-color: #0a3f89; }
 
 .x-sidebar .heading { padding: 30px 0 0 30px; }
 
@@ -254,7 +254,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-sidebar ul li a:after { content: '\e258'; right: -35px; font-size: 42px; width: 42px; height: 100%; }
 
-.x-sidebar ul li.current a { background-color: #fff; color: #02294a; }
+.x-sidebar ul li.current a { background-color: #fff; color: #0a3f89; }
 
 .x-sidebar ul li.current a:before, .x-sidebar ul li.current a:after { display: block; }
 
@@ -273,7 +273,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-list-1 ul li a:before, .x-list-3 ul li a:before, .x-list-4 ul li a:before, .x-list-5 ul li a:before { content: '\e250'; font-family: 'Glyphicons Halflings'; float: left; font-size: 10px; margin: 0 10px; }
 
-.x-list-1 ul li a:hover .download, .x-list-1 ul li a:hover:before, .x-list-3 ul li a:hover .download, .x-list-3 ul li a:hover:before, .x-list-4 ul li a:hover .download, .x-list-4 ul li a:hover:before, .x-list-5 ul li a:hover .download, .x-list-5 ul li a:hover:before { color: #fe7000; }
+.x-list-1 ul li a:hover .download, .x-list-1 ul li a:hover:before, .x-list-3 ul li a:hover .download, .x-list-3 ul li a:hover:before, .x-list-4 ul li a:hover .download, .x-list-4 ul li a:hover:before, .x-list-5 ul li a:hover .download, .x-list-5 ul li a:hover:before { color: #fa7800; }
 
 /* x-pagination */
 .x-pagination { text-align: right; padding-right: 30px; }
