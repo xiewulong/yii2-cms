@@ -28,8 +28,8 @@ const CONFIG = {
 					since: '0.0.1',
 				},
 				deps: [
-					'user.js',
-					'form.js',
+					'backend.user.js',
+					'backend.form.js',
 				],
 			},
 			'frontend.js': {
@@ -40,8 +40,8 @@ const CONFIG = {
 					since: '0.0.1',
 				},
 				deps: [
-					'carousel.js',
-					'captcha.js',
+					'frontend.carousel.js',
+					'frontend.captcha.js',
 				],
 			},
 		},

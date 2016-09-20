@@ -11,7 +11,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /*!
- * user
+ * backend.user
  * xiewulong <xiewulong@vip.qq.com>
  * create: 2016/8/8
  * since: 0.0.1
@@ -97,7 +97,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(jQuery, window, document);
 
 /*!
- * form
+ * backend.form
  * xiewulong <xiewulong@vip.qq.com>
  * create: 2016/8/8
  * since: 0.0.1
