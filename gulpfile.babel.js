@@ -56,6 +56,7 @@ GULP.task(_ns('scss'), function() {
 		GULP.src(CONFIG.css.src)
 			.pipe(PLUGINS.sourcemaps.init())
 			.pipe(PLUGINS.sass({outputStyle: style}).on('error', PLUGINS.sass.logError))
+			.pipe(PLUGINS.autoprefixer())
 			.pipe(PLUGINS.rename(function(path) {
 				if(style == 'compressed') {
 					path.basename += '.min';
