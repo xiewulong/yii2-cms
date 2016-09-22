@@ -111,7 +111,7 @@ $statusClasses = ['text-muted', 'text-warning', 'text-success', 'text-primary'];
 				<td class="text-center">
 					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['article/edit', 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['/article/delete'], ['data-delete' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['article/delete'], ['data-delete' => $item['id']]) ?>
 				</td>
 			</tr>
 			<? } ?>
