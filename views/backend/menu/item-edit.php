@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\attachment\widgets\Attachment;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
@@ -58,6 +59,21 @@ $this->params['route'] = $module->url('menu/list');
 					'class' => 'form-control',
 					'placeholder' => $item->getAttributeHint('description'),
 					'autofocus' => $item->isFirstErrorAttribute('description'),
+				]) ?>
+			</div>
+		</div>
+		<div class="form-group picture_id">
+			<?= Html::activeLabel($item, 'picture_id', ['class' => 'control-label col-sm-2']) ?>
+			<div class="col-sm-4">
+				<?= Attachment::widget([
+					'model' => $item,
+					'attribute' => 'picture_id',
+					'uploadAction' => $module->url('attachment/upload'),
+					'loadAction' => $module->url('attachment'),
+					'options' => [
+						'class' => 'glyphicon glyphicon-picture admin-attachment J-admin-attachment',
+						'style' => 'width:80px;height:80px;',
+					],
 				]) ?>
 			</div>
 		</div>
