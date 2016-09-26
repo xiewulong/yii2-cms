@@ -61,7 +61,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 .x-header ul > li:hover .dropdown { display: block; }
 
 /* x-footer */
-.x-footer { color: #fff; padding: 100px 0 20px; background-color: #0a3f89; }
+.x-footer { color: #fff; padding: 80px 0 20px; background-color: #0a3f89; }
 
 .x-footer h5 { margin: 0; font-size: 20px; font-weight: 700; padding-bottom: 40px; }
 
@@ -199,7 +199,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home ul.advantages li a:hover b { color: #fa7800; }
 
-.x-home ul.news { padding: 25px 0 50px; }
+.x-home ul.news { padding: 25px 0 50px; min-height: 275px; }
 
 .x-home ul.news li { font-size: 14px; width: 50%; height: 50px; line-height: 50px; overflow: hidden; padding-left: 30px; }
 
@@ -228,6 +228,8 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 .x-home-inverse .heading span { background-color: #fff; }
 
 .x-home-inverse ul li a { color: #fff; }
+
+.x-home-mt20 { margin-top: 20px; }
 
 /* x-sidebar */
 .x-sidebar { background-color: #fff; margin-top: -60px; position: relative; z-index: 98; padding: 0 30px 15px 0; }

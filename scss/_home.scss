@@ -228,6 +228,7 @@
 
 		&.news {
 			padding: 25px 0 50px;
+			min-height: 275px;
 
 			li {
 				font-size: 14px;
@@ -318,5 +319,9 @@
 				}
 			}
 		}
+	}
+
+	&-mt20 {
+		margin-top: 20px;
 	}
 }
