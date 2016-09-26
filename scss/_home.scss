@@ -165,6 +165,7 @@
 					}
 
 					.title {
+						font-size: 15px;
 						color: $color-secondary;
 						margin-top: 10px;
 					}
@@ -244,11 +245,11 @@
 					}
 
 					&:before {
-						content: '\f29c';
+						content: '\f101';
 						font-family: FontAwesome;
+						font-size: 16px;
 						float: left;
-						margin-right: 30px;
-						font-size: 24px;
+						margin-right: 10px;
 						color: $color-primary;
 					}
 

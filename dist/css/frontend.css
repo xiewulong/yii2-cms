@@ -97,7 +97,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 .x-wave-bottom-concave:after { content: ''; background-position: 50% 0; }
 
 /* x-carousel */
-.x-carousel { height: 450px; overflow: hidden; }
+.x-carousel { height: 350px; overflow: hidden; }
 
 .x-carousel, .x-carousel ul { position: relative; }
 
@@ -191,7 +191,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home ul.advantages li a b img { vertical-align: top; }
 
-.x-home ul.advantages li a .title { color: #fa7800; margin-top: 10px; }
+.x-home ul.advantages li a .title { font-size: 15px; color: #fa7800; margin-top: 10px; }
 
 .x-home ul.advantages li a .alias { display: none; }
 
@@ -205,7 +205,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home ul.news li a b, .x-home ul.news li a .alias, .x-home ul.news li a .description { display: none; }
 
-.x-home ul.news li a:before { content: '\f29c'; font-family: FontAwesome; float: left; margin-right: 30px; font-size: 24px; color: #0a3f89; }
+.x-home ul.news li a:before { content: '\f101'; font-family: FontAwesome; font-size: 16px; float: left; margin-right: 10px; color: #0a3f89; }
 
 .x-home ul.news li a:hover:before { color: #fa7800; }
 
