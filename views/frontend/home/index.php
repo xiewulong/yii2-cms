@@ -19,6 +19,22 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 	<?= Home::widget([
 		'siteId' => $module->siteId,
 		'type' => 1,
+		'position' => 'Home_advantages',
+		'targetBlank' => true,
+		'aliasToIcon' => true,
+		'options' => [
+			'class' => 'x-home',
+		],
+		'listOptions' => [
+			'class' => 'advantages',
+		],
+	]) ?>
+
+	<?= $module->hook('Hook_home_0') ?>
+
+	<?= Home::widget([
+		'siteId' => $module->siteId,
+		'type' => 1,
 		'position' => 'Home_news',
 		'targetBlank' => true,
 		'targetEnabled' => true,
@@ -32,22 +48,6 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 		],
 		'listOptions' => [
 			'class' => 'news',
-		],
-	]) ?>
-
-	<?= $module->hook('Hook_home_0') ?>
-
-	<?= Home::widget([
-		'siteId' => $module->siteId,
-		'type' => 1,
-		'position' => 'Home_advantages',
-		'targetBlank' => true,
-		'aliasToIcon' => true,
-		'options' => [
-			'class' => 'x-home',
-		],
-		'listOptions' => [
-			'class' => 'advantages',
 		],
 	]) ?>
 
