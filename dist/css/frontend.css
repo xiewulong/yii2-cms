@@ -157,7 +157,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home ul li a b img { width: 100%; height: 100%; }
 
-.x-home ul.projects { padding: 80px 0 60px; }
+.x-home ul.projects { padding: 60px 0 45px; }
 
 .x-home ul.projects li { width: 16.66666667%; text-align: center; font-size: 14px; line-height: 1.8; }
 
@@ -221,7 +221,7 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home .more { text-align: center; }
 
-.x-home-inverse { padding: 100px 0 80px; background-color: #0a3f89; }
+.x-home-inverse { padding: 85px 0 55px; background-color: #0a3f89; }
 
 .x-home-inverse .heading h5, .x-home-inverse .heading small { color: #fff; }
 
