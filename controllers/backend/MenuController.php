@@ -147,7 +147,7 @@ class MenuController extends Controller {
 		}
 		$query = SiteModuleItem::find()
 			->where(['site_id' => $this->module->siteId, 'module_id' => $mid])
-			->orderby('list_order desc, created_at desc');
+			->orderby('list_order desc, created_at');
 
 		if($sword !== null) {
 			$query->andWhere(['like', "$stype", $sword]);
