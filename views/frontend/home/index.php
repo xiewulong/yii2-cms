@@ -35,10 +35,9 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 	<?= Home::widget([
 		'siteId' => $module->siteId,
 		'type' => 1,
-		'position' => 'Home_news',
+		'position' => 'Home_about',
 		'targetBlank' => true,
 		'targetEnabled' => true,
-		'targetListLimit' => 8,
 		'targetMoreText' => \Yii::t($module->messageCategory, 'See more'),
 		'targetMoreOptions' => [
 			'class' => 'btn btn-primary btn-lg',
@@ -47,7 +46,7 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 			'class' => 'x-home',
 		],
 		'listOptions' => [
-			'class' => 'news',
+			'class' => 'about',
 		],
 	]) ?>
 
@@ -79,9 +78,10 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 	<?= Home::widget([
 		'siteId' => $module->siteId,
 		'type' => 1,
-		'position' => 'Home_about',
+		'position' => 'Home_news',
 		'targetBlank' => true,
 		'targetEnabled' => true,
+		'targetListLimit' => 8,
 		'targetMoreText' => \Yii::t($module->messageCategory, 'See more'),
 		'targetMoreOptions' => [
 			'class' => 'btn btn-primary btn-lg',
@@ -90,7 +90,7 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 			'class' => 'x-home',
 		],
 		'listOptions' => [
-			'class' => 'about',
+			'class' => 'news',
 		],
 	]) ?>
 
