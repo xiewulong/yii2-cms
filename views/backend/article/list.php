@@ -103,11 +103,11 @@ $statusClasses = ['text-muted', 'text-warning', 'text-success', 'text-primary'];
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
 				<td><?= Html::a($item['title'], $module->getFrontendUrl(['/article/details', 'id' => $item['id']]), ['target' => '_blank']) ?></td>
 				<td><?= Html::a($item['category']['name'], ['category/list', 'keyword' => $item['category']['name']]) ?></td>
-				<td class="text-center"><?= \Yii::t($module->messageCategory, $item['category']->getAttributeText('type')) ?></td>
+				<td class="text-center"><?= $item['category']->getAttributeText('type') ?></td>
 				<td class="text-center"><?= $item['pv'] ?></td>
 				<td class="text-center"><?= $item['uv'] ?></td>
-				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
-				<td class="text-center <?= $categoryStatusClasses[$item['category']['status']] ?>"><?= \Yii::t($module->messageCategory, $item['category']->getAttributeText('status')) ?></td>
+				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= $item->getAttributeText('status') ?></td>
+				<td class="text-center <?= $categoryStatusClasses[$item['category']['status']] ?>"><?= $item['category']->getAttributeText('status') ?></td>
 				<td class="text-center">
 					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['article/edit', 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>

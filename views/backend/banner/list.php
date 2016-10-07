@@ -91,7 +91,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<td class="text-center"><?= Html::a($item['itemQuantity'], ['banner/items', 'mid' => $item['id']]) ?></td>
 				<td class="text-center"><?= $item['itemTotalPageView'] ?></td>
 				<td class="text-center"><?= $item['itemTotalUniqueVisitor'] ?></td>
-				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
+				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= $item->getAttributeText('status') ?></td>
 				<td class="text-center">
 					<?= Html::a(\Yii::t($module->messageCategory, 'Add') . \Yii::t($module->messageCategory, 'Banner item'), ['banner/item-edit', 'mid' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>

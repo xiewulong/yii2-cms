@@ -107,12 +107,12 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<td class="text-center"><?= Html::textInput('items[' . $item['id'] . '][list_order]', $item['list_order'], ['class' => 'form-control text-center']) ?></td>
 				<td><?= Html::a($item['title'], ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
 				<td><?= Html::a(Html::img($module->attachmentRoute($item['picture_id']), ['class' => 'admin-image-limit']), ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
-				<td class="text-center"><?= \Yii::t($module->messageCategory, $item->getAttributeText('type')) ?></td>
+				<td class="text-center"><?= $item->getAttributeText('type') ?></td>
 				<td class="text-center"><?= $item['pv'] ?></td>
 				<td class="text-center"><?= $item['uv'] ?></td>
 				<td><?= Html::encode($superior['name']) ?></td>
-				<td class="text-center <?= $statusClasses[$superior['status']] ?>"><?= \Yii::t($module->messageCategory, $superior->getAttributeText('status')) ?></td>
-				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= \Yii::t($module->messageCategory, $item->getAttributeText('status')) ?></td>
+				<td class="text-center <?= $statusClasses[$superior['status']] ?>"><?= $superior->getAttributeText('status') ?></td>
+				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= $item->getAttributeText('status') ?></td>
 				<td class="text-center">
 					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['banner/item-edit', 'mid' => $superior['id'], 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
