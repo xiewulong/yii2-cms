@@ -59,11 +59,6 @@ $sidebar = array_merge([
 		'url' => [$module->url('global/site')],
 	],
 	[
-		'text' => \Yii::t($module->messageCategory, 'Menu'),
-		'icon' => 'glyphicon glyphicon-menu-hamburger',
-		'url' => [$module->url('menu/list')],
-	],
-	[
 		'text' => \Yii::t($module->messageCategory, 'Category'),
 		'icon' => 'glyphicon glyphicon glyphicon-th-list',
 		'url' => [$module->url('category/list')],
@@ -72,6 +67,11 @@ $sidebar = array_merge([
 		'text' => \Yii::t($module->messageCategory, 'Article'),
 		'icon' => 'glyphicon glyphicon glyphicon-pencil',
 		'url' => [$module->url('article/list')],
+	],
+	[
+		'text' => \Yii::t($module->messageCategory, 'Menu'),
+		'icon' => 'glyphicon glyphicon-menu-hamburger',
+		'url' => [$module->url('menu/list')],
 	],
 	[
 		'text' => \Yii::t($module->messageCategory, 'Banner'),
