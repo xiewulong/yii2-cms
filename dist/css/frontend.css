@@ -165,13 +165,13 @@ body { color: #333; font-size: 12px; font-family: "微软雅黑", microsoft yahe
 
 .x-home ul.projects li a b img { vertical-align: top; }
 
-.x-home ul.projects li a .title { color: #fff; margin-top: 10px; font-size: 15px; }
+.x-home ul.projects li a .title { color: #fff; margin-top: 10px; font-size: 15px; font-weight: 700; }
 
 .x-home ul.projects li a .alias { color: #0a3f89; }
 
 .x-home ul.projects li a .description { display: none; }
 
-.x-home ul.projects li a:hover b { color: #fa7800; }
+.x-home ul.projects li a:hover b, .x-home ul.projects li a:hover .title { color: #fa7800; }
 
 .x-home ul.about { padding: 30px 0 50px; }
 

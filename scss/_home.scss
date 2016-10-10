@@ -94,9 +94,9 @@
 
 					.title {
 						color: #fff;
-						// color: $color-secondary;
 						margin-top: 10px;
 						font-size: 15px;
+						font-weight: 700;
 					}
 
 					.alias {
@@ -108,7 +108,8 @@
 					}
 
 					&:hover {
-						b {
+						b,
+						.title {
 							color: $color-secondary;
 						}
 					}
