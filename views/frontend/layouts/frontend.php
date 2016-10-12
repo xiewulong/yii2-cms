@@ -103,30 +103,30 @@ FrontendAsset::register($this);
 				<?= Html::a(Html::img($module->imageRoute($site['sub_logo_id'])), \Yii::$app->homeUrl) ?>
 			</div>
 			<div class="col-xs-8 contact">
-				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Contact us')) ?>
+				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'contact us')) ?>
 				<div class="row">
 					<div class="col-xs-6"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
-						'attribute' => \Yii::t($module->messageCategory, 'Business'),
-						'action' => \Yii::t($module->messageCategory, 'Contact'),
+						'attribute' => \Yii::t($module->messageCategory, 'business'),
+						'action' => \Yii::t($module->messageCategory, 'contact'),
 					]) ?>：<?= $site['phone'] ?></div>
 					<div class="col-xs-6"><?= Yii::t($module->messageCategory, '{action} {attribute}', [
-						'action' => \Yii::t($module->messageCategory, 'Company'),
-						'attribute' => \Yii::t($module->messageCategory, 'Tax'),
+						'action' => \Yii::t($module->messageCategory, 'company'),
+						'attribute' => \Yii::t($module->messageCategory, 'tax'),
 					]) ?>：<?= $site['tax'] ?></div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6"><?= Yii::t($module->messageCategory, '{action} {attribute}', [
-						'action' => \Yii::t($module->messageCategory, 'Company'),
-						'attribute' => \Yii::t($module->messageCategory, 'Email'),
+						'action' => \Yii::t($module->messageCategory, 'company'),
+						'attribute' => \Yii::t($module->messageCategory, 'email'),
 					]) ?>：<?= $site['email'] ?></div>
 					<div class="col-xs-6"><?= Yii::t($module->messageCategory, '{action} {attribute}', [
-						'action' => \Yii::t($module->messageCategory, 'Company'),
-						'attribute' => \Yii::t($module->messageCategory, 'Address'),
+						'action' => \Yii::t($module->messageCategory, 'company'),
+						'attribute' => \Yii::t($module->messageCategory, 'address'),
 					]) ?>：<?= $site['address'] ?></div>
 				</div>
 			</div>
 			<div class="col-xs-2 follow">
-				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'Follow us')) ?>
+				<?= Html::tag('h5', \Yii::t($module->messageCategory, 'follow us')) ?>
 				<p>
 					<?= $site['qq'] ? Html::a(Html::tag('i', null, ['class' => 'fa fa-qq']), $site['qq'], ['target' => '_blank']) : null ?>
 					<?= $site['weibo'] ? Html::a(Html::tag('i', null, ['class' => 'fa fa-weibo']), $site['weibo'], ['target' => '_blank']) : null ?>

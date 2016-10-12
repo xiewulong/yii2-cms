@@ -35,7 +35,7 @@ class LinkController extends Controller {
 			'status' => SiteModuleItem::STATUS_ENABLED,
 		]);
 		if(!$item || $item->superior->status != SiteModule::STATUS_ENABLED) {
-			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 		}
 
 		return $this->redirect($item->accessed($this->module->statisticsEnable)->link);

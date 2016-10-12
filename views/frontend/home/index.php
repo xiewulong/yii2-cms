@@ -6,7 +6,7 @@ use yii\cms\widgets\HomeIcon;
 
 $module = \Yii::$app->controller->module;
 $site = $module->site;
-$this->title = \Yii::t($module->messageCategory, 'Home');
+$this->title = \Yii::t($module->messageCategory, 'home');
 
 // set parent route
 // $this->params['route'] = [];
@@ -38,7 +38,7 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 		'position' => 'Home_about',
 		'targetBlank' => true,
 		'targetEnabled' => true,
-		'targetMoreText' => \Yii::t($module->messageCategory, 'See more'),
+		'targetMoreText' => \Yii::t($module->messageCategory, 'see more'),
 		'targetMoreOptions' => [
 			'class' => 'btn btn-primary btn-lg',
 		],
@@ -82,7 +82,7 @@ $this->title = \Yii::t($module->messageCategory, 'Home');
 		'targetBlank' => true,
 		'targetEnabled' => true,
 		'targetListLimit' => 8,
-		'targetMoreText' => \Yii::t($module->messageCategory, 'See more'),
+		'targetMoreText' => \Yii::t($module->messageCategory, 'see more'),
 		'targetMoreOptions' => [
 			'class' => 'btn btn-primary btn-lg',
 		],

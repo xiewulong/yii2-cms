@@ -176,34 +176,34 @@ class Site extends ActiveRecord {
 	 */
 	public function attributeLabels() {
 		return [
-			'id' => \Yii::t($this->messageCategory, 'Site id'),
-			'type' => \Yii::t($this->messageCategory, 'Type'),
-			'name' => \Yii::t($this->messageCategory, 'Name'),
-			'alias' => \Yii::t($this->messageCategory, 'Alias'),
-			'logo_id' => \Yii::t($this->messageCategory, 'Logo'),
-			'sub_logo_id' => \Yii::t($this->messageCategory, 'Sub logo'),
-			'brief' => \Yii::t($this->messageCategory, 'Brief'),
-			'author' => \Yii::t($this->messageCategory, 'Author') . '(SEO)',
-			'keywords' => \Yii::t($this->messageCategory, 'Keyword') . '(SEO)',
-			'description' => \Yii::t($this->messageCategory, 'Description') . '(SEO)',
-			'phone' => \Yii::t($this->messageCategory, 'Phone'),
-			'tax' => \Yii::t($this->messageCategory, 'Tax'),
-			'email' => \Yii::t($this->messageCategory, 'Email'),
-			'address' => \Yii::t($this->messageCategory, 'Address'),
+			'id' => \Yii::t($this->messageCategory, 'site id'),
+			'type' => \Yii::t($this->messageCategory, 'type'),
+			'name' => \Yii::t($this->messageCategory, 'name'),
+			'alias' => \Yii::t($this->messageCategory, 'alias'),
+			'logo_id' => \Yii::t($this->messageCategory, 'logo'),
+			'sub_logo_id' => \Yii::t($this->messageCategory, 'sub logo'),
+			'brief' => \Yii::t($this->messageCategory, 'brief'),
+			'author' => \Yii::t($this->messageCategory, 'author') . '(SEO)',
+			'keywords' => \Yii::t($this->messageCategory, 'keyword') . '(SEO)',
+			'description' => \Yii::t($this->messageCategory, 'description') . '(SEO)',
+			'phone' => \Yii::t($this->messageCategory, 'phone'),
+			'tax' => \Yii::t($this->messageCategory, 'tax'),
+			'email' => \Yii::t($this->messageCategory, 'email'),
+			'address' => \Yii::t($this->messageCategory, 'address'),
 			'qq' => \Yii::t($this->messageCategory, 'QQ'),
-			'weixin_id' => \Yii::t($this->messageCategory, 'Weixin'),
-			'weibo' => \Yii::t($this->messageCategory, 'Weibo'),
-			'copyright' => \Yii::t($this->messageCategory, 'Copyright'),
-			'powered' => \Yii::t($this->messageCategory, 'Powered by'),
-			'powered_url' => \Yii::t($this->messageCategory, 'Powered by url'),
-			'record' => \Yii::t($this->messageCategory, 'Record number'),
-			'license' => \Yii::t($this->messageCategory, 'License number'),
-			'status' => \Yii::t($this->messageCategory, 'Status'),
-			'pv' => \Yii::t($this->messageCategory, 'Page view'),
-			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
-			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
-			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
-			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
+			'weixin_id' => \Yii::t($this->messageCategory, 'weixin'),
+			'weibo' => \Yii::t($this->messageCategory, 'weibo'),
+			'copyright' => \Yii::t($this->messageCategory, 'copyright'),
+			'powered' => \Yii::t($this->messageCategory, 'powered by'),
+			'powered_url' => \Yii::t($this->messageCategory, 'powered by url'),
+			'record' => \Yii::t($this->messageCategory, 'record number'),
+			'license' => \Yii::t($this->messageCategory, 'license number'),
+			'status' => \Yii::t($this->messageCategory, 'status'),
+			'pv' => \Yii::t($this->messageCategory, 'page view'),
+			'uv' => \Yii::t($this->messageCategory, 'unique Visitor'),
+			'created_at' => \Yii::t($this->messageCategory, 'created time'),
+			'operator_id' => \Yii::t($this->messageCategory, 'operator id'),
+			'updated_at' => \Yii::t($this->messageCategory, 'updated time'),
 		];
 	}
 
@@ -212,97 +212,97 @@ class Site extends ActiveRecord {
 	 */
 	public function attributeHints() {
 		return [
-			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Site id'),
+			'id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'site id'),
 			]),
-			'type' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Type'),
+			'type' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'type'),
 			]),
-			'name' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Name'),
+			'name' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'name'),
 			]),
-			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
+			'alias' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'alias'),
 			]),
-			'logo_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Upload'),
-				'attribute' => \Yii::t($this->messageCategory, 'Logo'),
+			'logo_id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'attribute' => \Yii::t($this->messageCategory, 'logo'),
 			]),
-			'sub_logo_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Upload'),
-				'attribute' => \Yii::t($this->messageCategory, 'Sub logo'),
+			'sub_logo_id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'attribute' => \Yii::t($this->messageCategory, 'sub logo'),
 			]),
-			'brief' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Brief'),
+			'brief' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'brief'),
 			]),
-			'author' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Author'),
+			'author' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'author'),
 			]),
-			'keywords' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Keyword'),
+			'keywords' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'keyword'),
 			]),
-			'description' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Description'),
+			'description' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'description'),
 			]),
-			'phone' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Phone'),
+			'phone' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'phone'),
 			]),
-			'tax' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Tax'),
+			'tax' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'tax'),
 			]),
-			'email' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Email'),
+			'email' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'email'),
 			]),
-			'address' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Address'),
+			'address' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'address'),
 			]),
-			'qq' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
+			'qq' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'QQ'),
 			]),
-			'weixin_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Weixin'),
+			'weixin_id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'weixin'),
 			]),
-			'weibo' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Weibo'),
+			'weibo' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'weibo'),
 			]),
-			'copyright' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Copyright'),
+			'copyright' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'copyright'),
 			]),
-			'powered' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Powered by'),
+			'powered' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'powered by'),
 			]),
-			'powered_url' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Powered by url'),
+			'powered_url' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'powered by url'),
 			]),
-			'record' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Record number'),
+			'record' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'record number'),
 			]),
-			'license' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'License number'),
+			'license' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'license number'),
 			]),
-			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Status'),
+			'status' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'status'),
 			]),
 		];
 	}
@@ -316,8 +316,8 @@ class Site extends ActiveRecord {
 	public function typeItems() {
 		return [
 			[
-				static::TYPE_PERSONAL => \Yii::t($this->messageCategory, 'Personal'),
-				static::TYPE_ENTERPRISE => \Yii::t($this->messageCategory, 'Enterprise'),
+				static::TYPE_PERSONAL => \Yii::t($this->messageCategory, 'personal'),
+				static::TYPE_ENTERPRISE => \Yii::t($this->messageCategory, 'enterprise'),
 			],
 			[
 				static::TYPE_PERSONAL => [
@@ -341,8 +341,8 @@ class Site extends ActiveRecord {
 	public function statusItems() {
 		return [
 			[
-				static::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
-				static::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
+				static::STATUS_DISABLED => \Yii::t($this->messageCategory, 'disabled'),
+				static::STATUS_ENABLED => \Yii::t($this->messageCategory, 'enabled'),
 			],
 		];
 	}

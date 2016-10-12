@@ -16,7 +16,7 @@ BackendAsset::register($this);
 
 <!-- begin head -->
 <head>
-<title><?= Html::encode($this->title) ?> - <?= Html::encode(($site['name'] ? : \Yii::$app->name) . \Yii::t($module->messageCategory, 'Management System')) ?></title>
+<title><?= Html::encode($this->title) ?> - <?= Html::encode(($site['name'] ? : \Yii::$app->name) . \Yii::t($module->messageCategory, 'management system')) ?></title>
 <meta charset="<?= \Yii::$app->charset ?>" />
 <meta name="author" content="<?= $site['author'] ? : 'xiewulong<xiewulong@vip.qq.com>' ?>" />
 <meta name="keywords" content="<?= $site['keywords'] ?>" />
@@ -49,32 +49,32 @@ BackendAsset::register($this);
 <?php
 $sidebar = array_merge([
 	[
-		'text' => \Yii::t($module->messageCategory, 'Dashboard'),
+		'text' => \Yii::t($module->messageCategory, 'dashboard'),
 		'icon' => 'glyphicon glyphicon-dashboard',
 		'url' => [$module->url('dashboard/index')],
 	],
 	[
-		'text' => \Yii::t($module->messageCategory, 'Global'),
+		'text' => \Yii::t($module->messageCategory, 'global'),
 		'icon' => 'glyphicon glyphicon-globe',
 		'url' => [$module->url('global/site')],
 	],
 	[
-		'text' => \Yii::t($module->messageCategory, 'Category'),
+		'text' => \Yii::t($module->messageCategory, 'category'),
 		'icon' => 'glyphicon glyphicon glyphicon-th-list',
 		'url' => [$module->url('category/list')],
 	],
 	[
-		'text' => \Yii::t($module->messageCategory, 'Article'),
+		'text' => \Yii::t($module->messageCategory, 'article'),
 		'icon' => 'glyphicon glyphicon glyphicon-pencil',
 		'url' => [$module->url('article/list')],
 	],
 	[
-		'text' => \Yii::t($module->messageCategory, 'Menu'),
+		'text' => \Yii::t($module->messageCategory, 'menu'),
 		'icon' => 'glyphicon glyphicon-menu-hamburger',
 		'url' => [$module->url('menu/list')],
 	],
 	[
-		'text' => \Yii::t($module->messageCategory, 'Banner'),
+		'text' => \Yii::t($module->messageCategory, 'banner'),
 		'icon' => 'glyphicon glyphicon-flag',
 		'url' => [$module->url('banner/list')],
 	],
@@ -82,22 +82,22 @@ $sidebar = array_merge([
 $params = [
 	'brand' => [
 		'logo' => $module->attachmentRoute($site['logo_id']),
-		'text' => ($site['name'] ? : \Yii::$app->name) . \Yii::t($module->messageCategory, 'Management System'),
+		'text' => ($site['name'] ? : \Yii::$app->name) . \Yii::t($module->messageCategory, 'management system'),
 		'url' => [$module->url('dashboard/index')],
 	],
 	'menus' => [
 		[
-			'text' => \Yii::$app->user->identity->username,
+			'text' => \Yii::$app->user->identity->name,
 			'icon' => 'glyphicon glyphicon-user',
 			'options' => ['class' => 'pull-right border-none'],
 			'dropdown' => [
 				[
-					'text' => \Yii::t($module->messageCategory, 'Reset password'),
+					'text' => \Yii::t($module->messageCategory, 'reset password'),
 					'url' => ['/account/password/reset'],
 					'options' => ['data-password' => 'reset'],
 				],
 				[
-					'text' => \Yii::t($module->messageCategory, 'Logout'),
+					'text' => \Yii::t($module->messageCategory, 'logout'),
 					'url' => ['/account/user/logout'],
 					'options' => ['data-user' => 'logout'],
 				],
@@ -105,8 +105,8 @@ $params = [
 		],
 		[
 			'text' => \Yii::t($module->messageCategory, '{action} {attribute}', [
-				'action' => \Yii::t($module->messageCategory, 'Go'),
-				'attribute' => \Yii::t($module->messageCategory, 'Home'),
+				'action' => \Yii::t($module->messageCategory, 'go'),
+				'attribute' => \Yii::t($module->messageCategory, 'home'),
 			]),
 			'icon' => 'glyphicon glyphicon-home',
 			'url' => $module->frontendUrl,

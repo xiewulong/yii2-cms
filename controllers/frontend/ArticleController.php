@@ -24,7 +24,7 @@ class ArticleController extends Controller {
 			'status' => [SiteArticle::STATUS_RELEASED, SiteArticle::STATUS_FEATURED],
 		]);
 		if(!$item || $item->superior->status != SiteCategory::STATUS_ENABLED || $item->superior->type == SiteCategory::TYPE_DOWNLOAD) {
-			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 		}
 
 		return $this->accessed()->render($this->action->id, [
@@ -39,7 +39,7 @@ class ArticleController extends Controller {
 			'status' => SiteCategory::STATUS_ENABLED,
 		]);
 		if(!$superior) {
-			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 		}
 
 		$query = $superior->getItems()

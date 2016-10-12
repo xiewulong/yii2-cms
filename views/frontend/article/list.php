@@ -20,8 +20,8 @@ $this->params['crumbs'] = [['title' => $this->title]];
 	<div class="row">
 		<div class="col-xs-9 col-xs-push-3">
 			<?= Crumbs::widget([
-				'headingText' => \Yii::t($module->messageCategory, 'Current location') . '：',
-				'homeText' => \Yii::t($module->messageCategory, 'Home'),
+				'headingText' => \Yii::t($module->messageCategory, 'current location') . '：',
+				'homeText' => \Yii::t($module->messageCategory, 'home'),
 				'options' => [
 					'class' => 'x-crumbs',
 				],
@@ -45,7 +45,7 @@ $this->params['crumbs'] = [['title' => $this->title]];
 				'items' => $items,
 				'timeEnabled' => $superior['type'] != 5,
 				'download' => $superior['type'] == 5 ? 'attachment_id' : false,
-				'downloadText' => \Yii::t($module->messageCategory, 'Download'),
+				'downloadText' => \Yii::t($module->messageCategory, 'download'),
 				'options' => [
 					'class' => 'x-list x-list-' . $superior['type'],
 				],

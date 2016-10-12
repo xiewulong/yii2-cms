@@ -54,9 +54,9 @@ class MenuController extends Controller {
 
 		return $this->respond([
 			'error' => !$done,
-			'message' => $done ? null : \Yii::t($this->module->messageCategory, 'No matched data') . ', ' . \Yii::t($this->module->messageCategory, 'Please {action} {attribute} first', [
-				'action' => \Yii::t($this->module->messageCategory, 'Add'),
-				'attribute' => \Yii::t($this->module->messageCategory, 'Menu group'),
+			'message' => $done ? null : \Yii::t($this->module->messageCategory, 'no matched data') . ', ' . \Yii::t($this->module->messageCategory, 'please {action} {attribute} first', [
+				'action' => \Yii::t($this->module->messageCategory, 'add'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'menu group'),
 			]),
 			'data' => $items,
 		]);
@@ -69,7 +69,7 @@ class MenuController extends Controller {
 			'type' => SiteModule::TYPE_MENU,
 		]);
 		if(!$superior) {
-			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 		}
 
 		if(!$id) {
@@ -85,7 +85,7 @@ class MenuController extends Controller {
 				'module_id' => $mid,
 			]);
 			if(!$item) {
-				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 			}
 			$item->scenario = 'edit';
 			if($item->type == SiteModuleItem::TYPE_CATEGORY) {
@@ -139,7 +139,7 @@ class MenuController extends Controller {
 			'type' => SiteModule::TYPE_MENU,
 		]);
 		if(!$superior) {
-			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 		}
 
 		if($type !== 'all') {
@@ -163,8 +163,8 @@ class MenuController extends Controller {
 
 		$typeItems = ArrayHelper::merge([
 			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
-				'attribute' => \Yii::t($this->module->messageCategory, 'Type'),
-				'action' => \Yii::t($this->module->messageCategory, 'Filtering'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'type'),
+				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
 			]),
 		], SiteModuleItem::defaultAttributeItems('type'));
 
@@ -192,14 +192,14 @@ class MenuController extends Controller {
 				'type' => SiteModule::TYPE_MENU,
 			]);
 			if(!$item) {
-				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 			}
 			$item->scenario = 'edit';
 		}
 
 		if(\Yii::$app->request->isPost && $item->load(\Yii::$app->request->post())) {
 			if($item->commonHandler()) {
-				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
+				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'operation succeeded'));
 
 				return $this->redirect(['menu/list']);
 			}

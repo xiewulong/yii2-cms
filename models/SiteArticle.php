@@ -163,25 +163,25 @@ class SiteArticle extends ActiveRecord {
 	 */
 	public function attributeLabels() {
 		return [
-			'id' => \Yii::t($this->messageCategory, 'Article id'),
-			'site_id' => \Yii::t($this->messageCategory, 'Site'),
-			'category_id' => \Yii::t($this->messageCategory, 'Category'),
-			'title' => \Yii::t($this->messageCategory, 'Title'),
-			'alias' => \Yii::t($this->messageCategory, 'Alias'),
-			'thumbnail_id' => \Yii::t($this->messageCategory, 'Thumbnail'),
-			'author' => \Yii::t($this->messageCategory, 'Author'),
-			'keywords' => \Yii::t($this->messageCategory, 'Keyword'),
-			'description' => \Yii::t($this->messageCategory, 'Description'),
-			'content' => \Yii::t($this->messageCategory, 'Content'),
-			'picture_ids' => \Yii::t($this->messageCategory, 'Picture'),
-			'attachment_id' => \Yii::t($this->messageCategory, 'Attachment'),
-			'status' => \Yii::t($this->messageCategory, 'Status'),
-			'pv' => \Yii::t($this->messageCategory, 'Page view'),
-			'uv' => \Yii::t($this->messageCategory, 'Unique Visitor'),
-			'creator_id' => \Yii::t($this->messageCategory, 'Creator id'),
-			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
-			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
-			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
+			'id' => \Yii::t($this->messageCategory, 'article id'),
+			'site_id' => \Yii::t($this->messageCategory, 'site'),
+			'category_id' => \Yii::t($this->messageCategory, 'category'),
+			'title' => \Yii::t($this->messageCategory, 'title'),
+			'alias' => \Yii::t($this->messageCategory, 'alias'),
+			'thumbnail_id' => \Yii::t($this->messageCategory, 'thumbnail'),
+			'author' => \Yii::t($this->messageCategory, 'author'),
+			'keywords' => \Yii::t($this->messageCategory, 'keyword'),
+			'description' => \Yii::t($this->messageCategory, 'description'),
+			'content' => \Yii::t($this->messageCategory, 'content'),
+			'picture_ids' => \Yii::t($this->messageCategory, 'picture'),
+			'attachment_id' => \Yii::t($this->messageCategory, 'attachment'),
+			'status' => \Yii::t($this->messageCategory, 'status'),
+			'pv' => \Yii::t($this->messageCategory, 'page view'),
+			'uv' => \Yii::t($this->messageCategory, 'unique Visitor'),
+			'creator_id' => \Yii::t($this->messageCategory, 'creator id'),
+			'created_at' => \Yii::t($this->messageCategory, 'created time'),
+			'operator_id' => \Yii::t($this->messageCategory, 'operator id'),
+			'updated_at' => \Yii::t($this->messageCategory, 'updated time'),
 		];
 	}
 
@@ -191,56 +191,56 @@ class SiteArticle extends ActiveRecord {
 	public function attributeHints() {
 		return [
 			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Article id'),
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'article id'),
 			]),
-			'site_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Site'),
+			'site_id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'site'),
 			]),
-			'category_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Category'),
+			'category_id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'category'),
 			]),
-			'title' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Title'),
+			'title' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'title'),
 			]),
-			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
+			'alias' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'alias'),
 			]),
-			'thumbnail_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Upload'),
-				'attribute' => \Yii::t($this->messageCategory, 'Thumbnail'),
+			'thumbnail_id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'attribute' => \Yii::t($this->messageCategory, 'thumbnail'),
 			]),
-			'author' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
+			'author' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
 				'action' => \Yii::t($this->messageCategory, 'Enter'),
 				'attribute' => \Yii::t($this->messageCategory, 'Author'),
 			]),
-			'keywords' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Keyword'),
+			'keywords' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'keyword'),
 			]),
-			'description' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Description'),
+			'description' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'description'),
 			]),
-			'content' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Content'),
+			'content' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'content'),
 			]),
-			'picture_ids' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Upload'),
-				'attribute' => \Yii::t($this->messageCategory, 'Picture'),
+			'picture_ids' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'attribute' => \Yii::t($this->messageCategory, 'picture'),
 			]),
-			'attachment_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Upload'),
-				'attribute' => \Yii::t($this->messageCategory, 'Attachment'),
+			'attachment_id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'upload'),
+				'attribute' => \Yii::t($this->messageCategory, 'attachment'),
 			]),
-			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Status'),
+			'status' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'status'),
 			]),
 		];
 	}
@@ -293,10 +293,10 @@ class SiteArticle extends ActiveRecord {
 	public function statusItems() {
 		return [
 			[
-				static::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
-				static::STATUS_DRAFTED => \Yii::t($this->messageCategory, 'Drafted'),
-				static::STATUS_RELEASED => \Yii::t($this->messageCategory, 'Released'),
-				static::STATUS_FEATURED => \Yii::t($this->messageCategory, 'Featured'),
+				static::STATUS_DELETED => \Yii::t($this->messageCategory, 'deleted'),
+				static::STATUS_DRAFTED => \Yii::t($this->messageCategory, 'drafted'),
+				static::STATUS_RELEASED => \Yii::t($this->messageCategory, 'released'),
+				static::STATUS_FEATURED => \Yii::t($this->messageCategory, 'featured'),
 			],
 		];
 	}

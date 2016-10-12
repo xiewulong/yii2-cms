@@ -5,8 +5,8 @@ use yii\xui\Ueditor;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
-	'attribute' => \Yii::t($module->messageCategory, 'Article'),
-	'action' => \Yii::t($module->messageCategory, $item['isNewRecord'] ? 'Add' : 'Edit'),
+	'attribute' => \Yii::t($module->messageCategory, 'article'),
+	'action' => \Yii::t($module->messageCategory, $item['isNewRecord'] ? 'add' : 'edit'),
 ]);
 
 // set parent route
@@ -17,8 +17,8 @@ $this->params['route'] = $module->url('article/list');
 <div class="clearfix admin-area admin-title">
 	<?= Html::tag('h5', $this->title, ['class' => 'pull-left admin-heading']) ?>
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
-		'action' => \Yii::t($module->messageCategory, 'Back to'),
-		'attribute' => \Yii::t($module->messageCategory, 'List'),
+		'action' => \Yii::t($module->messageCategory, 'back to'),
+		'attribute' => \Yii::t($module->messageCategory, 'list'),
 	]), [$this->params['route']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
 <!-- end admin-title -->
@@ -46,8 +46,8 @@ $this->params['route'] = $module->url('article/list');
 		</div>
 		<div class="form-group category_name">
 			<?= Html::label(\Yii::t($module->messageCategory, '{attribute} {action}', [
-				'attribute' => \Yii::t($module->messageCategory, 'Category'),
-				'action' => \Yii::t($module->messageCategory, 'Type'),
+				'attribute' => \Yii::t($module->messageCategory, 'category'),
+				'action' => \Yii::t($module->messageCategory, 'type'),
 			]), null, ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-4">
 				<?= Html::tag('p', null, ['class' => 'form-control-static']) ?>
@@ -185,7 +185,7 @@ $this->params['route'] = $module->url('article/list');
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4 col-sm-push-2">
-				<?= Html::submitButton(\Yii::t($module->messageCategory, 'Submit'), ['class' => 'btn btn-primary']) ?>
+				<?= Html::submitButton(\Yii::t($module->messageCategory, 'submit'), ['class' => 'btn btn-primary']) ?>
 			</div>
 		</div>
 	</div>

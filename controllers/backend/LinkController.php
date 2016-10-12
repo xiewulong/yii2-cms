@@ -44,7 +44,7 @@ class LinkController extends Controller {
 			'site_id' => $this->module->siteId,
 		]);
 		if(!$item) {
-			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 		}
 
 		return $this->redirect($item->getLink($this->module->frontendUrl));

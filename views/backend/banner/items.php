@@ -6,9 +6,9 @@ $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 	'attribute' => \Yii::t($module->messageCategory, '{attribute} {action}', [
 		'attribute' => $superior['name'],
-		'action' => \Yii::t($module->messageCategory, 'Banner item'),
+		'action' => \Yii::t($module->messageCategory, 'banner item'),
 	]),
-	'action' => \Yii::t($module->messageCategory, 'Management'),
+	'action' => \Yii::t($module->messageCategory, 'management'),
 ]);
 
 // set parent route
@@ -21,10 +21,10 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 <div class="clearfix admin-area admin-title">
 	<?= Html::tag('h5', $this->title, ['class' => 'pull-left admin-heading']) ?>
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
-		'action' => \Yii::t($module->messageCategory, 'Back to'),
+		'action' => \Yii::t($module->messageCategory, 'back to'),
 		'attribute' => \Yii::t($module->messageCategory, '{attribute} {action}', [
-			'attribute' => \Yii::t($module->messageCategory, 'Banner'),
-			'action' => \Yii::t($module->messageCategory, 'List'),
+			'attribute' => \Yii::t($module->messageCategory, 'banner'),
+			'action' => \Yii::t($module->messageCategory, 'list'),
 		]),
 	]), [$this->params['route']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
@@ -46,8 +46,8 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<div class="form-group">
 			<?= Html::listBox('stype', $stype, [
 				'title' => \Yii::t($module->messageCategory, '{attribute} {action}', [
-					'attribute' => \Yii::t($module->messageCategory, 'Banner item'),
-					'action' => \Yii::t($module->messageCategory, 'Title'),
+					'attribute' => \Yii::t($module->messageCategory, 'banner item'),
+					'action' => \Yii::t($module->messageCategory, 'title'),
 				]),
 			], [
 				'class' => 'form-control',
@@ -57,20 +57,20 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<div class="form-group">
 			<?= Html::textInput('sword', $sword, [
 				'class' => 'form-control',
-				'placeholder' => \Yii::t($module->messageCategory, 'Please {action} {attribute}', [
-					'action' => \Yii::t($module->messageCategory, 'Enter'),
-					'attribute' => \Yii::t($module->messageCategory, 'Search word'),
+				'placeholder' => \Yii::t($module->messageCategory, 'please {action} {attribute}', [
+					'action' => \Yii::t($module->messageCategory, 'enter'),
+					'attribute' => \Yii::t($module->messageCategory, 'search word'),
 				]),
 				'autofocus' => true,
 			]) ?>
 		</div>
 		<div class="form-group">
 			<?= Html::hiddenInput('mid', $superior['id']) ?>
-			<?= Html::submitButton(\Yii::t($module->messageCategory, 'Search'), ['class' => 'btn btn-primary']) ?>
+			<?= Html::submitButton(\Yii::t($module->messageCategory, 'search'), ['class' => 'btn btn-primary']) ?>
 		</div>
 	<?= Html::endForm() ?>
 	<div class="pull-right">
-		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['banner/item-edit', 'mid' => $superior['id']], ['class' => 'btn btn-default pull-left']) ?>
+		<?= Html::a(\Yii::t($module->messageCategory, 'add'), ['banner/item-edit', 'mid' => $superior['id']], ['class' => 'btn btn-default pull-left']) ?>
 	</div>
 </div>
 <!-- end admin-options -->
@@ -81,22 +81,22 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<thead>
 			<tr>
 				<!-- <th width="6%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th> -->
-				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'Sort') ?></th>
-				<th width="18%"><?= \Yii::t($module->messageCategory, 'Title') ?></th>
-				<th width="18%"><?= \Yii::t($module->messageCategory, 'Picture') ?></th>
-				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'Type') ?></th>
-				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Page view') ?></th>
-				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'Unique visitor') ?></th>
+				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'sort') ?></th>
+				<th width="18%"><?= \Yii::t($module->messageCategory, 'title') ?></th>
+				<th width="18%"><?= \Yii::t($module->messageCategory, 'picture') ?></th>
+				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'type') ?></th>
+				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'page view') ?></th>
+				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, 'unique visitor') ?></th>
 				<th width="10%"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
-					'attribute' => \Yii::t($module->messageCategory, 'Banner'),
-					'action' => \Yii::t($module->messageCategory, 'Name'),
+					'attribute' => \Yii::t($module->messageCategory, 'banner'),
+					'action' => \Yii::t($module->messageCategory, 'name'),
 				]) ?></th>
 				<th width="8%" class="text-center"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
-					'attribute' => \Yii::t($module->messageCategory, 'Banner'),
-					'action' => \Yii::t($module->messageCategory, 'Status'),
+					'attribute' => \Yii::t($module->messageCategory, 'banner'),
+					'action' => \Yii::t($module->messageCategory, 'status'),
 				]) ?></th>
-				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
-				<th class="text-center"><?= \Yii::t($module->messageCategory, 'Operations') ?></th>
+				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'status') ?></th>
+				<th class="text-center"><?= \Yii::t($module->messageCategory, 'operations') ?></th>
 			</tr>
 		</thead>
 		<?php if($items) { ?>
@@ -114,9 +114,9 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<td class="text-center <?= $statusClasses[$superior['status']] ?>"><?= $superior->getAttributeText('status') ?></td>
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= $item->getAttributeText('status') ?></td>
 				<td class="text-center">
-					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['banner/item-edit', 'mid' => $superior['id'], 'id' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'edit'), ['banner/item-edit', 'mid' => $superior['id'], 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['module/item-delete'], ['data-delete' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'delete'), ['module/item-delete'], ['data-delete' => $item['id']]) ?>
 				</td>
 			</tr>
 			<? } ?>
@@ -126,8 +126,8 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<!-- <td class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></td> -->
 				<td colspan="10">
 					<?= Html::submitButton(\Yii::t($module->messageCategory, '{attribute} {action}', [
-						'attribute' => \Yii::t($module->messageCategory, 'Batch'),
-						'action' => \Yii::t($module->messageCategory, 'Sort'),
+						'attribute' => \Yii::t($module->messageCategory, 'batch'),
+						'action' => \Yii::t($module->messageCategory, 'sort'),
 					]), [
 						'class' => 'btn btn-primary',
 						'name' => 'scenario',
@@ -151,7 +151,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<tr>
 				<td colspan="10" class="text-center empty">
 					<?= Html::tag('i', null, ['class' => 'glyphicon glyphicon-info-sign text-success']) ?>
-					<?= Html::tag('span', \Yii::t($module->messageCategory, 'No matched data')) ?>
+					<?= Html::tag('span', \Yii::t($module->messageCategory, 'no matched data')) ?>
 				</td>
 			</tr>
 		</tfoot>

@@ -40,7 +40,7 @@ class GlobalController extends Controller {
 			$item->weixin_id = null;
 			if($item->load(\Yii::$app->request->post())) {
 				if($item->commonHandler()) {
-					\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
+					\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'operation succeeded'));
 
 					return $this->refresh();
 				}

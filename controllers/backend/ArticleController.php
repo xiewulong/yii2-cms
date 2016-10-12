@@ -69,9 +69,9 @@ class ArticleController extends Controller {
 
 		return $this->respond([
 			'error' => !$done,
-			'message' => $done ? null : \Yii::t($this->module->messageCategory, 'No matched data') . ', ' . \Yii::t($this->module->messageCategory, 'Please {action} {attribute} first', [
-				'action' => \Yii::t($this->module->messageCategory, 'Add'),
-				'attribute' => \Yii::t($this->module->messageCategory, 'Category'),
+			'message' => $done ? null : \Yii::t($this->module->messageCategory, 'no matched data') . ', ' . \Yii::t($this->module->messageCategory, 'please {action} {attribute} first', [
+				'action' => \Yii::t($this->module->messageCategory, 'add'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'category'),
 			]),
 			'data' => $items,
 		]);
@@ -86,7 +86,7 @@ class ArticleController extends Controller {
 
 		return \Yii::$app->request->isAjax ? $this->respond([
 			'error' => !$done,
-			'message' => \Yii::t($this->module->messageCategory, 'Operation ' . ($done ? 'succeeded' : 'failed')) . ($done ? '' : ', ' . \Yii::t($this->module->messageCategory, 'Please try again')),
+			'message' => \Yii::t($this->module->messageCategory, 'operation ' . ($done ? 'succeeded' : 'failed')) . ($done ? '' : ', ' . \Yii::t($this->module->messageCategory, 'please try again')),
 		]) : $this->goBack();
 	}
 
@@ -100,9 +100,9 @@ class ArticleController extends Controller {
 			->orderby('created_at desc')
 			->all();
 		if(!$categorys) {
-			\Yii::$app->session->setFlash('error', '1|' . \Yii::t($this->module->messageCategory, 'Please {action} {attribute} first', [
-				'action' => \Yii::t($this->module->messageCategory, 'Add'),
-				'attribute' => \Yii::t($this->module->messageCategory, 'Category'),
+			\Yii::$app->session->setFlash('error', '1|' . \Yii::t($this->module->messageCategory, 'please {action} {attribute} first', [
+				'action' => \Yii::t($this->module->messageCategory, 'add'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'category'),
 			]));
 			return $this->redirect(['category/edit']);
 		}
@@ -120,7 +120,7 @@ class ArticleController extends Controller {
 				'site_id' => $this->module->siteId,
 			]);
 			if(!$item) {
-				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 			}
 			$item->scenario = 'edit';
 		}
@@ -130,7 +130,7 @@ class ArticleController extends Controller {
 			$item->picture_ids = [];
 			$item->attachment_id = null;
 			if($item->load(\Yii::$app->request->post()) && $item->commonHandler()) {
-				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
+				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'operation succeeded'));
 
 				return $this->redirect(['article/list', 'cid' => $item->category_id]);
 			}
@@ -178,8 +178,8 @@ class ArticleController extends Controller {
 
 		$categoryItems = ArrayHelper::merge([
 			0 => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
-				'attribute' => \Yii::t($this->module->messageCategory, 'Category'),
-				'action' => \Yii::t($this->module->messageCategory, 'Filtering'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'category'),
+				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
 			]),
 		], ArrayHelper::map(SiteCategory::find()
 			->select(['id', 'name'])
@@ -188,14 +188,14 @@ class ArticleController extends Controller {
 			->all(), 'id', 'name'));
 		$categoryTypeItems = ArrayHelper::merge([
 			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
-				'attribute' => \Yii::t($this->module->messageCategory, 'Type'),
-				'action' => \Yii::t($this->module->messageCategory, 'Filtering'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'type'),
+				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
 			]),
 		], SiteCategory::defaultAttributeItems('type'));
 		$statusItems = ArrayHelper::merge([
 			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
-				'attribute' => \Yii::t($this->module->messageCategory, 'Status'),
-				'action' => \Yii::t($this->module->messageCategory, 'Filtering'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'status'),
+				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
 			]),
 		], SiteArticle::defaultAttributeItems('status'));
 

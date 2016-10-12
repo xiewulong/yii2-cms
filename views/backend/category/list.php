@@ -4,8 +4,8 @@ use yii\widgets\LinkPager;
 
 $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
-	'attribute' => \Yii::t($module->messageCategory, 'Category'),
-	'action' => \Yii::t($module->messageCategory, 'List'),
+	'attribute' => \Yii::t($module->messageCategory, 'category'),
+	'action' => \Yii::t($module->messageCategory, 'list'),
 ]);
 
 // set parent route
@@ -36,8 +36,8 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<div class="form-group">
 			<?= Html::listBox('stype', $stype, [
 				'name' => \Yii::t($module->messageCategory, '{attribute} {action}', [
-					'attribute' => \Yii::t($module->messageCategory, 'Category'),
-					'action' => \Yii::t($module->messageCategory, 'Name'),
+					'attribute' => \Yii::t($module->messageCategory, 'category'),
+					'action' => \Yii::t($module->messageCategory, 'name'),
 				]),
 			], [
 				'class' => 'form-control',
@@ -48,18 +48,18 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<?= Html::textInput('sword', $sword, [
 				'class' => 'form-control',
 				'placeholder' => \Yii::t($module->messageCategory, 'Please {action} {attribute}', [
-					'action' => \Yii::t($module->messageCategory, 'Enter'),
-					'attribute' => \Yii::t($module->messageCategory, 'Search word'),
+					'action' => \Yii::t($module->messageCategory, 'enter'),
+					'attribute' => \Yii::t($module->messageCategory, 'search word'),
 				]),
 				'autofocus' => true,
 			]) ?>
 		</div>
 		<div class="form-group">
-			<?= Html::submitButton(\Yii::t($module->messageCategory, 'Search'), ['class' => 'btn btn-primary']) ?>
+			<?= Html::submitButton(\Yii::t($module->messageCategory, 'search'), ['class' => 'btn btn-primary']) ?>
 		</div>
 	<?= Html::endForm() ?>
 	<div class="pull-right">
-		<?= Html::a(\Yii::t($module->messageCategory, 'Add'), ['category/edit'], ['class' => 'btn btn-default pull-left']) ?>
+		<?= Html::a(\Yii::t($module->messageCategory, 'add'), ['category/edit'], ['class' => 'btn btn-default pull-left']) ?>
 	</div>
 </div>
 <!-- end admin-options -->
@@ -70,22 +70,22 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<thead>
 			<tr>
 				<!-- <th width="6%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th> -->
-				<th width="30%"><?= \Yii::t($module->messageCategory, 'Category') . \Yii::t($module->messageCategory, 'Name') ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Type') ?></th>
+				<th width="30%"><?= \Yii::t($module->messageCategory, 'category') . \Yii::t($module->messageCategory, 'name') ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'type') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
-					'attribute' => \Yii::t($module->messageCategory, 'Article'),
-					'action' => \Yii::t($module->messageCategory, 'Quantity'),
+					'attribute' => \Yii::t($module->messageCategory, 'article'),
+					'action' => \Yii::t($module->messageCategory, 'quantity'),
 				]) ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, '{action} {attribute}', [
-					'action' => \Yii::t($module->messageCategory, 'Total'),
-					'attribute' => \Yii::t($module->messageCategory, 'Page view'),
+					'action' => \Yii::t($module->messageCategory, 'total'),
+					'attribute' => \Yii::t($module->messageCategory, 'page view'),
 				]) ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, '{action} {attribute}', [
-					'action' => \Yii::t($module->messageCategory, 'Total'),
-					'attribute' => \Yii::t($module->messageCategory, 'Unique visitor'),
+					'action' => \Yii::t($module->messageCategory, 'total'),
+					'attribute' => \Yii::t($module->messageCategory, 'unique visitor'),
 				]) ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
-				<th class="text-center"><?= \Yii::t($module->messageCategory, 'Operations') ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'status') ?></th>
+				<th class="text-center"><?= \Yii::t($module->messageCategory, 'operations') ?></th>
 			</tr>
 		</thead>
 		<?php if($items) { ?>
@@ -100,13 +100,13 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<td class="text-center"><?= $item['itemTotalUniqueVisitor'] ?></td>
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= $item->getAttributeText('status') ?></td>
 				<td class="text-center">
-					<?= Html::a(\Yii::t($module->messageCategory, 'Add') . \Yii::t($module->messageCategory, 'Article'), ['article/edit', 'cid' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'add') . \Yii::t($module->messageCategory, 'article'), ['article/edit', 'cid' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Manage') . \Yii::t($module->messageCategory, 'Article'), ['article/list', 'cid' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'manage') . \Yii::t($module->messageCategory, 'article'), ['article/list', 'cid' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['category/edit', 'id' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'edit'), ['category/edit', 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['category/delete'], ['data-delete' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'delete'), ['category/delete'], ['data-delete' => $item['id']]) ?>
 				</td>
 			</tr>
 			<? } ?>
@@ -134,7 +134,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 			<tr>
 				<td colspan="7" class="text-center empty">
 					<?= Html::tag('i', null, ['class' => 'glyphicon glyphicon-info-sign text-success']) ?>
-					<?= Html::tag('span', \Yii::t($module->messageCategory, 'No matched data')) ?>
+					<?= Html::tag('span', \Yii::t($module->messageCategory, 'no matched data')) ?>
 				</td>
 			</tr>
 		</tfoot>

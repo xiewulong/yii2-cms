@@ -117,16 +117,16 @@ class SiteCategory extends ActiveRecord {
 	 */
 	public function attributeLabels() {
 		return [
-			'id' => \Yii::t($this->messageCategory, 'Category id'),
-			'site_id' => \Yii::t($this->messageCategory, 'Site'),
-			'type' => \Yii::t($this->messageCategory, 'Type'),
-			'name' => \Yii::t($this->messageCategory, 'Name'),
-			'alias' => \Yii::t($this->messageCategory, 'Alias'),
-			'status' => \Yii::t($this->messageCategory, 'Status'),
-			'creator_id' => \Yii::t($this->messageCategory, 'Creator id'),
-			'created_at' => \Yii::t($this->messageCategory, 'Created time'),
-			'operator_id' => \Yii::t($this->messageCategory, 'Operator id'),
-			'updated_at' => \Yii::t($this->messageCategory, 'Updated time'),
+			'id' => \Yii::t($this->messageCategory, 'category id'),
+			'site_id' => \Yii::t($this->messageCategory, 'site'),
+			'type' => \Yii::t($this->messageCategory, 'type'),
+			'name' => \Yii::t($this->messageCategory, 'name'),
+			'alias' => \Yii::t($this->messageCategory, 'alias'),
+			'status' => \Yii::t($this->messageCategory, 'status'),
+			'creator_id' => \Yii::t($this->messageCategory, 'creator id'),
+			'created_at' => \Yii::t($this->messageCategory, 'created time'),
+			'operator_id' => \Yii::t($this->messageCategory, 'operator id'),
+			'updated_at' => \Yii::t($this->messageCategory, 'updated time'),
 		];
 	}
 
@@ -135,29 +135,29 @@ class SiteCategory extends ActiveRecord {
 	 */
 	public function attributeHints() {
 		return [
-			'id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Category id'),
+			'id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'category id'),
 			]),
-			'site_id' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Site'),
+			'site_id' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'site'),
 			]),
-			'type' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Type'),
+			'type' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'type'),
 			]),
-			'name' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Name'),
+			'name' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'name'),
 			]),
-			'alias' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Enter'),
-				'attribute' => \Yii::t($this->messageCategory, 'Alias'),
+			'alias' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'enter'),
+				'attribute' => \Yii::t($this->messageCategory, 'alias'),
 			]),
-			'status' => \Yii::t($this->messageCategory, 'Please {action} {attribute}', [
-				'action' => \Yii::t($this->messageCategory, 'Choose'),
-				'attribute' => \Yii::t($this->messageCategory, 'Status'),
+			'status' => \Yii::t($this->messageCategory, 'please {action} {attribute}', [
+				'action' => \Yii::t($this->messageCategory, 'choose'),
+				'attribute' => \Yii::t($this->messageCategory, 'status'),
 			]),
 		];
 	}
@@ -171,11 +171,11 @@ class SiteCategory extends ActiveRecord {
 	public function typeItems() {
 		return [
 			[
-				static::TYPE_NEWS => \Yii::t($this->messageCategory, 'News'),
-				static::TYPE_PICTURES => \Yii::t($this->messageCategory, 'Gallery'),
-				static::TYPE_PAGE => \Yii::t($this->messageCategory, 'Single page'),
-				static::TYPE_NOTICE => \Yii::t($this->messageCategory, 'Notice'),
-				static::TYPE_DOWNLOAD => \Yii::t($this->messageCategory, 'Download'),
+				static::TYPE_NEWS => \Yii::t($this->messageCategory, 'news'),
+				static::TYPE_PICTURES => \Yii::t($this->messageCategory, 'gallery'),
+				static::TYPE_PAGE => \Yii::t($this->messageCategory, 'single page'),
+				static::TYPE_NOTICE => \Yii::t($this->messageCategory, 'notice'),
+				static::TYPE_DOWNLOAD => \Yii::t($this->messageCategory, 'download'),
 			],
 		];
 	}
@@ -189,9 +189,9 @@ class SiteCategory extends ActiveRecord {
 	public function statusItems() {
 		return [
 			[
-				static::STATUS_DELETED => \Yii::t($this->messageCategory, 'Deleted'),
-				static::STATUS_ENABLED => \Yii::t($this->messageCategory, 'Enabled'),
-				static::STATUS_DISABLED => \Yii::t($this->messageCategory, 'Disabled'),
+				static::STATUS_DELETED => \Yii::t($this->messageCategory, 'deleted'),
+				static::STATUS_ENABLED => \Yii::t($this->messageCategory, 'enabled'),
+				static::STATUS_DISABLED => \Yii::t($this->messageCategory, 'disabled'),
 			],
 		];
 	}

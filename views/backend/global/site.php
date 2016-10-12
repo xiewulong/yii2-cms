@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\attachment\widgets\Attachment;
 
 $module = \Yii::$app->controller->module;
-$this->title = \Yii::t($module->messageCategory, 'Global');
+$this->title = \Yii::t($module->messageCategory, 'global');
 
 // set parent route
 // $this->params['route'] = '';
@@ -265,7 +265,7 @@ $this->title = \Yii::t($module->messageCategory, 'Global');
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4 col-sm-push-2">
-				<?= Html::submitButton(\Yii::t($module->messageCategory, 'Submit'), ['class' => 'btn btn-primary']) ?>
+				<?= Html::submitButton(\Yii::t($module->messageCategory, 'submit'), ['class' => 'btn btn-primary']) ?>
 			</div>
 		</div>
 	</div>

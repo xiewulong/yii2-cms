@@ -39,7 +39,7 @@ class BannerController extends Controller {
 			'type' => SiteModule::TYPE_BANNER,
 		]);
 		if(!$superior) {
-			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 		}
 
 		if(!$id) {
@@ -55,7 +55,7 @@ class BannerController extends Controller {
 				'module_id' => $mid,
 			]);
 			if(!$item) {
-				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 			}
 			$item->scenario = 'edit';
 			if($item->type == SiteModuleItem::TYPE_CATEGORY) {
@@ -69,7 +69,7 @@ class BannerController extends Controller {
 			$item->picture_id = null;
 			if($item->load(\Yii::$app->request->post())) {
 				if($item->commonHandler()) {
-					\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
+					\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'operation succeeded'));
 
 					return $this->redirect(['banner/items', 'mid' => $mid]);
 				}
@@ -108,7 +108,7 @@ class BannerController extends Controller {
 			'type' => SiteModule::TYPE_BANNER,
 		]);
 		if(!$superior) {
-			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+			throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 		}
 
 		if($type !== 'all') {
@@ -132,8 +132,8 @@ class BannerController extends Controller {
 
 		$typeItems = ArrayHelper::merge([
 			'all' => \Yii::t($this->module->messageCategory, '{attribute} {action}', [
-				'attribute' => \Yii::t($this->module->messageCategory, 'Type'),
-				'action' => \Yii::t($this->module->messageCategory, 'Filtering'),
+				'attribute' => \Yii::t($this->module->messageCategory, 'type'),
+				'action' => \Yii::t($this->module->messageCategory, 'filtering'),
 			]),
 		], SiteModuleItem::defaultAttributeItems('type'));
 
@@ -161,14 +161,14 @@ class BannerController extends Controller {
 				'type' => SiteModule::TYPE_BANNER,
 			]);
 			if(!$item) {
-				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'No matched data'));
+				throw new NotFoundHttpException(\Yii::t($this->module->messageCategory, 'no matched data'));
 			}
 			$item->scenario = 'edit';
 		}
 
 		if(\Yii::$app->request->isPost && $item->load(\Yii::$app->request->post())) {
 			if($item->commonHandler()) {
-				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'Operation succeeded'));
+				\Yii::$app->session->setFlash('item', '0|' . \Yii::t($this->module->messageCategory, 'operation succeeded'));
 
 				return $this->redirect(['banner/list']);
 			}

@@ -46,7 +46,7 @@ class ModuleController extends Controller {
 
 		return \Yii::$app->request->isAjax ? $this->respond([
 			'error' => !$done,
-			'message' => \Yii::t($this->module->messageCategory, 'Operation ' . ($done ? 'succeeded' : 'failed')) . ($done ? '' : ', ' . \Yii::t($this->module->messageCategory, 'Please try again')),
+			'message' => \Yii::t($this->module->messageCategory, 'operation ' . ($done ? 'succeeded' : 'failed')) . ($done ? '' : ', ' . \Yii::t($this->module->messageCategory, 'please try again')),
 		]) : $this->goBack();
 	}
 
@@ -59,7 +59,7 @@ class ModuleController extends Controller {
 
 		return \Yii::$app->request->isAjax ? $this->respond([
 			'error' => !$done,
-			'message' => \Yii::t($this->module->messageCategory, 'Operation ' . ($done ? 'succeeded' : 'failed')) . ($done ? '' : ', ' . \Yii::t($this->module->messageCategory, 'Please try again')),
+			'message' => \Yii::t($this->module->messageCategory, 'operation ' . ($done ? 'succeeded' : 'failed')) . ($done ? '' : ', ' . \Yii::t($this->module->messageCategory, 'please try again')),
 		]) : $this->goBack();
 	}
 

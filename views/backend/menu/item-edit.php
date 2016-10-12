@@ -6,9 +6,9 @@ $module = \Yii::$app->controller->module;
 $this->title = \Yii::t($module->messageCategory, '{attribute} {action}', [
 	'attribute' => \Yii::t($module->messageCategory, '{attribute} {action}', [
 		'attribute' => $superior['name'],
-		'action' => \Yii::t($module->messageCategory, 'Menu item'),
+		'action' => \Yii::t($module->messageCategory, 'menu item'),
 	]),
-	'action' => \Yii::t($module->messageCategory, $item['isNewRecord'] ? 'Add' : 'Edit'),
+	'action' => \Yii::t($module->messageCategory, $item['isNewRecord'] ? 'add' : 'edit'),
 ]);
 
 // set parent route
@@ -19,10 +19,10 @@ $this->params['route'] = $module->url('menu/list');
 <div class="clearfix admin-area admin-title">
 	<?= Html::tag('h5', $this->title, ['class' => 'pull-left admin-heading']) ?>
 	<?= Html::a(\Yii::t($module->messageCategory, '{action} {attribute}', [
-		'action' => \Yii::t($module->messageCategory, 'Back to'),
+		'action' => \Yii::t($module->messageCategory, 'back to'),
 		'attribute' => \Yii::t($module->messageCategory, '{attribute} {action}', [
-			'attribute' => \Yii::t($module->messageCategory, 'Menu item'),
-			'action' => \Yii::t($module->messageCategory, 'List'),
+			'attribute' => \Yii::t($module->messageCategory, 'menu item'),
+			'action' => \Yii::t($module->messageCategory, 'list'),
 		]),
 	]), ['menu/items', 'mid' => $superior['id']], ['class' => 'btn btn-link pull-left']) ?>
 </div>
@@ -105,7 +105,7 @@ $this->params['route'] = $module->url('menu/list');
 			<?= Html::activeLabel($item, 'category_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-8">
 				<?= Html::activeHiddenInput($item, 'category_id') ?>
-				<?= Html::button(\Yii::t($module->messageCategory, 'Choose'), [
+				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
 					'class' => 'btn btn-default',
 					'data-form-selection' => $module->url('category/get'),
 				]) ?>
@@ -116,7 +116,7 @@ $this->params['route'] = $module->url('menu/list');
 			<?= Html::activeLabel($item, 'article_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-8">
 				<?= Html::activeHiddenInput($item, 'article_id') ?>
-				<?= Html::button(\Yii::t($module->messageCategory, 'Choose'), [
+				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
 					'class' => 'btn btn-default',
 					'data-form-selection' => $module->url('article/get'),
 				]) ?>
@@ -127,7 +127,7 @@ $this->params['route'] = $module->url('menu/list');
 			<?= Html::activeLabel($item, 'sub_module_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-8">
 				<?= Html::activeHiddenInput($item, 'sub_module_id') ?>
-				<?= Html::button(\Yii::t($module->messageCategory, 'Choose'), [
+				<?= Html::button(\Yii::t($module->messageCategory, 'choose'), [
 					'class' => 'btn btn-default',
 					'data-form-selection' => $module->url('menu/get?id=' . $superior['id']),
 					'data-form-selected-clear' => 'enabled',
@@ -149,7 +149,7 @@ $this->params['route'] = $module->url('menu/list');
 		</div>
 		<div class="form-group">
 			<div class="col-sm-4 col-sm-push-2">
-				<?= Html::submitButton(\Yii::t($module->messageCategory, 'Submit'), ['class' => 'btn btn-primary']) ?>
+				<?= Html::submitButton(\Yii::t($module->messageCategory, 'submit'), ['class' => 'btn btn-primary']) ?>
 			</div>
 		</div>
 	</div>

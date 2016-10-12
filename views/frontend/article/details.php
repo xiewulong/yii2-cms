@@ -20,8 +20,8 @@ $this->params['crumbs'] = [
 	<div class="row">
 		<div class="col-xs-9 col-xs-push-3">
 			<?= Crumbs::widget([
-				'headingText' => \Yii::t($module->messageCategory, 'Current location') . '：',
-				'homeText' => \Yii::t($module->messageCategory, 'Home'),
+				'headingText' => \Yii::t($module->messageCategory, 'current location') . '：',
+				'homeText' => \Yii::t($module->messageCategory, 'home'),
 				'options' => [
 					'class' => 'x-crumbs',
 				],
