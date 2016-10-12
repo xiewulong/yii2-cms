@@ -109,9 +109,9 @@ $statusClasses = ['text-muted', 'text-warning', 'text-success', 'text-primary'];
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= $item->getAttributeText('status') ?></td>
 				<td class="text-center <?= $categoryStatusClasses[$item['category']['status']] ?>"><?= $item['category']->getAttributeText('status') ?></td>
 				<td class="text-center">
-					<?= Html::a(\Yii::t($module->messageCategory, 'Edit'), ['article/edit', 'id' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'edit'), ['article/edit', 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'Delete'), ['article/delete'], ['data-delete' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'delete'), ['article/delete'], ['data-delete' => $item['id']]) ?>
 				</td>
 			</tr>
 			<? } ?>

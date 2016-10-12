@@ -47,7 +47,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<div class="form-group">
 			<?= Html::textInput('sword', $sword, [
 				'class' => 'form-control',
-				'placeholder' => \Yii::t($module->messageCategory, 'Please {action} {attribute}', [
+				'placeholder' => \Yii::t($module->messageCategory, 'please {action} {attribute}', [
 					'action' => \Yii::t($module->messageCategory, 'enter'),
 					'attribute' => \Yii::t($module->messageCategory, 'search word'),
 				]),

@@ -98,7 +98,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 					'attribute' => \Yii::t($module->messageCategory, 'menu'),
 					'action' => \Yii::t($module->messageCategory, 'status'),
 				]) ?></th>
-				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'Status') ?></th>
+				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'status') ?></th>
 				<th class="text-center"><?= \Yii::t($module->messageCategory, 'operations') ?></th>
 			</tr>
 		</thead>

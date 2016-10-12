@@ -62,7 +62,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<thead>
 			<tr>
 				<!-- <th width="6%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th> -->
-				<th width="20%"><?= \Yii::t($module->messageCategory, 'Menu') . \Yii::t($module->messageCategory, 'name') ?></th>
+				<th width="20%"><?= \Yii::t($module->messageCategory, 'menu') . \Yii::t($module->messageCategory, 'name') ?></th>
 				<th width="10%"><?= \Yii::t($module->messageCategory, 'position') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
 					'attribute' => \Yii::t($module->messageCategory, 'menu item'),
@@ -92,9 +92,9 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 				<td class="text-center"><?= $item['itemTotalUniqueVisitor'] ?></td>
 				<td class="text-center <?= $statusClasses[$item['status']] ?>"><?= $item->getAttributeText('status') ?></td>
 				<td class="text-center">
-					<?= Html::a(\Yii::t($module->messageCategory, 'Add') . \Yii::t($module->messageCategory, 'menu item'), ['menu/item-edit', 'mid' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'add') . \Yii::t($module->messageCategory, 'menu item'), ['menu/item-edit', 'mid' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
-					<?= Html::a(\Yii::t($module->messageCategory, 'manage') . \Yii::t($module->messageCategory, 'Menu item'), ['menu/items', 'mid' => $item['id']]) ?>
+					<?= Html::a(\Yii::t($module->messageCategory, 'manage') . \Yii::t($module->messageCategory, 'menu item'), ['menu/items', 'mid' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
 					<?= Html::a(\Yii::t($module->messageCategory, 'edit'), ['menu/edit', 'id' => $item['id']]) ?>
 					<?= Html::tag('span', '|') ?>
