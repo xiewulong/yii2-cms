@@ -5,7 +5,7 @@
  * https://github.com/xiewulong/yii2-cms
  * https://raw.githubusercontent.com/xiewulong/yii2-cms/master/LICENSE
  * create: 2016/8/7
- * update: 2016/9/2
+ * update: 2016/10/12
  * since: 0.0.1
  */
 
@@ -91,7 +91,7 @@ class BackendModule extends Module {
 			$this->_site = new Site;
 			$this->_site->scenario = 'add';
 			$this->_site->id = $this->siteId;
-			$this->_site->powered = 'Nanning Automan Technology Co., Ltd.';
+			$this->_site->powered = \Yii::t($this->messageCategory, 'Nanning Automan Technology Co., Ltd.');
 			if(!$this->_site->commonHandler()) {
 				\Yii::$app->end($this->_site->getFirstError('id'));
 			}
