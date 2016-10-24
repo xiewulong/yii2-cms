@@ -31,7 +31,7 @@ FrontendAsset::register($this);
 <!-- end ie modes -->
 
 <!-- begin mobile -->
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-touch-fullscreen" content="yes" />
 <meta name="format-detection" content="telephone=no,email=no" />
