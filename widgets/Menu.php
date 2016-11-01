@@ -49,7 +49,7 @@ class Menu extends Ul {
 				if($this->isCurrent($item)) {
 					$itemOptions['class'] = (isset($itemOptions['class']) ? $itemOptions['class'] : '') . ' current';
 				}
-				$content = Html::a($item['title'], [$this->moduleRoute . 'link/jump', 'id' => $item['id']], $_options);
+				$content = Html::a($item['title'] == '委托登录' ? Html::tag('strong', $item['title']) : $item['title'], [$this->moduleRoute . 'link/jump', 'id' => $item['id']], $_options);
 
 				if($this->recursive) {
 					$content .= $this->children($item);
