@@ -38,6 +38,7 @@ $this->title = \Yii::t($module->messageCategory, 'home');
 		'position' => 'Home_about',
 		'targetBlank' => true,
 		'targetEnabled' => true,
+		'targetMore' => false,
 		'targetMoreText' => \Yii::t($module->messageCategory, 'see more'),
 		'targetMoreOptions' => [
 			'class' => 'btn btn-primary btn-lg',

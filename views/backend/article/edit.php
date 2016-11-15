@@ -29,6 +29,7 @@ $this->params['route'] = $module->url('article/list');
 		<div class="form-group category_id">
 			<?= Html::activeLabel($item, 'category_id', ['class' => 'control-label col-sm-2']) ?>
 			<div class="col-sm-3">
+				<!--
 				<?php if($item['id']) { ?>
 				<?= Html::tag('p', $item['category']['name'], [
 					'class' => 'form-control-static',
@@ -41,6 +42,12 @@ $this->params['route'] = $module->url('article/list');
 					'size' => 1,
 				])?>
 				<? } ?>
+				 -->
+				<?= Html::activeListBox($item, 'category_id', $categoryNames, [
+					'class' => 'form-control',
+					'data-form-switch' => 'radio',
+					'size' => 1,
+				])?>
 				<?php $this->registerJs('$("[data-form-switch=radio]").formSwitch(' . $item->getAttributeItems('categoryType', 1, true) . ', "' . $item['category']['id'] . '", ".form-group.category_name .form-control-static", ' . $categoryTypes . ', ' . $categoryTypeItems . ');', 3); ?>
 			</div>
 		</div>

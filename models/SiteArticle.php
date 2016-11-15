@@ -142,6 +142,7 @@ class SiteArticle extends ActiveRecord {
 		];
 
 		$scenarios['edit'] = [
+			'category_id',
 			'title',
 			'alias',
 			'thumbnail_id',
