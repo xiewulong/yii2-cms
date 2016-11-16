@@ -81,8 +81,9 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<thead>
 			<tr>
 				<!-- <th width="6%" class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></th> -->
+				<th width="5%" class="text-center">序号</th>
 				<th width="5%" class="text-center"><?= \Yii::t($module->messageCategory, 'sort') ?></th>
-				<th width="15%"><?= \Yii::t($module->messageCategory, 'title') ?></th>
+				<th width="10%"><?= \Yii::t($module->messageCategory, 'title') ?></th>
 				<th width="10%" class="text-center"><?= \Yii::t($module->messageCategory, 'type') ?></th>
 				<th width="10%"><?= \Yii::t($module->messageCategory, '{attribute} {action}', [
 					'attribute' => \Yii::t($module->messageCategory, 'sub menu'),
@@ -104,9 +105,10 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		</thead>
 		<?php if($items) { ?>
 		<tbody>
-			<?php foreach($items as $item) { ?>
+			<?php foreach($items as $index => $item) { ?>
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('cb') ?></td> -->
+				<td class="text-center"><?= $index + 1 ?></td>
 				<td class="text-center"><?= Html::textInput('items[' . $item['id'] . '][list_order]', $item['list_order'], ['class' => 'form-control text-center']) ?></td>
 				<td><?= Html::a($item['title'], ['link/jump', 'id' => $item['id']], ['target' => '_blank']) ?></td>
 				<td class="text-center"><?= $item->getAttributeText('type') ?></td>
@@ -127,7 +129,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<tfoot>
 			<tr>
 				<!-- <td class="text-center"><?= Html::checkbox('all', null, ['data-check' => 'cb']) ?></td> -->
-				<td colspan="10">
+				<td colspan="11">
 					<?= Html::submitButton(\Yii::t($module->messageCategory, '{attribute} {action}', [
 						'attribute' => \Yii::t($module->messageCategory, 'batch'),
 						'action' => \Yii::t($module->messageCategory, 'sort'),
@@ -152,7 +154,7 @@ $statusClasses = ['text-muted', 'text-success', 'text-danger'];
 		<?php } else { ?>
 		<tfoot>
 			<tr>
-				<td colspan="10" class="text-center empty">
+				<td colspan="11" class="text-center empty">
 					<?= Html::tag('i', null, ['class' => 'glyphicon glyphicon-info-sign text-success']) ?>
 					<?= Html::tag('span', \Yii::t($module->messageCategory, 'no matched data')) ?>
 				</td>
