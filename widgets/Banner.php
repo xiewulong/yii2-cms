@@ -29,7 +29,7 @@ class Banner extends Ul {
 					'site_id' => $this->siteId,
 					'status' => SiteModuleItem::STATUS_ENABLED,
 				])
-				->orderby('list_order desc, created_at desc')
+				->orderby('list_order desc, created_at')
 				->all();
 		}
 
