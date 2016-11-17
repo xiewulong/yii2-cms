@@ -54,7 +54,7 @@ class Ul extends \yii\xui\Ul {
 			return $this->renderAll();
 		}
 
-		$items = $this->getItems()->orderby('list_order desc, created_at')->all();
+		$items = $this->items;
 		$content = [];
 		foreach($items as $index => $item) {
 			if($index >= $this->targetLimit) break;
