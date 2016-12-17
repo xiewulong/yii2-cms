@@ -17,6 +17,8 @@ class Home extends Ul {
 
 	public $keywordsToIcon = false;
 
+	public $marquee = false;
+
 	public function init() {
 		parent::init();
 
@@ -57,7 +59,7 @@ class Home extends Ul {
 	}
 
 	protected function renderItems() {
-		return Html::ul($this->items, array_merge([
+		$ul = Html::ul($this->items, array_merge([
 			'item' => function($item) {
 				$_content = [];
 				$_options = [];
@@ -94,6 +96,12 @@ class Home extends Ul {
 				return Html::tag('li', $content, $itemOptions);
 			},
 		], $this->listOptions));
+
+		if($this->marquee) {
+			$ul = Html::tag('div', Html::tag('div', $ul, ['class' => 'scroller']), ['class' => 'marquee J-marquee']);
+		}
+
+		return $ul;
 	}
 
 }

@@ -270,13 +270,12 @@
 			padding: 50px 0;
 
 			li {
-				// width: 12.5%;
-				width: 16.66666666666667%;
+				width: 188px;
 				padding: 0 15px 10px 0;
 
 				a {
 					b {
-						height: 70px;
+						height: 94px;
 						border: 1px solid #d7d7d7;
 					}
 
@@ -326,5 +325,20 @@
 
 	&-mt20 {
 		margin-top: 20px;
+	}
+
+	.marquee {
+		padding: 50px 0;
+		overflow: hidden;
+
+		.scroller {
+			overflow: hidden;
+			height: 104px;
+
+			ul.links {
+				padding: 0;
+				float: left;
+			}
+		}
 	}
 }

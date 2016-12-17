@@ -1,9 +1,14 @@
 /*!
- * frontend.carousel
+ * frontend
  * xiewulong <xiewulong@vip.qq.com>
  * create: 2016/8/8
  * since: 0.0.1
  */
+
+// styles
+import '../scss/frontend.scss';
+
+// carousel
 (($, undefined) => {
 
 	class Carousel {
@@ -132,3 +137,102 @@
 	};
 
 })(jQuery);
+
+// captcha
+(($, document, undefined) => {
+
+	class Captcha {
+
+		constructor(button) {
+			this.button = button;
+			this.$button = $(this.button);
+			this.$img = this.$button.attr('data-captcha-img') ? $(this.$button.attr('data-captcha-img')) : this.$button;
+			this.url = this.$button.attr('data-captcha');
+
+			return this.init();
+		}
+
+		init() {
+			this.refresh();
+
+			return false;
+		}
+
+		refresh() {
+			$.ajax({
+				url: this.url,
+				data: {refresh: 1},
+				method: 'get',
+				dataType: 'json',
+				success: (d) => {
+					d.url && this.src(d.url);
+				}
+			});
+		}
+
+		src(src) {
+			this.$img.attr('src', src);
+		}
+	}
+
+	$(document).on('click', '[data-captcha]', function() {
+		return new Captcha(this);
+	});
+
+})(jQuery, document);
+
+// marquee
+(($, document, undefined) => {
+
+	class Marquee {
+
+		constructor(target) {
+			this.$target = $(target);
+			this.$scroller = this.$target.find('.scroller');
+			this.$ul = this.$scroller.find('ul');
+			this.$li = this.$ul.find('li');
+			this.len = this.$li.length;
+
+			if(this.len <= 5) {
+				return;
+			}
+
+			this.w = this.$li.width() + parseInt(this.$li.css('paddingRight'));
+			this.width = this.w * this.len;
+			this.$scroller.width(this.width * 2).append(this.$ul.clone());
+			this.current = 0;
+			this.speed = 10;
+
+			this.events();
+			this.go();
+		}
+
+		pause() {
+			clearTimeout(this.timer);
+		}
+
+		go() {
+			this.pause();
+
+			let current = this.current - 1;
+			if(current < - this.width) {
+				current = 0;
+			}
+
+			this.$scroller.css({marginLeft: current});
+			this.current = current;
+
+			this.timer = setTimeout(this.go.bind(this), this.speed);
+		}
+
+		events() {
+			this.$target.hover(this.pause.bind(this), this.go.bind(this));
+		}
+
+	}
+
+	$('.J-marquee').each(function() {
+		return new Marquee(this);
+	});
+
+})(jQuery, document);

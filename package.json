@@ -19,19 +19,33 @@
     "url": "https://github.com/xiewulong/yii2-cms/issues"
   },
   "homepage": "https://github.com/xiewulong/yii2-cms#readme",
+  "scripts": {
+    "start": "webpack --colors --progress -d -w",
+    "release": "webpack --colors --display-error-details --progress -p"
+  },
   "devDependencies": {
-    "babel-preset-es2015": "^6.14.0",
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-header": "^1.8.8",
-    "gulp-load-plugins": "^1.3.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.2",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^2.0.0"
+    "autoprefixer": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-react": "*",
+    "classnames": "*",
+    "css-loader": "*",
+    "extract-text-webpack-plugin": "*",
+    "file-loader": "*",
+    "jquery": "*",
+    "node-sass": "*",
+    "normalize.css": "*",
+    "postcss-loader": "*",
+    "react": "*",
+    "react-addons-css-transition-group": "*",
+    "react-dom": "*",
+    "react-fastclick": "*",
+    "react-router": "*",
+    "sass-loader": "*",
+    "style-loader": "*",
+    "url-loader": "*",
+    "webpack": "*",
+    "whatwg-fetch": "*"
   }
 }
