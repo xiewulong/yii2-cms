@@ -76,8 +76,8 @@ body {
     list-style: none; }
     .x-header ul > li {
       float: left;
-      height: 80px;
-      line-height: 80px;
+      height: 100px;
+      line-height: 100px;
       padding: 0 10px;
       position: relative; }
       .x-header ul > li a {
@@ -370,12 +370,12 @@ body {
           color: #fa7800; }
     .x-home ul.news {
       padding: 25px 0 50px;
-      min-height: 275px; }
+      min-height: 170px; }
       .x-home ul.news li {
         font-size: 14px;
         width: 50%;
-        height: 40px;
-        line-height: 40px;
+        height: 34px;
+        line-height: 34px;
         overflow: hidden;
         padding-left: 30px; }
         .x-home ul.news li a b,
