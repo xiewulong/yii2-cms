@@ -279,7 +279,7 @@
 				this.width = this.w * this.len;
 				this.$scroller.width(this.width * 2).append(this.$ul.clone());
 				this.current = 0;
-				this.speed = 10;
+				this.speed = 30;
 	
 				this.events();
 				this.go();
