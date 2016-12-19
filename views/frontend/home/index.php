@@ -103,6 +103,7 @@ $this->title = \Yii::t($module->messageCategory, 'home');
 		'position' => 'Home_cases',
 		'targetBlank' => true,
 		'marquee' => true,
+		'style' => 'marquee',
 		'options' => [
 			'class' => 'x-home',
 		],
@@ -119,6 +120,7 @@ $this->title = \Yii::t($module->messageCategory, 'home');
 		'position' => 'Friendly_links',
 		'targetBlank' => true,
 		'marquee' => true,
+		'style' => 'marquee',
 		'options' => [
 			'class' => 'x-home',
 		],

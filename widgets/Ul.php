@@ -43,6 +43,8 @@ class Ul extends \yii\xui\Ul {
 
 	public $recursive = false;
 
+	public $style;
+
 	protected $_superior;
 
 	public function run() {
@@ -180,7 +182,7 @@ class Ul extends \yii\xui\Ul {
 	}
 
 	protected function createImageRoute($id) {
-		return [$this->moduleRoute . 'image/', 'id' => $id];
+		return [$this->moduleRoute . 'image/', 'id' => $id, 'style' => $this->style];
 	}
 
 	protected function createLink($item) {
