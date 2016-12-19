@@ -140,14 +140,7 @@ FrontendAsset::register($this);
 </div>
 <!-- end x-footer -->
 
-<?= Statistics::widget([
-	'baidu' => 'id',
-	'cnzz' => 1,
-	'piwik' => [
-		'host' => 'piwik.domain.com',
-		'id' => 1,
-	],
-]) ?>
+<!-- Statistics::widget(['baidu' => 'id', 'cnzz' => 1, 'piwik' => ['host' => 'piwik.domain.com', 'id' => 1]]) -->
 
 <?php $this->endBody(); ?>
 </body>
